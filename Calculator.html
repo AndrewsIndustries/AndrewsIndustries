@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Multi-Mode Calculator</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for calculator buttons and layout */
+        :root {
+            --key-color-dark: #374151; /* Gray-700 */
+            --key-op-color: #f59e0b; /* Amber-500 */
+            --key-func-color: #4b5563; /* Gray-600 */
+        }
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+        }
+        .converter-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .key {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.1s;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .key-num { background-color: var(--key-color-dark); }
+        .key-op { background-color: var(--key-op-color); }
+        .key-func { background-color: var(--key-func-color); }
+        .key-op:hover { background-color: #d97706; }
+        .key-num:hover { background-color: #4b5563; }
+        .key-func:hover { background-color: #6b7280; }
+        /* Responsive zero key for Math Mode */
+        .key-zero { grid-column: span 2; }
+
+        /* Custom Input Styling */
+        input[type="text"], select {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-800 flex items-center justify-center min-h-screen p-4 font-sans">
+
+    <div id="app" class="bg-gray-900 text-white rounded-xl shadow-2xl w-full max-w-lg md:max-w-md overflow-hidden">
+        
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-gray-700">
+            <button id="tab-math" class="flex-1 py-3 text-lg font-semibold transition-colors duration-200 border-b-2 border-transparent hover:bg-gray-800" onclick="switchMode('math')">
+                Math Mode
+            </button>
+            <button id="tab-converter" class="flex-1 py-3 text-lg font-semibold transition-colors duration-200 border-b-2 border-transparent hover:bg-gray-800" onclick="switchMode('converter')">
+                Unit Converter
+            </button>
+        </div>
+
+        <!-- Math Mode Interface -->
+        <div id="math-mode" class="p-4 space-y-4">
+            <!-- Display -->
+            <input type="text" id="math-display" class="w-full h-20 bg-gray-700 text-white text-5xl p-4 rounded-lg text-right font-light tracking-wider overflow-hidden" value="0" disabled />
+
+            <!-- Keys -->
+            <div class="calculator-grid" onclick="handleMathKey(event)">
+                <!-- Row 1: Functions/Clear -->
+                <button class="key key-func text-amber-500" data-action="clear">AC</button>
+                <button class="key key-func" data-action="sign">+/-</button>
+                <button class="key key-func" data-action="percent">%</button>
+                <button class="key key-func" data-action="sqrt">√</button>
+                <button class="key key-op" data-action="divide">÷</button>
+
+                <!-- Row 2: Scientific/Numbers -->
+                <button class="key key-func" data-action="sin">sin</button>
+                <button class="key key-num">7</button>
+                <button class="key key-num">8</button>
+                <button class="key key-num">9</button>
+                <button class="key key-op" data-action="multiply">×</button>
+
+                <!-- Row 3: Scientific/Numbers -->
+                <button class="key key-func" data-action="cos">cos</button>
+                <button class="key key-num">4</button>
+                <button class="key key-num">5</button>
+                <button class="key key-num">6</button>
+                <button class="key key-op" data-action="subtract">-</button>
+
+                <!-- Row 4: Scientific/Numbers -->
+                <button class="key key-func" data-action="tan">tan</button>
+                <button class="key key-num">1</button>
+                <button class="key key-num">2</button>
+                <button class="key key-num">3</button>
+                <button class="key key-op" data-action="add">+</button>
+                
+                <!-- Row 5: Scientific/Numbers -->
+                <button class="key key-func" data-action="log">log</button>
+                <button class="key key-num key-zero">0</button>
+                <button class="key key-num" data-action="decimal">.</button>
+                <button class="key key-op" data-action="calculate">=</button>
+            </div>
+        </div>
+        
+        <!-- Unit Converter Interface -->
+        <div id="converter-mode" class="p-4 space-y-4 hidden">
+            <!-- Unit Type Selector -->
+            <select id="conversion-type" class="w-full bg-gray-700 text-white p-3 rounded-lg text-lg appearance-none" onchange="loadUnits()">
+                <option value="length">Length</option>
+                <option value="weight">Weight / Mass</option>
+                <option value="temperature">Temperature</option>
+            </select>
+            
+            <div class="converter-grid">
+                <!-- Input Section -->
+                <div class="space-y-2 bg-gray-800 p-4 rounded-lg shadow-inner">
+                    <label for="input-value" class="text-gray-400 block text-sm">Convert From:</label>
+                    <input type="number" id="input-value" class="w-full bg-gray-700 text-white text-3xl p-2 rounded-lg" value="1" oninput="convertUnits()" />
+                    <select id="unit-from" class="w-full bg-gray-700 text-white p-2 rounded-lg" onchange="convertUnits()"></select>
+                </div>
+                
+                <!-- Result Section -->
+                <div class="space-y-2 bg-gray-800 p-4 rounded-lg shadow-inner">
+                    <label for="output-value" class="text-gray-400 block text-sm">Result:</label>
+                    <input type="text" id="output-value" class="w-full bg-gray-700 text-white text-3xl p-2 rounded-lg" value="0" disabled />
+                    <select id="unit-to" class="w-full bg-gray-700 text-white p-2 rounded-lg" onchange="convertUnits()"></select>
+                </div>
+            </div>
+            <div id="converter-message" class="text-sm text-gray-400 text-center mt-2">Ready to convert!</div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Global State and Constants ---
+
+        const mathDisplay = document.getElementById('math-display');
+        const tabMath = document.getElementById('tab-math');
+        const tabConverter = document.getElementById('tab-converter');
+        
+        // Math Mode State
+        let mathState = {
+            firstValue: null,
+            operator: null,
+            waitingForSecondValue: false,
+            displayValue: '0',
+            previousKeyType: 'clear'
+        };
+
+        // Unit Conversion Constants (Base units are marked with 'base')
+        const CONVERSIONS = {
+            length: {
+                meter: { name: 'Meter (m)', factor: 1, base: true },
+                kilometer: { name: 'Kilometer (km)', factor: 1000 },
+                mile: { name: 'Mile (mi)', factor: 1609.34 },
+                yard: { name: 'Yard (yd)', factor: 0.9144 },
+                foot: { name: 'Foot (ft)', factor: 0.3048 },
+                inch: { name: 'Inch (in)', factor: 0.0254 },
+            },
+            weight: {
+                kilogram: { name: 'Kilogram (kg)', factor: 1, base: true },
+                gram: { name: 'Gram (g)', factor: 0.001 },
+                pound: { name: 'Pound (lb)', factor: 0.453592 },
+                ounce: { name: 'Ounce (oz)', factor: 0.0283495 },
+                tonne: { name: 'Tonne (t)', factor: 1000 },
+            },
+            temperature: {
+                celsius: { name: 'Celsius (°C)', base: true },
+                fahrenheit: { name: 'Fahrenheit (°F)' },
+                kelvin: { name: 'Kelvin (K)' }
+            }
+        };
+
+        // --- Core Math Logic ---
+
+        function calculate(n1, n2, op) {
+            const num1 = parseFloat(n1);
+            const num2 = parseFloat(n2);
+            
+            if (op === 'add') return num1 + num2;
+            if (op === 'subtract') return num1 - num2;
+            if (op === 'multiply') return num1 * num2;
+            if (op === 'divide') {
+                if (num2 === 0) {
+                    return 'Error';
+                }
+                return num1 / num2;
+            }
+            return num2;
+        }
+
+        function handleScientific(action, value) {
+            const num = parseFloat(value);
+            switch (action) {
+                case 'sin': return Math.sin(num * (Math.PI / 180)).toFixed(4); // Degrees to Radians
+                case 'cos': return Math.cos(num * (Math.PI / 180)).toFixed(4);
+                case 'tan': return Math.tan(num * (Math.PI / 180)).toFixed(4);
+                case 'log': return Math.log10(num).toFixed(4);
+                case 'sqrt': return Math.sqrt(num).toFixed(4);
+                default: return value;
+            }
+        }
+
+        function handleMathKey(event) {
+            // Ensure the click is on a button within the grid
+            const key = event.target.closest('button');
+            if (!key) return;
+
+            const action = key.dataset.action;
+            const keyContent = key.textContent;
+            const keyType = getKeyType(key);
+
+            // Dispatch to the correct handler based on key type
+            if (keyType === 'number') handleNumber(keyContent);
+            else if (keyType === 'operator') handleOperator(action);
+            else if (keyType === 'decimal') handleDecimal();
+            else if (keyType === 'clear') resetCalculator();
+            else if (keyType === 'calculate') handleCalculate();
+            else if (keyType === 'function') handleFunction(action);
+            
+            mathDisplay.value = mathState.displayValue;
+            updateKeyHighlight(key);
+        }
+
+        function getKeyType(key) {
+            const { action } = key.dataset;
+            if (!action) return 'number';
+            if (['add', 'subtract', 'multiply', 'divide'].includes(action)) return 'operator';
+            if (['sin', 'cos', 'tan', 'log', 'sqrt', 'sign', 'percent'].includes(action)) return 'function';
+            return action; // 'decimal', 'clear', 'calculate'
+        }
+
+        function resetCalculator() {
+            mathState.displayValue = '0';
+            mathState.firstValue = null;
+            mathState.operator = null;
+            mathState.waitingForSecondValue = false;
+            mathState.previousKeyType = 'clear';
+        }
+
+        function handleNumber(keyContent) {
+            if (mathState.waitingForSecondValue || mathState.displayValue === '0' || mathState.previousKeyType === 'operator') {
+                mathState.displayValue = keyContent;
+                mathState.waitingForSecondValue = false;
+            } else {
+                mathState.displayValue += keyContent;
+            }
+            mathState.previousKeyType = 'number';
+        }
+
+        function handleDecimal() {
+            if (!mathState.displayValue.includes('.')) {
+                mathState.displayValue += '.';
+            }
+            mathState.previousKeyType = 'decimal';
+        }
+
+        function handleOperator(action) {
+            const inputValue = parseFloat(mathState.displayValue);
+            if (mathState.firstValue === null || mathState.previousKeyType === 'calculate') {
+                mathState.firstValue = inputValue;
+            } else if (mathState.operator) {
+                const result = calculate(mathState.firstValue, inputValue, mathState.operator);
+                mathState.displayValue = String(result);
+                mathState.firstValue = result;
+            }
+            mathState.waitingForSecondValue = true;
+            mathState.operator = action;
+            mathState.previousKeyType = 'operator';
+        }
+
+        function handleCalculate() {
+            if (mathState.firstValue === null || mathState.operator === null) return;
+            let inputValue = mathState.waitingForSecondValue ? mathState.firstValue : parseFloat(mathState.displayValue);
+            const result = calculate(mathState.firstValue, inputValue, mathState.operator);
+            mathState.displayValue = String(result);
+            mathState.firstValue = result; // Keep the result as the new firstValue
+            mathState.operator = null;
+            mathState.waitingForSecondValue = true; // Allow starting a new operation
+            mathState.previousKeyType = 'calculate';
+        }
+
+        function handleFunction(action) {
+            if (['sin', 'cos', 'tan', 'log', 'sqrt'].includes(action)) {
+                mathState.displayValue = String(handleScientific(action, mathState.displayValue));
+            } else if (action === 'sign') {
+                mathState.displayValue = String(parseFloat(mathState.displayValue) * -1);
+            } else if (action === 'percent') {
+                mathState.displayValue = String(parseFloat(mathState.displayValue) / 100);
+            }
+            mathState.previousKeyType = 'function';
+        }
+
+        function updateKeyHighlight(key) {
+            // Remove highlight from previous operator
+            document.querySelectorAll('.key-op.border-2').forEach(k => {
+                k.classList.remove('border-2', 'border-white');
+            });
+
+            // Highlight the current operator if one is set
+            if (mathState.operator) {
+                const activeOpKey = document.querySelector(`[data-action="${mathState.operator}"]`);
+                if (activeOpKey) {
+                    activeOpKey.classList.add('border-2', 'border-white');
+                }
+            }
+        }
+
+
+        // --- Unit Converter Logic ---
+
+        function getBaseUnitValue(value, fromUnit, type) {
+            const unit = CONVERSIONS[type][fromUnit];
+            if (type === 'temperature') {
+                if (fromUnit === 'fahrenheit') return (value - 32) * (5 / 9);
+                if (fromUnit === 'kelvin') return value - 273.15;
+                return value; // Celsius is base
+            }
+            return value * unit.factor;
+        }
+
+        function convertFromBase(baseValue, toUnit, type) {
+            const unit = CONVERSIONS[type][toUnit];
+            if (type === 'temperature') {
+                if (toUnit === 'fahrenheit') return (baseValue * (9 / 5)) + 32;
+                if (toUnit === 'kelvin') return baseValue + 273.15;
+                return baseValue; // Celsius is base
+            }
+            return baseValue / unit.factor;
+        }
+
+        function convertUnits() {
+            const type = document.getElementById('conversion-type').value;
+            const valueInput = document.getElementById('input-value');
+            const fromUnit = document.getElementById('unit-from').value;
+            const toUnit = document.getElementById('unit-to').value;
+            const outputDisplay = document.getElementById('output-value');
+            const message = document.getElementById('converter-message');
+
+            const inputValue = parseFloat(valueInput.value);
+
+            if (isNaN(inputValue)) {
+                outputDisplay.value = "Invalid Input";
+                message.textContent = "Please enter a valid number.";
+                return;
+            }
+
+            try {
+                // 1. Convert input value to the category's base unit (e.g., meters, kilograms, celsius)
+                const baseValue = getBaseUnitValue(inputValue, fromUnit, type);
+                
+                // 2. Convert the base unit value to the target unit
+                const result = convertFromBase(baseValue, toUnit, type);
+                
+                outputDisplay.value = result.toFixed(6).replace(/\.?0+$/, "");
+                message.textContent = `${inputValue} ${CONVERSIONS[type][fromUnit].name} = ${outputDisplay.value} ${CONVERSIONS[type][toUnit].name}`;
+
+            } catch (error) {
+                console.error("Conversion error:", error);
+                outputDisplay.value = "Error";
+                message.textContent = "An error occurred during conversion.";
+            }
+        }
+
+        function loadUnits() {
+            const type = document.getElementById('conversion-type').value;
+            const units = CONVERSIONS[type];
+            const unitFromSelect = document.getElementById('unit-from');
+            const unitToSelect = document.getElementById('unit-to');
+
+            // Clear existing options
+            unitFromSelect.innerHTML = '';
+            unitToSelect.innerHTML = '';
+
+            for (const key in units) {
+                const unit = units[key];
+                const option = `<option value="${key}">${unit.name}</option>`;
+                unitFromSelect.innerHTML += option;
+                unitToSelect.innerHTML += option;
+            }
+
+            // Set default selections
+            // Try to select the base unit for 'From' and a different unit for 'To'
+            const unitKeys = Object.keys(units);
+            const baseUnit = unitKeys.find(key => units[key].base) || unitKeys[0];
+            const secondUnit = unitKeys.length > 1 ? unitKeys[1] : unitKeys[0];
+
+            unitFromSelect.value = baseUnit;
+            unitToSelect.value = secondUnit;
+
+            convertUnits();
+        }
+
+        // --- View Controller (Mode Switching) ---
+
+        function switchMode(mode) {
+            document.getElementById('math-mode').classList.add('hidden');
+            document.getElementById('converter-mode').classList.add('hidden');
+            tabMath.classList.remove('border-amber-500', 'text-amber-500');
+            tabConverter.classList.remove('border-amber-500', 'text-amber-500');
+
+            if (mode === 'math') {
+                document.getElementById('math-mode').classList.remove('hidden');
+                tabMath.classList.add('border-amber-500', 'text-amber-500');
+            } else if (mode === 'converter') {
+                document.getElementById('converter-mode').classList.remove('hidden');
+                tabConverter.classList.add('border-amber-500', 'text-amber-500');
+                loadUnits();
+            }
+        }
+
+        // --- Initialization ---
+        window.onload = function() {
+            // Set initial mode and highlight tab
+            switchMode('math');
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andrew's_Industries</title>
+    <link rel="icon" type="image/x-icon" href="icons/FlagEagle.ico">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif; /* Use a modern sans-serif font */
+            color: #333;
+            background-color: #f7f9fc; /* Very light, professional background */
+            padding: 20px;
+        }
+
+        /* --- Table Styles (Applies to both) --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for lift */
+            border-radius: 8px; /* Slightly rounded corners */
+            overflow: hidden; /* Ensures borders/shadows behave with rounded corners */
+        }
+
+        /* --- Table Header Styling --- */
+        th, table tr:first-child td {
+            background-color: none; /* Dark primary color */
+            color: #ffffff;
+            font-weight: bold;
+            padding: 15px 20px;
+            text-align: left;
+            border: none; /* Remove default borders */
+        }
+
+        /* --- Standard Cell Styling --- */
+        td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0; /* Light horizontal separator */
+            border-right: none; /* Crucially remove vertical lines */
+        }
+
+        /* --- Zebra Striping (Alternating row color) --- */
+        table tr:nth-child(even) {
+            background-color: #f7fcfb; /* Very light alternative color */
+        }
+
+        /* --- Styling for Highlighted/Key Phrases --- */
+        em, b { /* Target the text you have in italics and bolding */
+            font-weight: 700;
+            color: #ff6900; /* A high-contrast, engineering Orange */
+            font-style: normal; /* Keep bold/key phrases clean, not italicized */
+        }
+
+        /* --- Icon/Service Name Column Emphasis (First Column) --- */
+        table td:first-child {
+            font-weight: bold;
+            color: #004d40;
+            width: 20%; /* Give the service name more space */
+            border-right: 1px solid #e0e0e0; /* Keep a subtle divider for the first column */
+        }
+    </style>
+</head>
+
+
+    <header class="banner-container">
+
+        <img src="images/Logos/Andrews Industries Coke.png"
+        width="relevant" 
+        height="125px">
+
+
+        <a href="USA.html">
+            <img src="images/Icon/FlagEaglenoback.png"
+            width="relevant"
+            height="50px">
+        </a>
+
+
+    </header>
+
+    <header>
+        <h5>I bring a unique blend of relevant skills and experience 
+            directly applicable to your needs, a passion for the project,
+            and a proven ability to deliver results. My work involves everything 
+            from designing parts in 3D to bringing them to life 
+            with CNC machines, 3D printers, and traditional casting techniques.
+        </h5>
+        <div class="button-container">
+            <a href="Custom_Castings.html" class="button">Custom_Castings</a>
+            <a href="Digital_Downloads.html" class="button">Digital_Downloads</a>
+        </div>
+    </header>
+
+    <br>
+    <br>
+
+<body style="background-color: rgb(214, 214, 214)"></body>
+
+    <div class="w3-content w3-section" style="text-align: center;">
+        <img class="mySlides w3-animate-fading" src="images/20220420_082559.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20220425_140645.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20220711_071800.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20220916_134130.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20220512_074407.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20220711_071800.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20221005_102834.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20230124_070543.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/20230317_071217.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/bracket1.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/Cap316.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/ClevisEndAlum.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/collar.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/comodis.png" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/FlangeTube316.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/foot.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/outputshaft.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/RD20.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/Ring316.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/TestProPic.png" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/tube-holder-bucket.jpg" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/BobCad/comodis.png" style="height: 350px;">
+        <img class="mySlides w3-animate-fading" src="images/924192.png" style="height: 350px;">
+    </div>
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            var currentImage = x[myIndex-1];
+            currentImage.style.display = "inline-block";
+            currentImage.style.margin = "auto";
+            setTimeout(carousel, 2000);   
+        }
+    </script>
+
+    <p style="line-height: 100%; margin-bottom: 0in">
+        <br/>
+    </p>
+    <div class="service-container">
+        <h2>CNC Programming &Our Comprehensive Services Optimization</h2>
+        <table cellpadding="2" cellspacing="2" style="page-break-before: auto; page-break-after: auto">
+            <thead>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Service</span></font></font></strong></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Detailed
+                        Description</span></font></font></strong></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Key
+                        Technologies &amp; Outputs</span></font></font></strong></p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">CNC
+                        Programming &amp; Optimization</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Development
+                        of custom G-code and M-code for complex, multi-axis CNC machining
+                        operations. We specialize in optimizing existing programs for
+                        <b>reduced cycle times, improved tool life, and enhanced surface
+                        finish</b>, directly impacting your bottom line.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>G-Code/M-Code,
+                        CAD/CAM Integration (e.g., Fusion 360, Mastercam),</b>
+                        High-Efficiency Milling Paths</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">3D
+                        Modeling &amp; Design for Manufacturing (DfM)</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Transformation
+                        of client sketches, 2D drawings, or conceptual ideas into robust,
+                        manufacturable 3D solid models. We apply <b>Design for
+                        Manufacturing (DfM)</b> principles to ensure the model is
+                        optimized for its final process (CNC, 3D printing, or casting).</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Solid
+                        Modeling (e.g., SolidWorks, Inventor),</b> Technical Drawings,
+                        STL/STEP/IGES Files</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Advanced
+                        3D Printing</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">High-resolution
+                        additive manufacturing for detailed parts and functional
+                        prototypes. We primarily use <b>SLA/DLP resin printing</b> for
+                        exceptional surface quality and intricate details, ideal for
+                        creating master patterns, jewelry, or detailed molds.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>SLA/DLP
+                        Resin Printing,</b> High-Detail Polymers, Precision Master
+                        Patterns</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Custom
+                        Mold-Making &amp; Tooling</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Design
+                        and fabrication of high-precision molds tailored for specific
+                        production methods (e.g., silicone, investment, injection). Our
+                        focus is on <b>multi-use molds</b> that deliver consistent,
+                        repeatable results with excellent surface finish and dimensional
+                        accuracy.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>CAD
+                        Mold Design,</b> CNC-Machined Mold Inserts, Silicone RTV Molds</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: -0.0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Rapid
+                        Prototyping &amp; Small-Batch Production</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Accelerated
+                        service for quick-turnaround production of custom parts.
+                        Leveraging in-house 3D printing and quick-cast methods, we move
+                        from design approval to physical part delivery in days, enabling
+                        <b>fast design iteration and market validation.</b></span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Fast
+                        Design-to-Part Cycle,</b> Iterative Prototyping, Short-Run
+                        Manufacturing</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Custom
+                        Casting (Metal &amp; Composite)</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">High-quality
+                        casting services using proprietary processes for materials
+                        ranging from <b>non-ferrous metals (e.g., brass, bronze,
+                        aluminum)</b> to high-performance <b>resins and composites</b>.
+                        Ideal for industrial components, bespoke artistic pieces, and
+                        jewelry.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Investment
+                        Casting Prep,</b> Silicone/Urethane Casting, Custom Material
+                        Pigmentation</span></font></font></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="line-height: 100%; margin-bottom: 0in">
+        <br/>
+    </p>
+    <div class="service-container">
+        <h2>Who We Serve (Target Clients)</h2>
+        <table cellpadding="2" cellspacing="2" style="page-break-before: auto; page-break-after: auto">
+            <thead>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Target
+                        Client</span></font></font></strong></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Specific
+                        Needs We Address</span></font></font></strong></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font color="#1f1f1f"><font face="Google Sans Text, sans-serif"><strong>Value
+                        Proposition</span></font></font></strong></p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Machine
+                        Shops &amp; Fabrication Facilities</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Custom
+                        code development and optimization for complex parts, especially
+                        on multi-axis equipment, to <b>increase throughput and reduce
+                        scrap rates.</b></span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Operational
+                        Efficiency:</b> Faster, more reliable G-code to maximize machine
+                        uptime and profitability.</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Independent
+                        Engineers &amp; Innovators (Garage Engineers)</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Need
+                        for affordable, custom small-batch rapid prototyping in
+                        functional materials to validate designs and secure patents.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Innovation
+                        Accelerator:</b> Low-volume production and quick-turn parts to
+                        rapidly test and perfect product designs.</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Artisanal
+                        Product Makers (Soap/Candle Makers, Confectioners)</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Requirement
+                        for complex, branded, and dimensionally perfect <b>custom molds</b>
+                        that mass-produced options cannot provide.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Brand
+                        Differentiation:</b> Unique, highly detailed molds that elevate
+                        product quality and market appeal.</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Jewelry
+                        Designers &amp; Watchmakers</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Need
+                        for high-resolution resin patterns for investment casting and
+                        precise CNC work for intricate components.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>Detail
+                        &amp; Finish:</b> Ultra-fine detail models ready for the lost-wax
+                        casting process.</span></font></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b><font color="#1f1f1f">Industrial
+                        Designers &amp; Startups</span></b></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f">Complete
+                        support from conceptual 3D model through to the final small-batch
+                        production run.</span></font></font></p>
+                    </td>
+                    <td style="border: 1px solid #000000; padding: 0.07in 0.1in"><p style="orphans: 2; widows: 2; page-break-after: auto">
+                        <span style="display: inline-block; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><font color="#1f1f1f"><b>End-to-End
+                        Solution:</b> Single vendor for DfM, prototyping, and initial
+                        production, simplifying the supply chain.</span></font></font></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="line-height: 100%; margin-bottom: 0in">
+        <br/>
+    </p>
+
+    <div class="list-container">
+        <ul style="list-style-type: none;">
+            <li><a href="password.html">
+            <img src="images/AIQRCode.jpg" 
+            alt="password" 
+            width="relevant"
+            height="150px;"></a></li>
+            <br><br>
+            <li><a href="tel:1(775)2206953">(775)-220-6953</a></li>
+            <li><a href="mailto:andrewsindustries@gmail.com">andrewsindustries@gmail.com</a></li>
+            <li><a href="https://www.youtube.com/channel/UCSiqEv4D6dENLnj_3qI2fGw">@andrewsindustries7722</a>YouTube</li>
+            <li>PO BOX 1204 Carson City, NV 89702</li>
+        </ul>
+    </div>
+
+    <footer>
+        <a href="index.html" class="button">To Top</a>	
+    </footer>
+
+</body>
+</html>

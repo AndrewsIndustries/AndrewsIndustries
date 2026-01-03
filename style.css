@@ -1,0 +1,179 @@
+
+
+
+.banner-container {
+  width: 80%; /* Or a fixed pixel width */
+  margin: 0 auto; /* Centers horizontally by setting left and right margins to auto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-container {
+  text-align: center; /* Centers inline-block elements within the container */
+}
+
+.button-container {
+  text-align: center; /* Centers inline-block elements within the container */
+}
+
+.image-container {
+  text-align: center; /* Centers inline-block elements within the container */
+}
+
+
+
+ul {
+  list-style-type: none;
+}
+
+
+	p {font-size: 30px;
+	text-align: center;	
+	line-height: auto;
+	margin-bottom: 0.05in;
+	background: transparent}
+
+	h1 {font-size: 60px;
+		text-align: center;}
+	h2 {font-size: 30px;
+		text-align: center;}
+	h4 {font-size: 50px;
+		text-align: center;}
+	h5 {font-size: 20px;
+		text-align: center;}
+
+	div {text-align: center;}
+
+
+	.button {
+		display: inline-block;
+		padding: 10px 20px;
+		background-color: #000000;
+		color: #ffffff;
+		border: none;
+		border-radius: 25px;
+		text-decoration: none;
+		font-size: 25px;
+		cursor: pointer;
+		text-align: center;
+	}
+	.button:hover {
+		background-color: #f40009;
+	}
+
+
+
+	.slider1 {
+		height: 180px;
+		width: "auto";
+		background-image: url(images/outputshaft.jpg);
+		background-size: contain;
+		object-fit: cover;
+		margin-left: 100px;
+		margin-right: 50px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		float: right;
+		background-repeat: no-repeat;
+		animation: slide 2s infinite;
+	}
+	
+	@keyframes slide {
+		33% {
+			background-image: url(images/bucket1.jpg);
+		}
+		66% {
+			background-image: url(images/collar.jpg);
+		}
+		100% {
+			background-image: url(images/outputshaft.jpg);
+		}
+	
+	}
+
+
+
+
+
+
+	.MyButton1 {
+		display: inline-block;
+		padding: 10px 20px;
+		background-color: #D23037;
+		color: #000000;
+		border: none;
+		border-radius: 25px;
+		text-decoration: none;
+		font-size: 25px;
+		cursor: pointer;
+		text-align: center;
+	}
+	.MyButton1:hover {
+		background-color: #BBBDBB;
+	}
+
+	.center-image {
+		text-align: center;
+	}
+
+
+
+
+
+
+
+	/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+
+
+
+
+
+
+}.five-column-grid-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Creates three equal-width columns */
+  gap: 5px; /* Sets the spacing between grid items */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.five-column-grid-list li {
+  /* Add styling for individual list items */
+  padding: 5px;
+  border: none;
+}
+

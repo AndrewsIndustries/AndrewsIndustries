@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Castings.html</title>
+    <link rel="icon" type="image/x-icon" href="icons/FlagEagle.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: rgb(214, 214, 214)">
+
+    <header>
+        <h1>Custom Castings</h1>
+    </header>
+
+
+    <div class="w3-content w3-section" style="text-align: center;">
+
+    <img class="mySlides w3-animate-fading" src="images/Hero/CustomCastings1.webp" style="height: 350px;">
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/AlumPart001.jpg" style="height: 350px;">
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/BrnzPart001.jpg" style="height: 350px;">
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/CoprPart001.jpg" style="height: 350px;"> 
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/CncrtBunny.jpg" style="height: 350px;">
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/CastRings001.jpg" style="height: 350px;">
+    <img class="mySlides w3-animate-fading" src="images/CustomCastings/SlvrRingFrog001.webp" style="height: 350px;">
+
+    </div>
+
+
+
+    <div class="image-container">
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtGQroxpWjQpz962sBIYlw0WLo046zBMlhYzYonSFKN7fd_Ix9FFqicA2m5630Ug/pubhtml?widget=true&amp;headers=false"
+            height="250px"
+            width="1200px"></iframe>
+
+
+
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            var currentImage = x[myIndex-1];
+            currentImage.style.display = "inline-block";
+            currentImage.style.margin = "auto";
+            setTimeout(carousel, 2000);   
+        }
+    </script>
+
+    </div>
+
+
+
+    <footer>
+        <a href="index.html" class="button">To Main</a>	
+    </footer>
+
+</body>
+</html>
