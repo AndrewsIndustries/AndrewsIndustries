@@ -15,22 +15,22 @@
 
 <body>
 
+ <div class="image-container">
 
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
-    height="200px"
+    height="900px"
     width="1375px">  
 </iframe>
+</div>
+    <script>
+  setInterval(function() {
+    var iframes = document.querySelectorAll('iframe');
+    iframes.forEach(function(iframe) {
+      iframe.src = iframe.src;
+    });
+  }, 60000); // 60000ms = 1 minute
+</script>
 
 
-
-<iframe width="960px" 
-height="540px"
-src="https://www.youtube.com/embed/ZavG6B1_aLs" 
-title="MIDDLE EAST WAR LIVE COVERAGE UPDATES" 
-frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-float="left"
-fullscreen="true"
-></iframe>
 </body>
 </html>
