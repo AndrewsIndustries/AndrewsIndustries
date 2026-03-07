@@ -15,25 +15,145 @@
 
 <body>
 
-<div class="image-container">
+<div class="slider-container">
+    <div class="slider">
 
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
-    height="775px"
-    width="1375px"
-    float="left"
-    padding="0px"
-    margin="0px">  
-</iframe>
+        <div class="slide">
+            <iframe src="https://andrewsindustriesllc.com/My%20Page.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+
+        <div class="slide">
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/406fa569-c3bf-46ca-863d-44dcb10f8644_hspflirxcd01_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+
+        <div class="slide">
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/c3ae62a5-f5fa-4684-8c65-7cd676f27e32_hspflirxcd01_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+
+        <div class="slide">
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/6a57e35c-62c4-4215-9558-d0674b43679a_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+    
+        <div class="slide">
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/78a519f5-90d1-46f0-a627-c04f3a875e71_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+
+        <div class="slide">
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/78a519f5-90d1-46f0-a627-c04f3a875e71_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+
+        <div class="slide">
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/7fd299c3-f9ba-429f-935a-e24f7c60dd26_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        </div>
+    </div>
+
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+    <div class="dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
 </div>
-    <script>
-  setInterval(function() {
-    var iframes = document.querySelectorAll('iframe');
-    iframes.forEach(function(iframe) {
-      iframe.src = iframe.src;
-    });
-  }, 60000); // 60000ms = 1 minute
-</script>
 
 
 </body>
+
+
+
+
+<script>
+let currentIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const intervalTime = 20000; // 20 Seconds
+let slideInterval;
+let progress = 0;
+const progressBar = document.getElementById('progressBar');
+const tickRate = 100; // Update every 100ms
+const step = (tickRate / intervalTime) * 100; // How much % to add each tick
+let progressInterval;
+
+function updateProgress() {
+    progress += step;
+    progressBar.style.width = progress + "%";
+
+    if (progress >= 100) {
+        resetProgress();
+    }
+}
+
+function resetProgress() {
+    progress = 0;
+    progressBar.style.width = "0%";
+    if (progressInterval) clearInterval(progressInterval);
+    progressInterval = setInterval(updateProgress, tickRate);
+}
+
+function showSlide(index) {
+    // Remove active class from all
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Pause all videos
+    document.querySelectorAll('video').forEach(v => v.pause());
+
+    // Activate selected slide
+    currentIndex = index;
+    slides[currentIndex].classList.add('active');
+    dots[currentIndex].classList.add('active');
+    
+    // Play the current video
+    const currentVideo = slides[currentIndex].querySelector('video');
+    if (currentVideo) {
+        currentVideo.currentTime = 0;
+        currentVideo.play().catch(e => console.error("Video play failed:", e));
+    }
+    
+    resetProgress();
+}
+
+function nextSlide() {
+    let next = (currentIndex + 1) % slides.length;
+    showSlide(next);
+}
+
+// Manual Navigation
+function currentSlide(index) {
+    showSlide(index);
+    resetTimer();
+}
+
+function changeSlide(direction) {
+    let next = (currentIndex + direction + slides.length) % slides.length;
+    showSlide(next);
+    resetTimer(); // Restarts the 20s countdown
+}
+
+// Auto-play Timer
+function resetTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, intervalTime);
+}
+
+// Initialize first video
+window.onload = () => {
+    showSlide(0);
+    resetTimer();
+};
+
+</script>
+
+
+
 </html>
