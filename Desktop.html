@@ -42,34 +42,46 @@
     </div>
     <div class="slider">
 
-        <div class="slide">
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--mt rose-->
+            <video src="https://streamer4.brownrice.com/mtrosesummit/mtrosesummit.stream/main_playlist.m3u8"></video>
         </div>
 
-        <div class="slide">
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/fbafdf3c-454d-40b7-a000-801b4c5518da_hspflirxcd01_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--mt rose slide bowl-->
+            <video src="https://streamer5.brownrice.com/mtroseslidebowl/mtroseslidebowl.stream/main_playlist.m3u8"></video>
         </div>
 
-
-        <div class="slide">
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd03/16f5a6d0-80a8-4771-a534-6e1bc7ee44b0_hspflirxcd03_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--into reno-->
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/36073d4e-d0e9-4e20-a844-b43de1d179d6_hspflirxcd01_public.stream/playlist.m3u8"></video>
         </div>
 
-        <div class="slide">
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/df61860e-6739-4d2e-b346-a4242ffd56d5_hspflirxcd01_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--n. washoe valley-->
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/9bb80468-eb35-4904-99dc-9a2947f1c7e3_hspflirxcd02_public.stream/playlist.m3u8"></video>
         </div>
 
-        <div class="slide">
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/66939df9-550e-48cc-93e8-186d789fc3ad_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--washoe val s. looking n.-->
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd03/16f5a6d0-80a8-4771-a534-6e1bc7ee44b0_hspflirxcd03_public.stream/playlist.m3u8"></video>
         </div>
 
-        <div class="slide">
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/c3ae62a5-f5fa-4684-8c65-7cd676f27e32_hspflirxcd01_public.stream/playlist.m3u8" muted loop playsinline></video>
+        <div class="slide"><!--arowhead looking n.-->
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/df61860e-6739-4d2e-b346-a4242ffd56d5_hspflirxcd01_public.stream/playlist.m3u8"></video>
         </div>
-    
-        <div class="slide">
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/49552511-8296-4a39-ac95-e7c817a2cfc0_hspflirxcd02_public.stream/playlist.m3u8" muted loop playsinline></video>
+
+        <div class="slide"><!--college looking s.-->
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/c3ae62a5-f5fa-4684-8c65-7cd676f27e32_hspflirxcd01_public.stream/playlist.m3u8"></video>
         </div>
+
+          <div class="slide"><!--50x395-->
+            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/fbafdf3c-454d-40b7-a000-801b4c5518da_hspflirxcd01_public.stream/playlist.m3u8"></video>
+        </div>
+
+        <div class="slide"><!--395 at airport-->
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8"></video>
+        </div>
+
+        <div class="slide"><!--spooner summit-->
+            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/78a519f5-90d1-46f0-a627-c04f3a875e71_hspflirxcd02_public.stream/playlist.m3u8"></video>
+        </div>
+
 
     </div>
 
@@ -84,6 +96,11 @@
         <span class="dot" onclick="currentSlide(4)"></span>
         <span class="dot" onclick="currentSlide(5)"></span>
         <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+        <span class="dot" onclick="currentSlide(8)"></span>
+        <span class="dot" onclick="currentSlide(9)"></span>
+        <span class="dot" onclick="currentSlide(10)"></span>
+
     </div>
 
     <div class="progress-container">
@@ -300,11 +317,25 @@ window.onload = () => {
 <footer>
 
 
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
+    <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
         float="none"
-        height="200px"
+        height="900px"
         width="1362px">
     </iframe>
+
+<script>
+  setInterval(function() {
+    var iframe = document.getElementById('spreadsheet-iframe');
+    if (iframe) {
+      var src = iframe.src.split('?')[0]; // Get the base URL
+      var params = new URLSearchParams(iframe.src.split('?')[1] || '');
+      params.delete('_cache_bust'); // Remove old cache buster if it exists
+      src += '?' + params.toString() + '&_cache_bust=' + new Date().getTime();
+      iframe.src = src;
+    }
+  }, 60000); // 60000ms = 1 minute
+</script>
+
 
 </footer>
 
