@@ -45,6 +45,21 @@ ul {
 	h5 {font-size: 20px;
 		text-align: center;}
 
+	h10 {font-size: 50px;
+		color: #f40009;
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;}
+
+	h11 {font-size: 30px;
+		color: #ff6600;
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;}
+
+	h12 {font-size: 20px;
+		color: #ff7011;
+		text-align: center;
+		font-family: Arial, Helvetica, sans-serif;}
+
 	div {text-align: center;}
 
 

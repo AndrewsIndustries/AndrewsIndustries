@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andrew's Industries</title>
+    <link rel="icon" type="image/x-icon" href="images\Icon\FlagEaglenoback.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+    <header>
+<div class="image-container">
+<img src="images/CNC/CNC RedandBlack.png" alt="CNC RedandBlack"
+height="250px">
+</div>
+
+    </header>
+<body style="background-color: rgb(0, 0, 0)"></body>
+
+    <div class="w3-content w3-section" style="text-align: center;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/bobcadlogo1.png" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/fusion360logo1.jpeg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/kennlogo1.png" style="height: 450px;">
+
+        <img class="mySlides w3-animate-fading" src="images/20220420_082559.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20220425_140645.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20220711_071800.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20220916_134130.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20220512_074407.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20220711_071800.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20221005_102834.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20230124_070543.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/20230317_071217.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/bracket1.jpg" style="height: 450px;">
+        
+        <img class="mySlides w3-animate-fading" src="images/Logos/bobcadlogo2.jpeg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/fusion360logo2.png" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/kennlogo2.png" style="height: 450px;">
+
+        <img class="mySlides w3-animate-fading" src="images/Cap316.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/ClevisEndAlum.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/collar.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/comodis.png" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/FlangeTube316.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/foot.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/outputshaft.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/RD20.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Ring316.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/TestProPic.png" style="height: 450px;">
+    
+        <img class="mySlides w3-animate-fading" src="images/Logos/bobcadlogo3.jpeg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/fusion360logo3.jpeg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/Logos/kennlogo3.png" style="height: 450px;">
+
+        <img class="mySlides w3-animate-fading" src="images/tube-holder-bucket.jpg" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/BobCad/comodis.png" style="height: 450px;">
+        <img class="mySlides w3-animate-fading" src="images/924192.png" style="height: 450px;">
+   
+   
+    </div>
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            var currentImage = x[myIndex-1];
+            currentImage.style.display = "inline-block";
+            currentImage.style.margin = "auto";
+            setTimeout(carousel, 2000);   
+        }
+    </script>
+
+
+<div class="list-container">
+    <ul>
+        <li><h10>G&M Code Development</h10></li>
+        <li><h11>This is the "DNA" of the machining process. 
+            While CAM software generates the bulk of it, 
+            custom-optimized G-code ensures 
+            the machine runs at peak efficiency.</h11></li>
+        <li><h12>Optimization: Reducing "air cutting" time and optimizing tool paths to shave seconds (or minutes) off cycle times.
+            Macro Programming: Implementing G65 subprograms or Fanuc-style macros for repetitive tasks, probing cycles, or part families.
+            Error Reduction: Cleaning up "bloated" code that can cause older controllers to lag or stutter during high-speed look-ahead operations.</h12></li>    
+
+        <li><h10>Custom Setup Sheets</h10></li>
+        <li><h11>A shop is only as fast as its changeover. Professional setup sheets bridge the gap between the programmer and the operator.<h11></li>
+        <li><h12>Visual Clarity: Including 3D screenshots of the part orientation, fixture locations, and "Work Offset" ($G54, G55$, etc.) origins.Tooling Data: Explicit lists of tool projections, flutes, holder types, and specific stick-out lengths to prevent spindle crashes.Quality Control: Integrating critical dimension check-points directly into the workflow so the operator knows exactly what to mic after the first <h12></li>
+
+
+        <li><h10>Custom Post Processors</h10></li>
+        <li><h11>The Post Processor is the translator between your CAM software 
+            (like the BobCAD-CAM shown in your screenshot) 
+            and your specific CNC machine hardware.<h11></li>
+
+        <li><h12>Machine-Specific Syntax: Tailoring code for unique controllers 
+            (Haas, Mazak, Heidenhain, etc.) so you don't have to "hand-edit" 
+            code after posting.Multi-Axis Support: Correctly handling 4th and 
+            5th axis rotary logic, including Inverse Time Feed ($G93$) and 
+            Tool Center Point Control (TCPC).Safety Blocks: Forcing specific safety codes 
+            at every tool change to ensure the machine is in the correct state (e.g., $G80$
+             to cancel canned cycles or $G90$ for absolute positioning).<h12></li>
+
+        
+    </ul>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="image-container">
+
+        <img src="images\Gray\Gray_4806 - Copy_edited.png"
+        width="250px" 
+        height="relevant" 
+        float="none"
+        padding="3px"></a>
+
+  <br>   
+
+<footer>
+    <a href="index.html">
+        <img src="images/Icon/FlagEaglenoback.png"
+        margin-left="auto"
+        margin-right="auto"
+        height="150px"
+        width="inherit">
+    </a>
+
+</footer>
+</div>
+</body>
+</html>
