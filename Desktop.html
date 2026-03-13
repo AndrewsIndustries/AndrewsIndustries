@@ -42,8 +42,12 @@
     </div>
     <div class="slider">
 
-        <div class="slide"><!--my page-->
-            <video src="https://andrewsindustriesllc.com/My%20Page.html"></video>
+        <div class="slide">        
+        <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
+        float="none"
+        height="900px"
+        width="1362px">
+        </iframe>
         </div>
 
         <div class="slide"><!--mtrosesummit-->
@@ -227,11 +231,13 @@ function toggleMute() {
 }
 
 function toggleFullscreen() {
-  const elem = document.querySelector('.slider-container');
+  const elem = document.querySelector('.slide.active');
   if (!document.fullscreenElement) {
-    elem.requestFullscreen().catch(err => {
-      alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-    });
+    if (elem) {
+      elem.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    }
   } else {
     document.exitFullscreen();
   }
@@ -317,11 +323,7 @@ window.onload = () => {
 <footer>
 
 
-    <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
-        float="none"
-        height="600px"
-        width="1362px">
-    </iframe>
+
 
 <script>
   setInterval(function() {
