@@ -23,6 +23,19 @@
             cursor: pointer;
             margin-left: 5px;
         }
+        .slide iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .fake-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+        }
     </style>
 
 </head>
@@ -32,21 +45,11 @@
 <body>
 
 <div class="slider-container">
-    <div class="controls">
-        <button id="playPauseBtn">Pause</button>
-        <button id="muteBtn">Unmute</button>
-        <button id="fullscreenBtn">Fullscreen</button>
-        <button id="refreshBtn">Refresh</button>
-        <button id="startRecordBtn">Record</button>
-        <button id="stopRecordBtn" style="display:none;">Stop</button>
-    </div>
+
     <div class="slider">
 
         <div class="slide">        
-        <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
-        float="none"
-        height="900px"
-        width="1362px">
+        <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false">
         </iframe>
         </div>
 
@@ -232,14 +235,8 @@ function toggleMute() {
 
 function toggleFullscreen() {
   const elem = document.querySelector('.slide.active');
-  if (!document.fullscreenElement) {
-    if (elem) {
-      elem.requestFullscreen().catch(err => {
-        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-      });
-    }
-  } else {
-    document.exitFullscreen();
+  if (elem) {
+    elem.classList.toggle('fake-fullscreen');
   }
 }
 
@@ -306,13 +303,11 @@ document.addEventListener('keydown', (event) => {
 
 
 window.onload = () => {
-    // Hook up buttons
-    document.getElementById('playPauseBtn').onclick = togglePlayPause;
-    document.getElementById('muteBtn').onclick = toggleMute;
-    document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
-    document.getElementById('refreshBtn').onclick = () => location.reload();
-    document.getElementById('startRecordBtn').onclick = startRecording;
-    document.getElementById('stopRecordBtn').onclick = stopRecording;
+    slides.forEach(slide => {
+        slide.addEventListener('dblclick', () => {
+            toggleFullscreen();
+        });
+    });
 
     showSlide(0);
     resetTimer();
