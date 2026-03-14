@@ -24,6 +24,19 @@
             cursor: pointer;
             margin-left: 5px;
         }
+        .slide iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .fake-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+        }
   
     </style>
 
@@ -51,32 +64,32 @@
             <video src="https://live5.brownrice.com:444/mtrosewcl/mtrosewcl.stream/main_playlist.m3u8"></video>
         </div>
 
-        <div class="slide"><!--n. washoe valley-->
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/9bb80468-eb35-4904-99dc-9a2947f1c7e3_hspflirxcd02_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!---->
+            <video src="https://live5.brownrice.com:444/mtrosecam/mtrosecam.stream/main_playlist.m3u8"></video>
         </div>
 
-        <div class="slide"><!--washoe val s. looking n.-->
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd03/16f5a6d0-80a8-4771-a534-6e1bc7ee44b0_hspflirxcd03_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!--.-->
+            <video src="https://live6.brownrice.com:444/mtrose1/mtrose1.stream/main_playlist.m3u8"></video>
         </div>
 
-        <div class="slide"><!--arowhead looking n.-->
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/df61860e-6739-4d2e-b346-a4242ffd56d5_hspflirxcd01_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!---->
+            <iframe src="https://threatmap.bitdefender.com/"></iframe>
         </div>
 
-        <div class="slide"><!--college looking s.-->
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/c3ae62a5-f5fa-4684-8c65-7cd676f27e32_hspflirxcd01_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!---->
+            <iframe src="https://livethreatmap.radware.com/"></iframe>
         </div>
 
-          <div class="slide"><!--50x395-->
-            <video src="https://d2wse1.its.nv.gov:443/renoxcd01/fbafdf3c-454d-40b7-a000-801b4c5518da_hspflirxcd01_public.stream/playlist.m3u8"></video>
+          <div class="slide"><!---->
+            <iframe src="https://www.tzevaadom.co.il/en/"></iframe>
         </div>
 
-        <div class="slide"><!--395 at airport-->
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!---->
+            <iframe src="https://www.cfr.org/global-conflict-tracker"></iframe>
         </div>
 
-        <div class="slide"><!--spooner summit-->
-            <video src="https://d2wse2.its.nv.gov:443/renoxcd02/78a519f5-90d1-46f0-a627-c04f3a875e71_hspflirxcd02_public.stream/playlist.m3u8"></video>
+        <div class="slide"><!---->
+            <iframe src="https://iranwarmap.com/"></iframe>
         </div>
 
 
@@ -95,7 +108,7 @@
         <span class="dot" onclick="currentSlide(6)"></span>
         <span class="dot" onclick="currentSlide(7)"></span>
         <span class="dot" onclick="currentSlide(8)"></span>
-        <span class="dot" onclick="currentSlide(9)"></span>
+
 
 
     </div>
@@ -110,7 +123,7 @@
 
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
     height="900px"
-    width="1350px">  
+    width="1375px">  
 </iframe>
 
 <hr>
@@ -257,13 +270,9 @@ function toggleMute() {
 }
 
 function toggleFullscreen() {
-  const elem = document.querySelector('.slider-container');
-  if (!document.fullscreenElement) {
-    elem.requestFullscreen().catch(err => {
-      alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-    });
-  } else {
-    document.exitFullscreen();
+  const elem = document.querySelector('.slide.active');
+  if (elem) {
+    elem.classList.toggle('fake-fullscreen');
   }
 }
 
@@ -337,6 +346,12 @@ window.onload = () => {
     document.getElementById('refreshBtn').onclick = () => location.reload();
     document.getElementById('startRecordBtn').onclick = startRecording;
     document.getElementById('stopRecordBtn').onclick = stopRecording;
+
+    slides.forEach(slide => {
+        slide.addEventListener('dblclick', () => {
+            toggleFullscreen();
+        });
+    });
 
     showSlide(0);
     resetTimer();
