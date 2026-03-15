@@ -301,15 +301,16 @@ video {
     justify-items: center;
     align-items: center;
     height: 100vh;
-    background-color: #000000;
-    gap: 1rem;
+    background-image: url('images/Backgrounds/TheDecayofTime.png');
+    background-size: cover;
+    gap: .75rem;
 }
 
 .clock {
-    font-family: 'monospace';
-    font-size: 2.5rem;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffffff;
+    font-family: 'times new roman', serif;
+    font-size: 5.0rem;
+    color: #000000;
+    text-shadow: 0 0 15px #ff0000;
 }
 
 .clock-wrapper {
@@ -319,8 +320,8 @@ video {
 }
 
 .clock-label {
-    font-family: 'monospace';
-    font-size: 1rem;
-    color: #ffffff;
-    text-shadow: 0 0 5px #ffffff;
+    font-family: 'times new roman', serif;
+    font-size: 3rem;
+    color: #000000;
+    text-shadow: 0 0 15px #ff0000;
 }
