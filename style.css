@@ -310,7 +310,7 @@ video {
     font-family: 'times new roman', serif;
     font-size: 5.0rem;
     color: #fffdd0;
-    text-shadow: 0 0 15px #4c48ca;
+    text-shadow: 0 0 20px #000000;
 }
 
 .clock-wrapper {
@@ -323,5 +323,5 @@ video {
     font-family: 'times new roman', serif;
     font-size: 3rem;
     color: #fffdd0;
-    text-shadow: 0 0 15px #4c48ca;
+    text-shadow: 0 0 20px #000000;
 }
