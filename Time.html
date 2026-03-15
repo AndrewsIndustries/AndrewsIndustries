@@ -8,45 +8,104 @@
 </head>
 <body>
     <div class="clock-container">
-        <div class="clock" id="clock-pst"></div>
-        <div class="clock" id="clock-mt"></div>
-        <div class="clock" id="clock-ct"></div>
-        <div class="clock" id="clock-et"></div>
-        <div class="clock" id="clock-utc"></div>
+        <div class="clock-wrapper">
+            <div class="clock-label">PST</div>
+            <div class="clock" id="clock-pst"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">MT</div>
+            <div class="clock" id="clock-mt"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">CT</div>
+            <div class="clock" id="clock-ct"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">ET</div>
+            <div class="clock" id="clock-et"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">UTC</div>
+            <div class="clock" id="clock-utc"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">France</div>
+            <div class="clock" id="clock-fr"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Spain</div>
+            <div class="clock" id="clock-es"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Germany</div>
+            <div class="clock" id="clock-de"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Israel</div>
+            <div class="clock" id="clock-il"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Saudi Arabia</div>
+            <div class="clock" id="clock-sa"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Iran</div>
+            <div class="clock" id="clock-ir"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Beijing</div>
+            <div class="clock" id="clock-cn"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Moscow</div>
+            <div class="clock" id="clock-ru"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">India</div>
+            <div class="clock" id="clock-in"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Indonesia</div>
+            <div class="clock" id="clock-id"></div>
+        </div>
+        <div class="clock-wrapper">
+            <div class="clock-label">Japan</div>
+            <div class="clock" id="clock-jp"></div>
+        </div>
     </div>
     <script>
+        const timezones = [
+            { id: 'clock-pst', timeZone: 'America/Los_Angeles' },
+            { id: 'clock-mt', timeZone: 'America/Denver' },
+            { id: 'clock-ct', timeZone: 'America/Chicago' },
+            { id: 'clock-et', timeZone: 'America/New_York' },
+            { id: 'clock-utc', timeZone: 'UTC' },
+            { id: 'clock-fr', timeZone: 'Europe/Paris' },
+            { id: 'clock-es', timeZone: 'Europe/Madrid' },
+            { id: 'clock-de', timeZone: 'Europe/Berlin' },
+            { id: 'clock-il', timeZone: 'Asia/Jerusalem' },
+            { id: 'clock-sa', timeZone: 'Asia/Riyadh' },
+            { id: 'clock-ir', timeZone: 'Asia/Tehran' },
+            { id: 'clock-cn', timeZone: 'Asia/Shanghai' },
+            { id: 'clock-ru', timeZone: 'Europe/Moscow' },
+            { id: 'clock-in', timeZone: 'Asia/Kolkata' },
+            { id: 'clock-id', timeZone: 'Asia/Jakarta' },
+            { id: 'clock-jp', timeZone: 'Asia/Tokyo' },
+        ];
+
+        function formatTime(date) {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
         function updateClock() {
             const now = new Date();
-            const pacificTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
-            const mountainTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Denver" }));
-            const centralTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
-            const easternTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
-            const utcTime = new Date(now.toLocaleString("en-US", { timeZone: "UTC" }));
-
-            const hoursPST = pacificTime.getHours().toString().padStart(2, '0');
-            const minutesPST = pacificTime.getMinutes().toString().padStart(2, '0');
-            const secondsPST = pacificTime.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock-pst').textContent = `${hoursPST}:${minutesPST}:${secondsPST} PST`;
-
-            const hoursMT = mountainTime.getHours().toString().padStart(2, '0');
-            const minutesMT = mountainTime.getMinutes().toString().padStart(2, '0');
-            const secondsMT = mountainTime.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock-mt').textContent = `${hoursMT}:${minutesMT}:${secondsMT} MT`;
-
-            const hoursCT = centralTime.getHours().toString().padStart(2, '0');
-            const minutesCT = centralTime.getMinutes().toString().padStart(2, '0');
-            const secondsCT = centralTime.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock-ct').textContent = `${hoursCT}:${minutesCT}:${secondsCT} CT`;
-
-            const hoursET = easternTime.getHours().toString().padStart(2, '0');
-            const minutesET = easternTime.getMinutes().toString().padStart(2, '0');
-            const secondsET = easternTime.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock-et').textContent = `${hoursET}:${minutesET}:${secondsET} ET`;
-
-            const hoursUTC = utcTime.getHours().toString().padStart(2, '0');
-            const minutesUTC = utcTime.getMinutes().toString().padStart(2, '0');
-            const secondsUTC = utcTime.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock-utc').textContent = `${hoursUTC}:${minutesUTC}:${secondsUTC} UTC`;
+            timezones.forEach(tz => {
+                const time = new Date(now.toLocaleString("en-US", { timeZone: tz.timeZone }));
+                document.getElementById(tz.id).textContent = formatTime(time);
+            });
         }
 
         setInterval(updateClock, 1000);
