@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="clock-container">
+        <div class="clock" id="clock-pst"></div>
+        <div class="clock" id="clock-mt"></div>
+        <div class="clock" id="clock-ct"></div>
+        <div class="clock" id="clock-et"></div>
+        <div class="clock" id="clock-utc"></div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const pacificTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+            const mountainTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Denver" }));
+            const centralTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+            const easternTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+            const utcTime = new Date(now.toLocaleString("en-US", { timeZone: "UTC" }));
+
+            const hoursPST = pacificTime.getHours().toString().padStart(2, '0');
+            const minutesPST = pacificTime.getMinutes().toString().padStart(2, '0');
+            const secondsPST = pacificTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock-pst').textContent = `${hoursPST}:${minutesPST}:${secondsPST} PST`;
+
+            const hoursMT = mountainTime.getHours().toString().padStart(2, '0');
+            const minutesMT = mountainTime.getMinutes().toString().padStart(2, '0');
+            const secondsMT = mountainTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock-mt').textContent = `${hoursMT}:${minutesMT}:${secondsMT} MT`;
+
+            const hoursCT = centralTime.getHours().toString().padStart(2, '0');
+            const minutesCT = centralTime.getMinutes().toString().padStart(2, '0');
+            const secondsCT = centralTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock-ct').textContent = `${hoursCT}:${minutesCT}:${secondsCT} CT`;
+
+            const hoursET = easternTime.getHours().toString().padStart(2, '0');
+            const minutesET = easternTime.getMinutes().toString().padStart(2, '0');
+            const secondsET = easternTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock-et').textContent = `${hoursET}:${minutesET}:${secondsET} ET`;
+
+            const hoursUTC = utcTime.getHours().toString().padStart(2, '0');
+            const minutesUTC = utcTime.getMinutes().toString().padStart(2, '0');
+            const secondsUTC = utcTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock-utc').textContent = `${hoursUTC}:${minutesUTC}:${secondsUTC} UTC`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call
+    </script>
+</body>
+</html>

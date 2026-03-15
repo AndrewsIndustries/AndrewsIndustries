@@ -297,3 +297,20 @@ video {
     background: #007bff; /* Choose your accent color */
     transition: width 0.1s linear; /* Keeps the movement smooth */
 }
+
+.clock-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+    gap: 0.5rem;
+}
+
+.clock {
+    font-family: 'monospace';
+    font-size: 2rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff;
+}
