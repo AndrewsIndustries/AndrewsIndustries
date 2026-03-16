@@ -219,7 +219,7 @@ ul {
 .slider-container2 {
     position: relative;
     width: 100%;
-    height: 100vh; /* Adjust height as needed */
+    height: 98vh; /* Adjust height as needed */
     overflow: hidden;
 }
 
