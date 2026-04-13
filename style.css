@@ -80,7 +80,7 @@ ul {
 
 	.slider1 {
 		height: 180px;
-		width: "auto";
+		width: auto;
 		background-image: url(images/outputshaft.jpg);
 		background-size: contain;
 		object-fit: cover;

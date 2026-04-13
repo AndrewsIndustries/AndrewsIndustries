@@ -8,11 +8,22 @@
     <link rel="icon" type="image/x-icon" href="images/Icon/FlagEaglenoback.png">
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: rgb(214, 214, 214)">
 
-    <header class="banner-container">
-        <h1>Digital Downloads</h1>
-    </header>
+<style>
+
+          body { background-image: url(images/Backgrounds/Digital\ Downloads1.png);}
+        .controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10000;
+        }
+
+</style>
+
+
+
+<body>
 
     <div class="w3-content w3-section" style="text-align: center;">
 
@@ -53,7 +64,7 @@
             var currentImage = x[myIndex-1];
             currentImage.style.display = "inline-block";
             currentImage.style.margin = "auto";
-            setTimeout(carousel, 2000);   
+            setTimeout(carousel, 7000);   
         }
     </script>
 

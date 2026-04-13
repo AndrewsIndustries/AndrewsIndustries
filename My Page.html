@@ -97,10 +97,13 @@
 
  <div class="image-container">
 
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
+  <div class="iframe-container">
+  <iframe id="spreadsheet-iframe" 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?widget=true&amp;headers=false"
     height="900px"
     width="1365px">  
-</iframe>
+    </iframe>
+    </div>
 
 <hr>
      
@@ -117,8 +120,7 @@
         <a href="Gray.html">
         <img src="images\Gray\Gray_4806 - Copy_edited.png"
         width="250px" 
-        height="relevant" 
-        float="none"
+        style="height: auto; float: none;"
         padding="3px"></a>
 
   <br>
@@ -344,7 +346,7 @@ window.onload = () => {
       src += '?' + params.toString() + '&_cache_bust=' + new Date().getTime();
       iframe.src = src;
     }
-  }, 60000); // 60000ms = 1 minute000ms = 1 minute
+  }, 60000); // 60000ms = 1 minute
 </script>
 
 
