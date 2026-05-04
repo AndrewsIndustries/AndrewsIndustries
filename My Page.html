@@ -37,10 +37,110 @@
             height: 100vh;
             z-index: 9999;
         }
+
+
+
+        header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000; /* Ensures it stays on top of other content */
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: none;
+            color: #D23037;
+            text-shadow: 0 0 20px #000000;
+            padding: 10px 0;
+            font-family: Arial, sans-serif;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 1.20rem;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        .ticker:hover {
+            animation-play-state: paused;
+        }
   
+
+
+
+
+
+
     </style>
 
 </head>
+
+<header float="top">
+    
+<div class="ticker-wrap">
+    <div class="ticker" id="news-ticker">
+        Connecting to news feed...
+    </div>
+</div>
+
+<script>
+    // 1. CONFIGURATION
+    const apiKey = 'ece07561988a6cad96866dbe9b8aa022';
+    
+    // Choose ONE of these URLs:
+    // A. WORLD NEWS (General top headlines)
+    const worldUrl = `GET https://gnews.io/api/v4/top-headlines?category=general&apikey=${apiKey}`;
+    
+    // B. LOCAL/SPECIFIC NEWS (e.g., Nevada news)
+    // Note: NewsAPI works best with keywords for local news
+    const localUrl = `https://gnews.io/api/v4/search?q=Google&lang=en&max=5&apikey=${apiKey}`;
+
+    async function fetchNews() {
+        const tickerElement = document.getElementById('news-ticker');
+        
+        try {
+            // Change 'worldUrl' to 'localUrl' if you want local news instead
+            const response = await fetch(worldUrl);
+            const data = await response.json();
+
+            if (data.status === "error") {
+                tickerElement.innerText = `API Error: ${data.message}`;
+                return;
+            }
+
+            if (data.articles && data.articles.length > 0) {
+                tickerElement.innerHTML = data.articles
+                    .map(article => `<span class="ticker-item">● ${article.title}</span>`)
+                    .join('');
+            } else {
+                tickerElement.innerText = "No news found at the moment.";
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            tickerElement.innerText = "Security block or connection issue. Check console (F12).";
+        }
+    }
+</script>
+
+    </header>
+
+
 
 <body>
 
@@ -330,6 +430,9 @@ window.onload = () => {
             toggleFullscreen();
         });
     });
+
+    // Initialize News Ticker
+    fetchNews();
 
     showSlide(0);
     resetTimer();
