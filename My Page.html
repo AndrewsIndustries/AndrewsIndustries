@@ -47,11 +47,18 @@
         z-index: 1000; /* Ensures it stays on top of other content */
         }
 
+        footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 1000; /* Ensures it stays on top of other content */
+        }
+
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
-            background-color: none;
-            color: #D23037;
+            background-color: transparent;
+            color: #00ff15;
             text-shadow: 0 0 20px #000000;
             padding: 10px 0;
             font-family: Arial, sans-serif;
@@ -63,13 +70,13 @@
             display: inline-block;
             white-space: nowrap;
             padding-right: 100%;
-            animation: ticker 30s linear infinite;
+            animation: ticker 500s linear infinite;
         }
 
         .ticker-item {
             display: inline-block;
             padding: 0 2rem;
-            font-size: 1.20rem;
+            font-size: 3rem;
         }
 
         @keyframes ticker {
@@ -91,58 +98,14 @@
 
 </head>
 
-<header float="top">
-    
-<div class="ticker-wrap">
-    <div class="ticker" id="news-ticker">
-        Connecting to news feed...
-    </div>
-</div>
-
-<script>
-    // 1. CONFIGURATION
-    const apiKey = 'ece07561988a6cad96866dbe9b8aa022';
-    
-    // Choose ONE of these URLs:
-    // A. WORLD NEWS (General top headlines)
-    const worldUrl = `GET https://gnews.io/api/v4/top-headlines?category=general&apikey=${apiKey}`;
-    
-    // B. LOCAL/SPECIFIC NEWS (e.g., Nevada news)
-    // Note: NewsAPI works best with keywords for local news
-    const localUrl = `https://gnews.io/api/v4/search?q=Google&lang=en&max=5&apikey=${apiKey}`;
-
-    async function fetchNews() {
-        const tickerElement = document.getElementById('news-ticker');
-        
-        try {
-            // Change 'worldUrl' to 'localUrl' if you want local news instead
-            const response = await fetch(worldUrl);
-            const data = await response.json();
-
-            if (data.status === "error") {
-                tickerElement.innerText = `API Error: ${data.message}`;
-                return;
-            }
-
-            if (data.articles && data.articles.length > 0) {
-                tickerElement.innerHTML = data.articles
-                    .map(article => `<span class="ticker-item">● ${article.title}</span>`)
-                    .join('');
-            } else {
-                tickerElement.innerText = "No news found at the moment.";
-            }
-        } catch (error) {
-            console.error('Fetch error:', error);
-            tickerElement.innerText = "Security block or connection issue. Check console (F12).";
-        }
-    }
-</script>
-
-    </header>
-
-
-
 <body>
+    <header>
+        <div class="ticker-wrap">
+            <div class="ticker" id="news-ticker">
+                Connecting to news feed...
+            </div>
+        </div>
+    </header>
 
 
 <div class="slider-container">
@@ -218,7 +181,6 @@
 
 <hr>
 
-<iframe src="http://feeds.skynews.com/feeds/rss/world.xml" width="100%" height="500"></iframe>
 
 
 
@@ -233,7 +195,6 @@
     </div>
   <br>
 
-<footer>
     <div class="image-container">
     <a href="index.html">
         <img src="images/Icon/FlagEaglenoback.png"
@@ -241,8 +202,20 @@
         width="inherit">
     </a>
     </div>
+
+
+
+
+
+<footer>
+    <div class="ticker-wrap">
+        <div class="ticker" id="footer-ticker" style="animation-duration: 300s;">
+            Connecting to defense feed...
+        </div>
+    </div>
+
+
 </footer>
-</div>
     <script>
  let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
@@ -423,15 +396,70 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+const headerRssUrls = [
+    'https://feeds.skynews.com/feeds/rss/world.xml',
+    'https://feeds.skynews.com/feeds/rss/us.xml',
+    'https://feeds.skynews.com/feeds/rss/strange.xml',
+];
 
-window.onload = () => {
+const footerRssUrls = [
+    'https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?max=10&ContentType=1&Site=945',
+    'https://www.war.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=2&Site=945&max=10'
+];
+
+async function updateTicker(urls, elementId) {
+    const tickerElement = document.getElementById(elementId);
+    if (!tickerElement) return;
+    
+    try {
+        const parser = new DOMParser();
+        const fetchPromises = urls.map(url =>
+            fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                return res.text();
+            })
+            .then(text => parser.parseFromString(text, "text/xml"))
+            .then(xmlDoc => Array.from(xmlDoc.querySelectorAll("item")))
+            .catch(err => {
+                console.warn(`Failed to fetch ${url}:`, err);
+                return []; 
+            })
+        );
+
+        const results = await Promise.all(fetchPromises);
+        const allItems = results.flat();
+
+        if (allItems.length > 0) {
+            tickerElement.innerHTML = allItems
+                .map(item => {
+                    const title = item.querySelector("title")?.textContent || "Breaking News";
+                    return `<span class="ticker-item">● ${title}</span>`;
+                })
+                .join('');
+        } else {
+            tickerElement.innerText = "No content found in this feed.";
+        }
+    } catch (error) {
+        console.error(`Fetch error for ${elementId}:`, error);
+        tickerElement.innerText = "Error loading feed.";
+    }
+}
+
+async function fetchNews() {
+    updateTicker(headerRssUrls, 'news-ticker');
+    updateTicker(footerRssUrls, 'footer-ticker');
+}
+
+// Use a more immediate initialization pattern
+function init() {
     // Hook up buttons
-    document.getElementById('playPauseBtn').onclick = togglePlayPause;
-    document.getElementById('muteBtn').onclick = toggleMute;
-    document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
-    document.getElementById('refreshBtn').onclick = () => location.reload();
-    document.getElementById('startRecordBtn').onclick = startRecording;
-    document.getElementById('stopRecordBtn').onclick = stopRecording;
+    if(document.getElementById('playPauseBtn')) document.getElementById('playPauseBtn').onclick = togglePlayPause;
+    if(document.getElementById('muteBtn')) document.getElementById('muteBtn').onclick = toggleMute;
+    if(document.getElementById('fullscreenBtn')) document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
+    if(document.getElementById('refreshBtn')) document.getElementById('refreshBtn').onclick = () => location.reload();
+    if(document.getElementById('startRecordBtn')) document.getElementById('startRecordBtn').onclick = startRecording;
+    if(document.getElementById('stopRecordBtn')) document.getElementById('stopRecordBtn').onclick = stopRecording;
 
     slides.forEach(slide => {
         slide.addEventListener('dblclick', () => {
@@ -444,7 +472,10 @@ window.onload = () => {
 
     showSlide(0);
     resetTimer();
-};
+}
+
+// Initialize immediately since script is at the bottom
+init();
 
 
 
