@@ -57,11 +57,11 @@
         .ticker-wrap {
             width: 100%;
             box-sizing: border-box;
-            border-bottom: 3px solid rgba(255, 0, 0, 0.1);
+            border-bottom: none;
             overflow: hidden;
             background-color: transparent;
             color: #000000;
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.1);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgb(127, 0, 0), 0 0 15px rgba(127, 2, 2, 0.494);
             padding: 1px 0;
             font-family: Arial, sans-serif;
             font-size: 50px;
@@ -178,11 +178,6 @@
 
 
 <hr>
-
-
-
-
-
 <br>
     <div class="image-container">
         <img src="images\Gray\Gray_4806 - Copy_edited.png" 
@@ -203,13 +198,14 @@
 
 
 
+
+
 <footer>
     <div class="ticker-wrap">
         <div class="ticker" id="footer-ticker" style="animation-duration: 180s;">
             Connecting to Yahoo Finance...
         </div>
     </div>
-
 </footer>
     <script>
  let currentIndex = 0;
@@ -399,6 +395,7 @@ const headerRssUrls = [
 const footerRssUrls = [
     'https://feeds.finance.yahoo.com/rss/2.0/headline?s=yhoo,goog&region=US&lang=en-US',
     
+    
 ];
 
 async function updateTicker(urls, elementId) {
@@ -501,6 +498,9 @@ function init() {
 init();
 
   setInterval(function() {
+    // Refresh news tickers to pick up 6am, 9am, and 1pm updates automatically
+    fetchNews();
+
     // Targeted refresh for all Google Sheet iframes
     const iframes = document.querySelectorAll('iframe[src*="docs.google.com/spreadsheets"]');
     iframes.forEach(iframe => {

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrews Industries | Stock Watch Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: #f8fafc; 
+            overflow-x: hidden;
+        }
+
+        .glass-card { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Ticker Animation Logic */
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background: #1e293b;
+            border-bottom: 2px solid #3b82f6;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: inline-flex;
+            animation: ticker-scroll 30s linear infinite;
+        }
+
+        .ticker-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .status-pill {
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .buy-theme { color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+        .sell-theme { color: #f87171; background: rgba(248, 113, 113, 0.1); }
+        .hold-theme { color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="ticker-container glass-card sticky top-0 z-50">
+        <div id="tickerContent" class="ticker-wrapper">
+            <!-- Ticker items will be dynamically injected here -->
+            <div class="ticker-item text-slate-400 italic">Initializing market data stream...</div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-4 md:p-8">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+            <div>
+                <h1 class="text-4xl font-bold text-white tracking-tight flex items-center gap-3">
+                    <i class="fas fa-chart-line text-blue-500"></i> Andrews Industries
+                </h1>
+                <p class="text-slate-400 mt-1">Automated Stock Watch & Analysis Engine v2.0</p>
+                <p id="lastUpdated" class="text-slate-500 text-xs mt-1 italic"></p>
+            </div>
+            <div class="flex gap-3">
+                <button id="refreshBtn" class="bg-blue-600 hover:bg-blue-500 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Sync Sheet
+                </button>
+                <button id="exportBtn" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-emerald-900/20">
+                    <i class="fas fa-file-export"></i> Export XML
+                </button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Market Sentiment</h3>
+                <p id="marketStatus" class="text-2xl font-bold text-white">Analyzing...</p>
+                <div class="w-full bg-slate-800 h-2 mt-4 rounded-full overflow-hidden">
+                    <div id="sentimentProgress" class="bg-blue-500 h-full w-0 transition-all duration-1000"></div>
+                </div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-blue-500">
+                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Total Analyzed</h3>
+                <p id="totalCount" class="text-4xl font-bold text-white">0</p>
+                <p class="text-xs text-slate-500 mt-2">Active tickers monitored</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-500">
+                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Top Recommendation</h3>
+                <p id="topPick" class="text-2xl font-bold text-emerald-400">---</p>
+                <p id="topPickDetails" class="text-xs text-slate-500 mt-2">Highest confidence signal</p>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden mb-8 border border-slate-700/50">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800/80 text-slate-400 text-xs uppercase tracking-widest font-semibold">
+                            <th class="px-6 py-4">Ticker</th>
+                            <th class="px-6 py-4">Current Price</th>
+                            <th class="px-6 py-4">24h Change</th>
+                            <th class="px-6 py-4">Recommended Action</th>
+                            <th class="px-6 py-4">AI Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockBody" class="divide-y divide-slate-800">
+                        <!-- Loading State -->
+                        <tr id="loadingState">
+                            <td colspan="5" class="px-6 py-12 text-center text-slate-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Fetching records from Google Sheets...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="glass-card p-4 rounded-xl flex justify-between items-center text-sm">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span id="systemLog" class="text-slate-400">System Ready. Waiting for user sync...</span>
+            </div>
+            <div class="text-slate-500 font-mono text-xs">
+                PATH: AndrewsIndustries/Stock Watch.xml
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pub?gid=134813518&single=true&output=csv";
+        
+        let currentStockData = [];
+
+        function analyzeStock(row) {
+            const ticker = (row[0] || "UNK").trim();
+            const price = parseFloat(row[1]) || 0;
+            const change = parseFloat(row[2]) || 0;
+            const volume = parseFloat(row[3]) || 0;
+
+            let action = "HOLD";
+            let confidence = 50;
+            let themeClass = "hold-theme";
+
+            if (change > 1.5) {
+                action = "BUY";
+                confidence = Math.min(98, 65 + (change * 2));
+                themeClass = "buy-theme";
+            } else if (change < -1.5) {
+                action = "SELL";
+                confidence = Math.min(98, 55 + Math.abs(change * 2));
+                themeClass = "sell-theme";
+            } else {
+                action = "HOLD";
+                confidence = 85;
+                themeClass = "hold-theme";
+            }
+
+            return { ticker, price, change, action, confidence, volume, themeClass };
+        }
+
+        async function fetchData() {
+            const log = document.getElementById('systemLog');
+            const icon = document.getElementById('refreshIcon');
+            const body = document.getElementById('stockBody');
+            
+            log.innerText = "Connecting to Google Cloud...";
+            icon.classList.add('fa-spin');
+
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                if (!response.ok) throw new Error("Sheet access denied.");
+                
+                const data = await response.text();
+                const rows = data.split('\n').map(row => row.split(','));
+                
+                // Remove header row
+                rows.shift();
+                
+                currentStockData = rows
+                    .filter(r => r[0] && r[0].trim() !== "" && r[0].trim() !== "Ticker")
+                    .map(analyzeStock);
+
+                updateUI();
+                log.innerText = `Sync successful: ${currentStockData.length} stocks analyzed.`;
+                document.getElementById('lastUpdated').innerText = `Last Refreshed: ${new Date().toLocaleTimeString()}`;
+            } catch (error) {
+                console.error(error);
+                log.innerText = "Error: Ensure Sheet is 'Published to Web' as CSV.";
+                body.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-red-400">Failed to load data. Please check your CSV URL.</td></tr>`;
+            } finally {
+                icon.classList.remove('fa-spin');
+            }
+        }
+
+        function updateUI() {
+            const body = document.getElementById('stockBody');
+            const ticker = document.getElementById('tickerContent');
+            
+            body.innerHTML = '';
+            ticker.innerHTML = ''; 
+
+            let buyCount = 0;
+            let highestConf = 0;
+            let topTicker = "N/A";
+
+            // 1. Build Ticker HTML
+            const tickerHtml = currentStockData.map(stock => {
+                const isPositive = stock.change >= 0;
+                const icon = isPositive ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+                const color = isPositive ? 'text-emerald-400' : 'text-red-400';
+                
+                return `
+                    <div class="ticker-item">
+                        <span class="font-bold mr-2 text-white">${stock.ticker}</span>
+                        <span class="font-mono text-slate-300 mr-2">$${stock.price.toFixed(2)}</span>
+                        <span class="${color} flex items-center text-xs font-bold">
+                            <i class="fas ${icon} mr-1"></i>${Math.abs(stock.change)}%
+                        </span>
+                    </div>
+                `;
+            }).join('');
+
+            // Duplicate for smooth loop
+            ticker.innerHTML = tickerHtml + tickerHtml;
+
+            // 2. Build Table and Logic
+            currentStockData.forEach(stock => {
+                if (stock.action === "BUY") buyCount++;
+                if (stock.confidence > highestConf) {
+                    highestConf = stock.confidence;
+                    topTicker = stock.ticker;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/30 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-blue-400">${stock.ticker}</td>
+                    <td class="px-6 py-4 font-mono">$${stock.price.toFixed(2)}</td>
+                    <td class="px-6 py-4 ${stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'} font-semibold">
+                        ${stock.change > 0 ? '+' : ''}${stock.change}%
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="status-pill ${stock.themeClass}">${stock.action}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-mono text-slate-400 w-8">${Math.round(stock.confidence)}%</span>
+                            <div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden min-w-[60px]">
+                                <div class="bg-blue-500 h-full rounded-full" style="width: ${stock.confidence}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+
+            // 3. Update Summary Cards
+            document.getElementById('totalCount').innerText = currentStockData.length;
+            document.getElementById('topPick').innerText = topTicker;
+            
+            const sentiment = currentStockData.length > 0 ? (buyCount / currentStockData.length) * 100 : 0;
+            const sentimentLabel = sentiment > 60 ? "BULLISH" : (sentiment > 35 ? "NEUTRAL" : "BEARISH");
+            
+            document.getElementById('marketStatus').innerText = sentimentLabel;
+            document.getElementById('sentimentProgress').style.width = sentiment + '%';
+        }
+
+        function generateXML() {
+            if (currentStockData.length === 0) {
+                document.getElementById('systemLog').innerText = "No data to export. Sync first.";
+                return;
+            }
+
+            const timestamp = new Date().toISOString();
+            let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+            xml += `<StockWatchReport>\n`;
+            xml += `  <Header>\n`;
+            xml += `    <Organization>Andrews Industries</Organization>\n`;
+            xml += `    <Generated>${timestamp}</Generated>\n`;
+            xml += `    <Count>${currentStockData.length}</Count>\n`;
+            xml += `  </Header>\n`;
+            xml += `  <MarketData>\n`;
+
+            currentStockData.forEach(s => {
+                xml += `    <Stock ticker="${s.ticker}">\n`;
+                xml += `      <Price>${s.price}</Price>\n`;
+                xml += `      <ChangePercent>${s.change}</ChangePercent>\n`;
+                xml += `      <Analysis>\n`;
+                xml += `        <Action>${s.action}</Action>\n`;
+                xml += `        <Confidence>${s.confidence.toFixed(1)}</Confidence>\n`;
+                xml += `      </Analysis>\n`;
+                xml += `    </Stock>\n`;
+            });
+
+            xml += `  </MarketData>\n`;
+            xml += `</StockWatchReport>`;
+
+            const blob = new Blob([xml], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Stock Watch.xml";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            document.getElementById('systemLog').innerText = "XML generated. Save to: GitHub/AndrewsIndustries/";
+        }
+
+        // Event Listeners
+        document.getElementById('refreshBtn').addEventListener('click', fetchData);
+        document.getElementById('exportBtn').addEventListener('click', generateXML);
+        
+        // Auto-run on load
+        window.addEventListener('load', fetchData);
+    </script>
+</body>
+</html>
