@@ -56,11 +56,13 @@
 
         .ticker-wrap {
             width: 100%;
+            box-sizing: border-box;
+            border-bottom: 3px solid rgba(255, 0, 0, 0.1);
             overflow: hidden;
             background-color: transparent;
-            color: #00ff15;
-            text-shadow: 0 0 20px #000000;
-            padding: 10px 0;
+            color: #000000;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 0, 0, 0.4), 0 0 15px rgba(255, 0, 0, 0.1);
+            padding: 1px 0;
             font-family: Arial, sans-serif;
             font-size: 50px;
             font-weight: bold;
@@ -204,7 +206,7 @@
 <footer>
     <div class="ticker-wrap">
         <div class="ticker" id="footer-ticker" style="animation-duration: 180s;">
-            Connecting to Fox News...
+            Connecting to Yahoo Finance...
         </div>
     </div>
 
