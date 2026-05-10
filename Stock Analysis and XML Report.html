@@ -102,6 +102,9 @@
                 <button id="exportBtn" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-emerald-900/20">
                     <i class="fas fa-file-export"></i> Export XML
                 </button>
+                <button id="githubPushBtn" class="bg-slate-700 hover:bg-slate-600 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-slate-900/20">
+                    <i class="fab fa-github"></i> Push to GitHub
+                </button>
             </div>
         </header>
 
@@ -155,7 +158,7 @@
                 <span id="systemLog" class="text-slate-400">System Ready. Waiting for user sync...</span>
             </div>
             <div class="text-slate-500 font-mono text-xs">
-                PATH: C:\Users\andre\Documents\GitHub\AndrewsIndustries\Stock Watch.xml
+                REPO: <a href="https://github.com/AndrewsIndustries/AndrewsIndustries" target="_blank" class="hover:text-blue-400 transition-colors">AndrewsIndustries/main</a>
             </div>
         </footer>
     </div>
@@ -326,27 +329,69 @@
                 xml += `    </Stock>\n`;
             });
 
-            xml += `  </MarketData>\n`;
-            xml += `</StockWatchReport>`;
+        xml += `  </MarketData>\n</StockWatchReport>`;
+        return xml;
+    }
 
-            const blob = new Blob([xml], { type: 'application/xml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "Stock Watch.xml";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            
-            document.getElementById('systemLog').innerText = "XML generated. Save to: GitHub/AndrewsIndustries/";
-        }
+    async function pushToGitHub() {
+        const xmlContent = generateXML();
+        if (!xmlContent) return;
 
-        // Event Listeners
-        document.getElementById('refreshBtn').addEventListener('click', fetchData);
-        document.getElementById('exportBtn').addEventListener('click', generateXML);
+        // For security, we ask for the PAT via a prompt rather than hardcoding it.
+        // This ensures the key is never saved in your public source code.
+        const pat = prompt("Please enter your GitHub Personal Access Token:");
+        if (!pat) return;
+
+        const REPO_OWNER = 'AndrewsIndustries';
+        const REPO_NAME = 'AndrewsIndustries';
         
-        // Auto-run on load
-        window.addEventListener('load', fetchData);
+        try {
+            document.getElementById('systemLog').innerText = "Triggering GitHub automation...";
+            
+            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/dispatches`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${pat}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    event_type: 'update-xml',
+                    client_payload: { xml_content: xmlContent }
+                })
+            });
+
+            if (response.status === 204) {
+                document.getElementById('systemLog').innerText = "Success! GitHub Action triggered. Check Actions tab.";
+            } else {
+                throw new Error(`GitHub returned ${response.status}`);
+            }
+        } catch (error) {
+            document.getElementById('systemLog').innerText = `Error: ${error.message}`;
+        }
+    }
+
+    function downloadXML() {
+        const xml = generateXML();
+        if (!xml) return;
+        const blob = new Blob([xml], { type: 'application/xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "Stock Watch.xml";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        document.getElementById('systemLog').innerText = "XML generated for manual commit.";
+    }
+
+    // Event Listeners
+    document.getElementById('refreshBtn').addEventListener('click', fetchData);
+    document.getElementById('exportBtn').addEventListener('click', downloadXML);
+    document.getElementById('githubPushBtn').addEventListener('click', pushToGitHub);
+    
+    // Auto-run on load
+    window.addEventListener('load', fetchData);
     </script>
 </body>
 </html>

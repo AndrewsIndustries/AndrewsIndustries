@@ -1,0 +1,42 @@
+name: Update Stock Watch XML
+
+on:
+  repository_dispatch:
+    types: [update-xml]
+
+jobs:
+  update_xml_file:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Grant write permission to the GITHUB_TOKEN
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use the GITHUB_TOKEN provided by GitHub Actions for authentication
+          # This token has write permissions because of the 'permissions' block above
+          token: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Extract XML content from payload
+        id: get_xml_content
+        run: |
+          # GitHub Actions automatically escapes newlines in client_payload.
+          # We need to unescape them before writing to file.
+          XML_CONTENT=$(echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g')
+          echo "$XML_CONTENT" > Stock\ Watch.xml
+          echo "Content written to Stock Watch.xml"
+          cat Stock\ Watch.xml # For debugging purposes in action logs
+
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add "Stock Watch.xml"
+          git diff --staged --quiet || git commit -m "Update Stock Watch.xml via GitHub Action"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically provided token
