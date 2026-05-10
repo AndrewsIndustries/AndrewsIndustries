@@ -339,8 +339,13 @@
 
         // For security, we ask for the PAT via a prompt rather than hardcoding it.
         // This ensures the key is never saved in your public source code.
-        const pat = prompt("Please enter your GitHub Personal Access Token:");
-        if (!pat) return;
+        let pat = localStorage.getItem('gh_pat');
+        
+        if (!pat) {
+            pat = prompt("Please enter your GitHub Personal Access Token (this will be saved locally in your browser):");
+            if (!pat) return;
+            localStorage.setItem('gh_pat', pat);
+        }
 
         const REPO_OWNER = 'AndrewsIndustries';
         const REPO_NAME = 'AndrewsIndustries';
