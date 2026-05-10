@@ -70,7 +70,7 @@
             display: inline-block;
             white-space: nowrap;
             padding-right: 100%;
-            animation: ticker 500s linear infinite;
+            animation: ticker linear infinite;
         }
 
         .ticker-item {
@@ -82,10 +82,6 @@
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
-        }
-
-        .ticker:hover {
-            animation-play-state: paused;
         }
   
 
@@ -101,8 +97,8 @@
 <body>
     <header>
         <div class="ticker-wrap">
-            <div class="ticker" id="news-ticker">
-                Connecting to news feed...
+            <div class="ticker" id="news-ticker" style="animation-duration: 300s;">
+                Connecting to Sky News...
             </div>
         </div>
     </header>
@@ -168,7 +164,7 @@
 
     <div class="image-container">
     <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1260211830" height="900px" width="1365px"> </iframe>
-
+    <p style="font-size: 14px; color: #666;">Data refreshes every 60 seconds</p>
 
 <hr>
      
@@ -187,20 +183,18 @@
 
 <br>
     <div class="image-container">
-    <a href="Gray.html">
         <img src="images\Gray\Gray_4806 - Copy_edited.png" 
+        alt="Gray Clan Family Crest"
         height="250px"
         width="inherit">
-    </a>
     </div>
   <br>
 
     <div class="image-container">
-    <a href="index.html">
         <img src="images/Icon/FlagEaglenoback.png"
+        alt="Andrews Industries Logo"
         height="150px"
         width="inherit">
-    </a>
     </div>
 
 
@@ -209,11 +203,10 @@
 
 <footer>
     <div class="ticker-wrap">
-        <div class="ticker" id="footer-ticker" style="animation-duration: 300s;">
-            Connecting to defense feed...
+        <div class="ticker" id="footer-ticker" style="animation-duration: 180s;">
+            Connecting to Fox News...
         </div>
     </div>
-
 
 </footer>
     <script>
@@ -401,48 +394,76 @@ const headerRssUrls = [
     'https://feeds.skynews.com/feeds/rss/us.xml',
     'https://feeds.skynews.com/feeds/rss/strange.xml',
 ];
-
 const footerRssUrls = [
-    'https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?max=10&ContentType=1&Site=945',
-    'https://www.war.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=2&Site=945&max=10'
+    'https://feeds.finance.yahoo.com/rss/2.0/headline?s=yhoo,goog&region=US&lang=en-US',
+    
 ];
 
 async function updateTicker(urls, elementId) {
     const tickerElement = document.getElementById(elementId);
     if (!tickerElement) return;
-    
+
     try {
+        let allTitles = [];
         const parser = new DOMParser();
-        const fetchPromises = urls.map(url =>
-            fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res.text();
-            })
-            .then(text => parser.parseFromString(text, "text/xml"))
-            .then(xmlDoc => Array.from(xmlDoc.querySelectorAll("item")))
-            .catch(err => {
-                console.warn(`Failed to fetch ${url}:`, err);
-                return []; 
-            })
-        );
 
-        const results = await Promise.all(fetchPromises);
-        const allItems = results.flat();
+        for (const url of urls) {
+            // Try multiple proxies for each URL to ensure content is retrieved
+            const proxyUrls = [
+                `https://api.allorigins.win/get?url=${encodeURIComponent(url.trim())}&_=${Date.now()}`,
+                `https://corsproxy.io/?${encodeURIComponent(url.trim())}`
+            ];
 
-        if (allItems.length > 0) {
-            tickerElement.innerHTML = allItems
-                .map(item => {
-                    const title = item.querySelector("title")?.textContent || "Breaking News";
-                    return `<span class="ticker-item">● ${title}</span>`;
-                })
-                .join('');
+            for (const proxyUrl of proxyUrls) {
+                try {
+                    const response = await fetch(proxyUrl);
+                    if (!response.ok) continue;
+
+                    let xmlText;
+                    // Handle JSON response from AllOrigins or raw text from Corsproxy
+                    if (proxyUrl.includes('allorigins.win')) {
+                        const data = await response.json();
+                        xmlText = data.contents;
+                    } else {
+                        xmlText = await response.text();
+                    }
+
+                    if (!xmlText) continue;
+
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    // Check if parsing failed (e.g. proxy returned an HTML error page instead of RSS)
+                    if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
+
+                    const items = xmlDoc.querySelectorAll("item, entry");
+                    
+                    if (items.length > 0) {
+                        items.forEach(item => {
+                            const title = item.querySelector("title")?.textContent;
+                            if (title) allTitles.push(title.trim());
+                        });
+                        break; // Success found for this feed, stop trying other proxies for it
+                    }
+                } catch (err) {
+                    console.warn(`Proxy attempt failed for ${url} using ${proxyUrl}:`, err);
+                }
+            }
+        }
+
+        if (allTitles.length > 0) {
+            tickerElement.innerHTML = '';
+            allTitles.forEach(title => {
+                const span = document.createElement('span');
+                span.className = 'ticker-item';
+                span.textContent = `● ${title}`;
+                tickerElement.appendChild(span);
+            });
         } else {
-            tickerElement.innerText = "No content found in this feed.";
+            tickerElement.innerText = "News temporarily unavailable. Retrying...";
+            setTimeout(() => updateTicker(urls, elementId), 15000); 
         }
     } catch (error) {
-        console.error(`Fetch error for ${elementId}:`, error);
-        tickerElement.innerText = "Error loading feed.";
+        console.error(`Error updating ${elementId}:`, error);
+        tickerElement.innerText = "Connection error.";
     }
 }
 
@@ -477,17 +498,16 @@ function init() {
 // Initialize immediately since script is at the bottom
 init();
 
-
-
   setInterval(function() {
-    var iframe = document.getElementById('spreadsheet-iframe');
-    if (iframe) {
-      var src = iframe.src.split('?')[0]; // Get the base URL
-      var params = new URLSearchParams(iframe.src.split('?')[1] || '');
+    // Targeted refresh for all Google Sheet iframes
+    const iframes = document.querySelectorAll('iframe[src*="docs.google.com/spreadsheets"]');
+    iframes.forEach(iframe => {
+      let src = iframe.src.split('?')[0]; 
+      let params = new URLSearchParams(iframe.src.split('?')[1] || '');
       params.delete('_cache_bust'); // Remove old cache buster if it exists
       src += '?' + params.toString() + '&_cache_bust=' + new Date().getTime();
       iframe.src = src;
-    }
+    });
   }, 60000); // 60000ms = 1 minute
 </script>
 
