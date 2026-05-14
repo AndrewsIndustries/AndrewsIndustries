@@ -1,0 +1,601 @@
+<StockWatchReport>
+<Header>
+<Organization>Andrews Industries</Organization>
+<Generated>2026-05-10T04:55:43.849Z</Generated>
+<Count>74</Count>
+</Header>
+<MarketData>
+<Stock ticker="INTC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="AMD">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="NVAX">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MRVL">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="SMCI">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="CSCO">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="TSLA">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="KWR">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="DD">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="BA">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="AAPL">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="ZIM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="HMC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="NVDA">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="SNAP">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="BLK">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="KTOS">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MS">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="ORC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="FUJHY">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="TWO">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="AGNC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="GME">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="GS">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="F">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="TXN">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="VOO">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="ORCL">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="GOOGL">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="BRKA">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="AMZN">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="PLTR">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="GM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="VZ">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="PG">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="WMT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="WSR">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="HWKN">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="SBLK">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="BDN">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="KO">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="RIOT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="COST">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="SHEL">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="GD">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="RTX">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="CVX">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="NOC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="LHX">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="JNJ">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="VDE">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="TSM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="PH">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="TM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="V">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MRK">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="WDFC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="DJT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="PEP">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MA">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="LMT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="META">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="ADBE">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="XOM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MSFT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="PFE">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="HD">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="OXY">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="BAC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="MCD">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="CF">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="WFC">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="RDDT">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+<Stock ticker="AFRM">
+<Price>0</Price>
+<ChangePercent>0</ChangePercent>
+<Analysis>
+<Action>HOLD</Action>
+<Confidence>85.0</Confidence>
+</Analysis>
+</Stock>
+</MarketData>
+</StockWatchReport>
