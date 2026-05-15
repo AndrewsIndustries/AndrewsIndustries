@@ -62,9 +62,11 @@
             box-sizing: border-box;
             border-bottom: none;
             overflow: hidden;
-            background-color: transparent;
+            background-color: rgba(107, 101, 101, 0.9);
             color: #000000;
             text-shadow: 0 0 3px rgb(255, 255, 255), 0 0 15px rgb(127, 0, 0), 0 0 25px rgba(127, 2, 2, 0.943);
+            /* Oblique/Slant angle of 10 degrees */
+            transform: skewX(-10deg);
             padding: 1px 0;
             font-family: Arial, sans-serif;
             font-size: 50px;
@@ -399,14 +401,11 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
-    'https://rss.app/feeds/tmSw9BIqKHUhST7e.xml',
-    'https://feeds.skynews.com/feeds/rss/world.xml',
-    'https://feeds.skynews.com/feeds/rss/us.xml',
-    'https://feeds.skynews.com/feeds/rss/strange.xml',
+    'https://rss.app/feeds/EFP2shywTDtfmyab.xml',
+
 ];
 const footerRssUrls = [
-    'Stock Watch.xml',
-    'https://feeds.finance.yahoo.com/rss/2.0/headline?s=yhoo,goog&region=US&lang=en-US',
+    'C:\\Users\\andre\\Documents\\GitHub\\AndrewsIndustries\\.github\\workflow\\feed.xml',
 ];
 
 async function updateTicker(urls, elementId) {
