@@ -228,7 +228,7 @@
                     .map(parseCSVLine);
                 
                 if (rawRows.length === 0) throw new Error("Sheet is empty.");
-                console.log("Mapped Row 0 Sample (A, C, F):", rawRows[1][0], rawRows[1][2], rawRows[1][5]);
+                console.log("CSV Debug - Row 1 Content:", rawRows[1]); // Look at F12 console to verify columns
 
                 currentStockData = rawRows
                     .filter(r => r[0] && r[0].trim() !== "" && r[0].toLowerCase() !== "ticker")

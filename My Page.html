@@ -424,8 +424,11 @@ async function updateTicker(urls, elementId) {
             let proxyUrls = [];
 
             if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
-                // Direct fetch for GitHub content is faster and supports CORS
-                proxyUrls = [ `${cleanUrl}?t=${Date.now()}` ];
+                // Direct fetch for GitHub content is faster, but fallback to proxy if CORS issues occur
+                proxyUrls = [ 
+                    `${cleanUrl}?t=${Date.now()}`,
+                    `https://corsproxy.io/?${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`
+                ];
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
                     `https://corsproxy.io/?${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`,
@@ -456,6 +459,12 @@ async function updateTicker(urls, elementId) {
                     // Check if parsing failed (e.g. proxy returned an HTML error page instead of RSS)
                     if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
 
+                    // Pull the timestamp from the XML metadata if available
+                    const generatedNode = xmlDoc.querySelector("Generated");
+                    if (generatedNode) {
+                        xmlTimestamp = new Date(generatedNode.textContent).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+                    }
+
                     // Updated to support standard RSS/Atom AND your custom Stock Watch format
                     const items = xmlDoc.querySelectorAll("item, entry, Stock");
                     
@@ -485,7 +494,7 @@ async function updateTicker(urls, elementId) {
         }
 
         if (allTitles.length > 0) {
-            const displayTime = xmlTimestamp || "Live";
+            const displayTime = xmlTimestamp || new Date().toLocaleTimeString();
             
             tickerElement.innerHTML = `
                 <span class="ticker-item" style="color: #fbbf24;">As of ${displayTime} ●</span>
