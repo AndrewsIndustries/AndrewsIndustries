@@ -407,7 +407,7 @@ const headerRssUrls = [
 
 ];
 const footerRssUrls = [
-    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/.github/workflow/Stock%20Watch.xml',
+    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
 ];
 
 async function updateTicker(urls, elementId) {
@@ -416,6 +416,7 @@ async function updateTicker(urls, elementId) {
 
     try {
         let allTitles = [];
+        let xmlTimestamp = null;
         const parser = new DOMParser();
 
         for (const url of urls) {
@@ -484,10 +485,10 @@ async function updateTicker(urls, elementId) {
         }
 
         if (allTitles.length > 0) {
-            const now = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+            const displayTime = xmlTimestamp || "Live";
             
             tickerElement.innerHTML = `
-                <span class="ticker-item" style="color: #fbbf24;">As of ${now} ●</span>
+                <span class="ticker-item" style="color: #fbbf24;">As of ${displayTime} ●</span>
             `;
 
             allTitles.forEach(title => {

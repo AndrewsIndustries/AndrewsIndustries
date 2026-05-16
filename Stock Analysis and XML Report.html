@@ -176,9 +176,9 @@
         }
 
         function analyzeStock(row) {
-            const ticker = (row[0] || "N/A").trim(); // Column A
-            const price = parseNumeric(row[2]);      // Column C
-            const change = parseNumeric(row[5]);     // Column F
+            const ticker = (row[0] || "N/A").trim().toUpperCase(); // Column A
+            const price = parseNumeric(row[2]);                    // Column C
+            const change = parseNumeric(row[5]);                   // Column F
 
             let action = "HOLD";
             let confidence = 50;
@@ -216,7 +216,6 @@
                 
                 const data = await response.text();
                 
-                // Robust CSV parser to handle commas within quotes (common in currency)
                 const parseCSVLine = (text) => {
                     const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
                     return text.split(re).map(cell => 
@@ -229,8 +228,8 @@
                     .map(parseCSVLine);
                 
                 if (rawRows.length === 0) throw new Error("Sheet is empty.");
+                console.log("Mapped Row 0 Sample (A, C, F):", rawRows[1][0], rawRows[1][2], rawRows[1][5]);
 
-                // Process rows directly (Horizontal Layout)
                 currentStockData = rawRows
                     .filter(r => r[0] && r[0].trim() !== "" && r[0].toLowerCase() !== "ticker")
                     .map(analyzeStock);
