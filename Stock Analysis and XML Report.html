@@ -222,8 +222,17 @@
             icon.classList.add('fa-spin');
 
             try {
-                const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(SHEET_CSV_URL)}`);
-                const data = await response.text();
+                let data;
+                try {
+                    // Primary: AllOrigins
+                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}&_=${Date.now()}`);
+                    const json = await res.json();
+                    data = json.contents;
+                } catch (e) {
+                    // Fallback: CorsProxy
+                    const res = await fetch(`https://corsproxy.io/?url=${encodeURIComponent(SHEET_CSV_URL)}`);
+                    data = await res.text();
+                }
                 
                 const parseCSVLine = (text) => {
                     const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;

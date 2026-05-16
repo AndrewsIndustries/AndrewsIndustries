@@ -76,7 +76,7 @@
         .ticker {
             display: inline-block;
             white-space: nowrap;
-            padding-right: 100%;
+            padding-right: 50px;
             animation: ticker linear infinite;
         }
 
@@ -401,8 +401,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
-    'http://feeds.skynews.com/feeds/rss/us.xml',
-    'http://feeds.skynews.com/feeds/rss/strange.xml',  
+    'https://feeds.skynews.com/feeds/rss/us.xml',
+    'https://feeds.skynews.com/feeds/rss/strange.xml',  
 
 ];
 const footerRssUrls = [
@@ -423,17 +423,14 @@ async function updateTicker(urls, elementId) {
 
             if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
                 // Direct fetch for GitHub content is faster, but fallback to proxy if CORS issues occur
-                proxyUrls = [ 
-                    `${cleanUrl}?t=${Date.now()}`,
-                    `https://corsproxy.io/?${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`
-                ];
+                proxyUrls = [ `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`, `${cleanUrl}?t=${Date.now()}` ];
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
-                    `https://corsproxy.io/?${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`,
-                    `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`
+                    `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,
+                    `https://corsproxy.io/?url=${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`
                 ];
             } else {
-                // Local files (like Stock Watch.xml) should be fetched directly
+                // Local files
                 proxyUrls = [cleanUrl];
             }
 
@@ -506,13 +503,17 @@ async function updateTicker(urls, elementId) {
 
         if (allTitles.length > 0) {
             tickerElement.innerHTML = '';
-
-            allTitles.forEach(title => {
+            
+            // Duplicate items for a continuous loop effect
+            const displayTitles = [...allTitles, ...allTitles];
+            displayTitles.forEach(title => {
                 const span = document.createElement('span');
                 span.className = 'ticker-item';
                 span.textContent = `● ${title}`;
                 tickerElement.appendChild(span);
             });
+            // Set a dynamic duration (e.g., 10s per original item, minimum 30s)
+            tickerElement.style.animationDuration = Math.max(30, allTitles.length * 10) + 's';
         } else {
             // Only show retry message if the ticker is still empty
             if (tickerElement.innerHTML.includes('Connecting')) {
