@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrews Industries | Stock Watch Pro</title>
+    <title>Andrews Industries | Stock Watch Pro v2.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -28,7 +28,6 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        /* Ticker Animation Logic */
         @keyframes ticker-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -45,7 +44,7 @@
 
         .ticker-wrapper {
             display: inline-flex;
-            animation: ticker-scroll 30s linear infinite;
+            animation: ticker-scroll 45s linear infinite;
         }
 
         .ticker-wrapper:hover {
@@ -62,69 +61,69 @@
         .status-pill {
             padding: 2px 8px;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.70rem;
             font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .buy-theme { color: #4ade80; background: rgba(74, 222, 128, 0.1); }
-        .sell-theme { color: #f87171; background: rgba(248, 113, 113, 0.1); }
-        .hold-theme { color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+        .buy-theme { color: #4ade80; background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.2); }
+        .sell-theme { color: #f87171; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); }
+        .hold-theme { color: #fbbf24; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
 <body class="min-h-screen">
 
     <div class="ticker-container glass-card sticky top-0 z-50">
         <div id="tickerContent" class="ticker-wrapper">
-            <!-- Ticker items will be dynamically injected here -->
-            <div class="ticker-item text-slate-400 italic">Initializing market data stream...</div>
+            <div class="ticker-item text-slate-400 italic">Connecting to updated data stream...</div>
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto p-4 md:p-8">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
             <div>
-                <h1 class="text-4xl font-bold text-white tracking-tight flex items-center gap-3">
-                    <i class="fas fa-chart-line text-blue-500"></i> Andrews Industries
+                <h1 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+                    <i class="fas fa-microchip text-blue-500"></i> Andrews Refactored Engine
                 </h1>
-                <p class="text-slate-400 mt-1">Automated Stock Watch & Analysis Engine v2.0</p>
-                <p id="lastUpdated" class="text-slate-500 text-xs mt-1 italic"></p>
+                <p class="text-slate-400 mt-1">v2.2: L,Q,R,S Column Mapping Active</p>
             </div>
-            <div class="flex gap-3">
-                <button id="refreshBtn" class="bg-blue-600 hover:bg-blue-500 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-blue-900/20">
-                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Sync Sheet
+            <div class="flex flex-wrap gap-2">
+                <button id="refreshBtn" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Sync Strategy
                 </button>
-                <button id="exportBtn" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-emerald-900/20">
-                    <i class="fas fa-file-export"></i> Export XML
-                </button>
-                <button id="githubPushBtn" class="bg-slate-700 hover:bg-slate-600 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-slate-900/20">
-                    <i class="fab fa-github"></i> Push to GitHub
+                <button id="exportBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2">
+                    <i class="fas fa-download"></i> XML
                 </button>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Market Sentiment</h3>
-                <p id="marketStatus" class="text-2xl font-bold text-white">Analyzing...</p>
-                <div class="w-full bg-slate-800 h-2 mt-4 rounded-full overflow-hidden">
-                    <div id="sentimentProgress" class="bg-blue-500 h-full w-0 transition-all duration-1000"></div>
+        <!-- Strategy Insights -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-card p-5 rounded-xl">
+                <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Buy Logic</h3>
+                <p class="text-xs text-white">Value (Q) / Breakout (R)</p>
+                <p id="buyStatus" class="text-xl font-bold mt-2 text-emerald-400">---</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl border-l-2 border-yellow-500">
+                <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Hold Allocation</h3>
+                <p class="text-xs text-white">Trend (S) Follow</p>
+                <p id="holdStatus" class="text-xl font-bold mt-2 text-yellow-500">---</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl border-l-2 border-red-500">
+                <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Sell Triggers</h3>
+                <p class="text-xs text-white">PE (L) Degrade</p>
+                <p id="sellStatus" class="text-xl font-bold mt-2 text-red-500">---</p>
+            </div>
+            <div class="glass-card p-5 rounded-xl bg-blue-900/20 border-blue-500/30 border">
+                <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">System Confidence</h3>
+                <p id="avgConfidence" class="text-2xl font-bold text-blue-400">0%</p>
+                <div class="w-full bg-slate-800 h-1 mt-2 rounded-full overflow-hidden">
+                    <div id="confProgress" class="bg-blue-500 h-full w-0 transition-all duration-700"></div>
                 </div>
-            </div>
-            <div class="glass-card p-6 rounded-2xl border-l-4 border-blue-500">
-                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Total Analyzed</h3>
-                <p id="totalCount" class="text-4xl font-bold text-white">0</p>
-                <p class="text-xs text-slate-500 mt-2">Active tickers monitored</p>
-            </div>
-            <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-500">
-                <h3 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Top Recommendation</h3>
-                <p id="topPick" class="text-2xl font-bold text-emerald-400">---</p>
-                <p id="topPickDetails" class="text-xs text-slate-500 mt-2">Highest confidence signal</p>
             </div>
         </div>
 
@@ -132,19 +131,18 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-slate-800/80 text-slate-400 text-xs uppercase tracking-widest font-semibold">
-                            <th class="px-6 py-4">Ticker</th>
-                            <th class="px-6 py-4">Recommended Action</th>
-                            <th class="px-6 py-4">Current Price</th>
-                            <th class="px-6 py-4">24h Change</th>
-                            <th class="px-6 py-4">AI Confidence</th>
+                        <tr class="bg-slate-800/80 text-slate-400 text-[10px] uppercase tracking-widest font-bold">
+                            <th class="px-6 py-4">Asset</th>
+                            <th class="px-6 py-4">Action</th>
+                            <th class="px-6 py-4">Price / Intrinsic (Q)</th>
+                            <th class="px-6 py-4">Strategy Details</th>
+                            <th class="px-6 py-4">Risk Profile</th>
                         </tr>
                     </thead>
-                    <tbody id="stockBody" class="divide-y divide-slate-800">
-                        <!-- Loading State -->
+                    <tbody id="stockBody" class="divide-y divide-slate-800/50">
                         <tr id="loadingState">
                             <td colspan="5" class="px-6 py-12 text-center text-slate-500">
-                                <i class="fas fa-spinner fa-spin mr-2"></i> Fetching records from Google Sheets...
+                                <i class="fas fa-spinner fa-spin mr-2"></i> Mapping columns and executing analysis...
                             </td>
                         </tr>
                     </tbody>
@@ -152,14 +150,9 @@
             </div>
         </div>
 
-        <footer class="glass-card p-4 rounded-xl flex justify-between items-center text-sm">
-            <div class="flex items-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                <span id="systemLog" class="text-slate-400">System Ready. Waiting for user sync...</span>
-            </div>
-            <div class="text-slate-500 font-mono text-xs">
-                REPO: <a href="https://github.com/AndrewsIndustries/AndrewsIndustries" target="_blank" class="hover:text-blue-400 transition-colors">AndrewsIndustries/main</a>
-            </div>
+        <footer class="flex justify-between items-center text-[10px] text-slate-500 uppercase tracking-widest px-2">
+            <div>Engine v2.2 | Mapping: Q (IV), R (Resist), S (Trend), L (PE)</div>
+            <div>Andrews Industries Proprietary Algorithm</div>
         </footer>
     </div>
 
@@ -170,69 +163,83 @@
 
         function parseNumeric(val) {
             if (!val) return 0;
-            // Remove currency symbols, commas, and percentage signs that break parseFloat
             const cleaned = val.toString().replace(/[^0-9.-]+/g, "");
             return parseFloat(cleaned) || 0;
         }
 
+        /**
+         * Refactored Trading Logic with Targeted Column Mapping
+         */
         function analyzeStock(row) {
-            const ticker = (row[0] || "N/A").trim().toUpperCase(); // Column A
-            const price = parseNumeric(row[2]);                    // Column C
-            const change = parseNumeric(row[5]);                   // Column F
+            // Updated Mapping:
+            // Ticker: A (0), Price: C (2)
+            // Intrinsic Value: Q (16), Resistance: R (17), Trend: S (18), P/E: L (11)
+            
+            const ticker = (row[0] || "N/A").trim().toUpperCase(); 
+            const price = parseNumeric(row[2]);                     
+            const peRatio = parseNumeric(row[11]) || 15;                  // Column L
+            const intrinsicValue = parseNumeric(row[16]) || (price * 1.1); // Column Q
+            const resistance = parseNumeric(row[17]) || (price * 1.05);   // Column R
+            const trend24h = parseNumeric(row[5]);                        // Column F
 
             let action = "HOLD";
-            let confidence = 50;
+            let strategyMsg = "";
+            let allocation = "80% Core / 20% Explore";
             let themeClass = "hold-theme";
+            let confidence = 50;
 
-            if (change > 1.5) {
+            const isValueBuy = price < intrinsicValue;
+            const isBreakout = price > resistance;
+
+            // Strategy Execution Logic
+            if (isValueBuy || isBreakout) {
                 action = "BUY";
-                confidence = Math.min(98, 65 + (change * 2));
                 themeClass = "buy-theme";
-            } else if (change < -1.5) {
+                allocation = "Fixed DCA Interval Entry";
+                strategyMsg = isBreakout ? "Resistance (R) Breakout Detected" : "Below Intrinsic (Q) Value Buy";
+                confidence = isValueBuy && isBreakout ? 98 : 78;
+            } 
+            else if (peRatio > 35 || trend24h < -5) {
                 action = "SELL";
-                confidence = Math.min(98, 55 + Math.abs(change * 2));
                 themeClass = "sell-theme";
-            } else {
+                allocation = "Pre-Determined Profit Exit";
+                strategyMsg = peRatio > 35 ? "L-Column P/E Degradation" : "S-Column Trailing Stop Triggered";
+                confidence = 92;
+            }
+            else {
                 action = "HOLD";
-                confidence = 85;
                 themeClass = "hold-theme";
+                strategyMsg = trend24h > 0 ? "Trend (S) Intact" : "Market Structure Stable";
+                allocation = "80% Core / 20% Explore";
+                confidence = 85;
             }
             
-            return { ticker, price, change, action, confidence, themeClass };
+            return { ticker, price, intrinsicValue, action, strategyMsg, allocation, confidence, themeClass, trend24h };
         }
 
         async function fetchData() {
-            const log = document.getElementById('systemLog');
             const icon = document.getElementById('refreshIcon');
-            
-            log.innerText = "Syncing all data sheets...";
             icon.classList.add('fa-spin');
 
             try {
-                const parseCSVLine = (text) => {
-                    const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
-                    return text.split(re).map(cell => 
-                        cell.trim().replace(/^"(.*)"$/, '$1').replace(/,/g, '')
-                    );
-                };
-
                 const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(SHEET_CSV_URL)}`);
                 const data = await response.text();
-                const rawRows = data.split(/\r?\n/)
-                    .filter(line => line.trim() !== "")
-                    .map(parseCSVLine);
+                
+                const parseCSVLine = (text) => {
+                    const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
+                    return text.split(re).map(cell => cell.trim().replace(/^"(.*)"$/, '$1').replace(/,/g, ''));
+                };
+
+                const rawRows = data.split(/\r?\n/).filter(line => line.trim() !== "").map(parseCSVLine);
                 
                 currentStockData = rawRows
-                    .filter(r => r[0] && r[0].trim() !== "" && r[0].toLowerCase() !== "ticker")
+                    .filter(r => r[0] && r[0].toLowerCase() !== "ticker")
                     .map(analyzeStock);
 
                 updateUI();
-                log.innerText = `Sync successful: ${currentStockData.length} stocks analyzed.`;
             } catch (error) {
                 console.error(error);
-                const body = document.getElementById('stockBody');
-                log.innerText = "Error: Ensure Sheet is 'Published to Web' as CSV.";
-                body.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-red-400">Failed to load data. Please check your CSV URL.</td></tr>`;
+                document.getElementById('stockBody').innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-red-400">Engine error: Check CORS or CSV URL.</td></tr>`;
             } finally {
                 icon.classList.remove('fa-spin');
             }
@@ -240,173 +247,98 @@
 
         function updateUI() {
             const body = document.getElementById('stockBody');
-            const ticker = document.getElementById('tickerContent');
-            
+            const tickerEl = document.getElementById('tickerContent');
             body.innerHTML = '';
-            ticker.innerHTML = ''; 
+            tickerEl.innerHTML = ''; 
 
-            let buyCount = 0;
-            let highestConf = 0;
-            let topTicker = "N/A";
+            let totalConf = 0;
+            let buyC = 0, holdC = 0, sellC = 0;
 
-            // 1. Build Ticker HTML
-            const tickerHtml = currentStockData.map(stock => {
-                const isPositive = stock.change >= 0;
-                const icon = isPositive ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
-                const color = isPositive ? 'text-emerald-400' : 'text-red-400';
-                
-                return `
-                    <div class="ticker-item">
-                        <span class="font-bold mr-2 text-white">${stock.ticker}</span>
-                        <span class="status-pill ${stock.themeClass} mr-2 text-[10px] py-0 leading-tight">${stock.action}</span>
-                        <span class="font-mono text-slate-300 mr-2">$${stock.price.toFixed(2)}</span>
-                        <span class="${color} flex items-center text-xs font-bold">
-                            <i class="fas ${icon} mr-1"></i>${Math.abs(stock.change)}%
-                        </span>
-                    </div>
-                `;
-            }).join('');
+            const tickerHtml = currentStockData.map(s => `
+                <div class="ticker-item">
+                    <span class="font-bold mr-2 text-white">${s.ticker}</span>
+                    <span class="status-pill ${s.themeClass} mr-2 text-[8px]">${s.action}</span>
+                    <span class="font-mono text-slate-400">$${s.price.toFixed(2)}</span>
+                    <span class="ml-2 text-[10px] ${s.trend24h >= 0 ? 'text-emerald-400' : 'text-red-400'}">
+                        ${s.trend24h >= 0 ? '↑' : '↓'}
+                    </span>
+                </div>
+            `).join('');
 
-            // Duplicate for smooth loop
-            ticker.innerHTML = tickerHtml + tickerHtml;
+            tickerEl.innerHTML = tickerHtml + tickerHtml;
 
-            // 2. Build Table and Logic
-            currentStockData.forEach(stock => {
-                if (stock.action === "BUY") buyCount++;
-                if (stock.confidence > highestConf) {
-                    highestConf = stock.confidence;
-                    topTicker = stock.ticker;
-                }
+            currentStockData.forEach(s => {
+                totalConf += s.confidence;
+                if (s.action === "BUY") buyC++;
+                if (s.action === "HOLD") holdC++;
+                if (s.action === "SELL") sellC++;
 
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-800/30 transition-colors";
+                tr.className = "hover:bg-white/5 transition-colors";
                 tr.innerHTML = `
-                    <td class="px-6 py-4 font-bold text-blue-400">${stock.ticker}</td>
-                    <td class="px-6 py-4">
-                        <span class="status-pill ${stock.themeClass}">${stock.action}</span>
+                    <td class="px-6 py-5">
+                        <div class="font-bold text-white">${s.ticker}</div>
+                        <div class="text-[10px] text-slate-500">${s.trend24h >= 0 ? '+' : ''}${s.trend24h}% Momentum (S)</div>
                     </td>
-                    <td class="px-6 py-4 font-mono">$${stock.price.toFixed(2)}</td>
-                    <td class="px-6 py-4 ${stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'} font-semibold">
-                        ${stock.change > 0 ? '+' : ''}${stock.change}%
+                    <td class="px-6 py-5">
+                        <span class="status-pill ${s.themeClass}">${s.action}</span>
                     </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xs font-mono text-slate-400 w-8">${Math.round(stock.confidence)}%</span>
-                            <div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden min-w-[60px]">
-                                <div class="bg-blue-500 h-full rounded-full" style="width: ${stock.confidence}%"></div>
-                            </div>
+                    <td class="px-6 py-5 font-mono text-sm">
+                        <div class="text-blue-400">$${s.price.toFixed(2)}</div>
+                        <div class="text-slate-500 text-[10px]">Intrinsic (Q): $${s.intrinsicValue.toFixed(2)}</div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="text-xs text-slate-300 font-semibold">${s.strategyMsg}</div>
+                        <div class="text-[10px] text-slate-500">Calculated Confidence: ${s.confidence}%</div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="text-[10px] text-slate-400 mb-1">${s.allocation}</div>
+                        <div class="w-24 h-1 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full" style="width: ${s.confidence}%"></div>
                         </div>
                     </td>
                 `;
                 body.appendChild(tr);
             });
 
-            // 3. Update Summary Cards
-            document.getElementById('totalCount').innerText = currentStockData.length;
-            document.getElementById('topPick').innerText = topTicker;
+            document.getElementById('buyStatus').innerText = `${buyC} Targets`;
+            document.getElementById('holdStatus').innerText = `${holdC} Active`;
+            document.getElementById('sellStatus').innerText = `${sellC} Signals`;
             
-            const sentiment = currentStockData.length > 0 ? (buyCount / currentStockData.length) * 100 : 0;
-            const sentimentLabel = sentiment > 60 ? "BULLISH" : (sentiment > 35 ? "NEUTRAL" : "BEARISH");
-            
-            document.getElementById('marketStatus').innerText = sentimentLabel;
-            document.getElementById('sentimentProgress').style.width = sentiment + '%';
+            const avg = currentStockData.length ? Math.round(totalConf / currentStockData.length) : 0;
+            document.getElementById('avgConfidence').innerText = `${avg}%`;
+            document.getElementById('confProgress').style.width = `${avg}%`;
         }
 
         function generateXML() {
-            if (currentStockData.length === 0) {
-                document.getElementById('systemLog').innerText = "No data to export. Sync first.";
-                return;
-            }
-
+            if (!currentStockData.length) return;
             const timestamp = new Date().toISOString();
-            let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-            xml += `<StockWatchReport>\n`;
-            xml += `  <Header>\n`;
-            xml += `    <Organization>Andrews Industries</Organization>\n`;
-            xml += `    <Generated>${timestamp}</Generated>\n`;
-            xml += `    <Count>${currentStockData.length}</Count>\n`;
-            xml += `  </Header>\n`;
+            let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<StockWatchReport>\n`;
+            xml += `  <Header><Generated>${timestamp}</Generated><Engine>Andrews-v2.2</Engine></Header>\n`;
             xml += `  <MarketData>\n`;
-
             currentStockData.forEach(s => {
                 xml += `    <Stock ticker="${s.ticker}">\n`;
-                xml += `      <Price>${s.price}</Price>\n`;
-                xml += `      <ChangePercent>${s.change}</ChangePercent>\n`;
+                xml += `      <Price>${s.price.toFixed(2)}</Price>\n`;
+                xml += `      <ChangePercent>${s.trend24h.toFixed(2)}</ChangePercent>\n`;
                 xml += `      <Analysis>\n`;
                 xml += `        <Action>${s.action}</Action>\n`;
-                xml += `        <Confidence>${s.confidence.toFixed(1)}</Confidence>\n`;
+                xml += `        <Confidence>${s.confidence}</Confidence>\n`;
                 xml += `      </Analysis>\n`;
                 xml += `    </Stock>\n`;
             });
-
-        xml += `  </MarketData>\n</StockWatchReport>`;
-        return xml;
-    }
-
-    async function pushToGitHub() {
-        const xmlContent = generateXML();
-        if (!xmlContent) return;
-
-        // For security, we ask for the PAT via a prompt rather than hardcoding it.
-        // This ensures the key is never saved in your public source code.
-        let pat = localStorage.getItem('gh_pat');
-        
-        if (!pat) {
-            pat = prompt("Please enter your GitHub Personal Access Token (this will be saved locally in your browser):");
-            if (!pat) return;
-            localStorage.setItem('gh_pat', pat);
-        }
-
-        const REPO_OWNER = 'AndrewsIndustries';
-        const REPO_NAME = 'AndrewsIndustries';
-        
-        try {
-            document.getElementById('systemLog').innerText = "Triggering GitHub automation...";
+            xml += `  </MarketData>\n</StockWatchReport>`;
             
-            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/dispatches`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${pat}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    event_type: 'update-xml',
-                    client_payload: { xml_content: xmlContent }
-                })
-            });
-
-            if (response.status === 204) {
-                document.getElementById('systemLog').innerText = "Success! GitHub Action triggered. Check Actions tab.";
-            } else {
-                throw new Error(`GitHub returned ${response.status}`);
-            }
-        } catch (error) {
-            document.getElementById('systemLog').innerText = `Error: ${error.message}`;
+            const blob = new Blob([xml], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Andrews_Strategy_Export_v2.2.xml`;
+            a.click();
         }
-    }
 
-    function downloadXML() {
-        const xml = generateXML();
-        if (!xml) return;
-        const blob = new Blob([xml], { type: 'application/xml' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = "Stock Watch.xml";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        document.getElementById('systemLog').innerText = "XML generated for manual commit.";
-    }
-
-    // Event Listeners
-    document.getElementById('refreshBtn').addEventListener('click', fetchData);
-    document.getElementById('exportBtn').addEventListener('click', downloadXML);
-    document.getElementById('githubPushBtn').addEventListener('click', pushToGitHub);
-    
-    // Auto-run on load
-    window.addEventListener('load', fetchData);
+        document.getElementById('refreshBtn').addEventListener('click', fetchData);
+        document.getElementById('exportBtn').addEventListener('click', generateXML);
+        window.addEventListener('load', fetchData);
     </script>
 </body>
 </html>

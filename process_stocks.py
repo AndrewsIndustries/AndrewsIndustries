@@ -16,19 +16,19 @@ def parse_numeric(val):
         return 0.0
 
 def analyze_stock(row):
+    BUY_THRESHOLD = 1.5
+    SELL_THRESHOLD = -1.5
+    
     ticker = str(row[0]).strip().upper() if row[0] else "N/A"
     price = parse_numeric(row[2])   # Column C
     change = parse_numeric(row[5])  # Column F
 
-    action = "HOLD"
-    confidence = 85.0
-
-    if change > 1.5:
-        action = "BUY"
-        confidence = min(98.0, 65.0 + (change * 2))
-    elif change < -1.5:
-        action = "SELL"
-        confidence = min(98.0, 55.0 + abs(change * 2))
+    if change > BUY_THRESHOLD:
+        action, confidence = "BUY", min(98.0, 65.0 + (change * 2))
+    elif change < SELL_THRESHOLD:
+        action, confidence = "SELL", min(98.0, 55.0 + abs(change * 2))
+    else:
+        action, confidence = "HOLD", 85.0
 
     return {
         "ticker": ticker,
