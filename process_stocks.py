@@ -39,11 +39,15 @@ def analyze_stock(row):
     }
 
 def main():
-    print("Fetching CSV data...")
-    response = urllib.request.urlopen(SHEET_CSV_URL)
-    content = response.read().decode('utf-8')
-    reader = csv.reader(content.splitlines())
-    rows = list(reader)
+    try:
+        print(f"Fetching CSV data from {SHEET_CSV_URL}")
+        response = urllib.request.urlopen(SHEET_CSV_URL)
+        content = response.read().decode('utf-8')
+        reader = csv.reader(content.splitlines())
+        rows = list(reader)
+    except Exception as e:
+        print(f"Failed to fetch data: {e}")
+        return
 
     # Skip header
     data_rows = [r for r in rows if r and r[0].lower() != "ticker" and r[0].strip()]

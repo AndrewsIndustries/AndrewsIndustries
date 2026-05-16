@@ -2,10 +2,10 @@ name: Update Stock Watch XML
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 * * * *' # Runs every hour automatically
   repository_dispatch:
     types: [update-xml]
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch: # Allows you to trigger it manually from the GitHub website
 
 jobs:
   update_xml_file:
@@ -21,15 +21,22 @@ jobs:
           # This token has write permissions because of the 'permissions' block above
           token: ${{ secrets.GITHUB_TOKEN }} 
 
-      - name: Extract XML content from payload
-        id: get_xml_content
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Update Stock Data
         run: |
-          # GitHub Actions automatically escapes newlines in client_payload.
-          # We need to unescape them before writing to file.
           mkdir -p data/
-          XML_CONTENT=$(echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g')
-          echo "$XML_CONTENT" > "data/Stock Watch.xml"
-          echo "Content written to data/Stock Watch.xml"
+          if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
+            # If triggered by the HTML button, use the button's data
+            echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g' > "data/Stock Watch.xml"
+          else
+            # Otherwise (Schedule or Manual Trigger), run the Python script to fetch fresh data
+            python process_stocks.py
+          fi
+          echo "Stock Watch.xml updated."
 
       - name: Configure Git user
         run: |
