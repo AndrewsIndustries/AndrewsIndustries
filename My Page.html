@@ -423,7 +423,7 @@ async function updateTicker(urls, elementId) {
 
             if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
                 // Direct fetch for GitHub content is faster, but fallback to proxy if CORS issues occur
-                proxyUrls = [ `${cleanUrl}?t=${Date.now()}`, `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}` ];
+                proxyUrls = [ `${cleanUrl}?t=${Date.now()}`, `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl + '?t=' + Date.now())}` ];
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
                     `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,

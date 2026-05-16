@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrews Industries | Stock Watch Pro v2.2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-dark); 
+            background-size: cover;
+            background-position: center;
+            /* Uncomment and set your image path to restore background image */
+            /* background-image: url('images/Backgrounds/vintage.avif'); */
+            color: #f8fafc; 
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .glass-card { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); 
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Ticker Animation */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+            box-sizing: border-box;
+            border-top: 1px solid #333;
+        }
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 2px;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass-card flex items-center justify-between px-6 py-4">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-chart-line text-blue-500 text-2xl"></i>
+            <h1 class="text-xl font-bold tracking-wider">Andrews Industries <span class="text-blue-500">| Stock Watch Pro</span></h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="exportBtn" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-sm font-semibold transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-file-export"></i> Download XML
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 flex overflow-hidden">
+        
+        <!-- Sidebar Controls -->
+        <aside class="w-80 glass-card p-4 overflow-y-auto flex flex-col gap-6 border-r border-slate-700">
+            
+            <!-- Metric Weights -->
+            <div>
+                <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3"><i class="fa-solid fa-sliders mr-2"></i>Metric Weights</h2>
+                <p class="text-xs text-slate-500 mb-4">Adjust logic weighting from -10 to +10.</p>
+                <div class="space-y-4" id="sliderContainer">
+                    <!-- Sliders injected by JS -->
+                </div>
+            </div>
+
+            <!-- Data Source & Actions -->
+            <div class="mt-auto pt-4 border-t border-slate-700">
+                <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-solid fa-database mr-2"></i>Data Source</h2>
+                <p class="text-[10px] text-slate-500 mb-2">Automated fetch from Google Sheets active.</p>
+                <textarea id="csvInput" rows="3" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-xs text-slate-300 font-mono mb-2" placeholder="Paste your Google Sheet CSV here..."></textarea>
+                <button id="processBtn" class="w-full bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors mb-4">
+                    Process Data
+                <button id="processBtn" class="w-full bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors mb-4 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-sync" id="syncIcon"></i> Fetch & Process
+                </button>
+
+                <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-brands fa-github mr-2"></i>GitHub Integration</h2>
+                <p class="text-[10px] text-slate-500 mb-2">Target: data/Stock Watch.xml</p>
+                <input type="text" id="ghRepo" placeholder="username/repository" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white mb-2">
+                <button id="pushBtn" class="w-full bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded text-sm font-semibold transition-colors flex items-center justify-center gap-2 mb-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Push XML to Repo
+                </button>
+                <button id="resetTokenBtn" class="w-full text-xs text-slate-400 hover:text-white underline text-center">
+                    Reset Access Token
+                </button>
+            </div>
+        </aside>
+
+        <!-- Data Table -->
+        <section class="flex-1 p-6 overflow-y-auto">
+            <div class="glass-card rounded-lg overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800/50 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-700">
+                            <th class="p-4 font-medium">Ticker</th>
+                            <th class="p-4 font-medium text-center">Col T (Temp)</th>
+                            <th class="p-4 font-medium text-center">Base Score</th>
+                            <th class="p-4 font-medium text-center">Total Score</th>
+                            <th class="p-4 font-medium text-center">Confidence</th>
+                            <th class="p-4 font-medium text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody" class="text-sm divide-y divide-slate-800/50">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Ticker -->
+    <footer class="ticker-wrap h-12 flex items-center shadow-lg z-50">
+        <div id="tickerContent" class="ticker-content text-green-400 text-lg tracking-wide font-medium">
+            Waiting for data...
+        </div>
+    </footer>
+
+    <script>
+        // Default Mock Data matching user's Google Sheet columns (A=0, F=5... M=12, T=19)
+        const defaultCSV = `Ticker,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T
+INTC,x,x,x,x, -2, -1, 0, -3, -1, -2, -1, -4, x,x,x,x,x,x, -6
+AMD,x,x,x,x, 5, 4, 3, 2, 6, 4, 2, 5, x,x,x,x,x,x, 4
+NVAX,x,x,x,x, -8, -6, -5, -7, -9, -4, -5, -6, x,x,x,x,x,x, -9
+MRVL,x,x,x,x, 2, 1, 3, 2, 1, 2, 0, 1, x,x,x,x,x,x, 2
+SMCI,x,x,x,x, 9, 8, 7, 9, 8, 9, 7, 8, x,x,x,x,x,x, 10
+PFE,x,x,x,x, 0, -1, 1, 0, -1, 0, 1, 0, x,x,x,x,x,x, -1
+HD,x,x,x,x, 1, 2, 1, 1, 2, 1, 0, 1, x,x,x,x,x,x, 1
+OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
+        
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTp9TnMwxNNqwp3Ol3kjBaxvwvsyX9iLUltpNS6kMNhyARRYMYMIFwKNoW3D25XxACg2jk1MpKNOdCE/pubcsv?gid=0&single=true';
+
+        let analyzedResults = [];
+
+        // Initialize Sliders (F to M)
+        const metrics = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+        const sliderContainer = document.getElementById('sliderContainer');
+        
+        metrics.forEach(m => {
+            sliderContainer.innerHTML += `
+                <div>
+                    <div class="slider-label">
+                        <span>Metric Column ${m}</span>
+                        <span id="val${m}" class="font-bold text-blue-400">1</span>
+                    </div>
+                    <input type="range" id="w${m}" min="-10" max="10" step="1" value="1" class="w-full accent-blue-500">
+                </div>
+            `;
+        });
+
+        // Add Event Listeners for real-time processing
+        document.querySelectorAll('input[type=range], input[type=number]').forEach(el => {
+            el.addEventListener('input', (e) => {
+                if(e.target.type === 'range') {
+                    document.getElementById('val' + e.target.id.substring(1)).innerText = e.target.value;
+                }
+                processData();
+            });
+        });
+
+        document.getElementById('processBtn').addEventListener('click', processData);
+        document.getElementById('processBtn').addEventListener('click', fetchAndProcess);
+        document.getElementById('exportBtn').addEventListener('click', downloadXML);
+        document.getElementById('pushBtn').addEventListener('click', pushToGitHub);
+        document.getElementById('resetTokenBtn').addEventListener('click', resetToken);
+
+        async function fetchAndProcess() {
+            const icon = document.getElementById('syncIcon');
+            icon.classList.add('fa-spin');
+            
+            try {
+                let data;
+                try {
+                    // Primary: AllOrigins
+                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}&_=${Date.now()}`);
+                    const json = await res.json();
+                    if (json.contents) data = json.contents;
+                    else throw new Error("Empty contents");
+                } catch (e) {
+                    // Fallback: CodeTabs
+                    const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(SHEET_CSV_URL)}`);
+                    data = await res.text();
+                }
+
+                if (data && !data.trim().startsWith('{')) {
+                    document.getElementById('csvInput').value = data;
+                }
+            } catch (err) {
+                console.error("Fetch failed, using current input area content:", err);
+            } finally {
+                icon.classList.remove('fa-spin');
+                processData();
+            }
+        }
+
+        // Core Logic
+        function processData() {
+            const csvText = document.getElementById('csvInput').value || defaultCSV;
+            const lines = csvText.split('\n');
+            
+            const w = {};
+            metrics.forEach(m => w[m] = parseFloat(document.getElementById('w' + m).value));
+
+            analyzedResults = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const row = lines[i].split(',').map(s => s.trim());
+                if (row.length < 20 || !row[0]) continue; // Needs at least up to column T (index 19)
+
+                const ticker = row[0];
+                
+                // Fetch columns F(5) to M(12)
+                const vals = {
+                    F: parseFloat(row[5]) || 0, G: parseFloat(row[6]) || 0,
+                    H: parseFloat(row[7]) || 0, I: parseFloat(row[8]) || 0,
+                    J: parseFloat(row[9]) || 0, K: parseFloat(row[10]) || 0,
+                    L: parseFloat(row[11]) || 0, M: parseFloat(row[12]) || 0
+                };
+
+                let baseScore = 0;
+                metrics.forEach(m => { baseScore += vals[m] * w[m]; });
+
+                // Column T modifier (Warming/Cooling Macro)
+                const colT = parseFloat(row[19]) || 0;
+                const warmingScore = colT * 2.5; // Multiplier to give it adequate weight
+
+                // Total Final Score
+                const totalScore = baseScore + warmingScore;
+
+                // Action Logic
+                let action = 'HOLD';
+                if (totalScore > 20) action = 'BUY';
+                if (totalScore > 50) action = 'STRONG BUY';
+                if (totalScore < -20) action = 'SELL';
+                if (totalScore < -50) action = 'STRONG SELL';
+
+                // Confidence Scaling
+                let confidence = Math.min(100, Math.max(0, Math.abs(totalScore) + 40)).toFixed(1);
+
+                analyzedResults.push({
+                    ticker,
+                    colT: colT.toFixed(1),
+                    baseScore: baseScore.toFixed(1),
+                    totalScore: totalScore.toFixed(1),
+                    action,
+                    confidence
+                });
+            }
+
+            renderTable();
+            updateTicker();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = '';
+
+            analyzedResults.forEach(s => {
+                let actionColor = 'text-gray-400';
+                if (s.action.includes('BUY')) actionColor = 'text-green-400 font-bold';
+                if (s.action.includes('SELL')) actionColor = 'text-red-400 font-bold';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-4 font-bold tracking-wide">${s.ticker}</td>
+                    <td class="p-4 text-center">${s.colT}</td>
+                    <td class="p-4 text-center text-slate-400">${s.baseScore}</td>
+                    <td class="p-4 text-center font-semibold">${s.totalScore}</td>
+                    <td class="p-4 text-center">${s.confidence}%</td>
+                    <td class="p-4 text-right ${actionColor}">${s.action}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateTicker() {
+            const tickerDiv = document.getElementById('tickerContent');
+            let tickerHtml = analyzedResults.map(s => {
+                let colorClass = s.action.includes('BUY') ? 'text-green-400' : s.action.includes('SELL') ? 'text-red-400' : 'text-gray-400';
+                return `<span class="mx-6 font-bold">${s.ticker}: <span class="${colorClass}">${s.action}</span> (${s.confidence}%)</span>`;
+            }).join(' <span class="text-slate-600">|</span> ');
+            
+            // Duplicate content to ensure smooth marquee looping
+            tickerDiv.innerHTML = tickerHtml + ' <span class="text-slate-600">|</span> ' + tickerHtml;
+        }
+
+        // XML Report Generation
+        function getXMLString() {
+            let xml = `<StockWatchReport>\n`;
+            xml += `  <Header>\n`;
+            xml += `    <Organization>Andrews Industries</Organization>\n`;
+            xml += `    <Generated>${new Date().toISOString()}</Generated>\n`;
+            xml += `    <Count>${analyzedResults.length}</Count>\n`;
+            xml += `  </Header>\n`;
+            xml += `  <MarketData>\n`;
+            analyzedResults.forEach(s => {
+                xml += `    <Stock ticker="${s.ticker}">\n`;
+                xml += `      <Price>0</Price>\n`;
+                xml += `      <ChangePercent>0</ChangePercent>\n`;
+                xml += `      <Analysis>\n`;
+                xml += `        <Action>${s.action}</Action>\n`;
+                xml += `        <Confidence>${s.confidence}</Confidence>\n`;
+                xml += `      </Analysis>\n`;
+                xml += `    </Stock>\n`;
+            });
+            xml += `  </MarketData>\n</StockWatchReport>`;
+            return xml;
+        }
+
+        function downloadXML() {
+            if (analyzedResults.length === 0) return alert("Please process data first.");
+            const xml = getXMLString();
+            const blob = new Blob([xml], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Stock Watch.xml`;
+            a.click();
+        }
+
+        // GitHub Actions Integration
+        async function pushToGitHub() {
+            if (analyzedResults.length === 0) return alert("Please process data first.");
+            const repo = document.getElementById('ghRepo').value.trim();
+            if (!repo || !repo.includes('/')) return alert("Please enter a valid GitHub repository (e.g., username/repo).");
+
+            let token = localStorage.getItem('andrews_gh_pat');
+            if (!token) {
+                token = prompt("Enter your GitHub Personal Access Token (Requires repo contents access):");
+                if (!token) return;
+                localStorage.setItem('andrews_gh_pat', token);
+            }
+
+            const xml = getXMLString();
+            const pushBtn = document.getElementById('pushBtn');
+            pushBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Pushing...';
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        event_type: 'update-xml',
+                        client_payload: { xml_content: xml }
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Successfully triggered GitHub Action! XML has been dispatched.');
+                } else {
+                    const err = await response.text();
+                    alert('Failed to trigger GitHub Action: ' + err);
+                }
+            } catch (error) {
+                alert('Error pushing to GitHub: ' + error.message);
+            } finally {
+                pushBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Push XML to Repo';
+            }
+        }
+
+        function resetToken() {
+            localStorage.removeItem('andrews_gh_pat');
+            alert("GitHub Token cleared. You will be prompted for a new one on your next push.");
+        }
+
+        // Initialize on Load
+        window.addEventListener('load', () => {
+            document.getElementById('csvInput').value = defaultCSV;
+            processData();
+        });
+
+    </script>
+</body>
+</html>
