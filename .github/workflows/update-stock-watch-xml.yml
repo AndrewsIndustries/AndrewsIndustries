@@ -2,10 +2,10 @@ name: Update Stock Watch XML
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour automatically
+    - cron: '0 * * * *' # Automate: Runs every hour
   repository_dispatch:
     types: [update-xml]
-  workflow_dispatch: # Allows you to trigger it manually from the GitHub website
+  workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
   update_xml_file:
@@ -27,16 +27,15 @@ jobs:
           python-version: '3.x'
 
       - name: Update Stock Data
+        env:
+          XML_PAYLOAD: ${{ github.event.client_payload.xml_content }}
         run: |
           mkdir -p data/
           if [ "${{ github.event_name }}" == "repository_dispatch" ]; then
-            # If triggered by the HTML button, use the button's data
-            echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g' > "data/Stock Watch.xml"
+            echo "$XML_PAYLOAD" | sed 's/\\n/\n/g' > "data/Stock Watch.xml"
           else
-            # Otherwise (Schedule or Manual Trigger), run the Python script to fetch fresh data
             python process_stocks.py
           fi
-          echo "Stock Watch.xml updated."
 
       - name: Configure Git user
         run: |
@@ -46,6 +45,7 @@ jobs:
       - name: Commit and push changes
         run: |
           git add "data/Stock Watch.xml"
-          git diff --staged --quiet || (git commit -m "Update Stock Watch.xml via GitHub Action" && git push)
+          git diff --staged --quiet || git commit -m "Update Stock Watch.xml via GitHub Action"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically provided token

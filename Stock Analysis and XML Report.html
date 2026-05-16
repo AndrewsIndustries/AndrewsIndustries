@@ -89,11 +89,14 @@
                 <h1 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
                     <i class="fas fa-microchip text-blue-500"></i> Andrews Refactored Engine
                 </h1>
-                <p class="text-slate-400 mt-1">v2.2: L,Q,R,S Column Mapping Active</p>
+                <p class="text-slate-400 mt-1">v2.3: A, C, F Column Mapping Active</p>
             </div>
             <div class="flex flex-wrap gap-2">
                 <button id="refreshBtn" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2">
                     <i class="fas fa-sync-alt" id="refreshIcon"></i> Sync Strategy
+                </button>
+                <button id="pushBtn" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2">
+                    <i class="fas fa-cloud-upload-alt"></i> Push to GitHub
                 </button>
                 <button id="exportBtn" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2">
                     <i class="fas fa-download"></i> XML
@@ -105,12 +108,12 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="glass-card p-5 rounded-xl">
                 <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Buy Logic</h3>
-                <p class="text-xs text-white">Value (Q) / Breakout (R)</p>
+                <p class="text-xs text-white">Change (F) > 1.5%</p>
                 <p id="buyStatus" class="text-xl font-bold mt-2 text-emerald-400">---</p>
             </div>
             <div class="glass-card p-5 rounded-xl border-l-2 border-yellow-500">
                 <h3 class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Hold Allocation</h3>
-                <p class="text-xs text-white">Trend (S) Follow</p>
+                <p class="text-xs text-white">Stable Range</p>
                 <p id="holdStatus" class="text-xl font-bold mt-2 text-yellow-500">---</p>
             </div>
             <div class="glass-card p-5 rounded-xl border-l-2 border-red-500">
@@ -151,7 +154,7 @@
         </div>
 
         <footer class="flex justify-between items-center text-[10px] text-slate-500 uppercase tracking-widest px-2">
-            <div>Engine v2.2 | Mapping: Q (IV), R (Resist), S (Trend), L (PE)</div>
+            <div>Engine v2.3 | Mapping: A (Ticker), C (Price), F (24h Change)</div>
             <div>Andrews Industries Proprietary Algorithm</div>
         </footer>
     </div>
@@ -171,40 +174,34 @@
          * Refactored Trading Logic with Targeted Column Mapping
          */
         function analyzeStock(row) {
-            // Updated Mapping:
-            // Ticker: A (0), Price: C (2)
-            // Intrinsic Value: Q (16), Resistance: R (17), Trend: S (18), P/E: L (11)
+            const BUY_THRESHOLD = 1.5;
+            const SELL_THRESHOLD = -1.5;
             
             const ticker = (row[0] || "N/A").trim().toUpperCase(); 
             const price = parseNumeric(row[2]);                     
-            const peRatio = parseNumeric(row[11]) || 15;                  // Column L
             const intrinsicValue = parseNumeric(row[16]) || (price * 1.1); // Column Q
-            const resistance = parseNumeric(row[17]) || (price * 1.05);   // Column R
             const trend24h = parseNumeric(row[5]);                        // Column F
 
             let action = "HOLD";
             let strategyMsg = "";
-            let allocation = "80% Core / 20% Explore";
+            let allocation = "Hold Current Position";
             let themeClass = "hold-theme";
             let confidence = 50;
 
-            const isValueBuy = price < intrinsicValue;
-            const isBreakout = price > resistance;
-
             // Strategy Execution Logic
-            if (isValueBuy || isBreakout) {
+            if (trend24h > BUY_THRESHOLD) {
                 action = "BUY";
                 themeClass = "buy-theme";
-                allocation = "Fixed DCA Interval Entry";
-                strategyMsg = isBreakout ? "Resistance (R) Breakout Detected" : "Below Intrinsic (Q) Value Buy";
-                confidence = isValueBuy && isBreakout ? 98 : 78;
+                allocation = "Increase Weighting";
+                strategyMsg = "Positive Momentum Detected (F)";
+                confidence = Math.min(98, 65 + (trend24h * 2));
             } 
-            else if (peRatio > 35 || trend24h < -5) {
+            else if (trend24h < SELL_THRESHOLD) {
                 action = "SELL";
                 themeClass = "sell-theme";
-                allocation = "Pre-Determined Profit Exit";
-                strategyMsg = peRatio > 35 ? "L-Column P/E Degradation" : "S-Column Trailing Stop Triggered";
-                confidence = 92;
+                allocation = "Reduce Exposure";
+                strategyMsg = "Negative Trend Triggered (F)";
+                confidence = Math.min(98, 55 + Math.abs(trend24h * 2));
             }
             else {
                 action = "HOLD";
@@ -278,7 +275,7 @@
                 tr.innerHTML = `
                     <td class="px-6 py-5">
                         <div class="font-bold text-white">${s.ticker}</div>
-                        <div class="text-[10px] text-slate-500">${s.trend24h >= 0 ? '+' : ''}${s.trend24h}% Momentum (S)</div>
+                        <div class="text-[10px] text-slate-500">${s.trend24h >= 0 ? '+' : ''}${s.trend24h}% Change (F)</div>
                     </td>
                     <td class="px-6 py-5">
                         <span class="status-pill ${s.themeClass}">${s.action}</span>
@@ -310,7 +307,40 @@
             document.getElementById('confProgress').style.width = `${avg}%`;
         }
 
-        function generateXML() {
+        async function pushToGitHub() {
+            let token = localStorage.getItem('andrews_gh_pat');
+            if (!token) {
+                token = prompt("Enter GitHub Personal Access Token (PAT):");
+                if (token) localStorage.setItem('andrews_gh_pat', token);
+            }
+            if (!token) return;
+            
+            const pushBtn = document.getElementById('pushBtn');
+            pushBtn.disabled = true;
+            pushBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Pushing...';
+
+            try {
+                const response = await fetch('https://api.github.com/repos/AndrewsIndustries/AndrewsIndustries/dispatches', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                    },
+                    body: JSON.stringify({
+                        event_type: 'update-xml',
+                        client_payload: { xml_content: getXMLString() }
+                    })
+                });
+                if (response.ok) alert("Success! GitHub Action triggered.");
+                else alert("Error: Check PAT permissions.");
+            } catch (e) { alert("Failed to connect to GitHub."); }
+            finally {
+                pushBtn.disabled = false;
+                pushBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to GitHub';
+            }
+        }
+
+        function getXMLString() {
             if (!currentStockData.length) return;
             const timestamp = new Date().toISOString();
             let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<StockWatchReport>\n`;
@@ -327,17 +357,23 @@
                 xml += `    </Stock>\n`;
             });
             xml += `  </MarketData>\n</StockWatchReport>`;
-            
+            return xml;
+        }
+
+        function downloadXML() {
+            const xml = getXMLString();
+            if (!xml) return;
             const blob = new Blob([xml], { type: 'application/xml' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `Andrews_Strategy_Export_v2.2.xml`;
+            a.download = `Stock Watch.xml`;
             a.click();
         }
 
         document.getElementById('refreshBtn').addEventListener('click', fetchData);
-        document.getElementById('exportBtn').addEventListener('click', generateXML);
+        document.getElementById('exportBtn').addEventListener('click', downloadXML);
+        document.getElementById('pushBtn').addEventListener('click', pushToGitHub);
         window.addEventListener('load', fetchData);
     </script>
 </body>
