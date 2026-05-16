@@ -5,38 +5,21 @@ on:
     types: [update-xml]
 
 jobs:
-  update_xml_file:
+  update-file:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Grant write permission to the GITHUB_TOKEN
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          # Use the GITHUB_TOKEN provided by GitHub Actions for authentication
-          # This token has write permissions because of the 'permissions' block above
-          token: ${{ secrets.GITHUB_TOKEN }} 
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Extract XML content from payload
-        id: get_xml_content
+      - name: Update XML File
         run: |
-          # GitHub Actions automatically escapes newlines in client_payload.
-          # We need to unescape them before writing to file.
-          mkdir -p data/
-          XML_CONTENT=$(echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g')
-          echo "$XML_CONTENT" > "data/Stock Watch.xml"
-          echo "Content written to data/Stock Watch.xml"
+          mkdir -p data
+          echo "${{ github.event.client_payload.xml_content }}" > data/Stock\ Watch.xml
 
-      - name: Configure Git user
+      - name: Commit and Push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit and push changes
-        run: |
-          git add "data/Stock Watch.xml"
-          git diff --staged --quiet || git commit -m "Update Stock Watch.xml via GitHub Action"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/Stock\ Watch.xml
+          git commit -m "Update Stock Watch XML from Dashboard" || echo "No changes to commit"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the automatically provided token

@@ -104,15 +104,13 @@
                 <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-solid fa-database mr-2"></i>Data Source</h2>
                 <p class="text-[10px] text-slate-500 mb-2">Automated fetch from Google Sheets active.</p>
                 <textarea id="csvInput" rows="3" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-xs text-slate-300 font-mono mb-2" placeholder="Paste your Google Sheet CSV here..."></textarea>
-                <button id="processBtn" class="w-full bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors mb-4">
-                    Process Data
                 <button id="processBtn" class="w-full bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors mb-4 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-sync" id="syncIcon"></i> Fetch & Process
                 </button>
 
                 <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-brands fa-github mr-2"></i>GitHub Integration</h2>
                 <p class="text-[10px] text-slate-500 mb-2">Target: data/Stock Watch.xml</p>
-                <input type="text" id="ghRepo" placeholder="username/repository" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white mb-2">
+                <input type="text" id="ghRepo" value="AndrewsIndustries/AndrewsIndustries" placeholder="username/repository" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white mb-2">
                 <button id="pushBtn" class="w-full bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded text-sm font-semibold transition-colors flex items-center justify-center gap-2 mb-2">
                     <i class="fa-solid fa-cloud-arrow-up"></i> Push XML to Repo
                 </button>
@@ -129,8 +127,8 @@
                     <thead>
                         <tr class="bg-slate-800/50 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-700">
                             <th class="p-4 font-medium">Ticker</th>
-                            <th class="p-4 font-medium text-center">Col T (Temp)</th>
-                            <th class="p-4 font-medium text-center">Base Score</th>
+                            <th class="p-4 font-medium text-center">Days Change</th>
+                            <th class="p-4 font-medium text-center">Warming or Cooling</th>
                             <th class="p-4 font-medium text-center">Total Score</th>
                             <th class="p-4 font-medium text-center">Confidence</th>
                             <th class="p-4 font-medium text-right">Action</th>
@@ -166,19 +164,23 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTp9TnMwxNNqwp3Ol3kjBaxvwvsyX9iLUltpNS6kMNhyARRYMYMIFwKNoW3D25XxACg2jk1MpKNOdCE/pubcsv?gid=0&single=true';
 
         let analyzedResults = [];
+        let currentCSV = defaultCSV;
 
-        // Initialize Sliders (F to M)
-        const metrics = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+        // Initialize Sliders (F and T)
+        const metrics = ['F', 'T'];
+        const labels = { 'F': 'Days Change', 'T': 'Warming or Cooling' };
         const sliderContainer = document.getElementById('sliderContainer');
+        const savedWeights = JSON.parse(localStorage.getItem('andrews_weights') || '{}');
         
         metrics.forEach(m => {
+            const val = savedWeights[m] || 1;
             sliderContainer.innerHTML += `
                 <div>
                     <div class="slider-label">
-                        <span>Metric Column ${m}</span>
-                        <span id="val${m}" class="font-bold text-blue-400">1</span>
+                        <span id="name${m}">${labels[m]}</span>
+                        <span id="val${m}" class="font-bold text-blue-400">${val}</span>
                     </div>
-                    <input type="range" id="w${m}" min="-10" max="10" step="1" value="1" class="w-full accent-blue-500">
+                    <input type="range" id="w${m}" min="-10" max="10" step="1" value="${val}" class="w-full accent-blue-500">
                 </div>
             `;
         });
@@ -193,15 +195,12 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
             });
         });
 
-        document.getElementById('processBtn').addEventListener('click', processData);
-        document.getElementById('processBtn').addEventListener('click', fetchAndProcess);
         document.getElementById('exportBtn').addEventListener('click', downloadXML);
         document.getElementById('pushBtn').addEventListener('click', pushToGitHub);
         document.getElementById('resetTokenBtn').addEventListener('click', resetToken);
 
         async function fetchAndProcess() {
-            const icon = document.getElementById('syncIcon');
-            icon.classList.add('fa-spin');
+            const pushBtn = document.getElementById('pushBtn');
             
             try {
                 let data;
@@ -218,23 +217,25 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
                 }
 
                 if (data && !data.trim().startsWith('{')) {
-                    document.getElementById('csvInput').value = data;
+                    currentCSV = data;
                 }
             } catch (err) {
                 console.error("Fetch failed, using current input area content:", err);
             } finally {
-                icon.classList.remove('fa-spin');
                 processData();
             }
         }
 
         // Core Logic
         function processData() {
-            const csvText = document.getElementById('csvInput').value || defaultCSV;
+            const csvText = currentCSV;
             const lines = csvText.split('\n');
-            
+
+            const metricIndices = { 'F': 5, 'T': 19 };
+
             const w = {};
             metrics.forEach(m => w[m] = parseFloat(document.getElementById('w' + m).value));
+            localStorage.setItem('andrews_weights', JSON.stringify(w));
 
             analyzedResults = [];
 
@@ -244,23 +245,15 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
 
                 const ticker = row[0];
                 
-                // Fetch columns F(5) to M(12)
+                // Fetch columns F(5) and T(19)
                 const vals = {
-                    F: parseFloat(row[5]) || 0, G: parseFloat(row[6]) || 0,
-                    H: parseFloat(row[7]) || 0, I: parseFloat(row[8]) || 0,
-                    J: parseFloat(row[9]) || 0, K: parseFloat(row[10]) || 0,
-                    L: parseFloat(row[11]) || 0, M: parseFloat(row[12]) || 0
+                    F: parseFloat(row[5]) || 0,
+                    T: parseFloat(row[19]) || 0
                 };
 
-                let baseScore = 0;
-                metrics.forEach(m => { baseScore += vals[m] * w[m]; });
-
-                // Column T modifier (Warming/Cooling Macro)
-                const colT = parseFloat(row[19]) || 0;
-                const warmingScore = colT * 2.5; // Multiplier to give it adequate weight
-
-                // Total Final Score
-                const totalScore = baseScore + warmingScore;
+                const scoreF = vals.F * w['F'];
+                const scoreT = vals.T * w['T'];
+                const totalScore = scoreF + scoreT;
 
                 // Action Logic
                 let action = 'HOLD';
@@ -274,8 +267,8 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
 
                 analyzedResults.push({
                     ticker,
-                    colT: colT.toFixed(1),
-                    baseScore: baseScore.toFixed(1),
+                    valF: vals.F.toFixed(1),
+                    valT: vals.T.toFixed(1),
                     totalScore: totalScore.toFixed(1),
                     action,
                     confidence
@@ -298,8 +291,8 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="p-4 font-bold tracking-wide">${s.ticker}</td>
-                    <td class="p-4 text-center">${s.colT}</td>
-                    <td class="p-4 text-center text-slate-400">${s.baseScore}</td>
+                    <td class="p-4 text-center">${s.valF}</td>
+                    <td class="p-4 text-center">${s.valT}</td>
                     <td class="p-4 text-center font-semibold">${s.totalScore}</td>
                     <td class="p-4 text-center">${s.confidence}%</td>
                     <td class="p-4 text-right ${actionColor}">${s.action}</td>
@@ -404,8 +397,7 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
 
         // Initialize on Load
         window.addEventListener('load', () => {
-            document.getElementById('csvInput').value = defaultCSV;
-            processData();
+            fetchAndProcess();
         });
 
     </script>
