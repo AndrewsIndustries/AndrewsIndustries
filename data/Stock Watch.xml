@@ -2,24 +2,40 @@
 <StockWatchReport>
   <Header>
     <Organization>Andrews Industries</Organization>
-    <Generated>2026-05-16T17:07:27.401804+00:00</Generated>
+    <Generated>2026-05-16T19:16:33.631279+00:00</Generated>
     <Count>74</Count>
   </Header>
   <MarketData>
+    <Stock ticker="OXY">
+      <Price>59.62</Price>
+      <ChangePercent>0.00</ChangePercent>
+      <Analysis>
+        <Action>HOLD</Action>
+        <Confidence>85.0</Confidence>
+      </Analysis>
+    </Stock>
+    <Stock ticker="COST">
+      <Price>1048.95</Price>
+      <ChangePercent>0.00</ChangePercent>
+      <Analysis>
+        <Action>HOLD</Action>
+        <Confidence>85.0</Confidence>
+      </Analysis>
+    </Stock>
+    <Stock ticker="JNJ">
+      <Price>226.71</Price>
+      <ChangePercent>0.00</ChangePercent>
+      <Analysis>
+        <Action>HOLD</Action>
+        <Confidence>85.0</Confidence>
+      </Analysis>
+    </Stock>
     <Stock ticker="FUJHY">
       <Price>8.09</Price>
       <ChangePercent>6.73</ChangePercent>
       <Analysis>
         <Action>BUY</Action>
         <Confidence>78.5</Confidence>
-      </Analysis>
-    </Stock>
-    <Stock ticker="OXY">
-      <Price>59.62</Price>
-      <ChangePercent>4.89</ChangePercent>
-      <Analysis>
-        <Action>BUY</Action>
-        <Confidence>74.8</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="ADBE">
@@ -95,7 +111,7 @@
       </Analysis>
     </Stock>
     <Stock ticker="HWKN">
-      <Price>158.98</Price>
+      <Price>0.00</Price>
       <ChangePercent>1.54</ChangePercent>
       <Analysis>
         <Action>BUY</Action>
@@ -135,16 +151,8 @@
       </Analysis>
     </Stock>
     <Stock ticker="BRKA">
-      <Price>625500.00</Price>
+      <Price>0.00</Price>
       <ChangePercent>0.81</ChangePercent>
-      <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
-      </Analysis>
-    </Stock>
-    <Stock ticker="COST">
-      <Price>1048.95</Price>
-      <ChangePercent>0.74</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
@@ -183,7 +191,7 @@
       </Analysis>
     </Stock>
     <Stock ticker="PLTR">
-      <Price>133.99</Price>
+      <Price>0.00</Price>
       <ChangePercent>0.19</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
@@ -198,16 +206,16 @@
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
-    <Stock ticker="TWO">
-      <Price>12.60</Price>
+    <Stock ticker="WSR">
+      <Price>18.99</Price>
       <ChangePercent>0.00</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
-    <Stock ticker="WSR">
-      <Price>18.99</Price>
+    <Stock ticker="TWO">
+      <Price>12.60</Price>
       <ChangePercent>0.00</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
@@ -223,7 +231,7 @@
       </Analysis>
     </Stock>
     <Stock ticker="BAC">
-      <Price>49.77</Price>
+      <Price>0.00</Price>
       <ChangePercent>-0.16</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
@@ -376,14 +384,6 @@
     </Stock>
     <Stock ticker="TXN">
       <Price>302.73</Price>
-      <ChangePercent>-1.77</ChangePercent>
-      <Analysis>
-        <Action>SELL</Action>
-        <Confidence>58.5</Confidence>
-      </Analysis>
-    </Stock>
-    <Stock ticker="JNJ">
-      <Price>226.71</Price>
       <ChangePercent>-1.77</ChangePercent>
       <Analysis>
         <Action>SELL</Action>
@@ -575,7 +575,7 @@
       </Analysis>
     </Stock>
     <Stock ticker="SMCI">
-      <Price>31.04</Price>
+      <Price>0.00</Price>
       <ChangePercent>-6.02</ChangePercent>
       <Analysis>
         <Action>SELL</Action>
