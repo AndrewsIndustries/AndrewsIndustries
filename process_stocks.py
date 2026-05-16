@@ -16,7 +16,7 @@ def parse_numeric(val):
         return 0.0
 
 def analyze_stock(row):
-    ticker = str(row[0]).strip().toUpperCase() if row[0] else "N/A"
+    ticker = str(row[0]).strip().upper() if row[0] else "N/A"
     price = parse_numeric(row[2])   # Column C
     change = parse_numeric(row[5])  # Column F
 
@@ -41,8 +41,8 @@ def analyze_stock(row):
 def main():
     print("Fetching CSV data...")
     response = urllib.request.urlopen(SHEET_CSV_URL)
-    lines = [line.decode('utf-8') for line in response.readlines()]
-    reader = csv.reader(lines)
+    content = response.read().decode('utf-8')
+    reader = csv.reader(content.splitlines())
     rows = list(reader)
 
     # Skip header
