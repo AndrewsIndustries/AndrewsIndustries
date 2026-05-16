@@ -43,15 +43,13 @@ def main():
         print(f"Fetching CSV data from {SHEET_CSV_URL}")
         response = urllib.request.urlopen(SHEET_CSV_URL)
         content = response.read().decode('utf-8')
-        reader = csv.reader(content.splitlines())
-        rows = list(reader)
+        rows = list(csv.reader(content.splitlines()))
     except Exception as e:
         print(f"Failed to fetch data: {e}")
         return
 
-    # Skip header
+    # Process main analysis sheet (A: Ticker, C: Price, F: Change)
     data_rows = [r for r in rows if r and r[0].lower() != "ticker" and r[0].strip()]
-    
     stocks = [analyze_stock(r) for r in data_rows]
     
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
