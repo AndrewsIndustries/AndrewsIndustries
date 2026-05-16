@@ -2,204 +2,204 @@
 <StockWatchReport>
   <Header>
     <Organization>Andrews Industries</Organization>
-    <Generated>2026-05-16T15:04:02.685365+00:00</Generated>
+    <Generated>2026-05-16T17:07:27.401804+00:00</Generated>
     <Count>74</Count>
   </Header>
   <MarketData>
     <Stock ticker="FUJHY">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>8.09</Price>
+      <ChangePercent>6.73</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>78.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="OXY">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>59.62</Price>
+      <ChangePercent>4.89</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>74.8</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="ADBE">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>247.60</Price>
+      <ChangePercent>4.47</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>73.9</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="XOM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>157.92</Price>
+      <ChangePercent>4.07</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>73.1</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="SNAP">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>5.53</Price>
+      <ChangePercent>3.17</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>71.3</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MSFT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>421.92</Price>
+      <ChangePercent>3.05</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>71.1</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="CVX">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>191.10</Price>
+      <ChangePercent>2.39</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>69.8</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="CSCO">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>118.21</Price>
+      <ChangePercent>2.32</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>69.6</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="CF">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>125.24</Price>
+      <ChangePercent>2.26</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>69.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="VDE">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>168.38</Price>
+      <ChangePercent>2.17</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>69.3</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="HMC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>26.18</Price>
+      <ChangePercent>1.97</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>68.9</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="HWKN">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>158.98</Price>
+      <ChangePercent>1.54</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>BUY</Action>
+        <Confidence>68.1</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="RDDT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>158.17</Price>
+      <ChangePercent>1.19</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="SHEL">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>85.36</Price>
+      <ChangePercent>1.01</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="V">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>325.75</Price>
+      <ChangePercent>1.00</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MA">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>494.20</Price>
+      <ChangePercent>0.87</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="BRKA">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>625500.00</Price>
+      <ChangePercent>0.81</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="COST">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>1048.95</Price>
+      <ChangePercent>0.74</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="AAPL">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>300.23</Price>
+      <ChangePercent>0.68</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MCD">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>276.39</Price>
+      <ChangePercent>0.52</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="KO">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>80.82</Price>
+      <ChangePercent>0.46</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="PEP">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>149.12</Price>
+      <ChangePercent>0.30</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="PLTR">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>133.99</Price>
+      <ChangePercent>0.19</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="TM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>190.68</Price>
+      <ChangePercent>0.09</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="TWO">
-      <Price>0.00</Price>
+      <Price>12.60</Price>
       <ChangePercent>0.00</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
@@ -207,7 +207,7 @@
       </Analysis>
     </Stock>
     <Stock ticker="WSR">
-      <Price>0.00</Price>
+      <Price>18.99</Price>
       <ChangePercent>0.00</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
@@ -215,387 +215,387 @@
       </Analysis>
     </Stock>
     <Stock ticker="GME">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>21.59</Price>
+      <ChangePercent>-0.14</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="BAC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>49.77</Price>
+      <ChangePercent>-0.16</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="WDFC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>201.37</Price>
+      <ChangePercent>-0.25</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="ZIM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>25.57</Price>
+      <ChangePercent>-0.43</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="WFC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>73.42</Price>
+      <ChangePercent>-0.50</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="META">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>614.23</Price>
+      <ChangePercent>-0.68</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="WMT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>131.45</Price>
+      <ChangePercent>-0.76</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="SBLK">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>26.47</Price>
+      <ChangePercent>-0.79</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="PG">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>141.57</Price>
+      <ChangePercent>-0.80</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="LMT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>516.01</Price>
+      <ChangePercent>-0.85</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="ORC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>6.86</Price>
+      <ChangePercent>-0.87</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MS">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>192.51</Price>
+      <ChangePercent>-1.04</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="GOOGL">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>396.78</Price>
+      <ChangePercent>-1.07</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="AMZN">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>264.14</Price>
+      <ChangePercent>-1.15</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="VOO">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>679.44</Price>
+      <ChangePercent>-1.21</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="ORCL">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>192.95</Price>
+      <ChangePercent>-1.36</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="LHX">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>303.39</Price>
+      <ChangePercent>-1.38</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="NOC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>540.69</Price>
+      <ChangePercent>-1.45</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="VZ">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>46.37</Price>
+      <ChangePercent>-1.47</ChangePercent>
       <Analysis>
         <Action>HOLD</Action>
         <Confidence>85.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="PFE">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>25.33</Price>
+      <ChangePercent>-1.63</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>58.3</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="TXN">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>302.73</Price>
+      <ChangePercent>-1.77</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>58.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="JNJ">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>226.71</Price>
+      <ChangePercent>-1.77</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>58.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MRK">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>111.38</Price>
+      <ChangePercent>-1.79</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>58.6</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="GD">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>334.50</Price>
+      <ChangePercent>-1.79</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>58.6</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="AGNC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>10.34</Price>
+      <ChangePercent>-1.99</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="BLK">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>1081.90</Price>
+      <ChangePercent>-2.00</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="PH">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>862.72</Price>
+      <ChangePercent>-2.01</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="GS">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>948.47</Price>
+      <ChangePercent>-2.12</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.2</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="DD">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>49.31</Price>
+      <ChangePercent>-2.16</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.3</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="HD">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>297.51</Price>
+      <ChangePercent>-2.26</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="BDN">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>2.99</Price>
+      <ChangePercent>-2.29</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>59.6</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="RTX">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>171.18</Price>
+      <ChangePercent>-2.56</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>60.1</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="AFRM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>65.82</Price>
+      <ChangePercent>-2.59</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>60.2</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="NVAX">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>9.06</Price>
+      <ChangePercent>-3.10</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>61.2</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="MRVL">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>176.89</Price>
+      <ChangePercent>-3.12</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>61.2</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="DJT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>8.67</Price>
+      <ChangePercent>-3.13</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>61.3</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="TSM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>404.35</Price>
+      <ChangePercent>-3.20</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>61.4</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="KWR">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>137.99</Price>
+      <ChangePercent>-3.23</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>61.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="GM">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>74.86</Price>
+      <ChangePercent>-3.72</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>62.4</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="BA">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>220.49</Price>
+      <ChangePercent>-3.80</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>62.6</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="NVDA">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>225.32</Price>
+      <ChangePercent>-4.42</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>63.8</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="RIOT">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>23.49</Price>
+      <ChangePercent>-4.59</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>64.2</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="TSLA">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>422.24</Price>
+      <ChangePercent>-4.75</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>64.5</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="KTOS">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>52.09</Price>
+      <ChangePercent>-5.03</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>65.1</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="AMD">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>424.10</Price>
+      <ChangePercent>-5.69</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>66.4</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="SMCI">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>31.04</Price>
+      <ChangePercent>-6.02</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>67.0</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="INTC">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>108.77</Price>
+      <ChangePercent>-6.18</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>67.4</Confidence>
       </Analysis>
     </Stock>
     <Stock ticker="F">
-      <Price>0.00</Price>
-      <ChangePercent>0.00</ChangePercent>
+      <Price>13.40</Price>
+      <ChangePercent>-7.39</ChangePercent>
       <Analysis>
-        <Action>HOLD</Action>
-        <Confidence>85.0</Confidence>
+        <Action>SELL</Action>
+        <Confidence>69.8</Confidence>
       </Analysis>
     </Stock>
   </MarketData>
