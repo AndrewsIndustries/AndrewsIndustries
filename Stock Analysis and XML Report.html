@@ -134,9 +134,9 @@
                     <thead>
                         <tr class="bg-slate-800/80 text-slate-400 text-xs uppercase tracking-widest font-semibold">
                             <th class="px-6 py-4">Ticker</th>
+                            <th class="px-6 py-4">Recommended Action</th>
                             <th class="px-6 py-4">Current Price</th>
                             <th class="px-6 py-4">24h Change</th>
-                            <th class="px-6 py-4">Recommended Action</th>
                             <th class="px-6 py-4">AI Confidence</th>
                         </tr>
                     </thead>
@@ -168,11 +168,18 @@
         
         let currentStockData = [];
 
+        function parseNumeric(val) {
+            if (!val) return 0;
+            // Remove currency symbols, commas, and percentage signs that break parseFloat
+            const cleaned = val.toString().replace(/[^0-9.-]+/g, "");
+            return parseFloat(cleaned) || 0;
+        }
+
         function analyzeStock(row) {
-            const ticker = (row[0] || "UNK").trim();
-            const price = parseFloat(row[1]) || 0;
-            const change = parseFloat(row[2]) || 0;
-            const volume = parseFloat(row[3]) || 0;
+            const ticker = (row[1] || "UNK").trim();
+            const price = parseNumeric(row[3]);
+            const change = parseNumeric(row[6]);
+            const volume = parseNumeric(row[15]);
 
             let action = "HOLD";
             let confidence = 50;
@@ -208,13 +215,23 @@
                 if (!response.ok) throw new Error("Sheet access denied.");
                 
                 const data = await response.text();
-                const rows = data.split('\n').map(row => row.split(','));
+                // Parse the CSV into a 2D array
+                const rawRows = data.split(/\r?\n/)
+                    .filter(line => line.trim() !== "")
+                    .map(row => row.split(',')
+                        .map(cell => cell.trim().replace(/^"(.*)"$/, '$1').trim())
+                    );
                 
-                // Remove header row
+                if (rawRows.length === 0) throw new Error("Sheet is empty.");
+
+                // TRANSPOSE: Convert columns (stocks) into rows for processing
+                const rows = rawRows[0].map((_, colIndex) => rawRows.map(row => row[colIndex]));
+
+                // Remove the first transposed row (which contains the original vertical labels)
                 rows.shift();
                 
                 currentStockData = rows
-                    .filter(r => r[0] && r[0].trim() !== "" && r[0].trim() !== "Ticker")
+                    .filter(r => r[1] && r[1].trim() !== "" && r[1].trim() !== "Ticker")
                     .map(analyzeStock);
 
                 updateUI();
@@ -273,12 +290,12 @@
                 tr.className = "hover:bg-slate-800/30 transition-colors";
                 tr.innerHTML = `
                     <td class="px-6 py-4 font-bold text-blue-400">${stock.ticker}</td>
+                    <td class="px-6 py-4">
+                        <span class="status-pill ${stock.themeClass}">${stock.action}</span>
+                    </td>
                     <td class="px-6 py-4 font-mono">$${stock.price.toFixed(2)}</td>
                     <td class="px-6 py-4 ${stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'} font-semibold">
                         ${stock.change > 0 ? '+' : ''}${stock.change}%
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="status-pill ${stock.themeClass}">${stock.action}</span>
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">

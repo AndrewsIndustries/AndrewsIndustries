@@ -461,7 +461,13 @@ async function updateTicker(urls, elementId) {
                             // For RSS/Atom use <title>, for Stock Watch use the 'ticker' attribute
                             const title = item.querySelector("title")?.textContent || item.getAttribute("ticker");
                             const action = item.querySelector("Action")?.textContent;
-                            if (title) allTitles.push(action ? `${title}: ${action}` : title.trim());
+                            const price = item.querySelector("Price")?.textContent;
+                            const change = item.querySelector("ChangePercent")?.textContent;
+
+                            if (title) {
+                                let itemText = action ? `${title}: ${action}${price ? ' $' + parseFloat(price).toFixed(2) : ''}${change ? ' (' + (parseFloat(change) >= 0 ? '+' : '') + parseFloat(change).toFixed(2) + '%)' : ''}` : title.trim();
+                                allTitles.push(itemText);
+                            }
                         });
                         break; // Success found for this feed, stop trying other proxies for it
                     }
