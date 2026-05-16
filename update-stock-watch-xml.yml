@@ -23,10 +23,10 @@ jobs:
         run: |
           # GitHub Actions automatically escapes newlines in client_payload.
           # We need to unescape them before writing to file.
-          mkdir -p .github/workflow/
+          mkdir -p data/
           XML_CONTENT=$(echo "${{ github.event.client_payload.xml_content }}" | sed 's/\\n/\n/g')
-          echo "$XML_CONTENT" > ".github/workflow/Stock Watch.xml"
-          echo "Content successfully written to .github/workflow/Stock Watch.xml"
+          echo "$XML_CONTENT" > "data/Stock Watch.xml"
+          echo "Content written to data/Stock Watch.xml"
 
       - name: Configure Git user
         run: |
@@ -35,7 +35,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add ".github/workflow/Stock Watch.xml"
+          git add "data/Stock Watch.xml"
           git diff --staged --quiet || git commit -m "Update Stock Watch.xml via GitHub Action"
           git push
         env:

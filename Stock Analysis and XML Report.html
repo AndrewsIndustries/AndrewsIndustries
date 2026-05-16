@@ -176,10 +176,9 @@
         }
 
         function analyzeStock(row) {
-            const ticker = (row[1] || "UNK").trim();
-            const price = parseNumeric(row[3]);
-            const change = parseNumeric(row[6]);
-            const volume = parseNumeric(row[15]);
+            const ticker = (row[0] || "N/A").trim(); // Column A
+            const price = parseNumeric(row[2]);      // Column C
+            const change = parseNumeric(row[5]);     // Column F
 
             let action = "HOLD";
             let confidence = 50;
@@ -198,20 +197,21 @@
                 confidence = 85;
                 themeClass = "hold-theme";
             }
-
-            return { ticker, price, change, action, confidence, volume, themeClass };
+            
+            return { ticker, price, change, action, confidence, themeClass };
         }
 
         async function fetchData() {
             const log = document.getElementById('systemLog');
             const icon = document.getElementById('refreshIcon');
-            const body = document.getElementById('stockBody');
             
             log.innerText = "Connecting to Google Cloud...";
             icon.classList.add('fa-spin');
 
             try {
-                const response = await fetch(SHEET_CSV_URL);
+                // Added CORS proxy to prevent "0" values caused by blocked requests
+                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(SHEET_CSV_URL)}`;
+                const response = await fetch(proxyUrl);
                 if (!response.ok) throw new Error("Sheet access denied.");
                 
                 const data = await response.text();
@@ -224,21 +224,17 @@
                 
                 if (rawRows.length === 0) throw new Error("Sheet is empty.");
 
-                // TRANSPOSE: Convert columns (stocks) into rows for processing
-                const rows = rawRows[0].map((_, colIndex) => rawRows.map(row => row[colIndex]));
-
-                // Remove the first transposed row (which contains the original vertical labels)
-                rows.shift();
-                
-                currentStockData = rows
-                    .filter(r => r[1] && r[1].trim() !== "" && r[1].trim() !== "Ticker")
+                // Process rows directly (Horizontal Layout)
+                currentStockData = rawRows
+                    .filter(r => r[0] && r[0].trim() !== "" && r[0].toLowerCase() !== "ticker")
                     .map(analyzeStock);
 
                 updateUI();
                 log.innerText = `Sync successful: ${currentStockData.length} stocks analyzed.`;
-                document.getElementById('lastUpdated').innerText = `Last Refreshed: ${new Date().toLocaleTimeString()}`;
+                document.getElementById('lastUpdated').innerText = `As of ${new Date().toLocaleString()}`;
             } catch (error) {
                 console.error(error);
+                const body = document.getElementById('stockBody');
                 log.innerText = "Error: Ensure Sheet is 'Published to Web' as CSV.";
                 body.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-red-400">Failed to load data. Please check your CSV URL.</td></tr>`;
             } finally {
