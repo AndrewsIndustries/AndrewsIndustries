@@ -215,12 +215,18 @@
                 if (!response.ok) throw new Error("Sheet access denied.");
                 
                 const data = await response.text();
-                // Parse the CSV into a 2D array
+                
+                // Robust CSV parser to handle commas within quotes (common in currency)
+                const parseCSVLine = (text) => {
+                    const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
+                    return text.split(re).map(cell => 
+                        cell.trim().replace(/^"(.*)"$/, '$1').replace(/,/g, '')
+                    );
+                };
+
                 const rawRows = data.split(/\r?\n/)
                     .filter(line => line.trim() !== "")
-                    .map(row => row.split(',')
-                        .map(cell => cell.trim().replace(/^"(.*)"$/, '$1').trim())
-                    );
+                    .map(parseCSVLine);
                 
                 if (rawRows.length === 0) throw new Error("Sheet is empty.");
 
