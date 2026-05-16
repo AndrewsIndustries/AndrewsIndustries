@@ -423,11 +423,11 @@ async function updateTicker(urls, elementId) {
 
             if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
                 // Direct fetch for GitHub content is faster, but fallback to proxy if CORS issues occur
-                proxyUrls = [ `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`, `${cleanUrl}?t=${Date.now()}` ];
+                proxyUrls = [ `${cleanUrl}?t=${Date.now()}`, `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}` ];
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
                     `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,
-                    `https://corsproxy.io/?url=${encodeURIComponent(cleanUrl)}&cb=${Date.now()}`
+                    `https://api.codetabs.com/v1/proxy?URL=${encodeURIComponent(cleanUrl)}`
                 ];
             } else {
                 // Local files

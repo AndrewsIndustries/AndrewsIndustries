@@ -227,13 +227,18 @@
                     // Primary: AllOrigins
                     const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}&_=${Date.now()}`);
                     const json = await res.json();
-                    data = json.contents;
+                    if (json.contents) data = json.contents;
+                    else throw new Error("Empty contents from AllOrigins");
                 } catch (e) {
-                    // Fallback: CorsProxy
-                    const res = await fetch(`https://corsproxy.io/?url=${encodeURIComponent(SHEET_CSV_URL)}`);
+                    // Fallback: CodeTabs
+                    const res = await fetch(`https://api.codetabs.com/v1/proxy?URL=${encodeURIComponent(SHEET_CSV_URL)}`);
                     data = await res.text();
                 }
                 
+                if (data && (data.includes("CORSPROXY.IO/PRICING") || data.includes("CODETABS.COM/V1/{SERVICE}"))) {
+                    throw new Error("Proxy restricted or bad request format.");
+                }
+
                 const parseCSVLine = (text) => {
                     const re = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
                     return text.split(re).map(cell => cell.trim().replace(/^"(.*)"$/, '$1').replace(/,/g, ''));
