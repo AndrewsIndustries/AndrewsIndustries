@@ -231,11 +231,11 @@
                     else throw new Error("Empty contents from AllOrigins");
                 } catch (e) {
                     // Fallback: CodeTabs
-                    const res = await fetch(`https://api.codetabs.com/v1/proxy?URL=${encodeURIComponent(SHEET_CSV_URL)}`);
+                    const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(SHEET_CSV_URL)}`);
                     data = await res.text();
                 }
                 
-                if (data && (data.includes("CORSPROXY.IO/PRICING") || data.includes("CODETABS.COM/V1/{SERVICE}"))) {
+                if (data && (data.includes("CORSPROXY.IO/PRICING") || data.includes("CODETABS.COM") || data.startsWith('{'))) {
                     throw new Error("Proxy restricted or bad request format.");
                 }
 

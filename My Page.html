@@ -427,7 +427,7 @@ async function updateTicker(urls, elementId) {
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
                     `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,
-                    `https://api.codetabs.com/v1/proxy?URL=${encodeURIComponent(cleanUrl)}`
+                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(cleanUrl)}`
                 ];
             } else {
                 // Local files
@@ -449,6 +449,9 @@ async function updateTicker(urls, elementId) {
                     }
 
                     if (!xmlText) continue;
+
+                    // Skip if the response is JSON (likely a proxy error message) to avoid XML parser errors
+                    if (xmlText.trim().startsWith('{')) continue;
 
                     // Support for Google Sheets CSV data
                     if (cleanUrl.toLowerCase().includes('output=csv')) {
