@@ -347,7 +347,7 @@
             if (!currentStockData.length) return;
             const timestamp = new Date().toISOString();
             let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<StockWatchReport>\n`;
-            xml += `  <Header><Generated>${timestamp}</Generated><Engine>Andrews-v2.2</Engine></Header>\n`;
+            xml += `  <Header><Generated>${timestamp}</Generated><Engine>Andrews-v2.3</Engine></Header>\n`;
             xml += `  <MarketData>\n`;
             currentStockData.forEach(s => {
                 xml += `    <Stock ticker="${s.ticker}">\n`;
