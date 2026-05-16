@@ -401,11 +401,13 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
-    'https://rss.app/feeds/EFP2shywTDtfmyab.xml',
+    'http://feeds.skynews.com/feeds/rss/world.xml',
+    'http://feeds.skynews.com/feeds/rss/us.xml',
+    'http://feeds.skynews.com/feeds/rss/strange.xml',  
 
 ];
 const footerRssUrls = [
-    'C:\\Users\\andre\\Documents\\GitHub\\AndrewsIndustries\\.github\\workflow\\feed.xml',
+    'https://github.com/AndrewsIndustries/AndrewsIndustries/blob/main/.github/workflow/Stock%20Watch.xml?raw=true',
 ];
 
 async function updateTicker(urls, elementId) {
@@ -459,7 +461,7 @@ async function updateTicker(urls, elementId) {
                             // For RSS/Atom use <title>, for Stock Watch use the 'ticker' attribute
                             const title = item.querySelector("title")?.textContent || item.getAttribute("ticker");
                             const action = item.querySelector("Action")?.textContent;
-                            if (title) allTitles.push(action ? `${action}: ${title}` : title.trim());
+                            if (title) allTitles.push(action ? `${title}: ${action}` : title.trim());
                         });
                         break; // Success found for this feed, stop trying other proxies for it
                     }
@@ -471,6 +473,15 @@ async function updateTicker(urls, elementId) {
 
         if (allTitles.length > 0) {
             tickerElement.innerHTML = '';
+            
+            // Create the "As of" timestamp item
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'ticker-item';
+            timeSpan.style.color = '#fbbf24'; // Highlight in amber
+            const now = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+            timeSpan.textContent = `As of ${now} ●`;
+            tickerElement.appendChild(timeSpan);
+
             allTitles.forEach(title => {
                 const span = document.createElement('span');
                 span.className = 'ticker-item';
@@ -480,8 +491,9 @@ async function updateTicker(urls, elementId) {
         } else {
             // Only show retry message if the ticker is still empty
             if (tickerElement.innerHTML.includes('Connecting')) {
-                tickerElement.innerText = "News temporarily unavailable. Retrying...";
-                setTimeout(() => updateTicker(urls, elementId), 15000); 
+                const failTime = new Date().toLocaleTimeString();
+                tickerElement.innerText = `News unavailable. Retrying... (Last check: ${failTime})`;
+                setTimeout(() => updateTicker(urls, elementId), 15000);
             }
         }
     } catch (error) {

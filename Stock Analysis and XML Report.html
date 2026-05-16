@@ -249,6 +249,7 @@
                 return `
                     <div class="ticker-item">
                         <span class="font-bold mr-2 text-white">${stock.ticker}</span>
+                        <span class="status-pill ${stock.themeClass} mr-2 text-[10px] py-0 leading-tight">${stock.action}</span>
                         <span class="font-mono text-slate-300 mr-2">$${stock.price.toFixed(2)}</span>
                         <span class="${color} flex items-center text-xs font-bold">
                             <i class="fas ${icon} mr-1"></i>${Math.abs(stock.change)}%
