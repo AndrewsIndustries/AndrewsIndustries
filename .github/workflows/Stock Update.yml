@@ -9,17 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update XML File
+        env:
+          XML_CONTENT: ${{ github.event.client_payload.xml_content }}
         run: |
           mkdir -p data
-          echo "${{ github.event.client_payload.xml_content }}" > data/Stock\ Watch.xml
+          echo "$XML_CONTENT" > "data/Stock Watch.xml"
 
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/Stock\ Watch.xml
+          git add "data/Stock Watch.xml"
           git commit -m "Update Stock Watch XML from Dashboard" || echo "No changes to commit"
           git push
