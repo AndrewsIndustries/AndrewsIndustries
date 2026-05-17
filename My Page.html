@@ -516,7 +516,7 @@ async function updateTicker(urls, elementId) {
                 tickerElement.appendChild(span);
             });
             // Set a dynamic duration (e.g., 10s per original item, minimum 30s)
-            tickerElement.style.animationDuration = Math.max(30, allTitles.length * 10) + 's';
+            tickerElement.style.animationDuration = Math.max(5, allTitles.length * 5) + 's';
         } else {
             // Only show retry message if the ticker is still empty
             if (tickerElement.innerHTML.includes('Connecting')) {

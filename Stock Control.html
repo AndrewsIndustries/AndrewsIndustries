@@ -6,6 +6,8 @@
     <title>Andrews Industries | Stock Watch Pro v2.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Added SheetJS for reliable Excel/Watchlist parsing -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
@@ -81,6 +83,9 @@
             <button id="exportBtn" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-sm font-semibold transition-colors flex items-center gap-2">
                 <i class="fa-solid fa-file-export"></i> Download XML
             </button>
+            <button id="syncBtn" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-rotate"></i> Sync Now
+            </button>
         </div>
     </header>
 
@@ -89,25 +94,8 @@
         
         <!-- Sidebar Controls -->
         <aside class="w-80 glass-card p-4 overflow-y-auto flex flex-col gap-6 border-r border-slate-700">
-            
-            <!-- Metric Weights -->
-            <div>
-                <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-3"><i class="fa-solid fa-sliders mr-2"></i>Metric Weights</h2>
-                <p class="text-xs text-slate-500 mb-4">Adjust logic weighting from -10 to +10.</p>
-                <div class="space-y-4" id="sliderContainer">
-                    <!-- Sliders injected by JS -->
-                </div>
-            </div>
-
-            <!-- Data Source & Actions -->
-            <div class="mt-auto pt-4 border-t border-slate-700">
-                <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-solid fa-database mr-2"></i>Data Source</h2>
-                <p class="text-[10px] text-slate-500 mb-2">Automated fetch from Google Sheets active.</p>
-                <textarea id="csvInput" rows="3" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-xs text-slate-300 font-mono mb-2" placeholder="Paste your Google Sheet CSV here..."></textarea>
-                <button id="processBtn" class="w-full bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-sm font-semibold transition-colors mb-4 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-sync" id="syncIcon"></i> Fetch & Process
-                </button>
-
+            <!-- GitHub Integration -->
+            <div class="mt-4">
                 <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2"><i class="fa-brands fa-github mr-2"></i>GitHub Integration</h2>
                 <p class="text-[10px] text-slate-500 mb-2">Target: data/Stock Watch.xml</p>
                 <input type="text" id="ghRepo" value="AndrewsIndustries/AndrewsIndustries" placeholder="username/repository" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm text-white mb-2">
@@ -127,11 +115,9 @@
                     <thead>
                         <tr class="bg-slate-800/50 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-700">
                             <th class="p-4 font-medium">Ticker</th>
-                            <th class="p-4 font-medium text-center">Days Change</th>
-                            <th class="p-4 font-medium text-center">Warming or Cooling</th>
-                            <th class="p-4 font-medium text-center">Total Score</th>
-                            <th class="p-4 font-medium text-center">Confidence</th>
-                            <th class="p-4 font-medium text-right">Action</th>
+                            <th class="p-4 font-medium text-center">Price</th>
+                            <th class="p-4 font-medium text-center">Days Return</th>
+                            <th class="p-4 font-medium text-center">WARMING OR COOLING</th>
                         </tr>
                     </thead>
                     <tbody id="dataTableBody" class="text-sm divide-y divide-slate-800/50">
@@ -150,129 +136,96 @@
     </footer>
 
     <script>
-        // Default Mock Data matching user's Google Sheet columns (A=0, F=5... M=12, T=19)
-        const defaultCSV = `Ticker,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T
-INTC,x,x,x,x, -2, -1, 0, -3, -1, -2, -1, -4, x,x,x,x,x,x, -6
-AMD,x,x,x,x, 5, 4, 3, 2, 6, 4, 2, 5, x,x,x,x,x,x, 4
-NVAX,x,x,x,x, -8, -6, -5, -7, -9, -4, -5, -6, x,x,x,x,x,x, -9
-MRVL,x,x,x,x, 2, 1, 3, 2, 1, 2, 0, 1, x,x,x,x,x,x, 2
-SMCI,x,x,x,x, 9, 8, 7, 9, 8, 9, 7, 8, x,x,x,x,x,x, 10
-PFE,x,x,x,x, 0, -1, 1, 0, -1, 0, 1, 0, x,x,x,x,x,x, -1
-HD,x,x,x,x, 1, 2, 1, 1, 2, 1, 0, 1, x,x,x,x,x,x, 1
-OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
-        
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTp9TnMwxNNqwp3Ol3kjBaxvwvsyX9iLUltpNS6kMNhyARRYMYMIFwKNoW3D25XxACg2jk1MpKNOdCE/pubcsv?gid=0&single=true';
+        // Using the XLSX endpoint to specifically target the 'watchlist' sheet
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pub?output=xlsx';
 
         let analyzedResults = [];
-        let currentCSV = defaultCSV;
+        let currentXML = '';
 
-        // Initialize Sliders (F and T)
-        const metrics = ['F', 'T'];
-        const labels = { 'F': 'Days Change', 'T': 'Warming or Cooling' };
-        const sliderContainer = document.getElementById('sliderContainer');
-        const savedWeights = JSON.parse(localStorage.getItem('andrews_weights') || '{}');
-        
-        metrics.forEach(m => {
-            const val = savedWeights[m] || 1;
-            sliderContainer.innerHTML += `
-                <div>
-                    <div class="slider-label">
-                        <span id="name${m}">${labels[m]}</span>
-                        <span id="val${m}" class="font-bold text-blue-400">${val}</span>
-                    </div>
-                    <input type="range" id="w${m}" min="-10" max="10" step="1" value="${val}" class="w-full accent-blue-500">
-                </div>
-            `;
-        });
-
-        // Add Event Listeners for real-time processing
-        document.querySelectorAll('input[type=range], input[type=number]').forEach(el => {
-            el.addEventListener('input', (e) => {
-                if(e.target.type === 'range') {
-                    document.getElementById('val' + e.target.id.substring(1)).innerText = e.target.value;
-                }
-                processData();
-            });
-        });
-
+        // Event Listeners
         document.getElementById('exportBtn').addEventListener('click', downloadXML);
         document.getElementById('pushBtn').addEventListener('click', pushToGitHub);
+        document.getElementById('syncBtn').addEventListener('click', fetchAndProcess);
         document.getElementById('resetTokenBtn').addEventListener('click', resetToken);
 
         async function fetchAndProcess() {
-            const pushBtn = document.getElementById('pushBtn');
-            
             try {
-                let data;
+                const tickerDiv = document.getElementById('tickerContent');
+                tickerDiv.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Syncing with Google Sheets...';
+                
+                let arrayBuffer;
                 try {
-                    // Primary: AllOrigins
-                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}&_=${Date.now()}`);
-                    const json = await res.json();
-                    if (json.contents) data = json.contents;
-                    else throw new Error("Empty contents");
+                    const response = await fetch(`${SHEET_URL}&cache_bust=${Date.now()}`);
+                    if (response.ok) {
+                        arrayBuffer = await response.arrayBuffer();
+                    }
                 } catch (e) {
-                    // Fallback: CodeTabs
-                    const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(SHEET_CSV_URL)}`);
-                    data = await res.text();
+                    console.warn("Direct fetch blocked by browser security (CORS), trying proxy...");
                 }
 
-                if (data && !data.trim().startsWith('{')) {
-                    currentCSV = data;
+                if (!arrayBuffer) {
+                    // Use AllOrigins /raw endpoint for direct binary streaming of XLSX
+                    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(SHEET_URL + '&cache_bust=' + Date.now())}`;
+                    const proxyRes = await fetch(proxyUrl);
+                    if (!proxyRes.ok) throw new Error(`Proxy failed (${proxyRes.status}). Try disabling ad-blockers.`);
+                    arrayBuffer = await proxyRes.arrayBuffer();
                 }
+
+                if (!arrayBuffer) throw new Error("No data received from source");
+                
+                processData(arrayBuffer);
             } catch (err) {
-                console.error("Fetch failed, using current input area content:", err);
-            } finally {
-                processData();
+                console.error("Fetch failed:", err);
+                document.getElementById('tickerContent').innerHTML = 
+                    `<span class="text-red-500"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Sync Failed: ${err.message === 'Failed to fetch' ? 'Connection Blocked (CORS/Ad-blocker)' : err.message}</span>`;
             }
         }
 
         // Core Logic
-        function processData() {
-            const csvText = currentCSV;
-            const lines = csvText.split('\n');
-
-            const metricIndices = { 'F': 5, 'T': 19 };
-
-            const w = {};
-            metrics.forEach(m => w[m] = parseFloat(document.getElementById('w' + m).value));
-            localStorage.setItem('andrews_weights', JSON.stringify(w));
-
+        function processData(buffer) {
+            const workbook = XLSX.read(buffer, { type: 'array' });
+            
+            // Specifically jump to 'watchlist' sheet, or fallback to the first sheet
+            const sheetName = workbook.SheetNames.find(n => n.toLowerCase() === 'watchlist') || workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            
+            // Convert sheet to array of arrays (header is row 0)
+            const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+            
             analyzedResults = [];
 
-            for (let i = 1; i < lines.length; i++) {
-                const row = lines[i].split(',').map(s => s.trim());
-                if (row.length < 20 || !row[0]) continue; // Needs at least up to column T (index 19)
+            if (rows.length < 2) {
+                document.getElementById('tickerContent').innerHTML = 
+                    `<i class="fa-solid fa-circle-exclamation mr-2"></i> Error: Sheet "${sheetName}" is empty or missing headers.`;
+                renderTable();
+                return;
+            }
+
+            const headers = rows[0].map(h => String(h).trim().toUpperCase());
+            const statusColIdx = headers.findIndex(h => h.toUpperCase() === 'WARMING OR COOLING');
+            const targetIdx = statusColIdx !== -1 ? statusColIdx : 19; // Fallback to index 19 if header name mismatch
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row[0]) continue; // Skip empty tickers
 
                 const ticker = row[0];
-                
-                // Fetch columns F(5) and T(19)
-                const vals = {
-                    F: parseFloat(row[5]) || 0,
-                    T: parseFloat(row[19]) || 0
-                };
-
-                const scoreF = vals.F * w['F'];
-                const scoreT = vals.T * w['T'];
-                const totalScore = scoreF + scoreT;
-
-                // Action Logic
-                let action = 'HOLD';
-                if (totalScore > 20) action = 'BUY';
-                if (totalScore > 50) action = 'STRONG BUY';
-                if (totalScore < -20) action = 'SELL';
-                if (totalScore < -50) action = 'STRONG SELL';
-
-                // Confidence Scaling
-                let confidence = Math.min(100, Math.max(0, Math.abs(totalScore) + 40)).toFixed(1);
+                const daysReturn = row[5];
+                const price = row[2] ;
+                const warmingCooling = row[19]; 
 
                 analyzedResults.push({
-                    ticker,
-                    valF: vals.F.toFixed(1),
-                    valT: vals.T.toFixed(1),
-                    totalScore: totalScore.toFixed(1),
-                    action,
-                    confidence
+                    ticker: ticker,
+                    price: price,
+                    daysChange: daysReturn,
+                    valT: warmingCooling
                 });
+            }
+            
+            if (analyzedResults.length === 0) {
+                document.getElementById('tickerContent').innerHTML = "CSV loaded, but no valid stock entries were found.";
+                renderTable();
+                return;
             }
 
             renderTable();
@@ -284,18 +237,16 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
             tbody.innerHTML = '';
 
             analyzedResults.forEach(s => {
-                let actionColor = 'text-gray-400';
-                if (s.action.includes('BUY')) actionColor = 'text-green-400 font-bold';
-                if (s.action.includes('SELL')) actionColor = 'text-red-400 font-bold';
-
+                const status = s.valT.toUpperCase();
+                const statusColor = status === 'WARMING' ? 'text-green-400 font-bold' : 
+                                   status === 'COOLING' ? 'text-red-400 font-bold' : 'text-white';
+                
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="p-4 font-bold tracking-wide">${s.ticker}</td>
-                    <td class="p-4 text-center">${s.valF}</td>
-                    <td class="p-4 text-center">${s.valT}</td>
-                    <td class="p-4 text-center font-semibold">${s.totalScore}</td>
-                    <td class="p-4 text-center">${s.confidence}%</td>
-                    <td class="p-4 text-right ${actionColor}">${s.action}</td>
+                    <td class="p-4 text-center text-slate-300">${s.price}</td>
+                    <td class="p-4 text-center text-slate-400">${s.daysChange}</td>
+                    <td class="p-4 text-center font-mono ${statusColor}">${s.valT}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -304,8 +255,19 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
         function updateTicker() {
             const tickerDiv = document.getElementById('tickerContent');
             let tickerHtml = analyzedResults.map(s => {
-                let colorClass = s.action.includes('BUY') ? 'text-green-400' : s.action.includes('SELL') ? 'text-red-400' : 'text-gray-400';
-                return `<span class="mx-6 font-bold">${s.ticker}: <span class="${colorClass}">${s.action}</span> (${s.confidence}%)</span>`;
+                const status = s.valT.toUpperCase();
+                const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
+                                 status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
+                                 'bg-slate-900 border-slate-700 text-white';
+
+                return `<span class="mx-16 inline-flex items-center">
+                    <span class="font-black text-white text-3xl mr-3">${s.ticker}</span> 
+                    <span class="text-slate-400 text-xl mr-3">${s.price}</span> 
+                    <span class="text-white text-xl mr-4">${s.daysChange}</span> 
+                    <span class="px-4 py-1 rounded border font-mono ${statusBg}">
+                        ${s.valT}
+                    </span> 
+                </span>`;
             }).join(' <span class="text-slate-600">|</span> ');
             
             // Duplicate content to ensure smooth marquee looping
@@ -323,12 +285,9 @@ OXY,x,x,x,x, 3, 4, 2, 5, 3, 4, 3, 4, x,x,x,x,x,x, 3`;
             xml += `  <MarketData>\n`;
             analyzedResults.forEach(s => {
                 xml += `    <Stock ticker="${s.ticker}">\n`;
-                xml += `      <Price>0</Price>\n`;
-                xml += `      <ChangePercent>0</ChangePercent>\n`;
-                xml += `      <Analysis>\n`;
-                xml += `        <Action>${s.action}</Action>\n`;
-                xml += `        <Confidence>${s.confidence}</Confidence>\n`;
-                xml += `      </Analysis>\n`;
+                xml += `      <Price>${s.price}</Price>\n`;
+                xml += `      <DaysChange>${s.daysChange}</DaysChange>\n`;
+                xml += `      <warming_cooling>${s.valT}</warming_cooling>\n`;
                 xml += `    </Stock>\n`;
             });
             xml += `  </MarketData>\n</StockWatchReport>`;
