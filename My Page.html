@@ -7,6 +7,7 @@
     <title>My Page</title>
     <link rel="icon" type="image/x-icon" href="images/Icon/FlagEaglenoback.png">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
 
           body { background-image: url(images/Backgrounds/vintage.avif);}
@@ -59,37 +60,39 @@
 
         .ticker-wrap {
             width: 100%;
-            box-sizing: border-box;
-            border-bottom: none;
             overflow: hidden;
-            background-color: rgba(107, 101, 101, 0.9);
-            color: #000000;
-            text-shadow: 0 0 3px rgb(255, 255, 255), 0 0 15px rgb(127, 0, 0), 0 0 25px rgba(127, 2, 2, 0.943);
-            text-shadow: 0 0 3px rgb(255, 255, 255), 0 0 5px rgba(0, 0, 0, 0.2);
-            /* Oblique/Slant angle of 10 degrees */
-            transform: skewX(-10deg);
-            padding: 1px 0;
-            font-family: Arial, sans-serif;
-            font-size: 50px;
-            font-weight: bold;
+            background-color: #000;
+            box-sizing: border-box;
+            border-top: 1px solid #222;
         }
 
-        .ticker {
+        .ticker-content {
             display: inline-block;
             white-space: nowrap;
-            padding-right: 50px;
-            animation: ticker linear infinite;
+            padding-left: 100%;
+            animation: ticker 300s linear infinite;
+            
         }
-
-        .ticker-item {
-            display: inline-block;
-            padding: 0 2rem;
-            font-size: 3rem;
+        
+        /* Slanted header effect to 'bring back' the classic feel with modern colors */
+        header .ticker-wrap {
+            transform: skewX(-12deg);
+            margin-left: -20px;
+            width: calc(100% + 40px);
+            border-bottom: 2px solid #dc2626; /* Red highlight line */
+        }
+        header .ticker-content {
+            transform: skewX(12deg);
         }
 
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
+        }
+        
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
         }
   
 
@@ -103,9 +106,9 @@
 </head>
 
 <body>
-    <header>
-        <div class="ticker-wrap">
-            <div class="ticker" id="news-ticker" style="animation-duration: 300s;">
+    <header class="z-50 shadow-2xl">
+        <div class="ticker-wrap h-12 flex items-center">
+            <div class="ticker-content" id="news-ticker">
                 Connecting to News...
             </div>
         </div>
@@ -214,9 +217,9 @@
 
 
 
-<footer>
-    <div class="ticker-wrap">
-        <div class="ticker" id="footer-ticker" style="animation-duration: 240s;">
+<footer class="z-50 shadow-lg border-t border-slate-800">
+    <div class="ticker-wrap h-12 flex items-center">
+        <div class="ticker-content" id="footer-ticker">
             Connecting to Watchlist...
         </div>
     </div>
@@ -407,8 +410,7 @@ const headerRssUrls = [
 
 ];
 const footerRssUrls = [
-    'https://github.com/AndrewsIndustries/AndrewsIndustries/blob/main/.github/workflows/Stock%20Watch.xml',
-    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
+    'https://github.com/AndrewsIndustries/AndrewsIndustries/raw/refs/heads/main/.github/workflows/Stock%20Watch.xml',
 ];
 
 async function updateTicker(urls, elementId) {
@@ -475,30 +477,41 @@ async function updateTicker(urls, elementId) {
                     }
 
                     const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-                    // Check if parsing failed (e.g. proxy returned an HTML error page instead of RSS)
                     if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
 
-                    // Updated to support standard RSS/Atom AND your custom Stock Watch format
                     const items = xmlDoc.querySelectorAll("item, entry, Stock");
                     
                     if (items.length > 0) {
                         items.forEach(item => {
-                            const title = item.querySelector("title")?.textContent || item.getAttribute("ticker");
-                            if (title) {
-                                const action = item.querySelector("Action")?.textContent;
-                                if (action) {
-                                    const priceVal = item.querySelector("Price")?.textContent || "0";
-                                    const changeVal = item.querySelector("ChangePercent")?.textContent || "0";
-                                    const price = parseFloat(priceVal).toFixed(2);
-                                    const change = parseFloat(changeVal);
-                                    const sign = change >= 0 ? '+' : '';
-                                    allTitles.push(`${title}: ${action} $${price} (${sign}${change.toFixed(2)}%)`);
-                                } else {
-                                    allTitles.push(title.trim());
+                            if (item.tagName === 'Stock') {
+                                const ticker = item.getAttribute('ticker');
+                                const price = item.querySelector('Price')?.textContent || 'N/A';
+                                const change = item.querySelector('DaysChange')?.textContent || '0%';
+                                const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
+                                
+                                const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
+                                                 status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
+                                                 'bg-slate-900 border-slate-700 text-white';
+
+                                allTitles.push(`<span class="mx-16 inline-flex items-center">
+                                    <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
+                                    <span class="text-slate-400 text-2xl mr-3">${price}</span> 
+                                    <span class="text-white text-2xl mr-4">${change}</span> 
+                                    <span class="px-4 py-1 rounded border font-mono text-xl ${statusBg}">
+                                        ${status}
+                                    </span> 
+                                </span>`);
+                            } else {
+                                const title = item.querySelector("title")?.textContent;
+                                if (title) {
+                                    allTitles.push(`<span class="mx-16 inline-flex items-center">
+                                        <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">NEWS</span>
+                                        <span class="text-white text-3xl font-bold">${title.trim()}</span>
+                                    </span>`);
                                 }
                             }
                         });
-                        break; // Success found for this feed, stop trying other proxies for it
+                        break; 
                     }
                 } catch (err) {
                     console.warn(`Proxy attempt failed for ${url} using ${proxyUrl}:`, err);
@@ -507,22 +520,12 @@ async function updateTicker(urls, elementId) {
         }
 
         if (allTitles.length > 0) {
-            tickerElement.innerHTML = '';
-            
-            // Duplicate items for a continuous loop effect
-            const displayTitles = [...allTitles, ...allTitles];
-            displayTitles.forEach(title => {
-                const span = document.createElement('span');
-                span.className = 'ticker-item';
-                span.textContent = `● ${title}`;
-                tickerElement.appendChild(span);
-            });
-            // Set a dynamic duration (e.g., 10s per original item, minimum 30s)
-            tickerElement.style.animationDuration = Math.max(5, allTitles.length * 5) + 's';
+            const tickerHtml = allTitles.join(' <span class="text-slate-600 text-3xl">|</span> ');
+            tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl">|</span> ' + tickerHtml;
+            tickerElement.style.animationDuration = Math.max(30, allTitles.length * 10) + 's';
         } else {
-            // Only show retry message if the ticker is still empty
             if (tickerElement.innerHTML.includes('Connecting')) {
-                tickerElement.innerText = "News unavailable. Retrying...";
+                tickerElement.innerHTML = `<span class="text-red-500 p-4">Data unavailable. Retrying...</span>`;
                 setTimeout(() => updateTicker(urls, elementId), 15000);
             }
         }
