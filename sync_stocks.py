@@ -19,18 +19,39 @@ def sync_spreadsheet_to_xml():
     # 1. Fetch and Parse CSV
     try:
         df = pd.read_csv(CSV_URL)
-        for _, row in df.iterrows():
+        
+        # Dynamically find the index for 'WARMING OR COOLING' to match JS logic
+        headers = [str(c).strip().upper() for c in df.columns]
+        try:
+            status_idx = headers.index('WARMING OR COOLING')
+        except ValueError:
+            status_idx = 19  # Fallback to Column T if header not found
+            
+        for i in range(len(df)):
+            ticker_val = str(df.iloc[i, 0]).strip()
+            
+            # Skip empty/invalid rows
+            if ticker_val == 'nan' or not ticker_val:
+                continue
+                
+            price_val = str(df.iloc[i, 2]).strip()
+            if price_val.lower() != 'nan' and not price_val.startswith('$'):
+                price_val = f"${price_val}"
+                
+            change_val = str(df.iloc[i, 5]).strip()
+            if change_val.lower() != 'nan' and not change_val.endswith('%'):
+                change_val = f"{change_val}%"
+
             stocks_data.append({
-                'ticker': row[0],
-                'price': str(row[2]),
-                'days_change': str(row[5]),
-                'warming_cooling': str(row[19])  
+                'ticker': ticker_val,
+                'price': price_val,
+                'days_change': change_val,
+                'warming_cooling': str(df.iloc[i, status_idx]).strip()  
             })  
 
-
-
-    except FileNotFoundError:
+    except Exception as e:
         print(f"Error: Could not fetch CSV from {CSV_URL}")
+        print(f"Details: {e}")
         return
 
     # 2. Build XML Structure
@@ -48,11 +69,18 @@ def sync_spreadsheet_to_xml():
         ET.SubElement(stock_node, 'warming_cooling').text = stock['warming_cooling']
 
     # 3. Write to file with pretty formatting
-    xml_str = minidom.parseString(ET.tostring(root, 'utf-8')).toprettyxml(indent="  ")
-    os.makedirs(os.path.dirname(XML_OUTPUT_PATH), exist_ok=True)
-    with open(XML_OUTPUT_PATH, "w", encoding='utf-8') as f:
-        f.write(xml_str)
-    print(f"Sync complete. {len(stocks_data)} stocks exported to {XML_OUTPUT_PATH}")
+    try:
+        xml_str = minidom.parseString(ET.tostring(root, 'utf-8')).toprettyxml(indent="    ")
+        
+        # Ensure target directory exists
+        os.makedirs(os.path.dirname(XML_OUTPUT_PATH), exist_ok=True)
+        
+        with open(XML_OUTPUT_PATH, 'w', encoding='utf-8') as f:
+            f.write(xml_str)
+        print(f"Successfully generated XML report with {len(stocks_data)} items at {XML_OUTPUT_PATH}")
+        
+    except Exception as e:
+        print(f"Failed to write XML output file: {e}")
 
 if __name__ == "__main__":
     sync_spreadsheet_to_xml()

@@ -55,7 +55,8 @@
             display: inline-block;
             white-space: nowrap;
             padding-left: 100%;
-            animation: ticker 30s linear infinite;
+            animation: ticker 300s linear infinite;
+            
         }
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
@@ -136,8 +137,8 @@
     </footer>
 
     <script>
-        // Using the XLSX endpoint to specifically target the 'watchlist' sheet
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pub?output=xlsx';
+        // Targeted XLSX endpoint for specific sheet GID: 134813518
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pub?gid=134813518&single=true&output=xlsx';
 
         let analyzedResults = [];
         let currentXML = '';
@@ -154,30 +155,53 @@
                 tickerDiv.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Syncing with Google Sheets...';
                 
                 let arrayBuffer;
+                const cacheBuster = `cache_bust=${Date.now()}`;
+                const targetUrl = `${SHEET_URL}&${cacheBuster}`;
+
+                // Attempt 1: Direct Fetch
                 try {
-                    const response = await fetch(`${SHEET_URL}&cache_bust=${Date.now()}`);
-                    if (response.ok) {
-                        arrayBuffer = await response.arrayBuffer();
-                    }
+                    const response = await fetch(targetUrl);
+                    if (response.ok) arrayBuffer = await response.arrayBuffer();
                 } catch (e) {
                     console.warn("Direct fetch blocked by browser security (CORS), trying proxy...");
                 }
 
+                // Attempt 2: Primary Proxy (AllOrigins)
                 if (!arrayBuffer) {
-                    // Use AllOrigins /raw endpoint for direct binary streaming of XLSX
-                    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(SHEET_URL + '&cache_bust=' + Date.now())}`;
-                    const proxyRes = await fetch(proxyUrl);
-                    if (!proxyRes.ok) throw new Error(`Proxy failed (${proxyRes.status}). Try disabling ad-blockers.`);
-                    arrayBuffer = await proxyRes.arrayBuffer();
+                    try {
+                        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+                        const proxyRes = await fetch(proxyUrl);
+                        if (proxyRes.ok) arrayBuffer = await proxyRes.arrayBuffer();
+                    } catch (e) {
+                        console.warn("Primary proxy failed, trying secondary fallback...");
+                    }
                 }
 
-                if (!arrayBuffer) throw new Error("No data received from source");
+                // Attempt 3: Secondary Proxy (CORSProxy.io)
+                if (!arrayBuffer) {
+                    try {
+                        const secondaryProxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+                        const secondaryRes = await fetch(secondaryProxyUrl);
+                        if (secondaryRes.ok) arrayBuffer = await secondaryRes.arrayBuffer();
+                    } catch (e) {
+                        console.warn("Secondary proxy failed, trying final fallback...");
+                    }
+                }
+
+                // Attempt 4: Tertiary Proxy (Codetabs)
+                if (!arrayBuffer) {
+                    const tertiaryProxyUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`;
+                    const tertiaryRes = await fetch(tertiaryProxyUrl);
+                    if (tertiaryRes.ok) arrayBuffer = await tertiaryRes.arrayBuffer();
+                }
+
+                if (!arrayBuffer) throw new Error("Connection Blocked. Please disable Ad-blockers or check internet connection.");
                 
                 processData(arrayBuffer);
             } catch (err) {
                 console.error("Fetch failed:", err);
                 document.getElementById('tickerContent').innerHTML = 
-                    `<span class="text-red-500"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Sync Failed: ${err.message === 'Failed to fetch' ? 'Connection Blocked (CORS/Ad-blocker)' : err.message}</span>`;
+                    `<span class="text-red-500"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Sync Failed: ${err.message} <button onclick="fetchAndProcess()" class="ml-4 underline hover:text-white text-xs">Retry Now</button></span>`;
             }
         }
 
@@ -209,16 +233,17 @@
                 const row = rows[i];
                 if (!row[0]) continue; // Skip empty tickers
 
-                const ticker = row[0];
-                const daysReturn = row[5];
-                const price = row[2] ;
-                const warmingCooling = row[19]; 
+                let priceVal = String(row[2] || "N/A").trim();
+                if (priceVal !== "N/A" && !priceVal.startsWith('$')) priceVal = `$${priceVal}`;
+
+                let changeVal = String(row[5] || "0%").trim();
+                if (changeVal !== "N/A" && !changeVal.endsWith('%')) changeVal = `${changeVal}%`;
 
                 analyzedResults.push({
-                    ticker: ticker,
-                    price: price,
-                    daysChange: daysReturn,
-                    valT: warmingCooling
+                    ticker: row[0],
+                    price: priceVal,
+                    daysChange: changeVal,
+                    valT: String(row[targetIdx] || "N/A")
                 });
             }
             
