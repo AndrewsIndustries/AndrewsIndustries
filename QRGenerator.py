@@ -1,13 +1,13 @@
 import pandas as pd
-import qrcode
+import qrcode # type: ignore
 import os
 import requests
 import re
-from PIL import Image
+import io
 
 # --- CONFIGURATION ---
 CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTp9TnMwxNNqwp3Ol3kjBaxvwvsyX9iLUltpNS6kMNhyARRYMYMIFwKNoW3D25XxACg2jk1MpKNOdCE/pub?output=csv'
-BASE_DIR = r'c:\Users\andre\Documents\GitHub\AndrewsIndustries'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 QR_DIR = os.path.join(BASE_DIR, 'images', 'QRCodes')
 
 def sanitize_filename(name):
@@ -26,7 +26,7 @@ def generate_qr_assets():
         # Use a timeout and headers to ensure a clean fetch
         response = requests.get(CSV_URL, timeout=10)
         response.raise_for_status()
-        df = pd.read_csv(requests.utils.io.StringIO(response.text))
+        df = pd.read_csv(io.StringIO(response.text))
     except Exception as e:
         print(f"Error fetching sheet: {e}")
         return
