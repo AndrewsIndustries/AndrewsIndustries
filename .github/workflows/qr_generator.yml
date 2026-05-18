@@ -1,0 +1,33 @@
+name: QR Code Generator
+
+on:
+  repository_dispatch:
+    types: [generate-qrs]
+  workflow_dispatch: # Allows manual run from GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas qrcode requests Pillow
+
+      - name: Run QR Generator
+        run: python QRGenerator.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add images/QRCodes/*.jpg
+          git commit -m "Update QR Code images [skip ci]" || echo "No changes to commit"
+          git push
