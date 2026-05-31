@@ -2,25 +2,18 @@ import streamlit as st
 import requests
 import pandas as pd
 from datetime import datetime
+import os
 
 # Configuration
 LAT, LON = 39.2348, -119.5839
-GITHUB_DARK_THEME = """
-    <style>
-    .stApp { background-color: #0d1117; color: #c9d1d9; }
-    [data-testid="stMetricValue"] { color: #58a6ff !important; }
-    .stMarkdown h1, .stMarkdown h2 { color: #f0f6fc; }
-    div[data-testid="metric-container"] {
-        background-color: #161b22;
-        border: 1px solid #30363d;
-        padding: 15px;
-        border-radius: 8px;
-    }
-    </style>
-"""
 
 st.set_page_config(page_title="Andrews Industries Weather", layout="wide")
-st.markdown(GITHUB_DARK_THEME, unsafe_allow_html=True)
+
+# Load shared CSS
+css_path = os.path.join(os.path.dirname(__file__), "weather.css")
+if os.path.exists(css_path):
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 @st.cache_data(ttl=300)
 def get_weather_data():
