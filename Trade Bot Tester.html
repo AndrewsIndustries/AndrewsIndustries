@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrews Industries | Bot Tester</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --neon-blue: #3b82f6;
+            --neon-green: #10b981;
+            --neon-red: #ef4444;
+            --neon-yellow: #f59e0b;
+            --bg-deep: #020617;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-deep); color: #f8fafc; transition: all 0.3s ease; }
+        .bot-slot { background-color: #111625; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; transition: all 0.4s ease; }
+        
+        /* Slot Theming */
+        #botSlot1 { --slot-clr: var(--neon-blue); }
+        #botSlot2 { --slot-clr: #a855f7; }
+        #botSlot3 { --slot-clr: var(--neon-green); }
+
+        .terminal { background: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; height: 150px; overflow-y: auto; color: var(--slot-clr); border: 1px solid #1e293b; }
+        .console-entry { padding: 2px 8px; border-bottom: 1px solid #ffffff05; }
+
+        .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .badge-long { background: rgba(16, 185, 129, 0.2); color: var(--neon-green); border: 1px solid var(--neon-green); }
+        .badge-short { background: rgba(239, 68, 68, 0.2); color: var(--neon-red); border: 1px solid var(--neon-red); }
+
+        button { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        button:active { transform: scale(0.95); }
+        
+        .metric-mini { background: #1e293b40; border: 1px solid #ffffff08; padding: 10px; border-radius: 8px; }
+        .hidden-slot { display: none !important; }
+    </style>
+</head>
+<body class="p-4 md:p-6 bg-[#010409]">
+    <div class="max-w-[1800px] mx-auto">
+        <!-- Header & Controls -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
+            <div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent italic">ARENA MODE</h1>
+                <div class="flex items-center gap-3 mt-1">
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Multi-Agent Strategy Stress Test</p>
+                    <span id="marketStatusBadge" class="badge bg-slate-800/50 text-slate-500 border border-slate-700">Market: Unknown</span>
+                    <span id="connectionStatusBadge" class="badge bg-slate-800/50 text-slate-500 border border-slate-700" title="Check terminal if offline">Dealer: Offline</span>
+                    <p id="dealerInstructions" class="text-[9px] text-rose-500/70 font-medium hidden">Check terminal for ImportErrors in Trading Bot.py</p>
+                </div>
+            </div>
+            
+            <div class="bg-[#111625] border border-[#1e293b] p-3 rounded-2xl flex items-center gap-4">
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-slate-500 font-bold uppercase">Competitors</span>
+                    <select id="botCountSelect" onchange="updateArenaLayout()" class="bg-transparent text-blue-400 font-bold outline-none">
+                        <option value="1">1 Player (Solo)</option>
+                        <option value="2" selected>2 Players (Duo)</option>
+                        <option value="3">3 Players (Arena)</option>
+                    </select>
+                </div>
+                <div class="h-8 w-px bg-white/10 mx-2"></div>
+                <button onclick="startArena()" class="px-6 py-2 bg-blue-600 text-white rounded-xl font-bold text-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">Battle Start</button>
+                <div class="h-8 w-px bg-white/10 mx-2"></div>
+                <button onclick="toggleCharts()" class="px-3 py-2 bg-blue-600/20 text-blue-400 border border-blue-500/20 rounded-xl text-xs font-bold hover:bg-blue-600/40" title="Toggle Charts Visibility">Toggle Charts</button>
+                <div class="h-8 w-px bg-white/10 mx-2"></div>
+                <button onclick="stopSimulation()" class="px-3 py-2 bg-amber-600/20 text-amber-500 border border-amber-500/20 rounded-xl text-xs font-bold hover:bg-amber-600/40" title="Pause Simulation Loop">Stop Sim</button>
+                <button onclick="resumeSimulation()" class="px-3 py-2 bg-emerald-600/20 text-emerald-500 border border-emerald-500/20 rounded-xl text-xs font-bold hover:bg-emerald-600/40" title="Resume Simulation Loop">Resume</button>
+                <button onclick="restartSystem()" class="px-3 py-2 bg-rose-600/20 text-rose-500 border border-rose-500/20 rounded-xl text-xs font-bold hover:bg-rose-600/40" title="Restart System Process">Restart Sys</button>
+            </div>
+        </div>
+
+        <!-- Arena Grid -->
+        <div id="arenaGrid" class="grid grid-cols-3 gap-6">
+            <!-- Bot Slot 1 -->
+            <div id="botSlot1" class="bot-slot flex flex-col gap-5">
+                <div class="flex justify-between items-center">
+                    <h2 id="bot1Name" class="bot-name font-bold text-lg text-[var(--slot-clr)]">Bot Player 1</h2>
+                    <div class="flex items-center gap-3">
+                        <input type="file" accept=".py" class="hidden" onchange="loadBotScript(1, this)">
+                        <button onclick="this.previousElementSibling.click()" class="text-[10px] bg-white/5 px-2 py-1 rounded border border-white/10">Load .py</button>
+                        <span class="badge bg-blue-500/20 text-blue-400 border border-blue-500/30">Slot 1</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="metric-mini">
+                        <div class="text-[9px] text-slate-500 uppercase font-bold">Valuation</div>
+                        <div id="b1-val" class="metric-val font-bold text-sm text-white">$5,000.00</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="text-[9px] text-slate-500 uppercase font-bold">Net P&L</div>
+                        <div id="b1-pnl" class="metric-pnl font-bold text-sm text-slate-400">0.00%</div>
+                    </div>
+                </div>
+                <div class="mt-2 flex gap-2">
+                    <input type="number" id="b1-input" placeholder="Add Funds..." class="bg-white/5 border border-white/10 rounded px-2 py-1 text-[10px] w-full focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <button onclick="loadCapital(0)" class="bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded text-[10px] font-bold">Load</button>
+                </div>
+
+                <div class="h-32 w-full mt-2 chart-container">
+                    <canvas id="b1-chart"></canvas>
+                </div>
+
+                <div class="flex-1 overflow-hidden">
+                    <table class="w-full text-left text-[10px]">
+                        <thead class="text-slate-500 uppercase border-b border-white/5">
+                            <tr><th class="pb-2">Asset</th><th class="pb-2">Side</th><th class="pb-2">Entry</th></tr>
+                        </thead>
+                        <tbody id="b1-portfolio" class="divide-y divide-white/5"></tbody>
+                    </table>
+                </div>
+
+                <div id="b1-term" class="terminal p-2 rounded-lg"></div>
+            </div>
+
+            <!-- Bot Slot 2 -->
+            <div id="botSlot2" class="bot-slot flex flex-col gap-5">
+                <div class="flex justify-between items-center">
+                    <h2 id="bot2Name" class="bot-name font-bold text-lg text-[var(--slot-clr)]">Bot Player 2</h2>
+                    <div class="flex items-center gap-3">
+                        <input type="file" accept=".py" class="hidden" onchange="loadBotScript(2, this)">
+                        <button onclick="this.previousElementSibling.click()" class="text-[10px] bg-white/5 px-2 py-1 rounded border border-white/10">Load .py</button>
+                        <span class="badge bg-purple-500/20 text-[#c084fc] border border-purple-500/30">Slot 2</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="metric-mini"><div class="text-[9px] text-slate-500 uppercase font-bold">Valuation</div><div id="b2-val" class="metric-val font-bold text-sm text-white">$5,000.00</div></div>
+                    <div class="metric-mini"><div class="text-[9px] text-slate-500 uppercase font-bold">Net P&L</div><div id="b2-pnl" class="metric-pnl font-bold text-sm text-slate-400">0.00%</div></div>
+                </div>
+                <div class="mt-2 flex gap-2">
+                    <input type="number" id="b2-input" placeholder="Add Funds..." class="bg-white/5 border border-white/10 rounded px-2 py-1 text-[10px] w-full focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <button onclick="loadCapital(1)" class="bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded text-[10px] font-bold">Load</button>
+                </div>
+                <div class="h-32 w-full mt-2 chart-container">
+                    <canvas id="b2-chart"></canvas>
+                </div>
+                <div class="flex-1">
+                    <table class="w-full text-left text-[10px]">
+                        <thead class="text-slate-500 uppercase border-b border-white/5">
+                            <tr><th class="pb-2">Asset</th><th class="pb-2">Side</th><th class="pb-2">Entry</th></tr>
+                        </thead>
+                        <tbody id="b2-portfolio" class="divide-y divide-white/5"></tbody>
+                    </table>
+                </div>
+                <div id="b2-term" class="terminal p-2 rounded-lg" style="color: #c084fc;"></div>
+            </div>
+
+            <!-- Bot Slot 3 -->
+            <div id="botSlot3" class="bot-slot flex flex-col gap-5">
+                <div class="flex justify-between items-center">
+                    <h2 id="bot3Name" class="bot-name font-bold text-lg text-[var(--slot-clr)]">Bot Player 3</h2>
+                    <div class="flex items-center gap-3">
+                        <input type="file" accept=".py" class="hidden" onchange="loadBotScript(3, this)">
+                        <button onclick="this.previousElementSibling.click()" class="text-[10px] bg-white/5 px-2 py-1 rounded border border-white/10">Load .py</button>
+                        <span class="badge bg-emerald-500/20 text-[#34d399] border border-emerald-500/30">Slot 3</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="metric-mini"><div class="text-[9px] text-slate-500 uppercase font-bold">Valuation</div><div id="b3-val" class="metric-val font-bold text-sm text-white">$5,000.00</div></div>
+                    <div class="metric-mini"><div class="text-[9px] text-slate-500 uppercase font-bold">Net P&L</div><div id="b3-pnl" class="metric-pnl font-bold text-sm text-slate-400">0.00%</div></div>
+                </div>
+                <div class="mt-2 flex gap-2">
+                    <input type="number" id="b3-input" placeholder="Add Funds..." class="bg-white/5 border border-white/10 rounded px-2 py-1 text-[10px] w-full focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <button onclick="loadCapital(2)" class="bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded text-[10px] font-bold">Load</button>
+                </div>
+                <div class="h-32 w-full mt-2 chart-container">
+                    <canvas id="b3-chart"></canvas>
+                </div>
+                <div class="flex-1">
+                    <table class="w-full text-left text-[10px]">
+                        <thead class="text-slate-500 uppercase border-b border-white/5">
+                            <tr><th class="pb-2">Asset</th><th class="pb-2">Side</th><th class="pb-2">Entry</th></tr>
+                        </thead>
+                        <tbody id="b3-portfolio" class="divide-y divide-white/5"></tbody>
+                    </table>
+                </div>
+                <div id="b3-term" class="terminal p-2 rounded-lg" style="color: #34d399;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+        const botCharts = {};
+        let arenaSocket = null;
+
+        /**
+         * Initializes the Chart.js instances for each bot slot
+         */
+        function initCharts() {
+            const themes = {
+                1: { color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' },
+                2: { color: '#c084fc', bg: 'rgba(192, 132, 252, 0.1)' },
+                3: { color: '#34d399', bg: 'rgba(52, 211, 153, 0.1)' }
+            };
+
+            for (let i = 1; i <= 3; i++) {
+                const ctx = document.getElementById(`b${i}-chart`).getContext('2d');
+                botCharts[i-1] = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            borderColor: themes[i].color,
+                            backgroundColor: themes[i].bg,
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: false },
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#64748b', font: { size: 9 } }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Periodically fetches the status from the Python backend
+         * and updates all active bot slots.
+         */
+        async function refreshArenaStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const state = await response.json();
+                const count = parseInt(document.getElementById('botCountSelect').value);
+
+                state.bots.forEach((bot, index) => {
+                    const slotNum = index + 1;
+                    if (slotNum > count) return; // Skip inactive slots
+
+                    // 1. Update Metrics
+                    document.getElementById(`b${slotNum}-val`).textContent = fmt.format(bot.valuation);
+                    
+                    // Synchronize Chart with Backend History for persistence
+                    const chart = botCharts[index];
+                    if (bot.valuation_history && bot.valuation_history.length > 0) {
+                        chart.data.labels = bot.valuation_history.map(h => h.time);
+                        chart.data.datasets[0].data = bot.valuation_history.map(h => h.val);
+                        chart.update('none'); // Update without animation for smoother performance
+                    }
+
+                    const pnlPct = bot.total_deposited > 0 
+                        ? ((bot.valuation - bot.total_deposited) / bot.total_deposited) * 100 
+                        : 0;
+                    
+                    const pnlEl = document.getElementById(`b${slotNum}-pnl`);
+                    pnlEl.textContent = `${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%`;
+                    pnlEl.className = `metric-pnl font-bold text-sm ${pnlPct >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+
+                    // 2. Update Portfolio Table (Mapped by ID)
+                    const tbody = document.getElementById(`b${slotNum}-portfolio`);
+                    tbody.innerHTML = Object.entries(bot.holdings).map(([symbol, pos]) => `
+                        <tr>
+                            <td class="py-2 font-bold">${symbol}</td>
+                            <td class="py-2"><span class="badge badge-long">LONG</span></td>
+                            <td class="py-2">${fmt.format(pos.entry_price)}</td>
+                        </tr>
+                    `).join('');
+
+                    // 3. Log Recent History to Terminal
+                    // We only log new history items to prevent duplicate messages
+                    if (bot.history.length > 0) {
+                        const lastTrade = bot.history[bot.history.length - 1];
+                        const lastMsg = `Trade Closed: ${lastTrade.symbol} for ${lastTrade.reason} (${fmt.format(lastTrade.pnl)})`;
+                        
+                        // Check if this message was already logged (simple check)
+                        const terminal = document.getElementById(`b${slotNum}-term`);
+                        if (!terminal.textContent.includes(lastTrade.time)) {
+                            logToBotTerminal(slotNum, lastMsg);
+                        }
+                    }
+                });
+            } catch (err) {
+                console.error("Failed to sync with synchronized dealer:", err);
+            }
+        }
+
+        // Start the refresh loop
+        setInterval(refreshArenaStatus, 5000);
+
+        function updateArenaLayout() {
+            const count = parseInt(document.getElementById('botCountSelect').value);
+            const grid = document.getElementById('arenaGrid');
+            
+            // Clear terminals on layout change for a fresh view
+            [1, 2, 3].forEach(i => document.getElementById(`b${i}-term`).innerHTML = '');
+
+            // Adjust Grid Columns
+            grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+
+            // Toggle Visibility
+            document.getElementById('botSlot1').classList.toggle('hidden-slot', count < 1);
+            document.getElementById('botSlot2').classList.toggle('hidden-slot', count < 2);
+            document.getElementById('botSlot3').classList.toggle('hidden-slot', count < 3);
+            
+            refreshArenaStatus(); // Immediate sync after layout change
+            logToBotTerminal(1, `Arena layout synchronized for ${count} player(s).`);
+        }
+
+        function toggleCharts() {
+            const containers = document.querySelectorAll('.chart-container');
+            containers.forEach(container => {
+                container.classList.toggle('hidden');
+            });
+        }
+
+        function loadBotScript(slotNum, input) {
+            const file = input.files[0];
+            if (file) {
+                const nameDisplay = document.getElementById(`bot${slotNum}Name`);
+                nameDisplay.textContent = file.name.replace('.py', '');
+                logToBotTerminal(slotNum, `Strategy Loaded: ${file.name}`);
+            }
+        }
+
+        /**
+         * Sends a request to the backend to add virtual capital to a specific bot.
+         */
+        async function loadCapital(botIdx) {
+            const input = document.getElementById(`b${botIdx + 1}-input`);
+            const amount = parseFloat(input.value);
+            if (isNaN(amount) || amount <= 0) return;
+            
+            const res = await fetch('/api/load_bankroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bot_id: botIdx, amount: amount })
+            });
+            
+            if (res.ok) { input.value = ''; refreshArenaStatus(); }
+        }
+
+        function logToBotTerminal(slotNum, msg) {
+            const terminal = document.getElementById(`b${slotNum}-term`);
+            if (!terminal) return;
+            
+            const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
+            const entry = document.createElement('div');
+            entry.className = 'console-entry';
+            entry.innerHTML = `<span class="opacity-40 mr-2">[${time}]</span> ${msg}`;
+            
+            terminal.appendChild(entry);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function startArena() {
+            if (arenaSocket && (arenaSocket.readyState === WebSocket.OPEN || arenaSocket.readyState === WebSocket.CONNECTING)) {
+                console.log("Arena is already connecting or active.");
+                return;
+            }
+
+            const count = parseInt(document.getElementById('botCountSelect').value);
+            
+            arenaSocket = new WebSocket('ws://127.0.0.1:8765');
+
+            arenaSocket.onopen = () => {
+                const connBadge = document.getElementById('connectionStatusBadge');
+                if (connBadge) {
+                    connBadge.textContent = 'Dealer: Online';
+                    connBadge.className = 'badge badge-long';
+                }
+                document.getElementById('dealerInstructions')?.classList.add('hidden');
+                for(let i=1; i<=count; i++) {
+                    logToBotTerminal(i, "BATTLE START INITIATED. Connected to Synchronized Dealer.");
+                }
+            };
+
+            arenaSocket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'MARKET_STATUS') {
+                    const statusMsg = `MARKET STATUS: ${data.status}${data.status === 'CLOSED' ? ' (Next Open: ' + data.next_open + ')' : ''}`;
+                    for(let i = 1; i <= count; i++) {
+                        logToBotTerminal(i, statusMsg);
+                    }
+
+                    // Update Market Status Badge
+                    const badge = document.getElementById('marketStatusBadge');
+                    if (badge) {
+                        badge.textContent = `Market: ${data.status}`;
+                        if (data.status === 'OPEN') {
+                            badge.className = 'badge badge-long';
+                        } else {
+                            badge.className = 'badge badge-short';
+                            badge.title = `Next Open: ${data.next_open}`;
+                        }
+                    }
+                    return;
+                }
+                
+                if (data.type === 'ARENA_TICKS') {
+                    data.data.forEach(tick => {
+                        for(let i=1; i<=count; i++) {
+                            logToBotTerminal(i, `Tick Received: [${tick.asset}] @ ${fmt.format(tick.price)}`);
+                        }
+                    });
+                }
+            };
+
+            arenaSocket.onerror = (error) => {
+                const connBadge = document.getElementById('connectionStatusBadge');
+                if (connBadge) {
+                    connBadge.textContent = 'Dealer: Error';
+                    connBadge.className = 'badge badge-short';
+                }
+                document.getElementById('dealerInstructions')?.classList.remove('hidden');
+                for(let i=1; i<=count; i++) {
+                    logToBotTerminal(i, "CRITICAL ERROR: Dealer connection failed. Is Trade Bot Tester.py running?");
+                }
+                arenaSocket = null;
+            };
+
+            arenaSocket.onclose = () => {
+                const connBadge = document.getElementById('connectionStatusBadge');
+                if (connBadge) {
+                    connBadge.textContent = 'Dealer: Reconnecting...';
+                    connBadge.className = 'badge bg-amber-500/20 text-amber-500 border border-amber-500/30 animate-pulse';
+                }
+                arenaSocket = null;
+                // Automatically attempt to reconnect after 5 seconds
+                setTimeout(startArena, 5000);
+            };
+        }
+
+        async function stopSimulation() {
+            const response = await fetch('/api/sim/stop', { method: 'POST' });
+            if (response.ok) {
+                [1, 2, 3].forEach(i => logToBotTerminal(i, "SYSTEM PAUSED: Simulation loop stopped."));
+            }
+        }
+
+        async function resumeSimulation() {
+            const response = await fetch('/api/sim/start', { method: 'POST' });
+            if (response.ok) {
+                [1, 2, 3].forEach(i => logToBotTerminal(i, "SYSTEM RESUMED: Simulation loop active."));
+            }
+        }
+
+        async function restartSystem() {
+            if (confirm("Restart the Trade Bot Tester process? This will briefly disconnect the UI.")) {
+                [1, 2, 3].forEach(i => logToBotTerminal(i, "SYSTEM RESTARTING... Please wait."));
+                fetch('/api/sys/restart', { method: 'POST' });
+                // Re-connect/Reload after a short delay
+                setTimeout(() => window.location.reload(), 3000);
+            }
+        }
+
+        async function resetArena() {
+            if (confirm("Are you sure you want to reset the entire Arena?")) {
+                const response = await fetch('/api/reset', { method: 'POST' });
+                if (response.ok) {
+                    [1, 2, 3].forEach(i => logToBotTerminal(i, "SYSTEM RESET: State purged."));
+                    refreshArenaStatus();
+                }
+            }
+        }
+
+        window.onload = () => {
+            updateArenaLayout();
+            initCharts();
+        };
+    </script>
+</body>
+</html>

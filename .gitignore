@@ -1,0 +1,12 @@
+# Sensitive credentials
+.env
+
+# Local simulation state
+tester_state.json
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+
+# Log files
+*.log

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; background-color: #f4f7f6; }
+    .container { max-width: 850px; margin: 20px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .header { text-align: center; border-bottom: 3px solid #D23037; padding-bottom: 15px; margin-bottom: 25px; }
+    h1 { color: #222; margin: 0; font-size: 24px; }
+    .market-summary { display: flex; justify-content: space-around; background: #fdf2f2; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #f5c6cb; }
+    .summary-item { text-align: center; }
+    .summary-label { font-size: 0.75em; color: #777; text-transform: uppercase; font-weight: bold; display: block; }
+    .summary-value { font-size: 1.3em; font-weight: bold; color: #D23037; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background-color: #f8f9fa; text-align: left; padding: 15px; font-size: 0.85em; color: #555; text-transform: uppercase; border-bottom: 2px solid #dee2e6; }
+    td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: top; }
+    .ticker { font-weight: bold; font-size: 1.1em; color: #D23037; }
+    .forecast-tag { font-size: 0.75em; color: #666; font-style: italic; display: block; margin-top: 4px; }
+    .warming { color: #28a745; font-weight: bold; }
+    .cooling { color: #dc3545; font-weight: bold; }
+    .prediction-box { font-size: 0.85em; color: #444; margin-top: 6px; padding: 4px 8px; background: #f1f1f1; border-radius: 4px; display: inline-block; }
+    .sentiment-container { margin-top: 10px; width: 100%; }
+    .sentiment-label { font-size: 0.7em; margin-bottom: 3px; display: block; color: #999; }
+    .sentiment-bar { height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
+    .sentiment-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+    .footer { text-align: center; font-size: 0.8em; color: #aaa; margin-top: 40px; padding-top: 10px; border-top: 1px solid #eee; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Daily Market Intelligence & Forecast</h1>
+      <p style="color: #666; font-size: 0.9em;"><?= timestamp ?></p>
+    </div>
+
+    <div class="market-summary">
+      <div class="summary-item">
+        <span class="summary-label">Volatility (VIX)</span>
+        <span class="summary-value"><?= vix ?></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Dollar Index (DXY)</span>
+        <span class="summary-value"><?= dxy ?></span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Market Avg Change</span>
+        <span class="summary-value <?= avgChange >= 0 ? 'warming' : 'cooling' ?>"><?= avgChange ?>%</span>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 20%;">Asset</th>
+          <th style="width: 15%;">Price</th>
+          <th>Predicted Outlook & Probability</th>
+          <th style="width: 20%;">Risk & Valuation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <? for (var i = 0; i < stocks.length; i++) { ?>
+          <tr>
+            <td><span class="ticker"><?= stocks[i].ticker ?></span></td>
+            <td>$<?= stocks[i].price ?></td>
+            <td>
+              <span class="<?= stocks[i].changeRaw >= 0 ? 'warming' : 'cooling' ?>">
+                <?= stocks[i].change ?>
+              </span>
+              <br>
+              <div class="prediction-box">
+                <strong>Prediction:</strong> <?= stocks[i].prediction ?>
+              </div>
+              <span class="forecast-tag">▶ <?= stocks[i].forecast ?></span>
+              <div class="sentiment-container">
+                <span class="sentiment-label">Trend Strength Score</span>
+                <div class="sentiment-bar">
+                  <div class="sentiment-fill" style="width: <?= stocks[i].sentiment ?>%;"></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <small><strong>Risk:</strong> <?= stocks[i].risk ?></small><br>
+              <small>P/E: <?= stocks[i].pe ?> | EPS: <?= stocks[i].eps ?></small>
+            </td>
+          </tr>
+        <? } ?>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <p>&copy; Andrews Industries. All projections are algorithmic and intended for research purposes.</p>
+    </div>
+  </div>
+</body>
+</html>

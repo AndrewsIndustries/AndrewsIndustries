@@ -4,20 +4,66 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
         },
         {
+            "name": "Python: Trade Bot Tester (Arena Dashboard)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Trade Bot Tester.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Trading Bot (Standalone Core)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Trading Bot.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Gemini Spread Bot",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Trade Bot Gemini Spread.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Gemini Bot",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Trade Bot Gemini.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Chrome: Open Arena UI",
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
+            "url": "http://127.0.0.1:5000",
             "webRoot": "${workspaceFolder}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch Arena Environment",
+            "configurations": [
+                "Python: Trade Bot Tester (Arena Dashboard)",
+                "Python: Trading Bot (Standalone Core)",
+                "Chrome: Open Arena UI"
+            ]
         }
     ]
 }
