@@ -26,7 +26,9 @@ div[data-testid="metric-container"] {
     border: 1px solid var(--border-color);
     padding: 15px;
     border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
+div[data-testid="metric-container"]:hover { transform: translateY(-2px); border-color: var(--accent-color); }
 
 /* weather or not.html Specific Styles */
 body {
@@ -83,6 +85,7 @@ h1 {
     border: 1px solid var(--border-color);
     padding: 15px;
     border-radius: 6px;
+    transition: background 0.2s ease;
 }
 
 .data-card label {
@@ -91,8 +94,9 @@ h1 {
     display: block;
     margin-bottom: 5px;
 }
+.data-card:hover { background: rgba(255,255,255,0.06); }
 
-.data-card value {
+.data-card .value {
     font-size: 1.3rem;
     font-weight: bold;
     color: var(--accent-color);
@@ -179,3 +183,15 @@ button:hover {
 
 ::-webkit-scrollbar { height: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+/* Activity Log Styling */
+@keyframes fadeInEntry {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+#update-log div {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeInEntry 0.4s ease-out;
+}

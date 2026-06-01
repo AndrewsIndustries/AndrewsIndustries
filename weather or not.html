@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Weather Watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="weather.css">
 </head>
 <body>
@@ -13,35 +14,36 @@
     <div class="data-grid">
         <div class="data-card full-width">
             <label>Current Location</label>
-            <value id="location">Detecting...</value>
+            <span class="value" id="location">Detecting...</span>
+            <span class="value" id="location" style="font-size: 0.9rem;">Detecting...</span>
         </div>
         <div class="data-card">
             <label>Temperature</label>
-            <value id="temp">--</value>
+            <span class="value" id="temp">--</span>
         </div>
         <div class="data-card">
             <label>Conditions</label>
-            <value id="conditions">--</value>
+            <span class="value" id="conditions">--</span>
         </div>
         <div class="data-card">
             <label>Wind</label>
-            <value id="wind">--</value>
+            <span class="value" id="wind">--</span>
         </div>
         <div class="data-card">
             <label>Humidity</label>
-            <value id="humidity">--</value>
+            <span class="value" id="humidity">--</span>
         </div>
         <div class="data-card">
             <label>Pressure</label>
-            <value id="pressure">--</value>
+            <span class="value" id="pressure">--</span>
         </div>
         <div class="data-card">
             <label>Solar Wind</label>
-            <value id="solar-wind">--</value>
+            <span class="value" id="solar-wind">--</span>
         </div>
         <div class="data-card full-width">
             <label>Forecast Short</label>
-            <value id="forecast" style="font-size: 1rem; font-weight: normal;">--</value>
+            <span class="value" id="forecast" style="font-size: 1rem; font-weight: normal;">--</span>
         </div>
     </div>
 
@@ -49,18 +51,18 @@
         <div class="section-box">
             <h2>Local Radar</h2>
             <div class="radar-container">
-                <iframe width="100%" height="100%" src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" frameborder="0"></iframe>
+                <img src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" style="width:100%; height:100%; object-fit:cover;">
             </div>
         </div>
         
         <div class="section-box">
             <h2>Sun & Space Weather</h2>
             <div class="data-grid">
-                <div class="data-card"><label>Sunrise</label><value id="sunrise">--</value></div>
-                <div class="data-card"><label>Sunset</label><value id="sunset">--</value></div>
-                <div class="data-card"><label>Planetary Kp</label><value id="kp-index">--</value></div>
+                <div class="data-card"><label>Sunrise</label><span class="value" id="sunrise">--</span></div>
+                <div class="data-card"><label>Sunset</label><span class="value" id="sunset">--</span></div>
+                <div class="data-card"><label>Planetary Kp</label><span class="value" id="kp-index">--</span></div>
                 <div class="data-card"><label>Traffic Cam</label>
-                    <img id="webcam" src="https://nvroads.com/map/CCTV/714--7" style="width:100%; border-radius:4px; margin-top:5px;">
+                    <video id="webcam" style="width:100%; border-radius:4px; margin-top:5px;" autoplay muted playsinline></video>
                 </div>
             </div>
         </div>
@@ -82,6 +84,12 @@
         </div>
     </div>
 
+    <div class="section-box" style="margin-top: 25px;">
+    <div class="section-box" style="margin-top: 15px;">
+        <h2>System Activity Log</h2>
+        <div id="update-log" style="font-family: monospace; font-size: 0.8rem; color: #8b949e; max-height: 80px; overflow-y: auto;"></div>
+    </div>
+
     <button onclick="getWeather()">Refresh Data</button>
     <div class="status" id="timestamp">Initializing...</div>
 </div>
@@ -91,56 +99,87 @@
     const LON = -119.7674;
     
     async function fetchJson(url) {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Fetch failed for ${url}`);
+        const res = await fetch(url, {
+            cache: 'no-store',
+            headers: { 
+                'Accept': 'application/geo+json'
+            }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
+    }
+
+    function addToLog(message) {
+        const log = document.getElementById('update-log');
+        const time = new Date().toLocaleTimeString();
+        log.innerHTML = `<div>[${time}] ${message}</div>` + log.innerHTML;
     }
 
     async function getWeather() {
         document.getElementById('timestamp').innerText = "Fetching live data...";
         try {
             // Step 1: Get NWS grid points for the coordinates
-            const pointsResponse = await fetch(`https://api.weather.gov/points/${LAT},${LON}`);
-            if (!pointsResponse.ok) throw new Error('Location lookup failed');
-            const pointsData = await pointsResponse.json();
+            const pointsData = await fetchJson(`https://api.weather.gov/points/${LAT},${LON}`);
             
             // Get city/state info from metadata
             const city = pointsData.properties.relativeLocation.properties.city;
             const state = pointsData.properties.relativeLocation.properties.state;
             document.getElementById('location').innerText = `${city}, ${state} 89702`;
+            addToLog(`Location locked: ${city}, ${state}`);
 
-            // Step 2: Parallel Fetch Forecasts, Observations, Ephemeris, and Space Weather
-            const [hourlyData, dailyData, stationData, sunData, spaceData, plasmaData] = await Promise.all([
-                fetchJson(pointsData.properties.forecastHourly),
-                fetchJson(pointsData.properties.forecast),
-                fetchJson(pointsData.properties.observationStations),
-                fetchJson(`https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&formatted=0`),
-                fetchJson(`https://services.swpc.noaa.gov/products/summary-planetary-k-index.json`),
-                fetchJson(`https://services.swpc.noaa.gov/products/solar-wind/plasma-5-minute.json`)
+            // Step 2: Fetch data with Settled promises so one failure doesn't kill the whole page
+            const results = await Promise.allSettled([
+                fetchJson(pointsData.properties.forecastHourly), // 0
+                fetchJson(pointsData.properties.forecast),       // 1
+                fetchJson(pointsData.properties.observationStations), // 2
+                fetchJson(`https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&formatted=0`), // 3
+                fetchJson(`https://services.swpc.noaa.gov/products/summary-planetary-k-index.json`), // 4
+                fetchJson(`https://services.swpc.noaa.gov/products/solar-wind/plasma-5-minute.json`) // 5
             ]);
 
+            const hourlyData = results[0].status === 'fulfilled' ? results[0].value : null;
+            const dailyData = results[1].status === 'fulfilled' ? results[1].value : null;
+            const stationData = results[2].status === 'fulfilled' ? results[2].value : null;
+            const sunData = results[3].status === 'fulfilled' ? results[3].value : null;
+            const spaceData = results[4].status === 'fulfilled' ? results[4].value : null;
+            const plasmaData = results[5].status === 'fulfilled' ? results[5].value : null;
+
             // Step 3: Get Pressure from Latest Observation
-            const latestObs = await fetchJson(`${stationData.features[0].id}/observations/latest`);
-            const pa = latestObs.properties.barometricPressure.value;
-            const inHg = pa ? (pa * 0.0002953).toFixed(2) : '--';
-            document.getElementById('pressure').innerText = `${inHg} inHg`;
+            if (stationData && stationData.features && stationData.features.length > 0) {
+                const latestObs = await fetchJson(`${stationData.features[0].id}/observations/latest`);
+                const pa = latestObs.properties?.barometricPressure?.value;
+                const inHg = pa ? (pa * 0.0002953).toFixed(2) : '--';
+                document.getElementById('pressure').innerText = `${inHg} inHg`;
+            }
 
             // Step 4: Display Current Weather
-            const current = hourlyData.properties.periods[0];
-            document.getElementById('temp').innerText = `${current.temperature}°${current.temperatureUnit}`;
-            document.getElementById('conditions').innerText = current.shortForecast;
-            document.getElementById('forecast').innerText = current.detailedForecast;
-            document.getElementById('wind').innerText = `${current.windSpeed} ${current.windDirection}`;
-            document.getElementById('humidity').innerText = current.relativeHumidity ? `${current.relativeHumidity.value}%` : '--';
+            if (hourlyData) {
+                const current = hourlyData.properties.periods[0];
+                document.getElementById('temp').innerText = `${current.temperature}°${current.temperatureUnit}`;
+                document.getElementById('conditions').innerText = current.shortForecast;
+                document.getElementById('forecast').innerText = current.detailedForecast;
+                document.getElementById('wind').innerText = `${current.windSpeed} ${current.windDirection}`;
+                document.getElementById('humidity').innerText = current.relativeHumidity ? `${current.relativeHumidity.value}%` : '--';
+            }
 
             // Step 5: Ephemeris & Space
-            document.getElementById('sunrise').innerText = new Date(sunData.results.sunrise).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            document.getElementById('sunset').innerText = new Date(sunData.results.sunset).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            document.getElementById('kp-index').innerText = spaceData[spaceData.length - 1].kp_index;
-            document.getElementById('solar-wind').innerText = `${Math.round(plasmaData[plasmaData.length - 1][2])} km/s`;
+            if (sunData) {
+                document.getElementById('sunrise').innerText = new Date(sunData.results.sunrise).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+                document.getElementById('sunset').innerText = new Date(sunData.results.sunset).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            }
+            
+            if (spaceData && spaceData.length > 0) {
+                document.getElementById('kp-index').innerText = spaceData[spaceData.length - 1].kp_index;
+            }
+
+            if (plasmaData && plasmaData.length > 1) {
+                const latestSpeed = plasmaData[plasmaData.length - 1][2];
+                document.getElementById('solar-wind').innerText = latestSpeed && !isNaN(latestSpeed) ? `${Math.round(latestSpeed)} km/s` : 'Steady';
+            }
 
             // Render Hourly (Next 12 hours)
-            const hourlyWrap = document.getElementById('hourly-wrap');
+            if (hourlyData) {
+                const hourlyWrap = document.getElementById('hourly-wrap');
             hourlyWrap.innerHTML = hourlyData.properties.periods.slice(1, 13).map(p => `
                 <div class="forecast-item">
                     <span>${new Date(p.startTime).toLocaleTimeString([], {hour: '2-digit'})}</span>
@@ -148,9 +187,11 @@
                     <span style="color:#8b949e">${p.shortForecast}</span>
                 </div>
             `).join('');
+            }
 
             // Render Daily (Next 7 days/periods)
-            const dailyWrap = document.getElementById('daily-wrap');
+            if (dailyData) {
+                const dailyWrap = document.getElementById('daily-wrap');
             dailyWrap.innerHTML = dailyData.properties.periods.map(p => `
                 <div class="forecast-item" style="min-width: 120px;">
                     <span style="font-weight:bold; color:#f0f6fc">${p.name}</span>
@@ -158,18 +199,34 @@
                     <span>${p.shortForecast}</span>
                 </div>
             `).join('');
+            }
             
             const now = new Date();
             document.getElementById('timestamp').innerText = `Last updated: ${now.toLocaleTimeString()}`;
+            addToLog("Successfully synchronized with NWS and SWPC data.");
 
         } catch (error) {
             console.error(error);
             document.getElementById('timestamp').innerText = "Error loading weather data.";
+            addToLog(`Critical Error: ${error.message}`);
         }
     }
 
     // Run automatically on load
     window.onload = getWeather;
+    // Auto-refresh every 10 minutes (600,000 milliseconds)
+    setInterval(getWeather, 600000);
+
+    // Initialize Traffic Camera Stream (HLS)
+    const video = document.getElementById('webcam');
+    const videoSrc = 'https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8';
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+    }
 </script>
 
 </body>
