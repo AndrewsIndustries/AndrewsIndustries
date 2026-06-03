@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 # Configuration
-LAT, LON = 39.2348, -119.5839
+LAT, LON = 39.2348, -119.5839  # Ensure no double dots like 39.23.48 here
 
 st.set_page_config(page_title="Andrews Industries Weather", layout="wide")
 
@@ -90,7 +90,7 @@ try:
         sunset = datetime.fromisoformat(sun['results']['sunset']).strftime('%I:%M %p')
         st.write(f"**Sunrise:** {sunrise}")
         st.write(f"**Sunset:** {sunset}")
-        current_kp = kp[-1]['kp_index'] if kp else "N/A"
+        current_kp = kp[-1][1] if len(kp) > 1 else "N/A"
         st.write(f"**Current Kp Index:** {current_kp}")
         st.subheader("Local DOT Cam")
         st.video("https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8", autoplay=True, muted=True)

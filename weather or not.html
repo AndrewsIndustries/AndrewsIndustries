@@ -10,7 +10,10 @@
         body { height: 100vh; overflow: hidden; margin: 0; padding: 0; font-size: 0.8rem; }
         .container { 
             height: 100vh; 
-            max-width: 100% !important;
+            margin-left: 310px;
+            width: calc(100% - 310px);
+            max-width: none !important;
+            border-left: 1px solid var(--border-color);
             display: flex; 
             flex-direction: column; 
             padding: 8px; 
@@ -25,18 +28,62 @@
         .data-card label { font-size: 0.6rem; margin-bottom: 2px; }
         .data-card .value { font-size: 0.8rem !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .section-box { padding: 8px !important; margin: 0 !important; flex: 1; min-height: 0; display: flex; flex-direction: column; }
-        .radar-container { height: 100% !important; min-height: 180px; }
-        .module-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 8px !important; flex: 1; min-height: 0; }
+        .radar-container { height: 100% !important; min-height: 120px; }
+        .module-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 8px !important; flex: 1; min-height: 0; }
         .scroll-v { overflow-y: auto; flex: 1; }
-        #update-log { max-height: 60px !important; font-size: 0.65rem !important; background: rgba(0,0,0,0.2); border-radius: 4px; padding: 4px; }
         button { padding: 4px 12px !important; font-size: 0.7rem; width: auto !important; margin: 0 !important; }
         .status { font-size: 0.7rem; }
-        #webcam { height: 100px; object-fit: cover; background: #000; }
+        .webcam-vid { height: 210px; width: 100%; object-fit: cover; background: #000; border-radius: 4px; }
         .forecast-item { padding: 4px !important; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; }
         .f-temp { font-size: 0.8rem !important; margin: 0 !important; }
+
+        /* Earthquake Sidebar Styles */
+        :root { --border-color: #30363d; --bg-color: #0d1117; --card-bg: #161b22; --accent-color: #58a6ff; }
+        .eq-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 310px;
+            height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            font-family: -apple-system, sans-serif;
+        }
+        .eq-header {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--card-bg);
+        }
+        .eq-header h3 { margin: 0; font-size: 0.9rem; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+        #eq-count { font-size: 0.75rem; color: #8b949e; margin-top: 2px; }
+        .eq-list { flex: 1; overflow-y: auto; }
+        .eq-item { 
+            display: flex; 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .eq-item:hover { background: rgba(255, 255, 255, 0.03); }
+        .eq-mag-col { width: 45px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: var(--accent-color); }
+        .eq-mag-high { color: #ff7b72 !important; } /* Visual highlight for M4.5+ */
+        .eq-details { flex: 1; padding-left: 10px; display: flex; flex-direction: column; gap: 2px; }
+        .eq-place { color: #f0f6fc; font-weight: 600; font-size: 0.75rem; }
+        .eq-time { color: #8b949e; font-size: 0.65rem; }
+        .eq-depth { color: #58a6ff; font-size: 0.65rem; font-weight: 500; }
     </style>
 </head>
 <body>
+<div class="eq-sidebar">
+    <div class="eq-header">
+        <h3>Search Results</h3>
+        <div id="eq-count">0 earthquakes found</div>
+    </div>
+    <div id="eq-list" class="eq-list"></div>
+</div>
+
 <div class="container">
     <div class="header-row">
         <h1>Live Weather Watch <span class="live-indicator">Live</span></h1>
@@ -54,46 +101,35 @@
         <div class="data-card"><label>Humidity</label><span class="value" id="humidity">--</span></div>
         <div class="data-card"><label>Pressure</label><span class="value" id="pressure">--</span></div>
         <div class="data-card"><label>Solar Wind</label><span class="value" id="solar-wind">--</span></div>
-        <div class="data-card" style="flex: 2;"><label>Short-term Outlook</label><span class="value" id="forecast" style="font-weight: normal;">--</span></div>
+        <div class="data-card"><label>Sunrise</label><span class="value" id="sunrise">--</span></div>
+        <div class="data-card"><label>Sunset</label><span class="value" id="sunset">--</span></div>
     </div>
 
     <div class="module-grid">
-        <div class="section-box">
-            <h2>Radar (KRGX)</h2>
-            <div class="radar-container">
-                <img src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" style="width:100%; height:100%; object-fit:cover;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="section-box" style="flex: 1;">
+                <h2>Radar (KRGX)</h2>
+                <div class="radar-container">
+                    <img src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1;">
+                <div class="section-box">
+                    <h2>Hourly Look-Ahead</h2>
+                    <div id="hourly-wrap" class="scroll-v"><div class="status">Loading...</div></div>
+                </div>
+                <div class="section-box">
+                    <h2>7-Day Forecast</h2>
+                    <div id="daily-wrap" class="scroll-v"><div class="status">Loading...</div></div>
+                </div>
             </div>
         </div>
         
         <div class="section-box">
-            <h2>Space & Traffic</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px;">
-                <div class="data-card"><label>Rise</label><span class="value" id="sunrise">--</span></div>
-                <div class="data-card"><label>Set</label><span class="value" id="sunset">--</span></div>
-                <div class="data-card"><label>Kp</label><span class="value" id="kp-index">--</span></div>
-                <div class="data-card"><label>Plasma</label><span class="value" id="plasma-status">--</span></div>
-            </div>
-            <video id="webcam" style="width:100%; border-radius:4px;" autoplay muted playsinline></video>
+            <h2>Traffic Cameras</h2>
+            <video id="webcam1" class="webcam-vid" style="margin-bottom: 8px;" autoplay muted playsinline></video>
+            <video id="webcam2" class="webcam-vid" autoplay muted playsinline></video>
         </div>
-
-        <div class="section-box">
-            <h2>Hourly Look-Ahead</h2>
-            <div id="hourly-wrap" class="scroll-v">
-                <div class="status">Loading hourly data...</div>
-            </div>
-        </div>
-
-        <div class="section-box">
-            <h2>7-Day Forecast</h2>
-            <div id="daily-wrap" class="scroll-v">
-                <div class="status">Loading 7-day data...</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <h2>System Log</h2>
-        <div id="update-log" style="font-family: monospace; font-size: 0.8rem; color: #8b949e; max-height: 80px; overflow-y: auto;"></div>
     </div>
 </div>
 <script>
@@ -101,19 +137,78 @@
     const LAT = 39.1638;
     const LON = -119.7674;
     
-    async function fetchJson(url) {
-        const res = await fetch(url, {
+    // --- Earthquake Sidebar Logic ---
+    const EQ_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=2&orderby=time";
+
+    async function fetchEarthquakes() {
+        try {
+            const data = await fetchJson(EQ_URL);
+            const list = document.getElementById('eq-list');
+            const countDisplay = document.getElementById('eq-count');
+            
+            if (!data.features) return;
+            
+            countDisplay.innerText = `${data.features.length} earthquakes found`;
+            
+            list.innerHTML = data.features.map(feat => {
+                const props = feat.properties;
+                const mag = props.mag ? props.mag.toFixed(1) : "N/A";
+                const isHigh = props.mag >= 4.5;
+                const depth = feat.geometry.coordinates[2].toFixed(1);
+                
+                // Format Timestamp to: YYYY-MM-DD HH:MM:SS UTC
+                const d = new Date(props.time);
+                const ts = d.getUTCFullYear() + '-' + 
+                           String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + 
+                           String(d.getUTCDate()).padStart(2, '0') + ' ' + 
+                           String(d.getUTCHours()).padStart(2, '0') + ':' + 
+                           String(d.getUTCMinutes()).padStart(2, '0') + ':' + 
+                           String(d.getUTCSeconds()).padStart(2, '0') + ' UTC';
+
+                return `
+                    <div class="eq-item" onclick="window.open('${props.url}', '_blank')">
+                        <div class="eq-mag-col ${isHigh ? 'eq-mag-high' : ''}">${mag}</div>
+                        <div class="eq-details">
+                            <div class="eq-place">${props.place}</div>
+                            <div class="eq-time">${ts}</div>
+                            <div class="eq-depth">${depth} km depth</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            addToLog(`Seismic data updated: ${data.features.length} events.`);
+        } catch (e) {
+            console.error("USGS Fetch Error:", e);
+            addToLog(`Earthquake Sync Error: ${e.message}`);
+        }
+    }
+
+    // Initial load and 5-minute interval
+    fetchEarthquakes();
+    setInterval(fetchEarthquakes, 300000); 
+
+
+    // --- Existing Weather Dashboard Logic ---
+    
+    async function fetchJson(url, timeout = 8000) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+        const res = await fetch(url, { 
             cache: 'no-store',
+            signal: controller.signal,
             headers: { 
                 'Accept': 'application/geo+json'
             }
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        clearTimeout(id);
         return res.json();
     }
 
     function addToLog(message) {
         const log = document.getElementById('update-log');
+        if (!log) return;
         const time = new Date().toLocaleTimeString();
         log.innerHTML = `<div>[${time}] ${message}</div>` + log.innerHTML;
     }
@@ -160,7 +255,6 @@
                 const current = hourlyData.properties.periods[0];
                 document.getElementById('temp').innerText = `${current.temperature}°${current.temperatureUnit}`;
                 document.getElementById('conditions').innerText = current.shortForecast;
-                document.getElementById('forecast').innerText = current.detailedForecast;
                 document.getElementById('wind').innerText = `${current.windSpeed} ${current.windDirection}`;
                 document.getElementById('humidity').innerText = current.relativeHumidity ? `${current.relativeHumidity.value}%` : '--';
             }
@@ -171,15 +265,10 @@
                 document.getElementById('sunset').innerText = new Date(sunData.results.sunset).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
             }
             
-            if (spaceData && spaceData.length > 0) {
-                document.getElementById('kp-index').innerText = spaceData[spaceData.length - 1].kp_index;
-            }
-
             if (plasmaData && plasmaData.length > 1) {
                 const latestSpeed = plasmaData[plasmaData.length - 1][2];
                 const val = latestSpeed && !isNaN(latestSpeed) ? `${Math.round(latestSpeed)} km/s` : 'Steady';
                 document.getElementById('solar-wind').innerText = val;
-                document.getElementById('plasma-status').innerText = val;
             }
 
             // Render Hourly (Next 12 hours)
@@ -224,16 +313,26 @@
     // Auto-refresh every 10 minutes (600,000 milliseconds)
     setInterval(getWeather, 600000);
 
-    // Initialize Traffic Camera Stream (HLS)
-    const video = document.getElementById('webcam');
-    const videoSrc = 'https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8';
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
-    }
+    // Initialize Traffic Camera Streams (HLS)
+    const initStream = (id, src) => {
+        const video = document.getElementById(id);
+        if (Hls.isSupported()) {
+            const hls = new Hls({
+                enableWorker: true,
+                lowLatencyMode: true,
+                backBufferLength: 60,
+                maxBufferLength: 30,
+                maxMaxBufferLength: 60
+            });
+            hls.loadSource(src);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = src;
+        }
+    };
+
+    initStream('webcam1', 'https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8');
+    initStream('webcam2', 'https://d2wse1.its.nv.gov/renoxcd01/fbafdf3c-454d-40b7-a000-801b4c5518da_hspflirxcd01_public.stream/playlist.m3u8');
 </script>
 
 </body>
