@@ -10,17 +10,17 @@
         body { height: 100vh; overflow: hidden; margin: 0; padding: 0; font-size: 0.8rem; }
         .container { 
             height: 100vh; 
-            margin-left: 310px;
-            width: calc(100% - 310px);
+            margin-left: 250px;
+            width: calc(100% - 250px);
             max-width: none !important;
             border-left: 1px solid var(--border-color);
             display: flex; 
             flex-direction: column; 
-            padding: 8px; 
-            gap: 8px; 
+            padding: 2px 8px 8px 8px; 
+            gap: 4px; 
             box-sizing: border-box;
         }
-        .header-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 2px; }
         h1 { font-size: 1rem; margin: 0; display: flex; align-items: center; gap: 8px; }
         h2 { font-size: 0.75rem; margin-top: 0; margin-bottom: 5px; text-transform: uppercase; color: #8b949e; }
         .data-grid { display: flex !important; gap: 5px !important; margin-bottom: 0 !important; }
@@ -29,11 +29,12 @@
         .data-card .value { font-size: 0.8rem !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .section-box { padding: 8px !important; margin: 0 !important; flex: 1; min-height: 0; display: flex; flex-direction: column; }
         .radar-container { height: 100% !important; min-height: 120px; }
-        .module-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 8px !important; flex: 1; min-height: 0; }
+        .module-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px !important; flex: 1.4; min-height: 0; }
+        .forecast-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 0.6; min-height: 0; }
         .scroll-v { overflow-y: auto; flex: 1; }
         button { padding: 4px 12px !important; font-size: 0.7rem; width: auto !important; margin: 0 !important; }
         .status { font-size: 0.7rem; }
-        .webcam-vid { height: 210px; width: 100%; object-fit: cover; background: #000; border-radius: 4px; }
+        .webcam-vid { flex: 1; min-height: 0; width: 100%; object-fit: cover; background: #000; border-radius: 4px; }
         .forecast-item { padding: 4px !important; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; }
         .f-temp { font-size: 0.8rem !important; margin: 0 !important; }
 
@@ -43,7 +44,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 310px;
+            width: 250px;
             height: 100vh;
             background: var(--bg-color);
             display: flex;
@@ -88,6 +89,7 @@
     <div class="header-row">
         <h1>Live Weather Watch <span class="live-indicator">Live</span></h1>
         <div id="location" style="font-weight: bold; color: var(--accent-color);">Detecting...</div>
+        <div id="current-time" style="font-family: monospace; font-size: 1rem; color: #fff; font-weight: bold;">--:--:--</div>
         <div class="flex items-center gap-4">
             <span class="status" id="timestamp">Initializing...</span>
             <button onclick="getWeather()">Refresh</button>
@@ -105,30 +107,30 @@
         <div class="data-card"><label>Sunset</label><span class="value" id="sunset">--</span></div>
     </div>
 
+    <div class="forecast-row">
+        <div class="section-box">
+            <h2>Hourly Look-Ahead</h2>
+            <div id="hourly-wrap" class="scroll-v"><div class="status">Loading...</div></div>
+        </div>
+        <div class="section-box">
+            <h2>7-Day Forecast</h2>
+            <div id="daily-wrap" class="scroll-v"><div class="status">Loading...</div></div>
+        </div>
+    </div>
+
     <div class="module-grid">
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="section-box" style="flex: 1;">
-                <h2>Radar (KRGX)</h2>
-                <div class="radar-container">
-                    <img src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1;">
-                <div class="section-box">
-                    <h2>Hourly Look-Ahead</h2>
-                    <div id="hourly-wrap" class="scroll-v"><div class="status">Loading...</div></div>
-                </div>
-                <div class="section-box">
-                    <h2>7-Day Forecast</h2>
-                    <div id="daily-wrap" class="scroll-v"><div class="status">Loading...</div></div>
-                </div>
+        <div class="section-box">
+            <h2>Radar (KRGX)</h2>
+            <div class="radar-container">
+                <img src="https://radar.weather.gov/ridge/standard/KRGX_0.gif" style="width:100%; height:100%; object-fit:cover;">
             </div>
         </div>
-        
         <div class="section-box">
             <h2>Traffic Cameras</h2>
-            <video id="webcam1" class="webcam-vid" style="margin-bottom: 8px;" autoplay muted playsinline></video>
-            <video id="webcam2" class="webcam-vid" autoplay muted playsinline></video>
+            <div style="position: relative; flex: 1; overflow: hidden; background: #000; border-radius: 4px;">
+                <video id="webcam1" class="webcam-vid" style="position: absolute; inset: 0; height: 100%; transition: opacity 1s;" autoplay muted playsinline></video>
+                <video id="webcam2" class="webcam-vid" style="position: absolute; inset: 0; height: 100%; transition: opacity 1s; opacity: 0;" autoplay muted playsinline></video>
+            </div>
         </div>
     </div>
 </div>
@@ -138,44 +140,46 @@
     const LON = -119.7674;
     
     // --- Earthquake Sidebar Logic ---
-    const EQ_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=2&orderby=time";
+    const EQ_URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
     async function fetchEarthquakes() {
         try {
-            const data = await fetchJson(EQ_URL);
+            const data = await fetchJson(EQ_URL, 5000);
             const list = document.getElementById('eq-list');
             const countDisplay = document.getElementById('eq-count');
             
-            if (!data.features) return;
+            if (!data || !data.features) return;
             
             countDisplay.innerText = `${data.features.length} earthquakes found`;
             
-            list.innerHTML = data.features.map(feat => {
+            // Performance Refactor: Limit processing and use DocumentFragment
+            const fragment = document.createDocumentFragment();
+            const recentEvents = data.features.slice(0, 50);
+
+            recentEvents.forEach(feat => {
                 const props = feat.properties;
+                const item = document.createElement('div');
+                item.className = 'eq-item';
+                item.onclick = () => window.open(props.url, '_blank');
+
                 const mag = props.mag ? props.mag.toFixed(1) : "N/A";
                 const isHigh = props.mag >= 4.5;
                 const depth = feat.geometry.coordinates[2].toFixed(1);
-                
-                // Format Timestamp to: YYYY-MM-DD HH:MM:SS UTC
-                const d = new Date(props.time);
-                const ts = d.getUTCFullYear() + '-' + 
-                           String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + 
-                           String(d.getUTCDate()).padStart(2, '0') + ' ' + 
-                           String(d.getUTCHours()).padStart(2, '0') + ':' + 
-                           String(d.getUTCMinutes()).padStart(2, '0') + ':' + 
-                           String(d.getUTCSeconds()).padStart(2, '0') + ' UTC';
+                const ts = new Date(props.time).toISOString().replace('T', ' ').split('.')[0] + ' UTC';
 
-                return `
-                    <div class="eq-item" onclick="window.open('${props.url}', '_blank')">
-                        <div class="eq-mag-col ${isHigh ? 'eq-mag-high' : ''}">${mag}</div>
-                        <div class="eq-details">
-                            <div class="eq-place">${props.place}</div>
-                            <div class="eq-time">${ts}</div>
-                            <div class="eq-depth">${depth} km depth</div>
-                        </div>
+                item.innerHTML = `
+                    <div class="eq-mag-col ${isHigh ? 'eq-mag-high' : ''}">${mag}</div>
+                    <div class="eq-details">
+                        <div class="eq-place">${props.place}</div>
+                        <div class="eq-time">${ts}</div>
+                        <div class="eq-depth">${depth} km depth</div>
                     </div>
                 `;
-            }).join('');
+                fragment.appendChild(item);
+            });
+
+            list.innerHTML = ''; 
+            list.appendChild(fragment);
             
             addToLog(`Seismic data updated: ${data.features.length} events.`);
         } catch (e) {
@@ -191,20 +195,28 @@
 
     // --- Existing Weather Dashboard Logic ---
     
-    async function fetchJson(url, timeout = 8000) {
+    async function fetchJson(url, timeout = 5000, headers = {}) {
         const controller = new AbortController();
         const id = setTimeout(() => controller.abort(), timeout);
-        const res = await fetch(url, { 
-            cache: 'no-store',
-            signal: controller.signal,
-            headers: { 
-                'Accept': 'application/geo+json'
-            }
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        clearTimeout(id);
-        return res.json();
+        try {
+            const res = await fetch(url, { 
+                cache: 'no-store',
+                signal: controller.signal,
+                headers: { 'Accept': 'application/geo+json', ...headers }
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return await res.json();
+        } finally {
+            clearTimeout(id);
+        }
     }
+
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('current-time').innerText = now.toLocaleTimeString([], { hour12: true });
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
     function addToLog(message) {
         const log = document.getElementById('update-log');
@@ -215,22 +227,23 @@
 
     async function getWeather() {
         document.getElementById('timestamp').innerText = "Fetching live data...";
+        const nwsHeaders = { 'User-Agent': '(AndrewsIndustries Weather App, contact: andre@example.com)' };
+
         try {
             // Step 1: Get NWS grid points for the coordinates
-            const pointsData = await fetchJson(`https://api.weather.gov/points/${LAT},${LON}`);
+            const pointsData = await fetchJson(`https://api.weather.gov/points/${LAT},${LON}`, 5000, nwsHeaders);
             
             // Get city/state info from metadata
             const city = pointsData.properties.relativeLocation.properties.city;
             const state = pointsData.properties.relativeLocation.properties.state;
             document.getElementById('location').innerText = `${city}, ${state} 89702`;
-            addToLog(`Location locked: ${city}, ${state}`);
 
             // Step 2: Fetch data with Settled promises so one failure doesn't kill the whole page
             const results = await Promise.allSettled([
-                fetchJson(pointsData.properties.forecastHourly), // 0
-                fetchJson(pointsData.properties.forecast),       // 1
-                fetchJson(pointsData.properties.observationStations), // 2
-                fetchJson(`https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&formatted=0`), // 3
+                fetchJson(pointsData.properties.forecastHourly, 5000, nwsHeaders), // 0
+                fetchJson(pointsData.properties.forecast, 5000, nwsHeaders),       // 1
+                fetchJson(pointsData.properties.observationStations, 5000, nwsHeaders), // 2
+                fetchJson(`https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&formatted=0`, 5000), // 3
                 fetchJson(`https://services.swpc.noaa.gov/products/summary-planetary-k-index.json`), // 4
                 fetchJson(`https://services.swpc.noaa.gov/products/solar-wind/plasma-5-minute.json`) // 5
             ]);
@@ -244,10 +257,14 @@
 
             // Step 3: Get Pressure from Latest Observation
             if (stationData && stationData.features && stationData.features.length > 0) {
-                const latestObs = await fetchJson(`${stationData.features[0].id}/observations/latest`);
-                const pa = latestObs.properties?.barometricPressure?.value;
-                const inHg = pa ? (pa * 0.0002953).toFixed(2) : '--';
-                document.getElementById('pressure').innerText = `${inHg} inHg`;
+                try {
+                    const latestObs = await fetchJson(`${stationData.features[0].id}/observations/latest`, 5000, nwsHeaders);
+                    const pa = latestObs.properties?.barometricPressure?.value;
+                    const inHg = pa ? (pa * 0.0002953).toFixed(2) : '--';
+                    document.getElementById('pressure').innerText = `${inHg} inHg`;
+                } catch (obsError) {
+                    document.getElementById('pressure').innerText = '--';
+                }
             }
 
             // Step 4: Display Current Weather
@@ -333,6 +350,16 @@
 
     initStream('webcam1', 'https://d2wse2.its.nv.gov:443/renoxcd02/6d2490ff-1896-4369-b7e4-92fd1a542642_hspflirxcd02_public.stream/playlist.m3u8');
     initStream('webcam2', 'https://d2wse1.its.nv.gov/renoxcd01/fbafdf3c-454d-40b7-a000-801b4c5518da_hspflirxcd01_public.stream/playlist.m3u8');
+
+    // Traffic Camera Slideshow Logic
+    let activeCam = 1;
+    setInterval(() => {
+        const v1 = document.getElementById('webcam1');
+        const v2 = document.getElementById('webcam2');
+        activeCam = activeCam === 1 ? 2 : 1;
+        v1.style.opacity = activeCam === 1 ? "1" : "0";
+        v2.style.opacity = activeCam === 2 ? "1" : "0";
+    }, 15000); // Swaps every 15 seconds
 </script>
 
 </body>
