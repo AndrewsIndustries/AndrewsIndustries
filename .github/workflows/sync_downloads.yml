@@ -1,0 +1,37 @@
+name: Sync Digital Downloads
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:   # Allows manual trigger from GitHub Actions tab
+  repository_dispatch: # Allows triggering via API (event_type: sync_downloads)
+    types: [sync_downloads]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install pandas requests
+
+      - name: Run Sync Script
+        run: python sync_digital_downloads.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "data/Digital_Downloads.xml" || true
+          git commit -m "Auto-sync digital downloads data" || exit 0
+          git push
