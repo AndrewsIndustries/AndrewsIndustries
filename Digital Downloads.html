@@ -61,15 +61,32 @@
                     response = await fetch(`${RAW_URL}?t=${Date.now()}`);
                 }
 
-                if (!response.ok) throw new Error("404: XML file missing. Run 'Refresh Data' or trigger the 'Sync Digital Downloads' GitHub Action.");
+                if (!response.ok) {
+                    throw new Error(`Data file not found (404).<br><br>
+                    <span class="text-sm font-normal text-slate-400">
+                    1. Ensure the 'Sync Digital Downloads' Action has run in GitHub.<br>
+                    2. Check that 'data/Digital_Downloads.xml' exists in your repo.<br>
+                    3. If testing locally, ensure you are connected to the internet.
+                    </span>`);
+                }
                 
                 const xmlText = await response.text();
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(xmlText, "text/xml");
                 const items = xmlDoc.getElementsByTagName("Item");
-                
                 const grid = document.getElementById('catalogGrid');
+                const loading = document.getElementById('loading');
+                
                 grid.innerHTML = '';
+
+                if (items.length === 0) {
+                    loading.innerHTML = `
+                        <i class="fa-solid fa-folder-open text-4xl text-slate-600 mb-4"></i>
+                        <p class="text-slate-400">The catalog is currently empty.</p>
+                        <p class="text-xs text-slate-500 mt-2">Add items to your Google Sheet and click 'Refresh Data'.</p>
+                    `;
+                    return;
+                }
 
                 Array.from(items).forEach(item => {
                     const name = item.getElementsByTagName("Name")[0]?.textContent || "Unnamed Asset";
@@ -93,12 +110,13 @@
                     grid.appendChild(card);
                 });
 
-                document.getElementById('loading').classList.add('hidden');
+                loading.classList.add('hidden');
                 grid.classList.remove('hidden');
             } catch (err) {
                 document.getElementById('loading').innerHTML = `
                     <i class="fa-solid fa-triangle-exclamation text-red-500 text-4xl mb-4"></i>
-                    <p class="text-red-400">Failed to load catalog: ${err.message}</p>
+                    <p class="text-red-400 font-bold uppercase tracking-tight">Load Failure</p>
+                    <p class="text-slate-400 mt-2 px-10">${err.message}</p>
                     <button onclick="location.reload()" class="mt-4 text-blue-400 underline">Retry</button>
                 `;
             }

@@ -17,7 +17,13 @@ def sync_downloads_data():
     try:
         response = requests.get(CSV_URL, timeout=15)
         response.raise_for_status()
-        df = pd.read_csv(io.StringIO(response.text))
+        
+        # Handle potential empty CSVs
+        csv_text = response.text.strip()
+        if not csv_text:
+            raise ValueError("The spreadsheet returned no data.")
+        
+        df = pd.read_csv(io.StringIO(csv_text))
         
         # Build XML Structure
         root = ET.Element('DigitalDownloadsReport')
@@ -27,13 +33,14 @@ def sync_downloads_data():
         
         items_node = ET.SubElement(root, 'Items')
 
-        print(f"[+] Successfully retrieved {len(df)} items.")
+        processed_count = 0
         for index, row in df.iterrows():
-            if len(row) < 4: continue
+            # Ensure we have at least: Name(0), Price(1), and Link(2)
+            if len(row) < 3: continue
             
             name = str(row.iloc[0]).strip()
             price = str(row.iloc[1]).strip()
-            link = str(row.iloc[3]).strip()
+            link = str(row.iloc[2]).strip()
 
             if name == 'nan' or not name: continue
             if price != 'nan' and price and not price.startswith('$'):
@@ -43,7 +50,11 @@ def sync_downloads_data():
             ET.SubElement(item, 'Name').text = name
             ET.SubElement(item, 'Price').text = price
             ET.SubElement(item, 'Link').text = link
+            processed_count += 1
             
+        ET.SubElement(header, 'ProcessedCount').text = str(processed_count)
+        print(f"[+] Successfully processed {processed_count} valid items.")
+
         # Pretty Print and Save
         xml_str = minidom.parseString(ET.tostring(root, 'utf-8')).toprettyxml(indent="    ")
         os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
