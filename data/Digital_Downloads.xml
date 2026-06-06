@@ -1,8 +1,25 @@
 <?xml version="1.0" ?>
 <DigitalDownloadsReport>
     <Header>
-        <Generated>2026-06-06T03:52:52</Generated>
+        <Generated>2026-06-06T04:02:57</Generated>
         <Count>3</Count>
+        <ProcessedCount>3</ProcessedCount>
     </Header>
-    <Items/>
+    <Items>
+        <Item>
+            <Name>Various AR blueprints</Name>
+            <Price>$Free</Price>
+            <Link>https://drive.google.com/drive/folders/1mn9Nn3nkR1duMKnE6pxTf0rjNbo7RT2g?usp=sharing</Link>
+        </Item>
+        <Item>
+            <Name>Basic G-code Simulator in Python</Name>
+            <Price>$Free</Price>
+            <Link>https://drive.google.com/file/d/1L2dnfnnfZt3qSV5MvgpwGUiqQNQHhjQ1/view?usp=sharing</Link>
+        </Item>
+        <Item>
+            <Name>CNC Packet</Name>
+            <Price>$Free</Price>
+            <Link>https://drive.google.com/drive/folders/1HOw5nLrPmNcgzmB254HgWX051A57KGPv?usp=sharing</Link>
+        </Item>
+    </Items>
 </DigitalDownloadsReport>
