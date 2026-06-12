@@ -378,13 +378,12 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
+    'data/osint_news.json', // Local processed feed
     'https://feeds.skynews.com/feeds/rss/us.xml',
     'https://feeds.skynews.com/feeds/rss/strange.xml',
-    'http://feeds.skynews.com/feeds/rss/strange.xml',
-
 ];
 const footerRssUrls = [
-    'https://github.com/AndrewsIndustries/AndrewsIndustries/raw/refs/heads/main/.github/workflows/Stock%20Watch.xml',
+    'data/Stock Watch.xml', // Local generated report
 ];
 
 async function updateTicker(urls, elementId) {
@@ -417,76 +416,39 @@ async function updateTicker(urls, elementId) {
                     const response = await fetch(proxyUrl);
                     if (!response.ok) continue;
 
-                    let xmlText;
+                    let responseText;
                     // Handle JSON response from AllOrigins or raw text from Corsproxy
                     if (proxyUrl.includes('allorigins.win')) {
-                        const data = await response.json();
-                        xmlText = data.contents;
+                        try {
+                            const data = await response.json();
+                            responseText = data.contents;
+                        } catch (e) { continue; }
                     } else {
-                        xmlText = await response.text();
+                        responseText = await response.text();
                     }
 
-                    if (!xmlText) continue;
+                    if (!responseText || responseText.trim() === "") continue;
+                    const trimmed = responseText.trim();
 
-                    // Skip if the response is JSON (likely a proxy error message) to avoid XML parser errors
-                    if (xmlText.trim().startsWith('{')) continue;
+                    // 1. Handle OSINT JSON Format
+                    if (cleanUrl.toLowerCase().endsWith('.json') || trimmed.startsWith('[')) {
+                        const titles = parseJsonOsint(trimmed);
+                        if (titles.length) { allTitles.push(...titles); break; }
+                    }
 
-                    // Support for Google Sheets CSV data
+                    // 2. Handle Google Sheets CSV Format
                     if (cleanUrl.toLowerCase().includes('output=csv')) {
-                        const lines = xmlText.split(/\r?\n/).filter(line => line.trim() !== "");
-                        if (lines.length > 1) {
-                            lines.shift(); // Remove header row (Name, Price)
-                            lines.forEach(line => {
-                                // Robust CSV split to handle potential commas inside quotes
-                                const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/g).map(cell => 
-                                    cell.trim().replace(/^"(.*)"$/, '$1')
-                                );
-                                if (cols[0] && cols[1]) {
-                                    const price = parseFloat(cols[1].replace(/[^0-9.-]+/g, "") || 0).toFixed(2);
-                                    allTitles.push(`${cols[0]}: $${price}`);
-                                }
-                            });
-                            break; // Successfully processed this feed
-                        }
+                        const titles = parseCsvData(trimmed);
+                        if (titles.length) { allTitles.push(...titles); break; }
                     }
 
-                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    // 3. Handle RSS or Stock XML Format
+                    if (trimmed.startsWith('{')) continue; // Skip JSON errors from proxies
+                    const xmlDoc = parser.parseFromString(responseText, "text/xml");
                     if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
+                    const titles = parseXmlData(xmlDoc);
+                    if (titles.length) { allTitles.push(...titles); break; }
 
-                    const items = xmlDoc.querySelectorAll("item, entry, Stock");
-                    
-                    if (items.length > 0) {
-                        items.forEach(item => {
-                            if (item.tagName === 'Stock') {
-                                const ticker = item.getAttribute('ticker');
-                                const price = item.querySelector('Price')?.textContent || 'N/A';
-                                const change = item.querySelector('DaysChange')?.textContent || '0%';
-                                const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
-                                
-                                const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
-                                                 status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
-                                                 'bg-slate-900 border-slate-700 text-white';
-
-                                allTitles.push(`<span class="mx-16 inline-flex items-center">
-                                    <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
-                                    <span class="text-slate-400 text-2xl mr-3">${price}</span> 
-                                    <span class="text-white text-2xl mr-4">${change}</span> 
-                                    <span class="px-4 py-1 rounded border font-mono text-xl ${statusBg}">
-                                        ${status}
-                                    </span> 
-                                </span>`);
-                            } else {
-                                const title = item.querySelector("title")?.textContent;
-                                if (title) {
-                                    allTitles.push(`<span class="mx-16 inline-flex items-center">
-                                        <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">NEWS</span>
-                                        <span class="text-white text-3xl font-bold">${title.trim()}</span>
-                                    </span>`);
-                                }
-                            }
-                        });
-                        break; 
-                    }
                 } catch (err) {
                     console.warn(`Proxy attempt failed for ${url} using ${proxyUrl}:`, err);
                 }
@@ -507,6 +469,84 @@ async function updateTicker(urls, elementId) {
         console.error(`Error updating ${elementId}:`, error);
         tickerElement.innerText = "Connection error.";
     }
+}
+
+function parseJsonOsint(text) {
+    try {
+        const data = JSON.parse(text);
+        if (!Array.isArray(data)) return [];
+        return data.map(entry => {
+            const level = entry.alert_level || 'LOW';
+            let source = (entry.source || 'OSINT').toUpperCase();
+            if (source.includes('SKY NEWS')) source = 'SKY NEWS';
+            
+            const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
+            const alertClass = level === 'HIGH' ? 'bg-red-900/40 border-red-700 text-red-400' : 
+                             level === 'MEDIUM' ? 'bg-amber-900/40 border-amber-700 text-amber-400' : 
+                             'bg-slate-900 border-slate-700 text-white';
+
+            return `<span class="mx-16 inline-flex items-center">
+                <span class="px-2 py-0.5 rounded border ${alertClass} font-black text-xs mr-3 tracking-widest">${level} ${source}</span>
+                <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
+            </span>`;
+        });
+    } catch (e) { return []; }
+}
+
+function parseCsvData(text) {
+    const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+    if (lines.length <= 1) return [];
+    lines.shift(); // Remove header
+    return lines.map(line => {
+        const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/g).map(cell => cell.trim().replace(/^"(.*)"$/, '$1'));
+        if (cols[0] && cols[1]) {
+            const price = parseFloat(cols[1].replace(/[^0-9.-]+/g, "") || 0).toFixed(2);
+            return `<span class="mx-16 inline-flex items-center">
+                <span class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-400 font-black text-xs mr-3 tracking-widest">SHEET</span>
+                <span class="text-white text-3xl font-bold">${cols[0]}: $${price}</span>
+            </span>`;
+        }
+        return null;
+    }).filter(x => x);
+}
+
+function parseXmlData(xmlDoc) {
+    const allTitles = [];
+    let feedTitle = (xmlDoc.querySelector("channel > title, feed > title")?.textContent || "NEWS").toUpperCase();
+
+    if (feedTitle.includes('SKY NEWS')) feedTitle = 'SKY NEWS';
+
+    const items = xmlDoc.querySelectorAll("item, entry, Stock");
+    items.forEach(item => {
+        if (item.tagName === 'Stock') {
+            const ticker = item.getAttribute('ticker');
+            const price = item.querySelector('Price')?.textContent || 'N/A';
+            const change = item.querySelector('DaysChange')?.textContent || '0%';
+            const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
+            
+            const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
+                             status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
+                             'bg-slate-900 border-slate-700 text-white';
+
+            allTitles.push(`<span class="mx-16 inline-flex items-center">
+                <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
+                <span class="text-slate-400 text-2xl mr-3">${price}</span> 
+                <span class="text-white text-2xl mr-4">${change}</span> 
+                <span class="px-4 py-1 rounded border font-mono text-xl ${statusBg}">
+                    ${status}
+                </span> 
+            </span>`);
+        } else {
+            const title = item.querySelector("title")?.textContent;
+            if (title) {
+                allTitles.push(`<span class="mx-16 inline-flex items-center">
+                    <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">${feedTitle}</span>
+                    <span class="text-white text-3xl font-bold">${title.trim()}</span>
+                </span>`);
+            }
+        }
+    });
+    return allTitles;
 }
 
 async function fetchNews() {
