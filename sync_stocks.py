@@ -8,7 +8,7 @@ from xml.dom import minidom
 # URL to your source Google Sheet exported as CSV
 CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pub?gid=134813518&single=true&output=csv'
 # Target path for the generated XML report
-XML_OUTPUT_PATH = r'C:\Users\andre\Documents\GitHub\AndrewsIndustries\data\Stock Watch.xml'
+XML_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'Stock Watch.xml')
 
 def sync_spreadsheet_to_xml():
     """

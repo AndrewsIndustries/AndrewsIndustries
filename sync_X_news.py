@@ -100,6 +100,7 @@ def sync_x_news():
                         entries.append({
                             'title': item.findtext('title'),
                             'summary': item.findtext('description'),
+                            'link': item.findtext('link'),
                             'id': item.findtext('guid') or item.findtext('link')
                         })
 
@@ -117,6 +118,7 @@ def sync_x_news():
                     item = {
                         "id": entry.get('id', hashlib.md5(headline.encode()).hexdigest()),
                         "timestamp_z": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        "link": entry.get('link', entry.get('id', '#')),
                         "source": f"@{handle.upper()}",
                         "headline": headline,
                         "summary": summary,

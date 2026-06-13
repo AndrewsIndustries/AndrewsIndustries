@@ -4,8 +4,8 @@ import sys
 import os
 
 def run_automation():
-    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sync_X_news.py")
-    print(f"[*] Starting Intel Feed (X News) Automation Loop")
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sync_stocks.py")
+    print(f"[*] Starting Stock Watch Automation Loop")
     print(f"[*] Target: {script_path}")
     print("[*] Interval: 300 seconds (5 minutes)")
     print("[*] Press Ctrl+C to stop the automation.")
