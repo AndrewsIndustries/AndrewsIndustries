@@ -479,6 +479,12 @@ function parseJsonOsint(text) {
             const level = entry.alert_level || 'LOW';
             let source = (entry.source || 'OSINT').toUpperCase();
             if (source.includes('SKY NEWS')) source = 'SKY NEWS';
+            if (source.includes('OSINTFEED.COM')) source = 'OSINT';
+            if (source.includes('CONFLICT_RADAR')) source = '@CONFLICT_RADAR';
+            if (source.includes('OSINTWARFARE')) source = '@OSINTWARFARE';
+            if (source.includes('OSINTTECHNICAL')) source = '@OSINTTECHNICAL';
+            if (source.includes('SENTDEFENDER')) source = '@SENTDEFENDER';
+            if (source.includes('POLYMARKETINTEL')) source = '@POLYMARKETINTEL';
             
             const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
             const alertClass = level === 'HIGH' ? 'bg-red-900/40 border-red-700 text-red-400' : 
@@ -515,6 +521,12 @@ function parseXmlData(xmlDoc) {
     let feedTitle = (xmlDoc.querySelector("channel > title, feed > title")?.textContent || "NEWS").toUpperCase();
 
     if (feedTitle.includes('SKY NEWS')) feedTitle = 'SKY NEWS';
+    if (feedTitle.includes('OSINTFEED.COM')) feedTitle = 'OSINT';
+    if (feedTitle.includes('CONFLICT_RADAR')) feedTitle = '@CONFLICT_RADAR';
+    if (feedTitle.includes('OSINTWARFARE')) feedTitle = '@OSINTWARFARE';
+    if (feedTitle.includes('OSINTTECHNICAL')) feedTitle = '@OSINTTECHNICAL';
+    if (feedTitle.includes('SENTDEFENDER')) feedTitle = '@SENTDEFENDER';
+    if (feedTitle.includes('POLYMARKETINTEL')) feedTitle = '@POLYMARKETINTEL';
 
     const items = xmlDoc.querySelectorAll("item, entry, Stock");
     items.forEach(item => {
