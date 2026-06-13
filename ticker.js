@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = ticker ? ticker.parentElement : null;
 
     if (!ticker || !container) {
-        console.error("Ticker elements not found. Ensure you have an element with id='ticker'.");
+        console.error("Ticker elements not found. Ensure you have an element with id='footer-ticker'.");
         return;
     }
 
     // Fetch live data from GitHub
     try {
-        const response = await fetch('https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/.github/workflows/Stock%20Watch.xml?t=' + Date.now());
+        const response = await fetch('https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml?t=' + Date.now());
         const xmlText = await response.text();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "application/xml");

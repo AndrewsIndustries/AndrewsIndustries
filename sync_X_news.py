@@ -7,12 +7,18 @@ from datetime import datetime, timezone
 import requests
 
 # --- CONFIGURATION ---
-NEWS_FEEDS = [
-    'https://osintfeed.com/feed/',
-    'https://feeds.skynews.com/feeds/rss/us.xml',
-    'https://feeds.skynews.com/feeds/rss/strange.xml',
-
+# Add or remove X (Twitter) handles here
+X_HANDLES = [
+    'conflict_radar',
+    'osintwarfare',
+    'Osinttechnical',
+    'sentdefender',
+    'PolymarketIntel'
 ]
+
+def get_nitter_url(handle):
+    return f'https://nitter.poast.org/{handle}/rss'
+
 OUTPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'osint_news.json')
 
 def clean_text(text):
@@ -28,8 +34,11 @@ def classify_urgency(headline, summary):
     """Objective urgency classification based on intelligence heuristics."""
     text = (headline + " " + summary).lower()
     
-    high_triggers = ['strike', 'war', 'invasion', 'missile', 'blockade', 'nuclear', 'offensive', 'combat', 'cyberattack', 'casualty']
-    med_triggers = ['exercise', 'military drill', 'explosion', 'diplomatic shift', 'unconfirmed', 'alert', 'protest', 'deployment', 'sanction']
+    high_triggers = [
+        'strike', 'war', 'invasion', 'missile', 'blockade', 'nuclear', 'offensive', 
+        'combat', 'cyberattack', 'casualty', 'breaking', 'urgent', 'intercept'
+    ]
+    med_triggers = ['exercise', 'military drill', 'explosion', 'diplomatic shift', 'unconfirmed', 'alert', 'protest', 'deployment', 'sanction', 'satellite', 'geolocated']
     
     if any(kw in text for kw in high_triggers):
         return "HIGH"
@@ -41,8 +50,9 @@ def identify_region(text):
     """Extracts primary region or body of water involved."""
     regions = [
         "Ukraine", "Russia", "Israel", "Gaza", "Iran", "Taiwan", "China", 
-        "Red Sea", "Middle East", "North Korea", "South China Sea", "USA", "UK",
-        "Europe", "NATO", "Pacific", "Arctic"
+        "Red Sea", "Middle East", "North Korea", "South China Sea", "USA", 
+        "Europe", "NATO", "Pacific", "Arctic", "Lebanon", "Yemen", "Sudan", 
+        "Black Sea", "Baltic"
     ]
     for region in regions:
         if region.lower() in text.lower():
@@ -58,12 +68,12 @@ def sync_osint():
     # Browser-like headers to prevent 403 Forbidden errors from OSINT providers
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 
-    for url in NEWS_FEEDS:
+    for handle in X_HANDLES:
+        url = get_nitter_url(handle)
         try:
             response = requests.get(url, headers=headers, timeout=20)
             response.raise_for_status()
             feed = feedparser.parse(response.content)
-            source = feed.feed.get('title', 'OSINT Source')
 
             for entry in feed.entries:
                 headline = clean_text(entry.get('title', ''))
@@ -84,7 +94,7 @@ def sync_osint():
                 item = {
                     "id": entry.get('id', hashlib.md5(headline.encode()).hexdigest()),
                     "timestamp_z": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-                    "source": source,
+                    "source": f"@{handle.upper()}",
                     "headline": headline,
                     "summary": summary,
                     "alert_level": alert_level,
@@ -93,7 +103,7 @@ def sync_osint():
                 unified_data.append(item)
 
         except Exception as e:
-            print(f"[!] Error processing {url}: {e}")
+            print(f"[!] Error processing @{handle}: {e}")
 
     # Save strictly as JSON array
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)

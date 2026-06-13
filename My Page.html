@@ -378,12 +378,13 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
-    'data/osint_news.json', // Local processed feed
-    'https://feeds.skynews.com/feeds/rss/us.xml',
-    'https://feeds.skynews.com/feeds/rss/strange.xml',
+    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/osint_news.json',
+    'data/osint_news.json' // Centralized X-Intelligence feed
 ];
+
 const footerRssUrls = [
-    'data/Stock Watch.xml', // Local generated report
+    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
+    'data/Stock%20Watch.xml'
 ];
 
 async function updateTicker(urls, elementId) {
@@ -431,7 +432,7 @@ async function updateTicker(urls, elementId) {
                     const trimmed = responseText.trim();
 
                     // 1. Handle OSINT JSON Format
-                    if (cleanUrl.toLowerCase().endsWith('.json') || trimmed.startsWith('[')) {
+                    if (cleanUrl.toLowerCase().endsWith('.json') || trimmed.startsWith('[') || (trimmed.startsWith('{') && !trimmed.includes('"error":'))) {
                         const titles = parseJsonOsint(trimmed);
                         if (titles.length) { allTitles.push(...titles); break; }
                     }
@@ -443,7 +444,6 @@ async function updateTicker(urls, elementId) {
                     }
 
                     // 3. Handle RSS or Stock XML Format
-                    if (trimmed.startsWith('{')) continue; // Skip JSON errors from proxies
                     const xmlDoc = parser.parseFromString(responseText, "text/xml");
                     if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
                     const titles = parseXmlData(xmlDoc);
@@ -458,7 +458,11 @@ async function updateTicker(urls, elementId) {
         if (allTitles.length > 0) {
             const tickerHtml = allTitles.join(' <span class="text-slate-600 text-3xl">|</span> ');
             tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl">|</span> ' + tickerHtml;
-            tickerElement.style.animationDuration = Math.max(30, allTitles.length * 10) + 's';
+            // Force animation restart to recalculate width
+            tickerElement.style.animation = 'none';
+            tickerElement.offsetHeight; // trigger reflow
+            tickerElement.style.animation = '';
+            tickerElement.style.animationDuration = Math.max(20, allTitles.length * 6) + 's';
         } else {
             if (tickerElement.innerHTML.includes('Connecting')) {
                 tickerElement.innerHTML = `<span class="text-red-500 p-4">Data unavailable. Retrying...</span>`;
@@ -471,20 +475,28 @@ async function updateTicker(urls, elementId) {
     }
 }
 
+/**
+ * Normalizes source names to requested handles and cleaner labels.
+ */
+function formatSourceLabel(name) {
+    let s = (name || '').trim().toUpperCase();
+    
+    // If the backend already passed @HANDLE, return it
+    if (s.startsWith('@')) return s;
+
+    // Fallback regex to extract @handle from raw titles
+    const handleMatch = s.match(/@([A-Z0-9_]+)/i);
+    if (handleMatch) return `@${handleMatch[1]}`;
+}
+
 function parseJsonOsint(text) {
     try {
         const data = JSON.parse(text);
         if (!Array.isArray(data)) return [];
         return data.map(entry => {
             const level = entry.alert_level || 'LOW';
-            let source = (entry.source || 'OSINT').toUpperCase();
-            if (source.includes('SKY NEWS')) source = 'SKY NEWS';
-            if (source.includes('OSINTFEED.COM')) source = 'OSINT';
-            if (source.includes('CONFLICT_RADAR')) source = '@CONFLICT_RADAR';
-            if (source.includes('OSINTWARFARE')) source = '@OSINTWARFARE';
-            if (source.includes('OSINTTECHNICAL')) source = '@OSINTTECHNICAL';
-            if (source.includes('SENTDEFENDER')) source = '@SENTDEFENDER';
-            if (source.includes('POLYMARKETINTEL')) source = '@POLYMARKETINTEL';
+            // Use the formatter function directly to avoid redeclaration errors
+            const sourceLabel = formatSourceLabel(entry.source);
             
             const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
             const alertClass = level === 'HIGH' ? 'bg-red-900/40 border-red-700 text-red-400' : 
@@ -492,7 +504,7 @@ function parseJsonOsint(text) {
                              'bg-slate-900 border-slate-700 text-white';
 
             return `<span class="mx-16 inline-flex items-center">
-                <span class="px-2 py-0.5 rounded border ${alertClass} font-black text-xs mr-3 tracking-widest">${level} ${source}</span>
+                <span class="px-2 py-0.5 rounded border ${alertClass} font-black text-xs mr-3 tracking-widest">${level} ${sourceLabel}</span>
                 <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
             </span>`;
         });
@@ -518,20 +530,13 @@ function parseCsvData(text) {
 
 function parseXmlData(xmlDoc) {
     const allTitles = [];
-    let feedTitle = (xmlDoc.querySelector("channel > title, feed > title")?.textContent || "NEWS").toUpperCase();
+    const rawTitle = xmlDoc.querySelector("channel > title, feed > title")?.textContent;
+    const feedLabel = formatSourceLabel(rawTitle || "NEWS");
 
-    if (feedTitle.includes('SKY NEWS')) feedTitle = 'SKY NEWS';
-    if (feedTitle.includes('OSINTFEED.COM')) feedTitle = 'OSINT';
-    if (feedTitle.includes('CONFLICT_RADAR')) feedTitle = '@CONFLICT_RADAR';
-    if (feedTitle.includes('OSINTWARFARE')) feedTitle = '@OSINTWARFARE';
-    if (feedTitle.includes('OSINTTECHNICAL')) feedTitle = '@OSINTTECHNICAL';
-    if (feedTitle.includes('SENTDEFENDER')) feedTitle = '@SENTDEFENDER';
-    if (feedTitle.includes('POLYMARKETINTEL')) feedTitle = '@POLYMARKETINTEL';
-
-    const items = xmlDoc.querySelectorAll("item, entry, Stock");
+    const items = xmlDoc.querySelectorAll("item, entry, Stock, stock");
     items.forEach(item => {
-        if (item.tagName === 'Stock') {
-            const ticker = item.getAttribute('ticker');
+        if (item.tagName.toUpperCase() === 'STOCK') {
+            const ticker = item.getAttribute('ticker') || 'N/A';
             const price = item.querySelector('Price')?.textContent || 'N/A';
             const change = item.querySelector('DaysChange')?.textContent || '0%';
             const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
@@ -552,7 +557,7 @@ function parseXmlData(xmlDoc) {
             const title = item.querySelector("title")?.textContent;
             if (title) {
                 allTitles.push(`<span class="mx-16 inline-flex items-center">
-                    <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">${feedTitle}</span>
+                    <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">${feedLabel}</span>
                     <span class="text-white text-3xl font-bold">${title.trim()}</span>
                 </span>`);
             }
