@@ -1,7 +1,1 @@
-alpaca-py
-python-dotenv
-pandas
-numpy
-websockets
-flask
-flask-socketio
+python -m pip install feedparser

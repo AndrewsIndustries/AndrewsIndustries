@@ -1,4 +1,11 @@
-import feedparser
+try:
+    import feedparser
+    FEEDPARSER_AVAILABLE = True
+except ImportError:
+    feedparser = None
+    FEEDPARSER_AVAILABLE = False
+    import xml.etree.ElementTree as ET
+
 import hashlib
 import json
 import re
@@ -16,13 +23,20 @@ X_HANDLES = [
     'PolymarketIntel'
 ]
 
-def get_nitter_url(handle):
-    return f'https://nitter.poast.org/{handle}/rss'
+def get_nitter_urls(handle):
+    """Returns multiple instance URLs for redundancy."""
+    instances = [
+        'https://nitter.privacydev.net',
+        'https://nitter.poast.org',
+        'https://nitter.perennialte.ch',
+        'https://nitter.net'
+    ]
+    return [f"{inst}/{handle}/rss" for inst in instances]
 
 OUTPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'x_news.json')
 
 def clean_text(text):
-    """Strips HTML tags and removes broken encodings."""
+    """Strips HTML tags and cleans up whitespace."""
     if not text: return ""
     # Remove HTML tags
     clean = re.sub(r'<[^>]+>', '', text)
@@ -31,7 +45,7 @@ def clean_text(text):
     return clean
 
 def classify_urgency(headline, summary):
-    """Objective urgency classification based on intelligence heuristics."""
+    """Objective urgency classification based on keyword triggers."""
     text = (headline + " " + summary).lower()
     
     high_triggers = [
@@ -65,45 +79,70 @@ def sync_x_news():
     
     seen_titles = set()
     unified_data = []
-    # Browser-like headers to prevent 403 Forbidden errors from OSINT providers
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    # Browser-like headers to prevent 403 Forbidden errors
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'}
 
     for handle in X_HANDLES:
-        url = get_nitter_url(handle)
-        try:
-            response = requests.get(url, headers=headers, timeout=20)
-            response.raise_for_status()
-            feed = feedparser.parse(response.content)
-
-            for entry in feed.entries:
-                headline = clean_text(entry.get('title', ''))
+        success = False
+        for url in get_nitter_urls(handle):
+            if success: break
+            try:
+                response = requests.get(url, headers=headers, timeout=15)
+                if response.status_code != 200: continue
                 
-                # 1. Deduplication
-                if not headline or headline in seen_titles:
-                    continue
-                seen_titles.add(headline)
+                entries = []
+                if FEEDPARSER_AVAILABLE:
+                    feed = feedparser.parse(response.content)
+                    entries = feed.entries
+                else:
+                    root = ET.fromstring(response.content)
+                    for item in root.findall('.//item'):
+                        entries.append({
+                            'title': item.findtext('title'),
+                            'summary': item.findtext('description'),
+                            'id': item.findtext('guid') or item.findtext('link')
+                        })
 
-                # 2. Content Cleaning & Summary
-                summary_raw = entry.get('summary', entry.get('description', ''))
-                summary = clean_text(summary_raw)[:280]
+                if not entries: continue
 
-                # 3. Urgency Classification
-                alert_level = classify_urgency(headline, summary)
+                for entry in entries:
+                    headline = clean_text(entry.get('title', ''))
+                    if not headline or headline in seen_titles: continue
+                    seen_titles.add(headline)
+
+                    summary_raw = entry.get('summary', entry.get('description', ''))
+                    summary = clean_text(summary_raw)[:280]
+                    alert_level = classify_urgency(headline, summary)
+                    
+                    item = {
+                        "id": entry.get('id', hashlib.md5(headline.encode()).hexdigest()),
+                        "timestamp_z": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        "source": f"@{handle.upper()}",
+                        "headline": headline,
+                        "summary": summary,
+                        "alert_level": alert_level,
+                        "primary_region": identify_region(headline + " " + summary)
+                    }
+                    unified_data.append(item)
                 
-                # 4. Data Construction
-                item = {
-                    "id": entry.get('id', hashlib.md5(headline.encode()).hexdigest()),
-                    "timestamp_z": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-                    "source": f"@{handle.upper()}",
-                    "headline": headline,
-                    "summary": summary,
-                    "alert_level": alert_level,
-                    "primary_region": identify_region(headline + " " + summary)
-                }
-                unified_data.append(item)
+                success = True
+                print(f"[+] Synced @{handle}")
+            except Exception:
+                continue
+        
+        if not success:
+            print(f"[!] Failed to sync @{handle} from all instances.")
 
-        except Exception as e:
-            print(f"[!] X Sync Error @{handle}: {e}")
+    # Ensure the feed is never empty so the ticker doesn't stall
+    if not unified_data:
+        unified_data.append({
+            "id": "sys-check",
+            "timestamp_z": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            "source": "@SYSTEM",
+            "headline": "X Content Stream active. Waiting for new updates from handles...",
+            "alert_level": "LOW",
+            "primary_region": "Global"
+        })
 
     # Save strictly as JSON array
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)

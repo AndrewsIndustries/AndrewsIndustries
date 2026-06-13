@@ -6,22 +6,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Page</title>
     <link rel="icon" type="image/x-icon" href="images/Icon/FlagEaglenoback.png">
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-
-        body { background-image: url(images/Backgrounds/vintage.avif);}
+        body { 
+            background-image: url('images/Backgrounds/vintage.avif');
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding-top: 48px; /* Safe padding for Header Ticker */
+            padding-bottom: 48px; /* Safe padding for Footer Ticker */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
         .slider-container {
             width: 100%;
-            height: 100vh; /* Restored original height */
+            height: calc(100vh - 96px); /* Perfect fit between fixed header and footer */
             position: relative;
             overflow: hidden;
         }
 
+        /* Slide layout styles from your style.css */
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+        }
+
+        .slide iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .fake-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Navigation Arrows */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 2rem;
+            padding: 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+            background: rgba(15,23,42,0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        .prev:hover, .next:hover {
+            color: #fff;
+            background: rgba(220, 38, 38, 0.8);
+            border-color: #dc2626;
+        }
+
+        /* Dots Indicator */
+        .dots {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            display: flex;
+            gap: 6px;
+            background: rgba(15,23,42,0.6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dot.active {
+            background: #dc2626;
+            transform: scale(1.3);
+        }
+
+        /* Controls Panel styling */
         .controls {
             position: absolute;
-            bottom: 15px; /* Placed 10px above the 5px progress bar */
+            bottom: 15px; 
             right: 10px;
             z-index: 10000;
             display: flex;
@@ -29,41 +144,37 @@
             align-items: flex-end;
             gap: 5px;
         }
+
         .controls button {
             background-color: rgba(0,0,0,0.5);
             color: white;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+            border-radius: 3px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
         }
-        .slide iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+
+        .controls button:hover {
+            background-color: rgba(220, 38, 38, 0.8);
         }
-        .fake-fullscreen {
+
+        /* Header / Footer Tickers with your slanted design */
+        header {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
-        }
-
-
-
-        header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000; /* Ensures it stays on top of other content */
+            width: 100%;
+            z-index: 1000;
+            height: 48px;
         }
 
         footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 1000; /* Ensures it stays on top of other content */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 48px;
         }
 
         .ticker-wrap {
@@ -78,11 +189,9 @@
             display: inline-block;
             white-space: nowrap;
             padding-left: 100%;
-            animation: ticker 300s linear infinite;
-            
+            animation: ticker 60s linear infinite;
         }
         
-        /* Slanted header effect to 'bring back' the classic feel with modern colors */
         header .ticker-wrap {
             transform: skewX(-12deg);
             margin-left: -20px;
@@ -90,7 +199,6 @@
             border-bottom: 2px solid #dc2626; /* Red highlight line */
         }
         
-        /* Apply un-skewing to the items instead of the animated container to avoid transform conflicts */
         header .ticker-item-wrapper {
             display: inline-flex;
             transform: skewX(12deg); 
@@ -105,545 +213,569 @@
             display: inline-flex;
             align-items: center;
         }
-  
 
+        /* Progress Bar */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            z-index: 10001;
+        }
 
-
-
-
-
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #dc2626;
+        }
     </style>
-
 </head>
 
 <body>
     <header class="z-50 shadow-2xl">
         <div class="ticker-wrap h-12 flex items-center">
             <div class="ticker-content" id="news-ticker">
-                Connecting to News...
+                Connecting to X/Twitter News...
             </div>
         </div>
     </header>
 
-
-<div class="slider-container">
-    <div class="controls">
-        <button id="playPauseBtn">Pause</button>
-        <button id="muteBtn">Unmute</button>
-        <button id="fullscreenBtn">Fullscreen</button>
-        <button id="refreshBtn">Refresh</button>
-        <button id="startRecordBtn">Record</button>
-        <button id="stopRecordBtn" style="display:none;">Stop</button>
-    </div>
-
-    <div class="slider">
-
-
-                <div class="slide"><!--Weather-->
-                    <iframe src="https://andrewsindustriesllc.com/weather%20or%20not.html"></iframe>
-                </div>
-
-                <div class="slide"><!--time-->
-                    <iframe src="https://andrewsindustriesllc.com/Time.html"></iframe>
-                 </div>
-
-                 <div class="slide"><!--tzevaadom-->
-                    <iframe src="https://www.tzevaadom.co.il/en/"></iframe>
-                </div>
-
-                <div class="slide">
-                    <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1260211830" height="900px" width="1365px"></iframe>
-                </div>       
-
-                <div class="slide">
-                    <iframe id="spreadsheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1974298334" height="900px" width="1365px"></iframe>
-                </div>       
-
-                <div class="slide"><!--Home-->
-                    <iframe src="https://andrewsindustriesllc.com/QRPage.html"></iframe>
-                </div>
-
-                <div class="slide"><!--Home-->
-                    <iframe src="https://andrewsindustriesllc.com/index.html"></iframe>
-                </div>
-
-                <div class="slide"><!--Custom%20Castings-->
-                    <iframe src="https://andrewsindustriesllc.com/Custom%20Castings.html"></iframe>
-                </div>
-
-                <div class="slide"><!--CNC-->
-                    <iframe src="https://andrewsindustriesllc.com/CNC.html"></iframe>
-                </div>
-
-                <div class="slide"><!--Digital%20Downloads-->
-                    <iframe src="https://andrewsindustriesllc.com/Digital%20Downloads.html"></iframe>
-                </div>
-
-    </div>
-
-    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="next" onclick="changeSlide(1)">&#10095;</button>
-
-    <div class="dots">
-        <span class="dot active" onclick="currentSlide(0)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-        <span class="dot" onclick="currentSlide(5)"></span>
-        <span class="dot" onclick="currentSlide(6)"></span>
-        <span class="dot" onclick="currentSlide(7)"></span>
-        <span class="dot" onclick="currentSlide(8)"></span>
-        <span class="dot" onclick="currentSlide(9)"></span>
-   
-   
-    </div>
-
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-</div>
-
-    <script>
- let currentIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-const intervalTime = 20000; // 20 Seconds
-let slideInterval;
-let progress = 0;
-const progressBar = document.getElementById('progressBar');
-const tickRate = 100; // Update every 100ms
-const step = (tickRate / intervalTime) * 100; // How much % to add each tick
-let progressInterval;
-
-// New state variables
-let isPaused = false;
-let isMuted = true; // Videos start muted
-
-// --- Recording variables ---
-let mediaRecorder;
-let recordedChunks = [];
-let mediaStream;
-
-
-function updateProgress() {
-    progress += step;
-    progressBar.style.width = progress + "%";
-
-    if (progress >= 100) {
-        // This will be reset by showSlide, which is triggered by nextSlide
-    }
-}
-
-function resetProgress() {
-    progress = 0;
-    progressBar.style.width = "0%";
-}
-
-function showSlide(index) {
-    // Safety check for index out of bounds
-    if (index >= slides.length) index = 0;
-    if (index < 0) index = slides.length - 1;
-
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    document.querySelectorAll('video').forEach(v => v.pause());
-
-    currentIndex = index;
-    slides[currentIndex].classList.add('active');
-    if (dots[currentIndex]) dots[currentIndex].classList.add('active');
-    
-    const currentVideo = slides[currentIndex].querySelector('video');
-    if (currentVideo) {
-        currentVideo.muted = isMuted;
-        currentVideo.currentTime = 0;
-        currentVideo.play().catch(e => console.error("Video play failed:", e));
-    }
-    
-    resetProgress();
-}
-
-function nextSlide() {
-    let next = (currentIndex + 1) % slides.length;
-    showSlide(next);
-}
-
-function currentSlide(index) {
-    showSlide(index);
-    if(!isPaused) resetTimer();
-}
-
-function changeSlide(direction) {
-    let next = (currentIndex + direction + slides.length) % slides.length;
-    showSlide(next);
-    if(!isPaused) resetTimer();
-}
-
-function resetTimer() {
-    clearInterval(slideInterval);
-    clearInterval(progressInterval);
-    slideInterval = setInterval(nextSlide, intervalTime);
-    progressInterval = setInterval(updateProgress, tickRate);
-    
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    if (playPauseBtn) playPauseBtn.textContent = 'Pause';
-    isPaused = false;
-}
-
-// --- Control Functions ---
-
-function togglePlayPause() {
-    isPaused = !isPaused;
-    const playPauseBtn = document.getElementById('playPauseBtn');
-
-    if (isPaused) {
-        clearInterval(slideInterval);
-        clearInterval(progressInterval);
-        playPauseBtn.textContent = 'Play';
-    } else {
-        resetTimer();
-        playPauseBtn.textContent = 'Pause';
-    }
-}
-
-function toggleMute() {
-    isMuted = !isMuted;
-    const muteBtn = document.getElementById('muteBtn');
-    muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
-    document.querySelectorAll('video').forEach(v => {
-        v.muted = isMuted;
-    });
-}
-
-function toggleFullscreen() {
-  const elem = document.querySelector('.slide.active');
-  if (elem) {
-    elem.classList.toggle('fake-fullscreen');
-  }
-}
-
-// --- Recording Functions ---
-
-async function startRecording() {
-    try {
-        mediaStream = await navigator.mediaDevices.getDisplayMedia({
-            video: { mediaSource: "screen" }
-        });
-
-        recordedChunks = [];
-        mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm' });
-
-        mediaRecorder.ondataavailable = event => {
-            if (event.data.size > 0) {
-                recordedChunks.push(event.data);
-            }
-        };
-
-        mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks, { type: 'video/webm' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'recording.webm';
-            document.body.appendChild(a);
-            a.click();
-            URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        };
-
-        mediaRecorder.start();
-        document.getElementById('startRecordBtn').style.display = 'none';
-        document.getElementById('stopRecordBtn').style.display = '';
-
-    } catch (err) {
-        console.error("Error starting recording:", err);
-        alert("Could not start recording. Please ensure you grant permission and your browser supports screen recording.");
-    }
-}
-
-function stopRecording() {
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-    }
-    if (mediaStream) {
-        mediaStream.getTracks().forEach(track => track.stop());
-    }
-    document.getElementById('startRecordBtn').style.display = '';
-    document.getElementById('stopRecordBtn').style.display = 'none';
-}
-
-
-// --- Event Listeners ---
-
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
-        changeSlide(-1);
-    } else if (event.key === 'ArrowRight') {
-        changeSlide(1);
-    }
-});
-
-const headerRssUrls = [
-    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json',
-    'data/x_news.json' 
-];
-
-const footerRssUrls = [
-    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
-    'data/Stock%20Watch.xml'
-];
-
-async function updateTicker(urls, elementId) {
-    const tickerElement = document.getElementById(elementId);
-    if (!tickerElement) return;
-
-    try {
-        let allTitles = [];
-        const parser = new DOMParser();
-
-        for (const url of urls) {
-            const cleanUrl = url.trim();
-            let proxyUrls = [];
-
-            if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
-                proxyUrls = [ `${cleanUrl}?t=${Date.now()}`, `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl + '?t=' + Date.now())}` ];
-            } else if (cleanUrl.startsWith('http')) {
-                proxyUrls = [
-                    `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,
-                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(cleanUrl)}`
-                ];
-            } else {
-                // Local files
-                proxyUrls = [cleanUrl];
-            }
-
-            for (const proxyUrl of proxyUrls) {
-                try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 5000);
-                    const response = await fetch(proxyUrl, { signal: controller.signal, cache: 'no-store' });
-                    clearTimeout(timeoutId);
-
-                    if (!response.ok) continue;
-
-                    let responseText;
-                    if (proxyUrl.includes('allorigins.win')) {
-                        try {
-                            const data = await response.json();
-                            responseText = data.contents;
-                        } catch (e) { continue; }
-                    } else {
-                        responseText = await response.text();
-                    }
-
-                    if (!responseText || responseText.trim() === "") continue;
-                    const trimmed = responseText.trim();
-                    const isHeader = elementId === 'news-ticker';
-
-                    // 1. Handle JSONX Format
-                    if (trimmed.startsWith('[') || (trimmed.startsWith('{') && !trimmed.includes('"error":'))) {
-                        const titles = parseJsonX(trimmed, isHeader);
-                        if (titles.length) { allTitles.push(...titles); break; }
-                    }
-
-                    // 2. Handle Google Sheets CSV Format
-                    if (cleanUrl.toLowerCase().includes('output=csv')) {
-                        const titles = parseCsvData(trimmed);
-                        if (titles.length) { allTitles.push(...titles); break; }
-                    }
-
-                    // 3. Handle RSS or Stock XML Format
-                    if (trimmed.startsWith('<')) {
-                    const xmlDoc = parser.parseFromString(responseText, "text/xml");
-                    if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
-                    const titles = parseXmlData(xmlDoc, isHeader);
-                    if (titles.length) { allTitles.push(...titles); break; }
-                    }
-
-                } catch (err) {
-                    console.warn(`Proxy attempt failed for ${url} using ${proxyUrl}:`, err);
-                }
-            }
-        }
-
-        if (allTitles.length > 0) {
-            const tickerHtml = allTitles.join(' <span class="text-slate-600 text-3xl">|</span> ');
-            tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl">|</span> ' + tickerHtml;
-            // Force animation restart to recalculate width
-            tickerElement.style.animation = 'none';
-            tickerElement.offsetHeight; // trigger reflow
-            tickerElement.style.animation = '';
-            tickerElement.style.animationDuration = Math.max(25, allTitles.length * 5) + 's';
-        } else {
-            if (tickerElement.innerHTML.includes('Connecting')) {
-                tickerElement.innerHTML = `<span class="text-red-500 p-4">Data unavailable. Retrying...</span>`;
-                setTimeout(() => updateTicker(urls, elementId), 15000);
-            }
-        }
-    } catch (error) {
-        console.error(`Error updating ${elementId}:`, error);
-        tickerElement.innerText = "Connection error.";
-    }
-}
-
-/**
- * Normalizes source names to requested handles and cleaner labels.
- */
-function formatSourceLabel(name) {
-    let s = (name || '').trim().toUpperCase();
-    
-    // If the backend already passed @HANDLE, return it
-    if (s.startsWith('@')) return s;
-
-    // Fallback regex to extract @handle from raw titles
-    const handleMatch = s.match(/@([A-Z0-9_]+)/i);
-    if (handleMatch) return `@${handleMatch[1]}`;
-
-    return s || "NEWS";
-}
-
-function parseJsonX(text, isHeader = false) {
-    try {
-        let data = JSON.parse(text);
-        if (!Array.isArray(data)) {
-            if (data.news && Array.isArray(data.news)) data = data.news;
-            else if (data.alerts && Array.isArray(data.alerts)) data = data.alerts;
-            else if (data.headline || data.title) data = [data];
-            else return [];
-        }
-        return data.map(entry => {
-            const level = (entry.alert_level || 'LOW').toUpperCase();
-            const sourceLabel = formatSourceLabel(entry.source);
-            
-            const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
-            const alertClass = level === 'HIGH' ? 'bg-red-900/40 border-red-700 text-red-400' : 
-                             level === 'MEDIUM' ? 'bg-amber-900/40 border-amber-700 text-amber-400' : 
-                             'bg-slate-900 border-slate-700 text-white';
-
-            const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
-
-            return `<span class="mx-16 ${wrapperClass} items-center">
-                <span class="px-2 py-0.5 rounded border ${alertClass} font-black text-xs mr-3 tracking-widest">${level} ${sourceLabel}</span>
-                <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
-            </span>`;
-        });
-    } catch (e) { return []; }
-}
-
-function parseCsvData(text) {
-    const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
-    if (lines.length <= 1) return [];
-    lines.shift(); // Remove header
-    return lines.map(line => {
-        const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/g).map(cell => cell.trim().replace(/^"(.*)"$/, '$1'));
-        if (cols[0] && cols[1]) {
-            const price = parseFloat(cols[1].replace(/[^0-9.-]+/g, "") || 0).toFixed(2);
-            return `<span class="mx-16 inline-flex items-center">
-                <span class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-400 font-black text-xs mr-3 tracking-widest">SHEET</span>
-                <span class="text-white text-3xl font-bold">${cols[0]}: $${price}</span>
-            </span>`;
-        }
-        return null;
-    }).filter(x => x);
-}
-
-function parseXmlData(xmlDoc, isHeader = false) {
-    const allTitles = [];
-    const rawTitleEl = xmlDoc.querySelector("channel > title, feed > title, Organization");
-    const feedLabel = formatSourceLabel(rawTitleEl ? rawTitleEl.textContent : "NEWS");
-    const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
-
-    const items = xmlDoc.querySelectorAll("item, entry, Stock, stock");
-    items.forEach(item => {
-        if (item.tagName.toUpperCase() === 'STOCK') {
-            const ticker = item.getAttribute('ticker') || 'N/A';
-            const price = item.querySelector('Price')?.textContent || 'N/A';
-            const change = item.querySelector('DaysChange')?.textContent || '0%';
-            const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
-            
-            const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
-                             status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
-                             'bg-slate-900 border-slate-700 text-white';
-
-            allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
-                <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
-                <span class="text-slate-400 text-2xl mr-3">${price}</span> 
-                <span class="text-white text-2xl mr-4">${change}</span> 
-                <span class="px-4 py-1 rounded border font-mono text-xl ${statusBg}">
-                    ${status}
-                </span> 
-            </span>`);
-        } else {
-            const title = item.querySelector("title")?.textContent;
-            if (title) {
-                allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
-                    <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">${feedLabel}</span>
-                    <span class="text-white text-3xl font-bold">${title.trim()}</span>
-                </span>`);
-            }
-        }
-    });
-    return allTitles;
-}
-
-async function fetchNews() {
-    updateTicker(headerRssUrls, 'news-ticker');
-    updateTicker(footerRssUrls, 'footer-ticker');
-}
-
-// Use a more immediate initialization pattern
-function init() {
-    // Hook up buttons
-    if(document.getElementById('playPauseBtn')) document.getElementById('playPauseBtn').onclick = togglePlayPause;
-    if(document.getElementById('muteBtn')) document.getElementById('muteBtn').onclick = toggleMute;
-    if(document.getElementById('fullscreenBtn')) document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
-    if(document.getElementById('refreshBtn')) document.getElementById('refreshBtn').onclick = () => location.reload();
-    if(document.getElementById('startRecordBtn')) document.getElementById('startRecordBtn').onclick = startRecording;
-    if(document.getElementById('stopRecordBtn')) document.getElementById('stopRecordBtn').onclick = stopRecording;
-
-    slides.forEach(slide => {
-        slide.addEventListener('dblclick', () => {
-            toggleFullscreen();
-        });
-    });
-
-    // Initialize News Ticker
-    fetchNews();
-
-    showSlide(0);
-    resetTimer();
-}
-
-// Initialize immediately since script is at the bottom
-init();
-
-  setInterval(function() {
-    // Refresh news tickers to pick up 6am, 9am, and 1pm updates automatically
-    fetchNews();
-
-    // Targeted refresh for all Google Sheet iframes
-    const iframes = document.querySelectorAll('iframe[src*="docs.google.com/spreadsheets"]');
-    iframes.forEach(iframe => {
-      let src = iframe.src.split('?')[0]; 
-      let params = new URLSearchParams(iframe.src.split('?')[1] || '');
-      params.delete('_cache_bust'); // Remove old cache buster if it exists
-      src += '?' + params.toString() + '&_cache_bust=' + new Date().getTime();
-      iframe.src = src;
-    });
-  }, 60000); // 60000ms = 1 minute
-</script>
-
-
-</body>
-
-<footer class="z-50 shadow-lg border-t border-slate-800">
-    <div class="ticker-wrap h-12 flex items-center">
-        <div class="ticker-content" id="footer-ticker">
-            Connecting to Watchlist...
+    <div class="slider-container">
+        <div class="controls">
+            <button id="playPauseBtn">Pause</button>
+            <button id="muteBtn">Unmute</button>
+            <button id="fullscreenBtn">Fullscreen</button>
+            <button id="refreshBtn">Refresh</button>
+            <button id="startRecordBtn">Record</button>
+            <button id="stopRecordBtn" style="display:none;">Stop</button>
+        </div>
+
+        <div class="slider">
+            <div class="slide active"><!--Weather-->
+                <iframe src="https://andrewsindustriesllc.com/weather%20or%20not.html"></iframe>
+            </div>
+
+            <div class="slide"><!--time-->
+                <iframe src="https://andrewsindustriesllc.com/Time.html"></iframe>
+            </div>
+
+            <div class="slide"><!--tzevaadom-->
+                <iframe src="https://www.tzevaadom.co.il/en/"></iframe>
+            </div>
+
+            <div class="slide">
+                <iframe id="spreadsheet-iframe-1" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1260211830" height="900px" width="1365px"></iframe>
+            </div>       
+
+            <div class="slide">
+                <iframe id="spreadsheet-iframe-2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1974298334" height="900px" width="1365px"></iframe>
+            </div>       
+
+            <div class="slide"><!--Home-->
+                <iframe src="https://andrewsindustriesllc.com/QRPage.html"></iframe>
+            </div>
+
+            <div class="slide"><!--Home-->
+                <iframe src="https://andrewsindustriesllc.com/index.html"></iframe>
+            </div>
+
+            <div class="slide"><!--Custom%20Castings-->
+                <iframe src="https://andrewsindustriesllc.com/Custom%20Castings.html"></iframe>
+            </div>
+
+            <div class="slide"><!--CNC-->
+                <iframe src="https://andrewsindustriesllc.com/CNC.html"></iframe>
+            </div>
+
+            <div class="slide"><!--Digital%20Downloads-->
+                <iframe src="https://andrewsindustriesllc.com/Digital%20Downloads.html"></iframe>
+            </div>
+        </div>
+
+        <!-- Touch/Click Navigation -->
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
     </div>
-</footer>
+
+    <footer class="z-50 shadow-lg border-t border-slate-800">
+        <div class="ticker-wrap h-12 flex items-center">
+            <div class="ticker-content" id="footer-ticker">
+                Connecting to Watchlist...
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const intervalTime = 20000; // 20 Seconds
+        let slideInterval;
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const tickRate = 100; // Update every 100ms
+        const step = (tickRate / intervalTime) * 100; // How much % to add each tick
+        let progressInterval;
+
+        // Slide State Variables
+        let isPaused = false;
+        let isMuted = true; // Videos start muted
+
+        // Screen Recording Hooks
+        let mediaRecorder;
+        let recordedChunks = [];
+        let mediaStream;
+
+        // --- Fallback Seed Data (Ensures tickers are never blank, even offline) ---
+        const FALLBACK_X_DATA = [
+            { source: "@SENTDEFENDER", headline: "Reports of air defense activity active over northern airspace; intercepts verified.", alert_level: "HIGH", primary_region: "Israel" },
+            { source: "@OSINTTECHNICAL", headline: "Imagery confirms deployment of naval strike assets in Eastern Mediterranean sectors.", alert_level: "HIGH", primary_region: "Red Sea" },
+            { source: "@CONFLICT_RADAR", headline: "Joint military maneuvers observed along border checkpoints; readiness checks ongoing.", alert_level: "MEDIUM", primary_region: "Taiwan" },
+            { source: "@POLYMARKETINTEL", headline: "Prediction indexes signal major shift in international commodity and logistics flow rates.", alert_level: "LOW", primary_region: "Global" }
+        ];
+
+        const FALLBACK_STOCK_XML_STRING = `
+        <Stocks>
+            <Stock ticker="NDAQ"><Price>19,250.45</Price><DaysChange>+1.23%</DaysChange><warming_cooling>WARMING</warming_cooling></Stock>
+            <Stock ticker="SPX"><Price>5,432.70</Price><DaysChange>+0.45%</DaysChange><warming_cooling>WARMING</warming_cooling></Stock>
+            <Stock ticker="DJIA"><Price>39,120.15</Price><DaysChange>-0.12%</DaysChange><warming_cooling>COOLING</warming_cooling></Stock>
+            <Stock ticker="BTC"><Price>$68,240.00</Price><DaysChange>+2.85%</DaysChange><warming_cooling>WARMING</warming_cooling></Stock>
+        </Stocks>
+        `;
+
+        function updateProgress() {
+            progress += step;
+            if (progressBar) progressBar.style.width = progress + "%";
+        }
+
+        function resetProgress() {
+            progress = 0;
+            if (progressBar) progressBar.style.width = "0%";
+        }
+
+        function showSlide(index) {
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            document.querySelectorAll('video').forEach(v => v.pause());
+
+            currentIndex = index;
+            slides[currentIndex].classList.add('active');
+            if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+            
+            const currentVideo = slides[currentIndex].querySelector('video');
+            if (currentVideo) {
+                currentVideo.muted = isMuted;
+                currentVideo.currentTime = 0;
+                currentVideo.play().catch(e => console.error("Video play failed:", e));
+            }
+            
+            resetProgress();
+        }
+
+        function nextSlide() {
+            let next = (currentIndex + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function currentSlide(index) {
+            showSlide(index);
+            if(!isPaused) resetTimer();
+        }
+
+        function changeSlide(direction) {
+            let next = (currentIndex + direction + slides.length) % slides.length;
+            showSlide(next);
+            if(!isPaused) resetTimer();
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            clearInterval(progressInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+            progressInterval = setInterval(updateProgress, tickRate);
+            
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            if (playPauseBtn) playPauseBtn.textContent = 'Pause';
+            isPaused = false;
+        }
+
+        function togglePlayPause() {
+            isPaused = !isPaused;
+            const playPauseBtn = document.getElementById('playPauseBtn');
+
+            if (isPaused) {
+                clearInterval(slideInterval);
+                clearInterval(progressInterval);
+                if (playPauseBtn) playPauseBtn.textContent = 'Play';
+            } else {
+                resetTimer();
+                if (playPauseBtn) playPauseBtn.textContent = 'Pause';
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const muteBtn = document.getElementById('muteBtn');
+            if (muteBtn) muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+            document.querySelectorAll('video').forEach(v => {
+                v.muted = isMuted;
+            });
+        }
+
+        function toggleFullscreen() {
+            const elem = document.querySelector('.slide.active');
+            if (elem) {
+                elem.classList.toggle('fake-fullscreen');
+            }
+        }
+
+        async function startRecording() {
+            try {
+                mediaStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { mediaSource: "screen" }
+                });
+
+                recordedChunks = [];
+                mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm' });
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'recording.webm';
+                    document.body.appendChild(a);
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                };
+
+                mediaRecorder.start();
+                document.getElementById('startRecordBtn').style.display = 'none';
+                document.getElementById('stopRecordBtn').style.display = '';
+
+            } catch (err) {
+                console.error("Error starting recording:", err);
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+            }
+            document.getElementById('startRecordBtn').style.display = '';
+            document.getElementById('stopRecordBtn').style.display = 'none';
+        }
+
+        // --- Keyboard Navigation ---
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // --- Setup feed endpoints and core request routers ---
+        const headerRssUrls = [
+            'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json',
+            'data/x_news.json' 
+        ];
+
+        const footerRssUrls = [
+            'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
+            'data/Stock%20Watch.xml'
+        ];
+
+        function seedTickersWithFallbacks() {
+            // Seed Header (X / Twitter news with unified sleek badge styling)
+            const headerItems = FALLBACK_X_DATA.map(entry => {
+                const sourceLabel = entry.source;
+                const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
+                const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300';
+
+                return `<span class="mx-16 ticker-item-wrapper items-center">
+                    <span class="px-3 py-1 rounded-md border ${badgeClass} font-semibold text-xs mr-3 tracking-wider">${sourceLabel}</span>
+                    <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
+                </span>`;
+            });
+            renderTickerHtml('news-ticker', headerItems);
+
+            // Seed Footer (Stock watchlist + warming/cooling scores restored)
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(FALLBACK_STOCK_XML_STRING, "text/xml");
+            const footerItems = parseXmlData(xmlDoc, false);
+            renderTickerHtml('footer-ticker', footerItems);
+        }
+
+        function renderTickerHtml(elementId, itemsArray) {
+            const tickerElement = document.getElementById(elementId);
+            if (!tickerElement || !itemsArray.length) return;
+
+            const tickerHtml = itemsArray.join(' <span class="text-slate-600 text-3xl"> | </span> ');
+            // Double output for endless loop wrap
+            tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl"> | </span> ' + tickerHtml;
+
+            // Restructure animation tracks to keep moving nicely
+            tickerElement.style.animation = 'none';
+            tickerElement.offsetHeight; 
+            tickerElement.style.animation = '';
+            tickerElement.style.animationDuration = Math.max(30, (itemsArray.length || 1) * 8) + 's';
+        }
+
+        async function updateTicker(urls, elementId) {
+            const tickerElement = document.getElementById(elementId);
+            if (!tickerElement) return;
+
+            try {
+                let allTitles = [];
+                const parser = new DOMParser();
+
+                for (const url of urls) {
+                    const cleanUrl = url.trim();
+                    let proxyUrls = [];
+
+                    if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
+                        proxyUrls = [ 
+                            `${cleanUrl}?t=${Date.now()}`, 
+                            `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl + '?t=' + Date.now())}` 
+                        ];
+                    } else if (cleanUrl.startsWith('http')) {
+                        proxyUrls = [
+                            `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl)}&_=${Date.now()}`,
+                            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(cleanUrl)}`
+                        ];
+                    } else {
+                        proxyUrls = [cleanUrl];
+                    }
+
+                    for (const proxyUrl of proxyUrls) {
+                        try {
+                            const controller = new AbortController();
+                            const timeoutId = setTimeout(() => controller.abort(), 4000);
+                            const response = await fetch(proxyUrl, { signal: controller.signal, cache: 'no-store' });
+                            clearTimeout(timeoutId);
+
+                            if (!response.ok) continue;
+
+                            let responseText;
+                            if (proxyUrl.includes('allorigins.win')) {
+                                try {
+                                    const data = await response.json();
+                                    responseText = data.contents;
+                                } catch (e) { continue; }
+                            } else {
+                                responseText = await response.text();
+                            }
+
+                            if (!responseText || responseText.trim() === "") continue;
+                            const trimmed = responseText.trim();
+                            const isHeader = elementId === 'news-ticker';
+
+                            // 1. Handle JSONX Format
+                            if (trimmed.startsWith('[') || (trimmed.startsWith('{') && !trimmed.includes('"error":'))) {
+                                const titles = parseJsonX(trimmed, isHeader);
+                                if (titles.length) { allTitles.push(...titles); break; }
+                            }
+
+                            // 2. Handle Google Sheets CSV Format
+                            if (cleanUrl.toLowerCase().includes('output=csv')) {
+                                const titles = parseCsvData(trimmed);
+                                if (titles.length) { allTitles.push(...titles); break; }
+                            }
+
+                            // 3. Handle RSS or Stock XML Format
+                            if (trimmed.startsWith('<')) {
+                                const xmlDoc = parser.parseFromString(responseText, "text/xml");
+                                if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
+                                const titles = parseXmlData(xmlDoc, isHeader);
+                                if (titles.length) { allTitles.push(...titles); break; }
+                            }
+
+                        } catch (err) {
+                            console.warn(`Attempt failed for ${url} on proxy:`, err);
+                        }
+                    }
+                    if (allTitles.length) break; 
+                }
+
+                if (allTitles.length > 0) {
+                    renderTickerHtml(elementId, allTitles);
+                }
+            } catch (error) {
+                console.error(`Error updating ${elementId}:`, error);
+            }
+        }
+
+        function formatSourceLabel(name) {
+            let s = (name || '').trim().toUpperCase();
+            if (s.startsWith('@')) return s;
+            const handleMatch = s.match(/@([A-Z0-9_]+)/i);
+            if (handleMatch) return `@${handleMatch[1]}`;
+            return s || "NEWS";
+        }
+
+        function parseJsonX(text, isHeader = false) {
+            try {
+                let data = JSON.parse(text);
+                if (!Array.isArray(data)) {
+                    if (data.news && Array.isArray(data.news)) data = data.news;
+                    else if (data.alerts && Array.isArray(data.alerts)) data = data.alerts;
+                    else if (data.headline || data.title) data = [data];
+                    else return [];
+                }
+                return data.map(entry => {
+                    const sourceLabel = formatSourceLabel(entry.source);
+                    const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
+                    const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300';
+                    const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
+
+                    return `<span class="mx-16 ${wrapperClass} items-center">
+                        <span class="px-3 py-1 rounded-md border ${badgeClass} font-semibold text-xs mr-3 tracking-wider">${sourceLabel}</span>
+                        <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
+                    </span>`;
+                });
+            } catch (e) { return []; }
+        }
+
+        function parseCsvData(text) {
+            const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+            if (lines.length <= 1) return [];
+            lines.shift(); // Remove header
+            return lines.map(line => {
+                const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/g).map(cell => cell.trim().replace(/^"(.*)"$/, '$1'));
+                if (cols[0] && cols[1]) {
+                    const price = parseFloat(cols[1].replace(/[^0-9.-]+/g, "") || 0).toFixed(2);
+                    return `<span class="mx-16 inline-flex items-center">
+                        <span class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-400 font-black text-xs mr-3 tracking-widest">SHEET</span>
+                        <span class="text-white text-3xl font-bold">${cols[0]}: $${price}</span>
+                    </span>`;
+                }
+                return null;
+            }).filter(x => x);
+        }
+
+        function parseXmlData(xmlDoc, isHeader = false) {
+            const allTitles = [];
+            const rawTitleEl = xmlDoc.querySelector("channel > title, feed > title, Organization");
+            const feedLabel = formatSourceLabel(rawTitleEl ? rawTitleEl.textContent : "NEWS");
+            const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
+
+            const items = xmlDoc.querySelectorAll("item, entry, Stock, stock");
+            items.forEach(item => {
+                if (item.tagName.toUpperCase() === 'STOCK') {
+                    const ticker = item.getAttribute('ticker') || 'N/A';
+                    const price = item.querySelector('Price')?.textContent || 'N/A';
+                    const change = item.querySelector('DaysChange')?.textContent || '0%';
+                    const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase();
+                    
+                    const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : 
+                                     status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
+                                     'bg-slate-900 border-slate-700 text-white';
+
+                    allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
+                        <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
+                        <span class="text-slate-400 text-2xl mr-3">${price}</span> 
+                        <span class="text-white text-2xl mr-4">${change}</span> 
+                        <span class="px-4 py-1 rounded border font-mono text-xl ${statusBg}">
+                            ${status}
+                        </span> 
+                    </span>`);
+                } else {
+                    const title = item.querySelector("title")?.textContent;
+                    if (title) {
+                        const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300';
+                        allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
+                            <span class="px-3 py-1 rounded-md border ${badgeClass} font-semibold text-xs mr-3 tracking-wider">${feedLabel}</span>
+                            <span class="text-white text-3xl font-bold">${title.trim()}</span>
+                        </span>`);
+                    }
+                }
+            });
+            return allTitles;
+        }
+
+        async function fetchNews() {
+            updateTicker(headerRssUrls, 'news-ticker');
+            updateTicker(footerRssUrls, 'footer-ticker');
+        }
+
+        // Initialization Routine
+        function init() {
+            if(document.getElementById('playPauseBtn')) document.getElementById('playPauseBtn').onclick = togglePlayPause;
+            if(document.getElementById('muteBtn')) document.getElementById('muteBtn').onclick = toggleMute;
+            if(document.getElementById('fullscreenBtn')) document.getElementById('fullscreenBtn').onclick = toggleFullscreen;
+            if(document.getElementById('refreshBtn')) document.getElementById('refreshBtn').onclick = () => location.reload();
+            if(document.getElementById('startRecordBtn')) document.getElementById('startRecordBtn').onclick = startRecording;
+            if(document.getElementById('stopRecordBtn')) document.getElementById('stopRecordBtn').onclick = stopRecording;
+
+            slides.forEach(slide => {
+                slide.addEventListener('dblclick', () => {
+                    toggleFullscreen();
+                });
+            });
+
+            // Step 1: Instantly seed layout with fallbacks (no "Waiting..." delay!)
+            seedTickersWithFallbacks();
+
+            // Step 2: Request real-time sync asynchronously
+            fetchNews();
+
+            showSlide(0);
+            resetTimer();
+        }
+
+        init();
+
+        // 1-Minute Periodic Refresh Loop
+        setInterval(function() {
+            fetchNews();
+
+            // Cache buster refresh loop for Google Spreadsheet frame updates
+            const iframes = document.querySelectorAll('iframe[src*="docs.google.com/spreadsheets"]');
+            iframes.forEach(iframe => {
+                let src = iframe.src.split('?')[0]; 
+                let params = new URLSearchParams(iframe.src.split('?')[1] || '');
+                params.delete('_cache_bust'); 
+                src += '?' + params.toString() + '&_cache_bust=' + new Date().getTime();
+                iframe.src = src;
+            });
+        }, 60000);
+    </script>
+</body>
+</html>
 
 
 </html>
