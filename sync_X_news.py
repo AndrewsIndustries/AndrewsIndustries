@@ -19,7 +19,7 @@ X_HANDLES = [
 def get_nitter_url(handle):
     return f'https://nitter.poast.org/{handle}/rss'
 
-OUTPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'osint_news.json')
+OUTPUT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'x_news.json')
 
 def clean_text(text):
     """Strips HTML tags and removes broken encodings."""
@@ -59,9 +59,9 @@ def identify_region(text):
             return region
     return "Global"
 
-def sync_osint():
-    """Ingests raw XML feeds and outputs a clean, unified JSON array."""
-    print(f"[-] Initializing OSINT Ingest...")
+def sync_x_news():
+    """Ingests X (Twitter) RSS feeds and outputs a clean, unified JSON array."""
+    print(f"[-] Initializing X Content Ingest...")
     
     seen_titles = set()
     unified_data = []
@@ -103,15 +103,15 @@ def sync_osint():
                 unified_data.append(item)
 
         except Exception as e:
-            print(f"[!] Error processing @{handle}: {e}")
+            print(f"[!] X Sync Error @{handle}: {e}")
 
     # Save strictly as JSON array
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(unified_data, f, indent=2)
     
-    print(f"[+] OSINT Sync Complete. {len(unified_data)} events processed.")
+    print(f"[+] X News Sync Complete. {len(unified_data)} events processed.")
     return json.dumps(unified_data) # Strict JSON output
 
 if __name__ == "__main__":
-    sync_osint()
+    sync_x_news()

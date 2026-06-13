@@ -89,8 +89,11 @@
             width: calc(100% + 40px);
             border-bottom: 2px solid #dc2626; /* Red highlight line */
         }
-        header .ticker-content {
-            transform: skewX(12deg);
+        
+        /* Apply un-skewing to the items instead of the animated container to avoid transform conflicts */
+        header .ticker-item-wrapper {
+            display: inline-flex;
+            transform: skewX(12deg); 
         }
 
         @keyframes ticker {
@@ -188,6 +191,10 @@
         <span class="dot" onclick="currentSlide(3)"></span>
         <span class="dot" onclick="currentSlide(4)"></span>
         <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+        <span class="dot" onclick="currentSlide(8)"></span>
+        <span class="dot" onclick="currentSlide(9)"></span>
    
    
     </div>
@@ -245,7 +252,7 @@ function showSlide(index) {
 
     currentIndex = index;
     slides[currentIndex].classList.add('active');
-    dots[currentIndex].classList.add('active');
+    if (dots[currentIndex]) dots[currentIndex].classList.add('active');
     
     const currentVideo = slides[currentIndex].querySelector('video');
     if (currentVideo) {
@@ -378,8 +385,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 const headerRssUrls = [
-    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/osint_news.json',
-    'data/osint_news.json' // Centralized X-Intelligence feed
+    'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json',
+    'data/x_news.json' 
 ];
 
 const footerRssUrls = [
@@ -400,7 +407,6 @@ async function updateTicker(urls, elementId) {
             let proxyUrls = [];
 
             if (cleanUrl.startsWith('https://raw.githubusercontent.com')) {
-                // Direct fetch for GitHub content is faster, but fallback to proxy if CORS issues occur
                 proxyUrls = [ `${cleanUrl}?t=${Date.now()}`, `https://api.allorigins.win/get?url=${encodeURIComponent(cleanUrl + '?t=' + Date.now())}` ];
             } else if (cleanUrl.startsWith('http')) {
                 proxyUrls = [
@@ -414,11 +420,14 @@ async function updateTicker(urls, elementId) {
 
             for (const proxyUrl of proxyUrls) {
                 try {
-                    const response = await fetch(proxyUrl);
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    const response = await fetch(proxyUrl, { signal: controller.signal, cache: 'no-store' });
+                    clearTimeout(timeoutId);
+
                     if (!response.ok) continue;
 
                     let responseText;
-                    // Handle JSON response from AllOrigins or raw text from Corsproxy
                     if (proxyUrl.includes('allorigins.win')) {
                         try {
                             const data = await response.json();
@@ -430,10 +439,11 @@ async function updateTicker(urls, elementId) {
 
                     if (!responseText || responseText.trim() === "") continue;
                     const trimmed = responseText.trim();
+                    const isHeader = elementId === 'news-ticker';
 
-                    // 1. Handle OSINT JSON Format
-                    if (cleanUrl.toLowerCase().endsWith('.json') || trimmed.startsWith('[') || (trimmed.startsWith('{') && !trimmed.includes('"error":'))) {
-                        const titles = parseJsonOsint(trimmed);
+                    // 1. Handle JSONX Format
+                    if (trimmed.startsWith('[') || (trimmed.startsWith('{') && !trimmed.includes('"error":'))) {
+                        const titles = parseJsonX(trimmed, isHeader);
                         if (titles.length) { allTitles.push(...titles); break; }
                     }
 
@@ -444,10 +454,12 @@ async function updateTicker(urls, elementId) {
                     }
 
                     // 3. Handle RSS or Stock XML Format
+                    if (trimmed.startsWith('<')) {
                     const xmlDoc = parser.parseFromString(responseText, "text/xml");
                     if (xmlDoc.getElementsByTagName("parsererror").length > 0) continue;
-                    const titles = parseXmlData(xmlDoc);
+                    const titles = parseXmlData(xmlDoc, isHeader);
                     if (titles.length) { allTitles.push(...titles); break; }
+                    }
 
                 } catch (err) {
                     console.warn(`Proxy attempt failed for ${url} using ${proxyUrl}:`, err);
@@ -462,7 +474,7 @@ async function updateTicker(urls, elementId) {
             tickerElement.style.animation = 'none';
             tickerElement.offsetHeight; // trigger reflow
             tickerElement.style.animation = '';
-            tickerElement.style.animationDuration = Math.max(20, allTitles.length * 6) + 's';
+            tickerElement.style.animationDuration = Math.max(25, allTitles.length * 5) + 's';
         } else {
             if (tickerElement.innerHTML.includes('Connecting')) {
                 tickerElement.innerHTML = `<span class="text-red-500 p-4">Data unavailable. Retrying...</span>`;
@@ -487,15 +499,21 @@ function formatSourceLabel(name) {
     // Fallback regex to extract @handle from raw titles
     const handleMatch = s.match(/@([A-Z0-9_]+)/i);
     if (handleMatch) return `@${handleMatch[1]}`;
+
+    return s || "NEWS";
 }
 
-function parseJsonOsint(text) {
+function parseJsonX(text, isHeader = false) {
     try {
-        const data = JSON.parse(text);
-        if (!Array.isArray(data)) return [];
+        let data = JSON.parse(text);
+        if (!Array.isArray(data)) {
+            if (data.news && Array.isArray(data.news)) data = data.news;
+            else if (data.alerts && Array.isArray(data.alerts)) data = data.alerts;
+            else if (data.headline || data.title) data = [data];
+            else return [];
+        }
         return data.map(entry => {
-            const level = entry.alert_level || 'LOW';
-            // Use the formatter function directly to avoid redeclaration errors
+            const level = (entry.alert_level || 'LOW').toUpperCase();
             const sourceLabel = formatSourceLabel(entry.source);
             
             const region = entry.primary_region ? ` [${entry.primary_region}]` : '';
@@ -503,7 +521,9 @@ function parseJsonOsint(text) {
                              level === 'MEDIUM' ? 'bg-amber-900/40 border-amber-700 text-amber-400' : 
                              'bg-slate-900 border-slate-700 text-white';
 
-            return `<span class="mx-16 inline-flex items-center">
+            const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
+
+            return `<span class="mx-16 ${wrapperClass} items-center">
                 <span class="px-2 py-0.5 rounded border ${alertClass} font-black text-xs mr-3 tracking-widest">${level} ${sourceLabel}</span>
                 <span class="text-white text-3xl font-bold">${entry.headline}${region}</span>
             </span>`;
@@ -528,10 +548,11 @@ function parseCsvData(text) {
     }).filter(x => x);
 }
 
-function parseXmlData(xmlDoc) {
+function parseXmlData(xmlDoc, isHeader = false) {
     const allTitles = [];
-    const rawTitle = xmlDoc.querySelector("channel > title, feed > title")?.textContent;
-    const feedLabel = formatSourceLabel(rawTitle || "NEWS");
+    const rawTitleEl = xmlDoc.querySelector("channel > title, feed > title, Organization");
+    const feedLabel = formatSourceLabel(rawTitleEl ? rawTitleEl.textContent : "NEWS");
+    const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex';
 
     const items = xmlDoc.querySelectorAll("item, entry, Stock, stock");
     items.forEach(item => {
@@ -545,7 +566,7 @@ function parseXmlData(xmlDoc) {
                              status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 
                              'bg-slate-900 border-slate-700 text-white';
 
-            allTitles.push(`<span class="mx-16 inline-flex items-center">
+            allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
                 <span class="font-black text-white text-4xl mr-3">${ticker}</span> 
                 <span class="text-slate-400 text-2xl mr-3">${price}</span> 
                 <span class="text-white text-2xl mr-4">${change}</span> 
@@ -556,7 +577,7 @@ function parseXmlData(xmlDoc) {
         } else {
             const title = item.querySelector("title")?.textContent;
             if (title) {
-                allTitles.push(`<span class="mx-16 inline-flex items-center">
+                allTitles.push(`<span class="mx-16 ${wrapperClass} items-center">
                     <span class="px-2 py-0.5 rounded border border-red-700 bg-red-900/40 text-red-400 font-black text-xs mr-3 tracking-widest">${feedLabel}</span>
                     <span class="text-white text-3xl font-bold">${title.trim()}</span>
                 </span>`);
