@@ -14,14 +14,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "application/xml");
         
-        // Target individual stock nodes for cleaner formatting
-        const stocks = xmlDoc.querySelectorAll('Stock');
+        // Using getElementsByTagName for broader XML compatibility
+        const stocks = xmlDoc.getElementsByTagName('Stock');
         const tickerData = Array.from(stocks).map(stock => {
             const symbol = stock.getAttribute('ticker') || 'N/A';
-            const price = stock.querySelector('Price')?.textContent || '0.00';
-            const change = stock.querySelector('ChangePercent')?.textContent || '0';
-            const sign = parseFloat(change) >= 0 ? '+' : '';
-            return `${symbol}: $${parseFloat(price).toFixed(2)} (${sign}${parseFloat(change).toFixed(2)}%)`;
+            const price = stock.getElementsByTagName('Price')[0]?.textContent || 'N/A';
+            const change = stock.getElementsByTagName('DaysChange')[0]?.textContent || '0%';
+            const status = stock.getElementsByTagName('warming_cooling')[0]?.textContent || '';
+            
+            // Use the pre-formatted strings from the Python sync script
+            let display = `${symbol}: ${price} (${change})`;
+            if (status && status.toLowerCase() !== 'nan' && status.trim() !== '') {
+                display += ` [${status}]`;
+            }
+            return display;
         }).join(' \u00A0\u00A0\u00A0 | \u00A0\u00A0\u00A0 ');
 
         ticker.textContent = tickerData || "No stock data found.";
