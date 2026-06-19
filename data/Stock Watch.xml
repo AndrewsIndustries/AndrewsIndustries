@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-18T23:48:58</Generated>
+        <Generated>2026-06-19T02:34:04</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -33,7 +33,7 @@
         </Stock>
         <Stock ticker="RDDT">
             <Price>$174.96</Price>
-            <DaysChange>5.37%</DaysChange>
+            <DaysChange>5.43%</DaysChange>
             <warming_cooling>3.3</warming_cooling>
         </Stock>
         <Stock ticker="AMD">
@@ -96,15 +96,15 @@
             <DaysChange>1.4%</DaysChange>
             <warming_cooling>-2.4</warming_cooling>
         </Stock>
+        <Stock ticker="ORC">
+            <Price>$6.70</Price>
+            <DaysChange>1.36%</DaysChange>
+            <warming_cooling>-5.3</warming_cooling>
+        </Stock>
         <Stock ticker="GOOGL">
             <Price>$368.03</Price>
             <DaysChange>1.17%</DaysChange>
             <warming_cooling>-8.3</warming_cooling>
-        </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.70</Price>
-            <DaysChange>1.13%</DaysChange>
-            <warming_cooling>-5.3</warming_cooling>
         </Stock>
         <Stock ticker="TSLA">
             <Price>$400.49</Price>
@@ -158,7 +158,7 @@
         </Stock>
         <Stock ticker="ORCL">
             <Price>$184.29</Price>
-            <DaysChange>0.41%</DaysChange>
+            <DaysChange>0.38%</DaysChange>
             <warming_cooling>-9.6</warming_cooling>
         </Stock>
         <Stock ticker="PEP">
@@ -173,7 +173,7 @@
         </Stock>
         <Stock ticker="TWO">
             <Price>$12.32</Price>
-            <DaysChange>0.16%</DaysChange>
+            <DaysChange>0.24%</DaysChange>
             <warming_cooling>-0.4</warming_cooling>
         </Stock>
         <Stock ticker="WSR">
@@ -193,7 +193,7 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$150.38</Price>
-            <DaysChange>-0.16%</DaysChange>
+            <DaysChange>-0.12%</DaysChange>
             <warming_cooling>1.7</warming_cooling>
         </Stock>
         <Stock ticker="GS">
