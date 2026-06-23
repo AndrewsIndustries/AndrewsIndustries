@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-23T01:49:26</Generated>
+        <Generated>2026-06-23T05:54:55</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -356,15 +356,15 @@
             <DaysChange>-4.75%</DaysChange>
             <warming_cooling>-5.8</warming_cooling>
         </Stock>
+        <Stock ticker="GOOGL">
+            <Price>$349.68</Price>
+            <DaysChange>-4.99%</DaysChange>
+            <warming_cooling>-1.9</warming_cooling>
+        </Stock>
         <Stock ticker="ORCL">
             <Price>$175.07</Price>
             <DaysChange>-5.0%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="GOOGL">
-            <Price>$349.56</Price>
-            <DaysChange>-5.02%</DaysChange>
-            <warming_cooling>-1.9</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
             <Price>$51.09</Price>
