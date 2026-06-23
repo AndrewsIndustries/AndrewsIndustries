@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-22T23:47:22</Generated>
+        <Generated>2026-06-23T01:49:26</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -93,7 +93,7 @@
         </Stock>
         <Stock ticker="SHEL">
             <Price>$79.66</Price>
-            <DaysChange>1.1%</DaysChange>
+            <DaysChange>1.08%</DaysChange>
             <warming_cooling>-3.3</warming_cooling>
         </Stock>
         <Stock ticker="DD">
@@ -126,15 +126,15 @@
             <DaysChange>0.48%</DaysChange>
             <warming_cooling>-5.7</warming_cooling>
         </Stock>
-        <Stock ticker="OXY">
-            <Price>$52.00</Price>
-            <DaysChange>0.35%</DaysChange>
-            <warming_cooling>-7.6</warming_cooling>
-        </Stock>
         <Stock ticker="F">
             <Price>$14.11</Price>
             <DaysChange>0.36%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
+        </Stock>
+        <Stock ticker="OXY">
+            <Price>$52.00</Price>
+            <DaysChange>0.35%</DaysChange>
+            <warming_cooling>-7.6</warming_cooling>
         </Stock>
         <Stock ticker="HWKN">
             <Price>$162.01</Price>
@@ -198,7 +198,7 @@
         </Stock>
         <Stock ticker="V">
             <Price>$326.60</Price>
-            <DaysChange>-0.19%</DaysChange>
+            <DaysChange>-0.2%</DaysChange>
             <warming_cooling>0.3</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
@@ -211,15 +211,15 @@
             <DaysChange>-0.34%</DaysChange>
             <warming_cooling>-3.2</warming_cooling>
         </Stock>
-        <Stock ticker="SNAP">
-            <Price>$4.63</Price>
-            <DaysChange>-0.64%</DaysChange>
-            <warming_cooling>-2.6</warming_cooling>
-        </Stock>
         <Stock ticker="PFE">
             <Price>$25.08</Price>
             <DaysChange>-0.52%</DaysChange>
             <warming_cooling>1.4</warming_cooling>
+        </Stock>
+        <Stock ticker="SNAP">
+            <Price>$4.63</Price>
+            <DaysChange>-0.64%</DaysChange>
+            <warming_cooling>-2.6</warming_cooling>
         </Stock>
         <Stock ticker="TWO">
             <Price>$12.22</Price>
@@ -253,7 +253,7 @@
         </Stock>
         <Stock ticker="MA">
             <Price>$484.09</Price>
-            <DaysChange>-1.17%</DaysChange>
+            <DaysChange>-1.16%</DaysChange>
             <warming_cooling>-0.9</warming_cooling>
         </Stock>
         <Stock ticker="ORC">
@@ -293,7 +293,7 @@
         </Stock>
         <Stock ticker="HD">
             <Price>$326.62</Price>
-            <DaysChange>-2.25%</DaysChange>
+            <DaysChange>-2.29%</DaysChange>
             <warming_cooling>6.2</warming_cooling>
         </Stock>
         <Stock ticker="META">
@@ -308,7 +308,7 @@
         </Stock>
         <Stock ticker="TM">
             <Price>$169.73</Price>
-            <DaysChange>-2.41%</DaysChange>
+            <DaysChange>-2.42%</DaysChange>
             <warming_cooling>-1.5</warming_cooling>
         </Stock>
         <Stock ticker="RDDT">
@@ -362,8 +362,8 @@
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="GOOGL">
-            <Price>$349.68</Price>
-            <DaysChange>-4.99%</DaysChange>
+            <Price>$349.56</Price>
+            <DaysChange>-5.02%</DaysChange>
             <warming_cooling>-1.9</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
