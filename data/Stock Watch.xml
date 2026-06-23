@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-23T08:59:25</Generated>
+        <Generated>2026-06-23T12:09:51</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -151,6 +151,11 @@
             <DaysChange>0.16%</DaysChange>
             <warming_cooling>3.3</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$641,000.00</Price>
+            <DaysChange>0.16%</DaysChange>
+            <warming_cooling>5.8</warming_cooling>
+        </Stock>
         <Stock ticker="KWR">
             <Price>$150.24</Price>
             <DaysChange>0.04%</DaysChange>
@@ -185,11 +190,6 @@
             <Price>$45.36</Price>
             <DaysChange>-0.02%</DaysChange>
             <warming_cooling>-2.4</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$639,500.00</Price>
-            <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>5.8</warming_cooling>
         </Stock>
         <Stock ticker="ADBE">
             <Price>$194.90</Price>
@@ -358,7 +358,7 @@
         </Stock>
         <Stock ticker="GOOGL">
             <Price>$349.56</Price>
-            <DaysChange>-5.02%</DaysChange>
+            <DaysChange>-4.99%</DaysChange>
             <warming_cooling>3.2</warming_cooling>
         </Stock>
         <Stock ticker="ORCL">
