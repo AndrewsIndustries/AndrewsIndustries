@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-23T23:33:38</Generated>
+        <Generated>2026-06-24T01:28:08</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -13,7 +13,7 @@
         </Stock>
         <Stock ticker="JNJ">
             <Price>$239.08</Price>
-            <DaysChange>3.35%</DaysChange>
+            <DaysChange>3.37%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
         </Stock>
         <Stock ticker="VZ">
@@ -28,23 +28,23 @@
         </Stock>
         <Stock ticker="RTX">
             <Price>$186.39</Price>
-            <DaysChange>2.48%</DaysChange>
+            <DaysChange>2.51%</DaysChange>
             <warming_cooling>7.2</warming_cooling>
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.77</Price>
-            <DaysChange>2.34%</DaysChange>
+            <DaysChange>2.27%</DaysChange>
             <warming_cooling>-0.9</warming_cooling>
+        </Stock>
+        <Stock ticker="BDN">
+            <Price>$3.16</Price>
+            <DaysChange>2.27%</DaysChange>
+            <warming_cooling>2.2</warming_cooling>
         </Stock>
         <Stock ticker="PG">
             <Price>$150.86</Price>
             <DaysChange>2.15%</DaysChange>
             <warming_cooling>8.3</warming_cooling>
-        </Stock>
-        <Stock ticker="BDN">
-            <Price>$3.16</Price>
-            <DaysChange>2.1%</DaysChange>
-            <warming_cooling>2.2</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$503.67</Price>
@@ -128,7 +128,7 @@
         </Stock>
         <Stock ticker="MA">
             <Price>$488.07</Price>
-            <DaysChange>0.8%</DaysChange>
+            <DaysChange>0.82%</DaysChange>
             <warming_cooling>5.0</warming_cooling>
         </Stock>
         <Stock ticker="COST">
@@ -156,19 +156,19 @@
             <DaysChange>0.58%</DaysChange>
             <warming_cooling>3.5</warming_cooling>
         </Stock>
+        <Stock ticker="MCD">
+            <Price>$271.66</Price>
+            <DaysChange>0.58%</DaysChange>
+            <warming_cooling>4.2</warming_cooling>
+        </Stock>
         <Stock ticker="AMZN">
             <Price>$234.11</Price>
             <DaysChange>0.57%</DaysChange>
             <warming_cooling>-4.1</warming_cooling>
         </Stock>
-        <Stock ticker="MCD">
-            <Price>$271.66</Price>
-            <DaysChange>0.54%</DaysChange>
-            <warming_cooling>4.2</warming_cooling>
-        </Stock>
         <Stock ticker="CVX">
             <Price>$175.98</Price>
-            <DaysChange>0.51%</DaysChange>
+            <DaysChange>0.53%</DaysChange>
             <warming_cooling>-4.0</warming_cooling>
         </Stock>
         <Stock ticker="OXY">
@@ -247,7 +247,7 @@
             <warming_cooling>-5.1</warming_cooling>
         </Stock>
         <Stock ticker="GOOGL">
-            <Price>$346.13</Price>
+            <Price>$346.09</Price>
             <DaysChange>-0.99%</DaysChange>
             <warming_cooling>3.2</warming_cooling>
         </Stock>
@@ -328,7 +328,7 @@
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,015.33</Price>
-            <DaysChange>-3.49%</DaysChange>
+            <DaysChange>-3.46%</DaysChange>
             <warming_cooling>3.3</warming_cooling>
         </Stock>
         <Stock ticker="SNAP">
@@ -341,6 +341,11 @@
             <DaysChange>-4.15%</DaysChange>
             <warming_cooling>-6.9</warming_cooling>
         </Stock>
+        <Stock ticker="ORCL">
+            <Price>$165.16</Price>
+            <DaysChange>-5.66%</DaysChange>
+            <warming_cooling>-10.0</warming_cooling>
+        </Stock>
         <Stock ticker="AMD">
             <Price>$519.85</Price>
             <DaysChange>-5.76%</DaysChange>
@@ -350,11 +355,6 @@
             <Price>$381.61</Price>
             <DaysChange>-5.79%</DaysChange>
             <warming_cooling>-4.5</warming_cooling>
-        </Stock>
-        <Stock ticker="ORCL">
-            <Price>$165.16</Price>
-            <DaysChange>-5.82%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="SMCI">
             <Price>$33.32</Price>
