@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-06-29T06:28:51</Generated>
+        <Generated>2026-06-29T11:32:31</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -191,10 +191,15 @@
             <DaysChange>0.58%</DaysChange>
             <warming_cooling>0.7</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="LMT">
-            <Price>$507.40</Price>
-            <DaysChange>0.47%</DaysChange>
-            <warming_cooling>-5.1</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="PG">
             <Price>$149.02</Price>
@@ -230,11 +235,6 @@
             <Price>$14.13</Price>
             <DaysChange>0.14%</DaysChange>
             <warming_cooling>-5.9</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$653,500.00</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>0.9</warming_cooling>
         </Stock>
         <Stock ticker="WMT">
             <Price>$115.69</Price>
