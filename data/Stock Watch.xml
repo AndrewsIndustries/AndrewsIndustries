@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-02T10:22:27</Generated>
+        <Generated>2026-07-02T12:24:11</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -156,6 +156,11 @@
             <DaysChange>0.95%</DaysChange>
             <warming_cooling>-6.4</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$659,500.00</Price>
+            <DaysChange>0.92%</DaysChange>
+            <warming_cooling>3.7</warming_cooling>
+        </Stock>
         <Stock ticker="GS">
             <Price>$1,019.61</Price>
             <DaysChange>0.81%</DaysChange>
@@ -165,11 +170,6 @@
             <Price>$169.66</Price>
             <DaysChange>0.74%</DaysChange>
             <warming_cooling>-4.8</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$657,500.00</Price>
-            <DaysChange>0.61%</DaysChange>
-            <warming_cooling>3.7</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
             <Price>$292.23</Price>
