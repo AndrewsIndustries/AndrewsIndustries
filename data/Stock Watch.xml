@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-02T20:46:00</Generated>
+        <Generated>2026-07-02T21:51:02</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -78,7 +78,7 @@
         </Stock>
         <Stock ticker="MRK">
             <Price>$129.56</Price>
-            <DaysChange>3.31%</DaysChange>
+            <DaysChange>3.34%</DaysChange>
             <warming_cooling>3.9</warming_cooling>
         </Stock>
         <Stock ticker="MA">
@@ -161,25 +161,25 @@
             <DaysChange>1.95%</DaysChange>
             <warming_cooling>3.1</warming_cooling>
         </Stock>
-        <Stock ticker="SNAP">
-            <Price>$4.84</Price>
-            <DaysChange>1.89%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
-        </Stock>
         <Stock ticker="SHEL">
             <Price>$78.02</Price>
             <DaysChange>1.89%</DaysChange>
             <warming_cooling>-9.9</warming_cooling>
+        </Stock>
+        <Stock ticker="PFE">
+            <Price>$24.32</Price>
+            <DaysChange>1.84%</DaysChange>
+            <warming_cooling>-9.6</warming_cooling>
         </Stock>
         <Stock ticker="WDFC">
             <Price>$245.83</Price>
             <DaysChange>1.82%</DaysChange>
             <warming_cooling>9.8</warming_cooling>
         </Stock>
-        <Stock ticker="PFE">
-            <Price>$24.32</Price>
-            <DaysChange>1.78%</DaysChange>
-            <warming_cooling>-9.6</warming_cooling>
+        <Stock ticker="SNAP">
+            <Price>$4.84</Price>
+            <DaysChange>1.79%</DaysChange>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="MSFT">
             <Price>$390.49</Price>
@@ -248,7 +248,7 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$58.73</Price>
-            <DaysChange>0.6%</DaysChange>
+            <DaysChange>0.63%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
         </Stock>
         <Stock ticker="XOM">
@@ -316,20 +316,20 @@
             <DaysChange>-1.39%</DaysChange>
             <warming_cooling>-4.5</warming_cooling>
         </Stock>
-        <Stock ticker="ORCL">
-            <Price>$140.27</Price>
-            <DaysChange>-1.56%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
+        <Stock ticker="RDDT">
+            <Price>$194.67</Price>
+            <DaysChange>-1.48%</DaysChange>
+            <warming_cooling>-8.8</warming_cooling>
         </Stock>
         <Stock ticker="SMCI">
             <Price>$27.22</Price>
             <DaysChange>-1.56%</DaysChange>
             <warming_cooling>-0.9</warming_cooling>
         </Stock>
-        <Stock ticker="RDDT">
-            <Price>$194.67</Price>
+        <Stock ticker="ORCL">
+            <Price>$140.27</Price>
             <DaysChange>-1.56%</DaysChange>
-            <warming_cooling>-8.8</warming_cooling>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="TXN">
             <Price>$293.08</Price>
