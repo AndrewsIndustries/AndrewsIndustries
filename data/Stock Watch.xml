@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-02T23:50:32</Generated>
+        <Generated>2026-07-03T01:21:52</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -188,7 +188,7 @@
         </Stock>
         <Stock ticker="BLK">
             <Price>$995.73</Price>
-            <DaysChange>1.54%</DaysChange>
+            <DaysChange>1.57%</DaysChange>
             <warming_cooling>-4.4</warming_cooling>
         </Stock>
         <Stock ticker="SBLK">
@@ -248,7 +248,7 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$58.73</Price>
-            <DaysChange>0.6%</DaysChange>
+            <DaysChange>0.63%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
         </Stock>
         <Stock ticker="XOM">
@@ -308,7 +308,7 @@
         </Stock>
         <Stock ticker="WFC">
             <Price>$85.51</Price>
-            <DaysChange>-0.51%</DaysChange>
+            <DaysChange>-0.5%</DaysChange>
             <warming_cooling>2.8</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
