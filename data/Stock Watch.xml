@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-07T01:50:33</Generated>
+        <Generated>2026-07-07T05:54:05</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -171,11 +171,6 @@
             <DaysChange>0.89%</DaysChange>
             <warming_cooling>-3.2</warming_cooling>
         </Stock>
-        <Stock ticker="PH">
-            <Price>$971.36</Price>
-            <DaysChange>0.88%</DaysChange>
-            <warming_cooling>4.9</warming_cooling>
-        </Stock>
         <Stock ticker="VOO">
             <Price>$690.62</Price>
             <DaysChange>0.84%</DaysChange>
@@ -183,8 +178,13 @@
         </Stock>
         <Stock ticker="DD">
             <Price>$141.05</Price>
-            <DaysChange>0.81%</DaysChange>
+            <DaysChange>0.78%</DaysChange>
             <warming_cooling>-6.8</warming_cooling>
+        </Stock>
+        <Stock ticker="PH">
+            <Price>$971.36</Price>
+            <DaysChange>0.74%</DaysChange>
+            <warming_cooling>4.9</warming_cooling>
         </Stock>
         <Stock ticker="HWKN">
             <Price>$139.44</Price>
@@ -223,7 +223,7 @@
         </Stock>
         <Stock ticker="WSR">
             <Price>$18.97</Price>
-            <DaysChange>-0.05%</DaysChange>
+            <DaysChange>0.03%</DaysChange>
             <warming_cooling>-0.6</warming_cooling>
         </Stock>
         <Stock ticker="SMCI">
@@ -261,6 +261,11 @@
             <DaysChange>-0.26%</DaysChange>
             <warming_cooling>1.3</warming_cooling>
         </Stock>
+        <Stock ticker="XOM">
+            <Price>$136.44</Price>
+            <DaysChange>-0.39%</DaysChange>
+            <warming_cooling>-3.4</warming_cooling>
+        </Stock>
         <Stock ticker="MCD">
             <Price>$279.50</Price>
             <DaysChange>-0.4%</DaysChange>
@@ -270,11 +275,6 @@
             <Price>$6.89</Price>
             <DaysChange>-0.43%</DaysChange>
             <warming_cooling>5.6</warming_cooling>
-        </Stock>
-        <Stock ticker="XOM">
-            <Price>$136.44</Price>
-            <DaysChange>-0.47%</DaysChange>
-            <warming_cooling>-3.4</warming_cooling>
         </Stock>
         <Stock ticker="PEP">
             <Price>$143.29</Price>
@@ -328,7 +328,7 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$149.31</Price>
-            <DaysChange>-1.39%</DaysChange>
+            <DaysChange>-1.38%</DaysChange>
             <warming_cooling>-1.3</warming_cooling>
         </Stock>
         <Stock ticker="KO">
@@ -363,7 +363,7 @@
         </Stock>
         <Stock ticker="PFE">
             <Price>$23.72</Price>
-            <DaysChange>-2.47%</DaysChange>
+            <DaysChange>-2.43%</DaysChange>
             <warming_cooling>-6.3</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
@@ -378,7 +378,7 @@
         </Stock>
         <Stock ticker="ZIM">
             <Price>$23.71</Price>
-            <DaysChange>-7.27%</DaysChange>
+            <DaysChange>-7.31%</DaysChange>
             <warming_cooling>4.0</warming_cooling>
         </Stock>
     </MarketData>
