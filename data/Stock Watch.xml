@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-06T23:53:59</Generated>
+        <Generated>2026-07-07T01:50:33</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -43,7 +43,7 @@
         </Stock>
         <Stock ticker="BA">
             <Price>$234.54</Price>
-            <DaysChange>3.65%</DaysChange>
+            <DaysChange>3.55%</DaysChange>
             <warming_cooling>-6.2</warming_cooling>
         </Stock>
         <Stock ticker="F">
@@ -123,7 +123,7 @@
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,011.21</Price>
-            <DaysChange>1.63%</DaysChange>
+            <DaysChange>1.55%</DaysChange>
             <warming_cooling>-8.9</warming_cooling>
         </Stock>
         <Stock ticker="AGNC">
@@ -326,11 +326,6 @@
             <DaysChange>-1.35%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
         </Stock>
-        <Stock ticker="JNJ">
-            <Price>$259.33</Price>
-            <DaysChange>-1.36%</DaysChange>
-            <warming_cooling>9.7</warming_cooling>
-        </Stock>
         <Stock ticker="PG">
             <Price>$149.31</Price>
             <DaysChange>-1.39%</DaysChange>
@@ -340,6 +335,11 @@
             <Price>$82.96</Price>
             <DaysChange>-1.4%</DaysChange>
             <warming_cooling>2.2</warming_cooling>
+        </Stock>
+        <Stock ticker="JNJ">
+            <Price>$259.33</Price>
+            <DaysChange>-1.41%</DaysChange>
+            <warming_cooling>9.7</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$538.00</Price>
@@ -363,7 +363,7 @@
         </Stock>
         <Stock ticker="PFE">
             <Price>$23.72</Price>
-            <DaysChange>-2.43%</DaysChange>
+            <DaysChange>-2.47%</DaysChange>
             <warming_cooling>-6.3</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
