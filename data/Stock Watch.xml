@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-09T01:15:48</Generated>
+        <Generated>2026-07-09T05:07:59</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -111,15 +111,15 @@
             <DaysChange>0.08%</DaysChange>
             <warming_cooling>-5.6</warming_cooling>
         </Stock>
-        <Stock ticker="PFE">
-            <Price>$24.05</Price>
-            <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>-7.9</warming_cooling>
-        </Stock>
         <Stock ticker="TWO">
             <Price>$12.07</Price>
             <DaysChange>-0.08%</DaysChange>
             <warming_cooling>0.5</warming_cooling>
+        </Stock>
+        <Stock ticker="PFE">
+            <Price>$24.05</Price>
+            <DaysChange>-0.08%</DaysChange>
+            <warming_cooling>-7.9</warming_cooling>
         </Stock>
         <Stock ticker="GD">
             <Price>$374.31</Price>
@@ -296,15 +296,15 @@
             <DaysChange>-1.89%</DaysChange>
             <warming_cooling>-3.7</warming_cooling>
         </Stock>
-        <Stock ticker="PH">
-            <Price>$939.13</Price>
-            <DaysChange>-1.92%</DaysChange>
-            <warming_cooling>1.9</warming_cooling>
-        </Stock>
         <Stock ticker="BDN">
             <Price>$3.07</Price>
             <DaysChange>-1.92%</DaysChange>
             <warming_cooling>4.6</warming_cooling>
+        </Stock>
+        <Stock ticker="PH">
+            <Price>$939.13</Price>
+            <DaysChange>-1.92%</DaysChange>
+            <warming_cooling>1.9</warming_cooling>
         </Stock>
         <Stock ticker="META">
             <Price>$603.12</Price>
@@ -316,15 +316,15 @@
             <DaysChange>-2.07%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="MA">
-            <Price>$519.86</Price>
-            <DaysChange>-2.21%</DaysChange>
-            <warming_cooling>6.0</warming_cooling>
-        </Stock>
         <Stock ticker="TSLA">
-            <Price>$393.93</Price>
-            <DaysChange>-2.23%</DaysChange>
-            <warming_cooling>7.3</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="MA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="MRK">
             <Price>$125.99</Price>
