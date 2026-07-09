@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-08T23:42:55</Generated>
+        <Generated>2026-07-09T01:15:48</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -18,7 +18,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$53.59</Price>
-            <DaysChange>3.73%</DaysChange>
+            <DaysChange>3.7%</DaysChange>
             <warming_cooling>-9.6</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
@@ -61,15 +61,15 @@
             <DaysChange>1.13%</DaysChange>
             <warming_cooling>-6.7</warming_cooling>
         </Stock>
+        <Stock ticker="TSM">
+            <Price>$436.98</Price>
+            <DaysChange>1.02%</DaysChange>
+            <warming_cooling>2.8</warming_cooling>
+        </Stock>
         <Stock ticker="SBLK">
             <Price>$26.46</Price>
             <DaysChange>0.99%</DaysChange>
             <warming_cooling>-7.3</warming_cooling>
-        </Stock>
-        <Stock ticker="TSM">
-            <Price>$436.98</Price>
-            <DaysChange>0.97%</DaysChange>
-            <warming_cooling>2.8</warming_cooling>
         </Stock>
         <Stock ticker="AAPL">
             <Price>$313.39</Price>
@@ -103,7 +103,7 @@
         </Stock>
         <Stock ticker="WSR">
             <Price>$19.00</Price>
-            <DaysChange>0.13%</DaysChange>
+            <DaysChange>0.16%</DaysChange>
             <warming_cooling>0.3</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
@@ -178,7 +178,7 @@
         </Stock>
         <Stock ticker="NOC">
             <Price>$545.11</Price>
-            <DaysChange>-0.66%</DaysChange>
+            <DaysChange>-0.72%</DaysChange>
             <warming_cooling>-5.5</warming_cooling>
         </Stock>
         <Stock ticker="KO">
@@ -193,7 +193,7 @@
         </Stock>
         <Stock ticker="SPCX">
             <Price>$148.26</Price>
-            <DaysChange>-0.78%</DaysChange>
+            <DaysChange>-0.81%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="AMZN">
@@ -316,15 +316,15 @@
             <DaysChange>-2.07%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="TSLA">
-            <Price>$394.06</Price>
-            <DaysChange>-2.19%</DaysChange>
-            <warming_cooling>7.3</warming_cooling>
-        </Stock>
         <Stock ticker="MA">
             <Price>$519.86</Price>
             <DaysChange>-2.21%</DaysChange>
             <warming_cooling>6.0</warming_cooling>
+        </Stock>
+        <Stock ticker="TSLA">
+            <Price>$393.93</Price>
+            <DaysChange>-2.23%</DaysChange>
+            <warming_cooling>7.3</warming_cooling>
         </Stock>
         <Stock ticker="MRK">
             <Price>$125.99</Price>
