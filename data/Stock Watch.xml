@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-10T23:27:43</Generated>
+        <Generated>2026-07-11T00:56:38</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -61,19 +61,19 @@
             <DaysChange>1.51%</DaysChange>
             <warming_cooling>-5.6</warming_cooling>
         </Stock>
-        <Stock ticker="NOC">
-            <Price>$539.63</Price>
-            <DaysChange>1.43%</DaysChange>
-            <warming_cooling>8.0</warming_cooling>
-        </Stock>
         <Stock ticker="VZ">
             <Price>$42.12</Price>
             <DaysChange>1.41%</DaysChange>
             <warming_cooling>-7.3</warming_cooling>
         </Stock>
+        <Stock ticker="NOC">
+            <Price>$539.63</Price>
+            <DaysChange>1.39%</DaysChange>
+            <warming_cooling>8.0</warming_cooling>
+        </Stock>
         <Stock ticker="CVX">
             <Price>$176.40</Price>
-            <DaysChange>1.36%</DaysChange>
+            <DaysChange>1.35%</DaysChange>
             <warming_cooling>-4.0</warming_cooling>
         </Stock>
         <Stock ticker="HD">
@@ -98,7 +98,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$52.89</Price>
-            <DaysChange>1.15%</DaysChange>
+            <DaysChange>1.13%</DaysChange>
             <warming_cooling>-6.1</warming_cooling>
         </Stock>
         <Stock ticker="KO">
@@ -118,7 +118,7 @@
         </Stock>
         <Stock ticker="LMT">
             <Price>$523.22</Price>
-            <DaysChange>0.99%</DaysChange>
+            <DaysChange>0.96%</DaysChange>
             <warming_cooling>9.0</warming_cooling>
         </Stock>
         <Stock ticker="TXN">
@@ -223,7 +223,7 @@
         </Stock>
         <Stock ticker="WSR">
             <Price>$18.99</Price>
-            <DaysChange>0.08%</DaysChange>
+            <DaysChange>0.11%</DaysChange>
             <warming_cooling>0.1</warming_cooling>
         </Stock>
         <Stock ticker="TWO">
@@ -258,18 +258,13 @@
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.81</Price>
-            <DaysChange>-0.22%</DaysChange>
+            <DaysChange>-0.15%</DaysChange>
             <warming_cooling>4.1</warming_cooling>
         </Stock>
         <Stock ticker="AAPL">
             <Price>$315.32</Price>
             <DaysChange>-0.28%</DaysChange>
             <warming_cooling>5.3</warming_cooling>
-        </Stock>
-        <Stock ticker="SNAP">
-            <Price>$4.68</Price>
-            <DaysChange>-0.32%</DaysChange>
-            <warming_cooling>2.6</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
             <Price>$24.17</Price>
@@ -283,8 +278,13 @@
         </Stock>
         <Stock ticker="BA">
             <Price>$222.28</Price>
-            <DaysChange>-0.38%</DaysChange>
+            <DaysChange>-0.37%</DaysChange>
             <warming_cooling>6.2</warming_cooling>
+        </Stock>
+        <Stock ticker="SNAP">
+            <Price>$4.68</Price>
+            <DaysChange>-0.43%</DaysChange>
+            <warming_cooling>2.6</warming_cooling>
         </Stock>
         <Stock ticker="AFRM">
             <Price>$83.42</Price>
@@ -353,7 +353,7 @@
         </Stock>
         <Stock ticker="ORCL">
             <Price>$140.64</Price>
-            <DaysChange>-2.17%</DaysChange>
+            <DaysChange>-2.14%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
@@ -361,15 +361,15 @@
             <DaysChange>-2.4%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
+        <Stock ticker="RDDT">
+            <Price>$195.34</Price>
+            <DaysChange>-2.48%</DaysChange>
+            <warming_cooling>10.0</warming_cooling>
+        </Stock>
         <Stock ticker="RIOT">
             <Price>$20.97</Price>
             <DaysChange>-2.53%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="RDDT">
-            <Price>$195.34</Price>
-            <DaysChange>-2.54%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="MRVL">
             <Price>$235.81</Price>
