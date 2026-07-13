@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-13T06:41:07</Generated>
+        <Generated>2026-07-13T09:58:00</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -157,19 +157,24 @@
             <warming_cooling>7.6</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
-            <Price>$693.86</Price>
-            <DaysChange>0.46%</DaysChange>
-            <warming_cooling>0.7</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="VDE">
-            <Price>$155.50</Price>
-            <DaysChange>0.45%</DaysChange>
-            <warming_cooling>-2.3</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="ADBE">
-            <Price>$223.64</Price>
-            <DaysChange>0.44%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
             <Price>$195.93</Price>
@@ -238,13 +243,8 @@
         </Stock>
         <Stock ticker="BDN">
             <Price>$3.06</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>0%</DaysChange>
             <warming_cooling>6.1</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$650,000.00</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>4.3</warming_cooling>
         </Stock>
         <Stock ticker="GS">
             <Price>$1,055.18</Price>
