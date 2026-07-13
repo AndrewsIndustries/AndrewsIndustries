@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-13T22:07:44</Generated>
+        <Generated>2026-07-13T23:08:59</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -191,15 +191,15 @@
             <DaysChange>-0.32%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="BLK">
-            <Price>$1,031.56</Price>
-            <DaysChange>-0.39%</DaysChange>
-            <warming_cooling>-3.9</warming_cooling>
-        </Stock>
         <Stock ticker="SNAP">
             <Price>$4.66</Price>
             <DaysChange>-0.43%</DaysChange>
             <warming_cooling>2.6</warming_cooling>
+        </Stock>
+        <Stock ticker="BLK">
+            <Price>$1,031.56</Price>
+            <DaysChange>-0.44%</DaysChange>
+            <warming_cooling>-3.9</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$520.68</Price>
@@ -213,13 +213,8 @@
         </Stock>
         <Stock ticker="GD">
             <Price>$372.78</Price>
-            <DaysChange>-0.61%</DaysChange>
+            <DaysChange>-0.58%</DaysChange>
             <warming_cooling>9.8</warming_cooling>
-        </Stock>
-        <Stock ticker="ZIM">
-            <Price>$23.80</Price>
-            <DaysChange>-0.71%</DaysChange>
-            <warming_cooling>-6.2</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
             <Price>$288.69</Price>
@@ -230,6 +225,11 @@
             <Price>$272.61</Price>
             <DaysChange>-0.72%</DaysChange>
             <warming_cooling>3.5</warming_cooling>
+        </Stock>
+        <Stock ticker="ZIM">
+            <Price>$23.80</Price>
+            <DaysChange>-0.75%</DaysChange>
+            <warming_cooling>-6.2</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
             <Price>$688.50</Price>
