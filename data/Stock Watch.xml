@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-14T11:04:36</Generated>
+        <Generated>2026-07-14T12:20:47</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -166,15 +166,15 @@
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>-1.9</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$651,000.00</Price>
-            <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>2.0</warming_cooling>
-        </Stock>
         <Stock ticker="KWR">
             <Price>$147.98</Price>
             <DaysChange>-0.13%</DaysChange>
             <warming_cooling>4.7</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$650,500.00</Price>
+            <DaysChange>-0.15%</DaysChange>
+            <warming_cooling>2.0</warming_cooling>
         </Stock>
         <Stock ticker="DJT">
             <Price>$8.52</Price>
