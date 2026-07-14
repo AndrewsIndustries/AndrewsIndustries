@@ -2,13 +2,13 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-14T00:04:00</Generated>
+        <Generated>2026-07-14T03:23:17</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
         <Stock ticker="XOM">
             <Price>$144.51</Price>
-            <DaysChange>4.11%</DaysChange>
+            <DaysChange>4.05%</DaysChange>
             <warming_cooling>-1.5</warming_cooling>
         </Stock>
         <Stock ticker="OXY">
@@ -53,7 +53,7 @@
         </Stock>
         <Stock ticker="V">
             <Price>$357.75</Price>
-            <DaysChange>2.56%</DaysChange>
+            <DaysChange>2.52%</DaysChange>
             <warming_cooling>9.4</warming_cooling>
         </Stock>
         <Stock ticker="SHEL">
@@ -78,7 +78,7 @@
         </Stock>
         <Stock ticker="VZ">
             <Price>$42.68</Price>
-            <DaysChange>1.35%</DaysChange>
+            <DaysChange>1.33%</DaysChange>
             <warming_cooling>-7.3</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
@@ -168,7 +168,7 @@
         </Stock>
         <Stock ticker="TWO">
             <Price>$12.08</Price>
-            <DaysChange>-0.04%</DaysChange>
+            <DaysChange>0.0%</DaysChange>
             <warming_cooling>-1.1</warming_cooling>
         </Stock>
         <Stock ticker="KWR">
