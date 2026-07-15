@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-15T07:57:40</Generated>
+        <Generated>2026-07-15T10:01:01</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -221,11 +221,6 @@
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$650,500.00</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>-0.4</warming_cooling>
-        </Stock>
         <Stock ticker="SMCI">
             <Price>$27.65</Price>
             <DaysChange>-0.04%</DaysChange>
@@ -260,6 +255,11 @@
             <Price>$921.75</Price>
             <DaysChange>-0.51%</DaysChange>
             <warming_cooling>-0.8</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$647,000.00</Price>
+            <DaysChange>-0.54%</DaysChange>
+            <warming_cooling>-0.4</warming_cooling>
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,025.44</Price>
