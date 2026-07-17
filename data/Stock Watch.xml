@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-17T21:29:11</Generated>
+        <Generated>2026-07-17T22:22:27</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -18,7 +18,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$54.86</Price>
-            <DaysChange>2.25%</DaysChange>
+            <DaysChange>2.26%</DaysChange>
             <warming_cooling>5.8</warming_cooling>
         </Stock>
         <Stock ticker="CSCO">
@@ -28,7 +28,7 @@
         </Stock>
         <Stock ticker="CVX">
             <Price>$187.38</Price>
-            <DaysChange>1.91%</DaysChange>
+            <DaysChange>1.92%</DaysChange>
             <warming_cooling>3.1</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
@@ -108,7 +108,7 @@
         </Stock>
         <Stock ticker="GD">
             <Price>$368.58</Price>
-            <DaysChange>-0.07%</DaysChange>
+            <DaysChange>-0.04%</DaysChange>
             <warming_cooling>8.2</warming_cooling>
         </Stock>
         <Stock ticker="TWO">
@@ -118,7 +118,7 @@
         </Stock>
         <Stock ticker="MRK">
             <Price>$127.50</Price>
-            <DaysChange>-0.1%</DaysChange>
+            <DaysChange>-0.14%</DaysChange>
             <warming_cooling>-4.0</warming_cooling>
         </Stock>
         <Stock ticker="GME">
@@ -128,7 +128,7 @@
         </Stock>
         <Stock ticker="BA">
             <Price>$214.03</Price>
-            <DaysChange>-0.15%</DaysChange>
+            <DaysChange>-0.14%</DaysChange>
             <warming_cooling>2.3</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
@@ -143,12 +143,12 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$61.27</Price>
-            <DaysChange>-0.36%</DaysChange>
+            <DaysChange>-0.4%</DaysChange>
             <warming_cooling>3.1</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
             <Price>$193.51</Price>
-            <DaysChange>-0.43%</DaysChange>
+            <DaysChange>-0.44%</DaysChange>
             <warming_cooling>4.2</warming_cooling>
         </Stock>
         <Stock ticker="COST">
@@ -261,15 +261,15 @@
             <DaysChange>-1.84%</DaysChange>
             <warming_cooling>2.1</warming_cooling>
         </Stock>
+        <Stock ticker="ORC">
+            <Price>$6.85</Price>
+            <DaysChange>-1.93%</DaysChange>
+            <warming_cooling>-2.0</warming_cooling>
+        </Stock>
         <Stock ticker="KTOS">
             <Price>$46.03</Price>
             <DaysChange>-1.98%</DaysChange>
             <warming_cooling>2.1</warming_cooling>
-        </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.85</Price>
-            <DaysChange>-2.0%</DaysChange>
-            <warming_cooling>-2.0</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
             <Price>$95.04</Price>
@@ -296,15 +296,15 @@
             <DaysChange>-2.12%</DaysChange>
             <warming_cooling>4.1</warming_cooling>
         </Stock>
-        <Stock ticker="GOOGL">
-            <Price>$346.77</Price>
-            <DaysChange>-2.17%</DaysChange>
-            <warming_cooling>5.9</warming_cooling>
-        </Stock>
         <Stock ticker="RDDT">
             <Price>$181.18</Price>
             <DaysChange>-2.2%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
+        </Stock>
+        <Stock ticker="GOOGL">
+            <Price>$346.77</Price>
+            <DaysChange>-2.17%</DaysChange>
+            <warming_cooling>5.9</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
             <Price>$202.81</Price>
@@ -351,15 +351,15 @@
             <DaysChange>-2.98%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
-        <Stock ticker="WDFC">
-            <Price>$246.79</Price>
-            <DaysChange>-3.35%</DaysChange>
-            <warming_cooling>6.7</warming_cooling>
-        </Stock>
         <Stock ticker="SNAP">
             <Price>$4.53</Price>
             <DaysChange>-3.41%</DaysChange>
             <warming_cooling>6.1</warming_cooling>
+        </Stock>
+        <Stock ticker="WDFC">
+            <Price>$246.79</Price>
+            <DaysChange>-3.35%</DaysChange>
+            <warming_cooling>6.7</warming_cooling>
         </Stock>
         <Stock ticker="KO">
             <Price>$81.56</Price>
