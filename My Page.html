@@ -261,10 +261,10 @@
         <iframe src="https://www.tzevaadom.co.il/en/"></iframe> 
       </div> 
       <div class="slide"> 
-        <iframe id="spreadsheet-iframe-1" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1260211830" h[...]
+        <iframe id="spreadsheet-iframe-1" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=12602118[...]
       </div> 
       <div class="slide"> 
-        <iframe id="spreadsheet-iframe-2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=1974298334" h[...]
+        <iframe id="spreadsheet-iframe-2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTQYftjQ9fHLfDzmWIZ7QFdW0SplgDJPVpaaHKirmWkOERgEMNSr2yPcwXUNKRnxSwFRPTTQf8maQjs/pubhtml?gid=19742983[...]
       </div> 
       <div class="slide"><!--Home--> 
         <iframe src="https://andrewsindustriesllc.com/QRPage.html"></iframe> 
@@ -330,10 +330,10 @@
     let mediaStream; 
     
     const FALLBACK_X_DATA = [
-      { source: "@SENTDEFENDER", headline: "Reports of air defense activity active over northern airspace; intercepts verified.", alert_level: "HIGH", primary_region: "Israel", link: "https://twitter.[...]
-      { source: "@OSINTTECHNICAL", headline: "Imagery confirms deployment of naval strike assets in Eastern Mediterranean sectors.", alert_level: "HIGH", primary_region: "Red Sea", link: "https://twit[...]
-      { source: "@CONFLICT_RADAR", headline: "Joint military maneuvers observed along border checkpoints; readiness checks ongoing.", alert_level: "MEDIUM", primary_region: "Taiwan", link: "https://tw[...]
-      { source: "@POLYMARKETINTEL", headline: "Prediction indexes signal major shift in international commodity and logistics flow rates.", alert_level: "LOW", primary_region: "Global", link: "https:/[...]
+      { source: "@SENTDEFENDER", headline: "Reports of air defense activity active over northern airspace; intercepts verified.", alert_level: "HIGH", primary_region: "Israel", link: "https://twi[...]
+      { source: "@OSINTTECHNICAL", headline: "Imagery confirms deployment of naval strike assets in Eastern Mediterranean sectors.", alert_level: "HIGH", primary_region: "Red Sea", link: "https:/[...]
+      { source: "@CONFLICT_RADAR", headline: "Joint military maneuvers observed along border checkpoints; readiness checks ongoing.", alert_level: "MEDIUM", primary_region: "Taiwan", link: "https[...]
+      { source: "@POLYMARKETINTEL", headline: "Prediction indexes signal major shift in international commodity and logistics flow rates.", alert_level: "LOW", primary_region: "Global", link: "ht[...]
     ]; 
     
     const FALLBACK_STOCK_XML_STRING = ` 
@@ -453,8 +453,14 @@
       document.getElementById('stopRecordBtn').style.display = 'none'; 
     } 
     
-    const headerRssUrls = ['https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json', 'data/x_news.json' ]; 
-    const footerRssUrls = ['https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml', 'data/Stock%20Watch.xml' ]; 
+    const headerRssUrls = [
+      'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json',
+      'https://api.allorigins.win/get?url=https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/x_news.json'
+    ];
+    const footerRssUrls = [
+      'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml',
+      'https://api.allorigins.win/get?url=https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/data/Stock%20Watch.xml'
+    ];
     
     function seedTickersWithFallbacks() {
       const headerItems = FALLBACK_X_DATA.map(entry => {
@@ -462,7 +468,7 @@
         const region = entry.primary_region ? ` [${entry.primary_region}]` : ''; 
         const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300'; 
         const link = entry.link || '#'; 
-        return `<a href="${link}" target="_blank" class="mx-16 ticker-item-wrapper items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border ${badgeClass[...]
+        return `<a href="${link}" target="_blank" class="mx-16 ticker-item-wrapper items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border ${badge[...]
       }); 
       renderTickerHtml('news-ticker', headerItems); 
       
@@ -567,7 +573,7 @@
           const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300'; 
           const wrapperClass = isHeader ? 'ticker-item-wrapper' : 'inline-flex'; 
           const link = entry.link || '#'; 
-          return `<a href="${link}" target="_blank" class="mx-16 ${wrapperClass} items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border ${badgeClass[...]
+          return `<a href="${link}" target="_blank" class="mx-16 ${wrapperClass} items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border ${badgeCl[...]
         }); 
       } catch (e) { return []; } 
     } 
@@ -580,7 +586,7 @@
         const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/g).map(cell => cell.trim().replace(/^"(.*)"$/, '$1')); 
         if (cols[0] && cols[1]) {
           const price = parseFloat(cols[1].replace(/[^0-9.-]+/g, "") || 0).toFixed(2); 
-          return `<span class="mx-16 inline-flex items-center"> <span class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-400 font-black text-xs mr-3 tracking-widest">SHEET</spa[...]
+          return `<span class="mx-16 inline-flex items-center"> <span class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-400 font-black text-xs mr-3 tracking-widest">SHEET[...]
         } 
         return null; 
       }).filter(x => x); 
@@ -598,14 +604,14 @@
           const price = item.querySelector('Price')?.textContent || 'N/A'; 
           const change = item.querySelector('DaysChange')?.textContent || '0%'; 
           const status = (item.querySelector('warming_cooling')?.textContent || 'N/A').toUpperCase(); 
-          const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 'bg-slate-900 border-slate-70[...]
-          allTitles.push(`<span class="mx-16 ${wrapperClass} items-center"> <span class="font-black text-white text-4xl mr-3">${ticker}</span> <span class="text-slate-400 text-2xl mr-3">${price}</span[...]
+          const statusBg = status === 'WARMING' ? 'bg-green-900/40 border-green-700 text-green-400' : status === 'COOLING' ? 'bg-red-900/40 border-red-700 text-red-400' : 'bg-slate-900 border-sla[...]
+          allTitles.push(`<span class="mx-16 ${wrapperClass} items-center"> <span class="font-black text-white text-4xl mr-3">${ticker}</span> <span class="text-slate-400 text-2xl mr-3">${price}<[...]
         } else {
           const title = item.querySelector("title")?.textContent; 
           const link = item.querySelector("link")?.textContent || item.querySelector("guid")?.textContent || "#"; 
           if (title) {
             const badgeClass = 'bg-slate-800 border-slate-700 text-slate-300'; 
-            allTitles.push(`<a href="${link}" target="_blank" class="mx-16 ${wrapperClass} items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border ${ba[...]
+            allTitles.push(`<a href="${link}" target="_blank" class="mx-16 ${wrapperClass} items-center no-underline hover:opacity-80 transition-opacity"> <span class="px-3 py-1 rounded-md border[...]
           } 
         } 
       }); 
