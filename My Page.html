@@ -183,7 +183,7 @@
       display: flex; 
       width: max-content;
       white-space: nowrap; 
-      animation: ticker 90s linear infinite; 
+      animation: ticker 120s linear infinite; 
     }
 
     .ticker-wrap:hover .ticker-content {
@@ -202,13 +202,6 @@
       transform: skewX(12deg); 
     }
 
-    .ticker {
-      display: inline-block;
-      white-space: nowrap;
-      padding-right: 100%;
-      animation: ticker-animation 120s linear infinite;
-    }
-    
     @keyframes ticker {
       0% { 
         transform: translate3d(0, 0, 0); 
@@ -216,7 +209,6 @@
       100% { 
         transform: translate3d(-100%, 0, 0); 
       } 
-    }
 
     .ticker-item {
       display: inline-flex; 
@@ -238,6 +230,25 @@
       width: 0%; 
       background: #dc2626; 
     }
+/* --- Ticker Layout Rules --- */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden; /* Hides the text when it goes off-screen */
+    background: #000;  /* Optional: background color */
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content; /* CRITICAL: Prevents premature text cutting/wrapping */
+    animation: marquee 20s linear infinite;
+}
+
+.ticker-item {
+    padding: 0 20px;
+    white-space: nowrap; /* Forces text to stay on a single line */
+}
+
+    
   </style> 
 </head> 
 <body> 
