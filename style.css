@@ -167,26 +167,7 @@ video {
     text-shadow: 0 0 20px #000000;
 }
 
-/* --- Ticker Layout Rules --- */
-.ticker-wrap {
-    width: 100%;
-    overflow: hidden; /* Hides the text when it goes off-screen */
-    background: #000;  /* Optional: background color */
-}
 
-.ticker-track {
-    display: flex;
-    width: max-content; /* CRITICAL: Prevents premature text cutting/wrapping */
-    animation: marquee 20s linear infinite;
-}
 
-.ticker-item {
-    padding: 0 20px;
-    white-space: nowrap; /* Forces text to stay on a single line */
-}
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
 }
