@@ -481,8 +481,8 @@
       tickerElement.offsetHeight; 
       tickerElement.style.animation = ''; 
       const isHeader = (elementId === 'news-ticker'); 
-      const speedMultiplier = isHeader ? 5 : 5; 
-      const minDuration = isHeader ? 120 : 120; 
+      const speedMultiplier = isHeader ? 3: 3; 
+      const minDuration = isHeader ? 120: 120; 
       tickerElement.style.animationDuration = Math.max(minDuration, (itemsArray.length || 1) * speedMultiplier) + 's'; 
     } 
     
