@@ -379,9 +379,10 @@
             alert("GitHub Token cleared. You will be prompted for a new one on your next push.");
         }
 
-        // Initialize on Load
-        window.addEventListener('load', () => {
-            fetchAndProcess();
+// Initialize on DOM Ready and run every 10 minutes
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndProcess(); // Run immediately on load
+            setInterval(fetchAndProcess, 10 * 60 * 1000); // 10 minutes in milliseconds
         });
 
     </script>
