@@ -185,12 +185,8 @@ video {
     white-space: nowrap; /* Forces text to stay on a single line */
 }
 
-/* --- Animation Loop --- */
 @keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%); /* Fixed from -50% to prevent early clipping */
-    }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 }
