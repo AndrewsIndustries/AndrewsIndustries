@@ -481,7 +481,7 @@
       tickerElement.offsetHeight; 
       tickerElement.style.animation = ''; 
       const isHeader = (elementId === 'news-ticker'); 
-      const speedMultiplier = isHeader ? .5: 2; 
+      const speedMultiplier = isHeader ? .5: 4; 
       const minDuration = isHeader ? 120: 120; 
       tickerElement.style.animationDuration = Math.max(minDuration, (itemsArray.length || 1) * speedMultiplier) + 's'; 
     } 
