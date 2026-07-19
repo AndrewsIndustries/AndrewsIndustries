@@ -498,10 +498,14 @@
       tickerElement.style.animation = 'none'; 
       tickerElement.offsetHeight; 
       tickerElement.style.animation = ''; 
-      const isHeader = (elementId === 'news-ticker'); 
-      const speedMultiplier = isHeader ? .5: 30; 
-      const minDuration = isHeader ? 120: 120; 
-      tickerElement.style.animationDuration = Math.max(minDuration, (itemsArray.length || 1) * speedMultiplier) + 's'; 
+      const isHeader = (elementId === 'news-ticker');
+      
+      // Give each item 8 seconds to cross the screen for a comfortable reading pace
+      const secondsPerItem = 8; 
+      const computedDuration = (itemsArray.length || 1) * secondsPerItem;
+      
+      // Ensure it never goes faster than a baseline minimum (e.g., 60s) if there are very few items
+      tickerElement.style.animationDuration = Math.max(60, computedDuration) + 's';
     } 
     
     async function updateTicker(urls, elementId) {
