@@ -501,16 +501,17 @@ function renderTickerHtml(elementId, itemsArray) {
   tickerElement.offsetHeight; 
   tickerElement.style.animation = '';
   
-  const isHeader = (elementId === 'news-ticker');
-  
-  // Give the long header news stories 35 seconds per item, 
-  // and the shorter footer stock watch list items 8 seconds per item.
-  const secondsPerItem = isHeader ? 35 : 8; 
-  
-  const computedDuration = (itemsArray.length || 1) * secondsPerItem;
-  
-  // Lock a safe baseline minimum so it never feels rushed
-  tickerElement.style.animationDuration = Math.max(60, computedDuration) + 's';
+const isHeader = (elementId === 'news-ticker');
+
+// Fine-tuned pacing:
+// Header gets bumped up to 45s per item to give long headlines more breathing room
+// Footer gets dropped down to 5.5s per item to pick up the pace for short stock tickers
+const secondsPerItem = isHeader ? 45 : 5.5; 
+
+const computedDuration = (itemsArray.length || 1) * secondsPerItem;
+
+// Lock a safe baseline minimum so it never feels rushed
+tickerElement.style.animationDuration = Math.max(60, computedDuration) + 's';
 }
     
     async function updateTicker(urls, elementId) {
