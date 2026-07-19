@@ -490,23 +490,28 @@
       renderTickerHtml('footer-ticker', footerItems); 
     } 
     
-    function renderTickerHtml(elementId, itemsArray) {
-      const tickerElement = document.getElementById(elementId); 
-      if (!tickerElement || !itemsArray.length) return; 
-      const tickerHtml = itemsArray.join(' <span class="text-slate-600 text-3xl"> | </span> '); 
-      tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl"> | </span> ' + tickerHtml; 
-      tickerElement.style.animation = 'none'; 
-      tickerElement.offsetHeight; 
-      tickerElement.style.animation = ''; 
-      const isHeader = (elementId === 'news-ticker');
-      
-      // Give each item 8 seconds to cross the screen for a comfortable reading pace
-      const secondsPerItem = 8; 
-      const computedDuration = (itemsArray.length || 1) * secondsPerItem;
-      
-      // Ensure it never goes faster than a baseline minimum (e.g., 60s) if there are very few items
-      tickerElement.style.animationDuration = Math.max(60, computedDuration) + 's';
-    } 
+function renderTickerHtml(elementId, itemsArray) {
+  const tickerElement = document.getElementById(elementId);
+  if (!tickerElement || !itemsArray.length) return;
+  
+  const tickerHtml = itemsArray.join(' <span class="text-slate-600 text-3xl"> | </span> ');
+  tickerElement.innerHTML = tickerHtml + ' <span class="text-slate-600 text-3xl"> | </span> ' + tickerHtml;
+  
+  tickerElement.style.animation = 'none';
+  tickerElement.offsetHeight; 
+  tickerElement.style.animation = '';
+  
+  const isHeader = (elementId === 'news-ticker');
+  
+  // Give the long header news stories 35 seconds per item, 
+  // and the shorter footer stock watch list items 8 seconds per item.
+  const secondsPerItem = isHeader ? 35 : 8; 
+  
+  const computedDuration = (itemsArray.length || 1) * secondsPerItem;
+  
+  // Lock a safe baseline minimum so it never feels rushed
+  tickerElement.style.animationDuration = Math.max(60, computedDuration) + 's';
+}
     
     async function updateTicker(urls, elementId) {
       const tickerElement = document.getElementById(elementId); 
