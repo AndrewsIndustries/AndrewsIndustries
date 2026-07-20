@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-20T21:16:17</Generated>
+        <Generated>2026-07-20T22:15:07</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -38,7 +38,7 @@
         </Stock>
         <Stock ticker="CF">
             <Price>$123.57</Price>
-            <DaysChange>1.72%</DaysChange>
+            <DaysChange>1.77%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="AMD">
@@ -53,7 +53,7 @@
         </Stock>
         <Stock ticker="CVX">
             <Price>$189.71</Price>
-            <DaysChange>1.24%</DaysChange>
+            <DaysChange>1.27%</DaysChange>
             <warming_cooling>8.1</warming_cooling>
         </Stock>
         <Stock ticker="FUJHY">
@@ -68,7 +68,7 @@
         </Stock>
         <Stock ticker="TSM">
             <Price>$402.30</Price>
-            <DaysChange>0.99%</DaysChange>
+            <DaysChange>1.06%</DaysChange>
             <warming_cooling>-7.4</warming_cooling>
         </Stock>
         <Stock ticker="DJT">
@@ -108,7 +108,7 @@
         </Stock>
         <Stock ticker="V">
             <Price>$360.57</Price>
-            <DaysChange>0.56%</DaysChange>
+            <DaysChange>0.55%</DaysChange>
             <warming_cooling>4.7</warming_cooling>
         </Stock>
         <Stock ticker="GD">
@@ -158,7 +158,7 @@
         </Stock>
         <Stock ticker="TWO">
             <Price>$12.10</Price>
-            <DaysChange>0.08%</DaysChange>
+            <DaysChange>0.04%</DaysChange>
             <warming_cooling>-2.7</warming_cooling>
         </Stock>
         <Stock ticker="ZIM">
@@ -188,7 +188,7 @@
         </Stock>
         <Stock ticker="MCD">
             <Price>$267.64</Price>
-            <DaysChange>-0.03%</DaysChange>
+            <DaysChange>-0.02%</DaysChange>
             <warming_cooling>2.0</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
@@ -213,7 +213,7 @@
         </Stock>
         <Stock ticker="GM">
             <Price>$75.80</Price>
-            <DaysChange>-0.34%</DaysChange>
+            <DaysChange>-0.35%</DaysChange>
             <warming_cooling>-0.8</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
@@ -278,7 +278,7 @@
         </Stock>
         <Stock ticker="WFC">
             <Price>$86.33</Price>
-            <DaysChange>-1.35%</DaysChange>
+            <DaysChange>-1.37%</DaysChange>
             <warming_cooling>5.0</warming_cooling>
         </Stock>
         <Stock ticker="BAC">
