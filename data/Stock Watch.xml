@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-20T10:30:38</Generated>
+        <Generated>2026-07-20T12:33:36</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -101,6 +101,11 @@
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>0.2</warming_cooling>
         </Stock>
+        <Stock ticker="WDFC">
+            <Price>$246.79</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>2.4</warming_cooling>
+        </Stock>
         <Stock ticker="GD">
             <Price>$368.58</Price>
             <DaysChange>-0.07%</DaysChange>
@@ -191,6 +196,11 @@
             <DaysChange>-1.0%</DaysChange>
             <warming_cooling>-0.1</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$646,000.00</Price>
+            <DaysChange>-1.0%</DaysChange>
+            <warming_cooling>-0.3</warming_cooling>
+        </Stock>
         <Stock ticker="VOO">
             <Price>$683.17</Price>
             <DaysChange>-1.01%</DaysChange>
@@ -210,11 +220,6 @@
             <Price>$177.61</Price>
             <DaysChange>-1.2%</DaysChange>
             <warming_cooling>2.0</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$644,500.00</Price>
-            <DaysChange>-1.23%</DaysChange>
-            <warming_cooling>-0.3</warming_cooling>
         </Stock>
         <Stock ticker="MS">
             <Price>$215.50</Price>
@@ -355,11 +360,6 @@
             <Price>$4.53</Price>
             <DaysChange>-3.41%</DaysChange>
             <warming_cooling>5.4</warming_cooling>
-        </Stock>
-        <Stock ticker="WDFC">
-            <Price>$246.79</Price>
-            <DaysChange>-3.73%</DaysChange>
-            <warming_cooling>2.4</warming_cooling>
         </Stock>
         <Stock ticker="KO">
             <Price>$81.56</Price>
