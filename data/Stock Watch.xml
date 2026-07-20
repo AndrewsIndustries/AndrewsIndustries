@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-20T04:38:06</Generated>
+        <Generated>2026-07-20T07:44:36</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -30,11 +30,6 @@
             <Price>$187.38</Price>
             <DaysChange>1.91%</DaysChange>
             <warming_cooling>8.1</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$652,500.00</Price>
-            <DaysChange>1.79%</DaysChange>
-            <warming_cooling>-0.3</warming_cooling>
         </Stock>
         <Stock ticker="ORCL">
             <Price>$126.41</Price>
@@ -131,6 +126,11 @@
             <DaysChange>-0.14%</DaysChange>
             <warming_cooling>0.4</warming_cooling>
         </Stock>
+        <Stock ticker="NVAX">
+            <Price>$8.21</Price>
+            <DaysChange>-0.36%</DaysChange>
+            <warming_cooling>-4.8</warming_cooling>
+        </Stock>
         <Stock ticker="PFE">
             <Price>$25.05</Price>
             <DaysChange>-0.36%</DaysChange>
@@ -140,11 +140,6 @@
             <Price>$61.27</Price>
             <DaysChange>-0.36%</DaysChange>
             <warming_cooling>2.8</warming_cooling>
-        </Stock>
-        <Stock ticker="NVAX">
-            <Price>$8.21</Price>
-            <DaysChange>-0.36%</DaysChange>
-            <warming_cooling>-4.8</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
             <Price>$193.51</Price>
@@ -226,6 +221,11 @@
             <DaysChange>-1.37%</DaysChange>
             <warming_cooling>8.6</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$643,500.00</Price>
+            <DaysChange>-1.38%</DaysChange>
+            <warming_cooling>-0.3</warming_cooling>
+        </Stock>
         <Stock ticker="MA">
             <Price>$543.60</Price>
             <DaysChange>-1.44%</DaysChange>
@@ -266,15 +266,15 @@
             <DaysChange>-1.98%</DaysChange>
             <warming_cooling>0.0</warming_cooling>
         </Stock>
-        <Stock ticker="INTC">
-            <Price>$95.04</Price>
-            <DaysChange>-2.0%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
-        </Stock>
         <Stock ticker="ORC">
             <Price>$6.85</Price>
             <DaysChange>-2.0%</DaysChange>
             <warming_cooling>-3.6</warming_cooling>
+        </Stock>
+        <Stock ticker="INTC">
+            <Price>$95.04</Price>
+            <DaysChange>-2.0%</DaysChange>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="SMCI">
             <Price>$24.18</Price>
