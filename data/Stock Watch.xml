@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-21T00:12:00</Generated>
+        <Generated>2026-07-21T03:43:33</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -53,7 +53,7 @@
         </Stock>
         <Stock ticker="CVX">
             <Price>$189.71</Price>
-            <DaysChange>1.27%</DaysChange>
+            <DaysChange>1.24%</DaysChange>
             <warming_cooling>8.1</warming_cooling>
         </Stock>
         <Stock ticker="FUJHY">
@@ -108,7 +108,7 @@
         </Stock>
         <Stock ticker="V">
             <Price>$360.57</Price>
-            <DaysChange>0.55%</DaysChange>
+            <DaysChange>0.56%</DaysChange>
             <warming_cooling>4.7</warming_cooling>
         </Stock>
         <Stock ticker="GD">
@@ -228,12 +228,12 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$149.13</Price>
-            <DaysChange>-0.54%</DaysChange>
+            <DaysChange>-0.57%</DaysChange>
             <warming_cooling>-0.1</warming_cooling>
         </Stock>
         <Stock ticker="GME">
             <Price>$21.76</Price>
-            <DaysChange>-0.62%</DaysChange>
+            <DaysChange>-0.59%</DaysChange>
             <warming_cooling>0.0</warming_cooling>
         </Stock>
         <Stock ticker="GS">
@@ -278,7 +278,7 @@
         </Stock>
         <Stock ticker="WFC">
             <Price>$86.33</Price>
-            <DaysChange>-1.37%</DaysChange>
+            <DaysChange>-1.35%</DaysChange>
             <warming_cooling>5.0</warming_cooling>
         </Stock>
         <Stock ticker="BAC">
@@ -296,15 +296,15 @@
             <DaysChange>-1.59%</DaysChange>
             <warming_cooling>-2.8</warming_cooling>
         </Stock>
-        <Stock ticker="F">
-            <Price>$13.99</Price>
-            <DaysChange>-1.62%</DaysChange>
-            <warming_cooling>-1.2</warming_cooling>
-        </Stock>
         <Stock ticker="JNJ">
             <Price>$248.82</Price>
             <DaysChange>-1.67%</DaysChange>
             <warming_cooling>-0.3</warming_cooling>
+        </Stock>
+        <Stock ticker="F">
+            <Price>$13.99</Price>
+            <DaysChange>-1.69%</DaysChange>
+            <warming_cooling>-1.2</warming_cooling>
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,054.11</Price>
@@ -373,7 +373,7 @@
         </Stock>
         <Stock ticker="ORCL">
             <Price>$121.38</Price>
-            <DaysChange>-3.96%</DaysChange>
+            <DaysChange>-3.98%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="NVAX">
