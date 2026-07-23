@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-23T08:48:00</Generated>
+        <Generated>2026-07-23T10:53:52</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -231,6 +231,11 @@
             <DaysChange>-0.25%</DaysChange>
             <warming_cooling>4.3</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$640,500.00</Price>
+            <DaysChange>-0.39%</DaysChange>
+            <warming_cooling>-2.8</warming_cooling>
+        </Stock>
         <Stock ticker="HWKN">
             <Price>$143.17</Price>
             <DaysChange>-0.47%</DaysChange>
@@ -260,11 +265,6 @@
             <Price>$353.42</Price>
             <DaysChange>-0.67%</DaysChange>
             <warming_cooling>0.8</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$643,000.00</Price>
-            <DaysChange>-0.69%</DaysChange>
-            <warming_cooling>-2.8</warming_cooling>
         </Stock>
         <Stock ticker="TSM">
             <Price>$421.21</Price>
