@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-23T03:43:45</Generated>
+        <Generated>2026-07-23T06:18:53</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -66,11 +66,6 @@
             <DaysChange>1.77%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="LMT">
-            <Price>$514.36</Price>
-            <DaysChange>1.49%</DaysChange>
-            <warming_cooling>-1.4</warming_cooling>
-        </Stock>
         <Stock ticker="GD">
             <Price>$373.16</Price>
             <DaysChange>1.48%</DaysChange>
@@ -86,15 +81,20 @@
             <DaysChange>1.45%</DaysChange>
             <warming_cooling>-2.2</warming_cooling>
         </Stock>
-        <Stock ticker="PH">
-            <Price>$970.77</Price>
-            <DaysChange>1.2%</DaysChange>
-            <warming_cooling>-1.1</warming_cooling>
+        <Stock ticker="LMT">
+            <Price>$514.36</Price>
+            <DaysChange>1.43%</DaysChange>
+            <warming_cooling>-1.4</warming_cooling>
         </Stock>
         <Stock ticker="VDE">
             <Price>$167.49</Price>
             <DaysChange>1.19%</DaysChange>
             <warming_cooling>6.8</warming_cooling>
+        </Stock>
+        <Stock ticker="PH">
+            <Price>$970.77</Price>
+            <DaysChange>1.17%</DaysChange>
+            <warming_cooling>-1.1</warming_cooling>
         </Stock>
         <Stock ticker="VZ">
             <Price>$44.29</Price>
