@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-24T10:47:47</Generated>
+        <Generated>2026-07-24T12:07:55</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -14,7 +14,7 @@
         <Stock ticker="RTX">
             <Price>$209.16</Price>
             <DaysChange>7.33%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-3.9</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
             <Price>$299.67</Price>
@@ -29,7 +29,7 @@
         <Stock ticker="SPCX">
             <Price>$118.24</Price>
             <DaysChange>2.59%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="MRK">
             <Price>$130.48</Price>
@@ -49,7 +49,7 @@
         <Stock ticker="SMCI">
             <Price>$31.20</Price>
             <DaysChange>2.09%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="RIOT">
             <Price>$23.86</Price>
@@ -94,7 +94,7 @@
         <Stock ticker="PFE">
             <Price>$25.01</Price>
             <DaysChange>0.72%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>5.6</warming_cooling>
         </Stock>
         <Stock ticker="CSCO">
             <Price>$112.76</Price>
@@ -109,7 +109,7 @@
         <Stock ticker="SHEL">
             <Price>$87.95</Price>
             <DaysChange>0.21%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="OXY">
             <Price>$57.60</Price>
@@ -129,7 +129,7 @@
         <Stock ticker="TWO">
             <Price>$12.09</Price>
             <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>0.0</warming_cooling>
         </Stock>
         <Stock ticker="COST">
             <Price>$926.06</Price>
@@ -169,7 +169,7 @@
         <Stock ticker="PEP">
             <Price>$134.95</Price>
             <DaysChange>-0.52%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-4.3</warming_cooling>
         </Stock>
         <Stock ticker="BAC">
             <Price>$61.28</Price>
@@ -239,12 +239,12 @@
         <Stock ticker="SNAP">
             <Price>$4.41</Price>
             <DaysChange>-1.34%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-4.6</warming_cooling>
         </Stock>
         <Stock ticker="TSM">
             <Price>$415.58</Price>
             <DaysChange>-1.34%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="PG">
             <Price>$146.97</Price>
@@ -379,7 +379,7 @@
         <Stock ticker="TSLA">
             <Price>$319.69</Price>
             <DaysChange>-14.52%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-9.3</warming_cooling>
         </Stock>
     </MarketData>
 </StockWatchReport>
