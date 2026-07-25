@@ -23,10 +23,10 @@
   align-items: center;
 }
 
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.image-container img {
+  max-width: 100%; /* Keeps image responsive */
+  height: auto;     /* Maintains aspect ratio */
+  margin: 0;        /* Prevents unwanted offsets */
 }
 
 .five-column-grid-list {
