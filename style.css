@@ -21,11 +21,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  min-height: 200px; /* or height: 100vh for full viewport height */
 }
 
-
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .five-column-grid-list {
   display: grid;
