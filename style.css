@@ -1,11 +1,4 @@
-.banner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  padding: 20px 0;
-}
+
 
 
 /* Style the button used to pause/play the video */
@@ -23,6 +16,14 @@
   background: #ddd;
   color: black;
 } /* Added missing closing bracket here */
+
+.banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .five-column-grid-list {
   display: grid;
