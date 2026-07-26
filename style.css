@@ -24,9 +24,11 @@
 }
 
 .image-container {
-  max-width: 100%; /* Keeps image responsive */
-  height: auto;     /* Maintains aspect ratio */
-  margin: 0;        /* Prevents unwanted offsets */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .five-column-grid-list {
