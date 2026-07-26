@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-26T15:47:08</Generated>
+        <Generated>2026-07-26T16:39:25</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -84,7 +84,7 @@
         <Stock ticker="WSR">
             <Price>$0.32</Price>
             <DaysChange>1.59%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="F">
             <Price>$14.37</Price>
