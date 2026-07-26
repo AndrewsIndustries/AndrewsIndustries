@@ -19,14 +19,16 @@
 
 .banner-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically (requires a set height) */
+  width: 100%;             /* Ensures it takes full width of parent */
 }
 
 .image-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically (requires a set height) */
+  width: 100%;             /* Ensures it takes full width of parent */
 }
 
 .five-column-grid-list {
