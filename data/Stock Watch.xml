@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-26T14:46:07</Generated>
+        <Generated>2026-07-26T15:47:08</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -80,6 +80,11 @@
             <Price>$263.40</Price>
             <DaysChange>1.59%</DaysChange>
             <warming_cooling>-4.1</warming_cooling>
+        </Stock>
+        <Stock ticker="WSR">
+            <Price>$0.32</Price>
+            <DaysChange>1.59%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="F">
             <Price>$14.37</Price>
@@ -225,11 +230,6 @@
             <Price>$168.73</Price>
             <DaysChange>-0.03%</DaysChange>
             <warming_cooling>-9.6</warming_cooling>
-        </Stock>
-        <Stock ticker="WSR">
-            <Price>$18.99</Price>
-            <DaysChange>-0.03%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
             <Price>$24.54</Price>
