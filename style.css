@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.image-container img {
+.image-container {
   max-width: 100%; /* Keeps image responsive */
   height: auto;     /* Maintains aspect ratio */
   margin: 0;        /* Prevents unwanted offsets */
