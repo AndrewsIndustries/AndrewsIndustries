@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-30T03:24:54</Generated>
+        <Generated>2026-07-30T06:04:25</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -23,7 +23,7 @@
         </Stock>
         <Stock ticker="CF">
             <Price>$127.35</Price>
-            <DaysChange>3.61%</DaysChange>
+            <DaysChange>3.6%</DaysChange>
             <warming_cooling>8.8</warming_cooling>
         </Stock>
         <Stock ticker="TM">
