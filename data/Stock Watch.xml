@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-31T10:08:49</Generated>
+        <Generated>2026-07-31T12:13:21</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -127,8 +127,8 @@
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
-            <Price>$668,000.00</Price>
-            <DaysChange>1.98%</DaysChange>
+            <Price>$669,500.00</Price>
+            <DaysChange>2.21%</DaysChange>
             <warming_cooling>0.7</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
