@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-07-31T20:37:37</Generated>
+        <Generated>2026-07-31T21:43:17</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -41,15 +41,15 @@
             <DaysChange>2.42%</DaysChange>
             <warming_cooling>6.3</warming_cooling>
         </Stock>
+        <Stock ticker="CVX">
+            <Price>$196.83</Price>
+            <DaysChange>2.35%</DaysChange>
+            <warming_cooling>10.0</warming_cooling>
+        </Stock>
         <Stock ticker="MRVL">
             <Price>$187.56</Price>
             <DaysChange>2.32%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="CVX">
-            <Price>$196.83</Price>
-            <DaysChange>2.23%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="CSCO">
             <Price>$115.99</Price>
@@ -58,7 +58,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$57.07</Price>
-            <DaysChange>2.0%</DaysChange>
+            <DaysChange>2.02%</DaysChange>
             <warming_cooling>8.3</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
@@ -83,12 +83,12 @@
         </Stock>
         <Stock ticker="SHEL">
             <Price>$91.98</Price>
-            <DaysChange>1.62%</DaysChange>
+            <DaysChange>1.65%</DaysChange>
             <warming_cooling>7.5</warming_cooling>
         </Stock>
         <Stock ticker="VZ">
             <Price>$46.81</Price>
-            <DaysChange>1.52%</DaysChange>
+            <DaysChange>1.51%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
@@ -98,12 +98,12 @@
         </Stock>
         <Stock ticker="NOC">
             <Price>$542.48</Price>
-            <DaysChange>1.43%</DaysChange>
+            <DaysChange>1.42%</DaysChange>
             <warming_cooling>0.5</warming_cooling>
         </Stock>
         <Stock ticker="PH">
             <Price>$976.53</Price>
-            <DaysChange>1.43%</DaysChange>
+            <DaysChange>1.26%</DaysChange>
             <warming_cooling>2.7</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
@@ -162,19 +162,19 @@
             <warming_cooling>1.5</warming_cooling>
         </Stock>
         <Stock ticker="PG">
-            <Price>$144.49</Price>
-            <DaysChange>0.37%</DaysChange>
-            <warming_cooling>0.3</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
-            <Price>$215.22</Price>
-            <DaysChange>0.39%</DaysChange>
-            <warming_cooling>8.6</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="BAC">
-            <Price>$61.95</Price>
-            <DaysChange>0.36%</DaysChange>
-            <warming_cooling>4.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GD">
             <Price>$383.42</Price>
@@ -183,7 +183,7 @@
         </Stock>
         <Stock ticker="MRK">
             <Price>$130.20</Price>
-            <DaysChange>0.32%</DaysChange>
+            <DaysChange>0.3%</DaysChange>
             <warming_cooling>6.1</warming_cooling>
         </Stock>
         <Stock ticker="TSM">
@@ -223,7 +223,7 @@
         </Stock>
         <Stock ticker="SNAP">
             <Price>$4.69</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>-0.32%</DaysChange>
             <warming_cooling>-7.1</warming_cooling>
         </Stock>
         <Stock ticker="BDN">
@@ -232,84 +232,89 @@
             <warming_cooling>3.6</warming_cooling>
         </Stock>
         <Stock ticker="HD">
-            <Price>$331.96</Price>
-            <DaysChange>-0.42%</DaysChange>
-            <warming_cooling>-3.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="CF">
-            <Price>$125.19</Price>
-            <DaysChange>-0.46%</DaysChange>
-            <warming_cooling>7.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="PEP">
-            <Price>$139.56</Price>
-            <DaysChange>-0.46%</DaysChange>
-            <warming_cooling>-0.5</warming_cooling>
-        </Stock>
-        <Stock ticker="TXN">
-            <Price>$275.74</Price>
-            <DaysChange>-0.58%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.49</Price>
-            <DaysChange>-0.61%</DaysChange>
-            <warming_cooling>-4.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GS">
-            <Price>$1,018.38</Price>
-            <DaysChange>-0.63%</DaysChange>
-            <warming_cooling>0.6</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GME">
-            <Price>$21.72</Price>
-            <DaysChange>-0.73%</DaysChange>
-            <warming_cooling>-2.4</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="ORC">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="BLK">
-            <Price>$1,090.39</Price>
-            <DaysChange>-0.73%</DaysChange>
-            <warming_cooling>1.9</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="MA">
-            <Price>$573.10</Price>
-            <DaysChange>-0.8%</DaysChange>
-            <warming_cooling>2.5</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="HWKN">
-            <Price>$128.03</Price>
-            <DaysChange>-0.92%</DaysChange>
-            <warming_cooling>3.9</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="XOM">
-            <Price>$155.44</Price>
-            <DaysChange>-0.97%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
-            <Price>$90.20</Price>
-            <DaysChange>-1.02%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="KO">
-            <Price>$87.59</Price>
-            <DaysChange>-1.02%</DaysChange>
-            <warming_cooling>-1.5</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="F">
-            <Price>$14.68</Price>
-            <DaysChange>-1.21%</DaysChange>
-            <warming_cooling>2.6</warming_cooling>
+        <Stock ticker="TXN">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="AGNC">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="TM">
-            <Price>$188.99</Price>
-            <DaysChange>-1.28%</DaysChange>
-            <warming_cooling>0.5</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="DD">
             <Price>$137.00</Price>
             <DaysChange>-1.33%</DaysChange>
             <warming_cooling>2.2</warming_cooling>
+        </Stock>
+        <Stock ticker="F">
+            <Price>$14.68</Price>
+            <DaysChange>-1.34%</DaysChange>
+            <warming_cooling>2.6</warming_cooling>
         </Stock>
         <Stock ticker="SBLK">
             <Price>$28.75</Price>
@@ -333,13 +338,8 @@
         </Stock>
         <Stock ticker="BA">
             <Price>$216.14</Price>
-            <DaysChange>-2.15%</DaysChange>
+            <DaysChange>-2.22%</DaysChange>
             <warming_cooling>-5.7</warming_cooling>
-        </Stock>
-        <Stock ticker="AGNC">
-            <Price>$10.66</Price>
-            <DaysChange>-1.3%</DaysChange>
-            <warming_cooling>-4.9</warming_cooling>
         </Stock>
         <Stock ticker="AFRM">
             <Price>$71.51</Price>
@@ -378,7 +378,7 @@
         </Stock>
         <Stock ticker="RDDT">
             <Price>$140.67</Price>
-            <DaysChange>-20.99%</DaysChange>
+            <DaysChange>-20.86%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
     </MarketData>
