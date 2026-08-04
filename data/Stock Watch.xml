@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-04T09:29:15</Generated>
+        <Generated>2026-08-04T11:40:29</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -71,15 +71,15 @@
             <DaysChange>4.54%</DaysChange>
             <warming_cooling>2.7</warming_cooling>
         </Stock>
-        <Stock ticker="TSLA">
-            <Price>$322.08</Price>
-            <DaysChange>3.49%</DaysChange>
-            <warming_cooling>-10.0</warming_cooling>
-        </Stock>
         <Stock ticker="ZIM">
             <Price>$26.07</Price>
             <DaysChange>3.49%</DaysChange>
             <warming_cooling>-1.5</warming_cooling>
+        </Stock>
+        <Stock ticker="TSLA">
+            <Price>$322.08</Price>
+            <DaysChange>3.49%</DaysChange>
+            <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,126.63</Price>
@@ -171,15 +171,15 @@
             <DaysChange>0.86%</DaysChange>
             <warming_cooling>3.3</warming_cooling>
         </Stock>
-        <Stock ticker="SMCI">
-            <Price>$28.64</Price>
-            <DaysChange>0.85%</DaysChange>
-            <warming_cooling>2.9</warming_cooling>
-        </Stock>
         <Stock ticker="GS">
             <Price>$1,027.06</Price>
             <DaysChange>0.85%</DaysChange>
             <warming_cooling>-9.4</warming_cooling>
+        </Stock>
+        <Stock ticker="SMCI">
+            <Price>$28.64</Price>
+            <DaysChange>0.85%</DaysChange>
+            <warming_cooling>2.9</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
             <Price>$216.65</Price>
@@ -220,6 +220,11 @@
             <Price>$954.08</Price>
             <DaysChange>0.23%</DaysChange>
             <warming_cooling>4.9</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$671,500.00</Price>
+            <DaysChange>0.22%</DaysChange>
+            <warming_cooling>3.0</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
             <Price>$25.03</Price>
@@ -265,11 +270,6 @@
             <Price>$382.43</Price>
             <DaysChange>-0.26%</DaysChange>
             <warming_cooling>6.4</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$668,000.00</Price>
-            <DaysChange>-0.3%</DaysChange>
-            <warming_cooling>3.0</warming_cooling>
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.47</Price>
