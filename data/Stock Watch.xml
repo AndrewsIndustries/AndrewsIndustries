@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-06T09:30:00</Generated>
+        <Generated>2026-08-06T11:42:05</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -91,12 +91,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="ADBE">
+        <Stock ticker="WMT">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="WMT">
+        <Stock ticker="ADBE">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
