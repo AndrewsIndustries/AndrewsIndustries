@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-07T19:07:37</Generated>
+        <Generated>2026-08-07T19:56:41</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -36,7 +36,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="MRVL">
+        <Stock ticker="HMC">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -46,17 +46,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="HMC">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="TSLA">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="AGNC">
+        <Stock ticker="MRVL">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -66,12 +56,22 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
+        <Stock ticker="DJT">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="TSLA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="SNAP">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="FUJHY">
+        <Stock ticker="AGNC">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -81,17 +81,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="KWR">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="F">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="DJT">
+        <Stock ticker="FUJHY">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -101,7 +91,22 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
+        <Stock ticker="KWR">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="NVDA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="PFE">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="F">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -111,7 +116,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="PFE">
+        <Stock ticker="ORCL">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="ZIM">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -126,7 +136,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="ZIM">
+        <Stock ticker="BA">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -136,27 +146,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="BLK">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="BDN">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="ORCL">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="PH">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="SBLK">
+        <Stock ticker="GD">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -166,7 +156,7 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="GD">
+        <Stock ticker="BLK">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -176,12 +166,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="LMT">
+        <Stock ticker="SBLK">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="BA">
+        <Stock ticker="GS">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -191,7 +181,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="GS">
+        <Stock ticker="LMT">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="PH">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -211,42 +206,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
+        <Stock ticker="BDN">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="META">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="TSM">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="BAC">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="KO">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="OXY">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="MRK">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="TWO">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="CSCO">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -256,12 +221,17 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
+        <Stock ticker="MSFT">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="WFC">
+        <Stock ticker="TWO">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="KO">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -271,17 +241,42 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="MSFT">
+        <Stock ticker="TSM">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="DD">
+        <Stock ticker="WFC">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="CSCO">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BAC">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="MRK">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="VZ">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="OXY">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -301,17 +296,12 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
+        <Stock ticker="HWKN">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="GME">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="VDE">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
-        <Stock ticker="MCD">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -321,12 +311,27 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
+        <Stock ticker="LHX">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="MCD">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
         <Stock ticker="GOOGL">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="LHX">
+        <Stock ticker="DD">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="VDE">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
@@ -351,22 +356,17 @@
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="HWKN">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
-        </Stock>
         <Stock ticker="AMD">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="V">
+        <Stock ticker="AFRM">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="AFRM">
+        <Stock ticker="V">
             <Price>$Loading...</Price>
             <DaysChange>Loading...%</DaysChange>
             <warming_cooling>nan</warming_cooling>
