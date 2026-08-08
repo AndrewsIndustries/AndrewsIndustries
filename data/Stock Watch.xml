@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-08T00:32:26</Generated>
+        <Generated>2026-08-08T02:29:56</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -43,7 +43,7 @@
         </Stock>
         <Stock ticker="HMC">
             <Price>$31.82</Price>
-            <DaysChange>3.5%</DaysChange>
+            <DaysChange>3.55%</DaysChange>
             <warming_cooling>6.9</warming_cooling>
         </Stock>
         <Stock ticker="DJT">
@@ -88,7 +88,7 @@
         </Stock>
         <Stock ticker="PFE">
             <Price>$26.76</Price>
-            <DaysChange>2.16%</DaysChange>
+            <DaysChange>2.14%</DaysChange>
             <warming_cooling>-0.2</warming_cooling>
         </Stock>
         <Stock ticker="SNAP">
@@ -168,7 +168,7 @@
         </Stock>
         <Stock ticker="JNJ">
             <Price>$259.24</Price>
-            <DaysChange>0.86%</DaysChange>
+            <DaysChange>0.88%</DaysChange>
             <warming_cooling>1.3</warming_cooling>
         </Stock>
         <Stock ticker="AMZN">
@@ -238,12 +238,12 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$63.17</Price>
-            <DaysChange>0.24%</DaysChange>
+            <DaysChange>0.27%</DaysChange>
             <warming_cooling>1.1</warming_cooling>
         </Stock>
         <Stock ticker="KO">
             <Price>$87.05</Price>
-            <DaysChange>0.22%</DaysChange>
+            <DaysChange>0.23%</DaysChange>
             <warming_cooling>7.4</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
@@ -281,15 +281,15 @@
             <DaysChange>-0.09%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
+        <Stock ticker="RTX">
+            <Price>$223.03</Price>
+            <DaysChange>-0.1%</DaysChange>
+            <warming_cooling>10.0</warming_cooling>
+        </Stock>
         <Stock ticker="COST">
             <Price>$947.82</Price>
             <DaysChange>-0.14%</DaysChange>
             <warming_cooling>1.2</warming_cooling>
-        </Stock>
-        <Stock ticker="RTX">
-            <Price>$223.03</Price>
-            <DaysChange>-0.15%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="WMT">
             <Price>$111.85</Price>
@@ -308,7 +308,7 @@
         </Stock>
         <Stock ticker="MCD">
             <Price>$274.48</Price>
-            <DaysChange>-0.65%</DaysChange>
+            <DaysChange>-0.64%</DaysChange>
             <warming_cooling>1.1</warming_cooling>
         </Stock>
         <Stock ticker="PG">
@@ -348,7 +348,7 @@
         </Stock>
         <Stock ticker="SHEL">
             <Price>$88.50</Price>
-            <DaysChange>-1.24%</DaysChange>
+            <DaysChange>-1.23%</DaysChange>
             <warming_cooling>5.3</warming_cooling>
         </Stock>
         <Stock ticker="CVX">
