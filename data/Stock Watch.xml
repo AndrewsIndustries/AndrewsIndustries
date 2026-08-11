@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-11T10:29:49</Generated>
+        <Generated>2026-08-11T11:21:23</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -57,7 +57,7 @@
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
-            <Price>$687,500.00</Price>
+            <Price>$688,000.00</Price>
             <DaysChange>1.93%</DaysChange>
             <warming_cooling>3.5</warming_cooling>
         </Stock>
@@ -201,6 +201,11 @@
             <DaysChange>0.31%</DaysChange>
             <warming_cooling>0.7</warming_cooling>
         </Stock>
+        <Stock ticker="F">
+            <Price>$14.00</Price>
+            <DaysChange>0.14%</DaysChange>
+            <warming_cooling>-0.2</warming_cooling>
+        </Stock>
         <Stock ticker="MA">
             <Price>$563.17</Price>
             <DaysChange>0.04%</DaysChange>
@@ -295,11 +300,6 @@
             <Price>$6.50</Price>
             <DaysChange>-0.91%</DaysChange>
             <warming_cooling>-5.8</warming_cooling>
-        </Stock>
-        <Stock ticker="F">
-            <Price>$13.85</Price>
-            <DaysChange>-0.93%</DaysChange>
-            <warming_cooling>-0.2</warming_cooling>
         </Stock>
         <Stock ticker="PEP">
             <Price>$137.73</Price>
