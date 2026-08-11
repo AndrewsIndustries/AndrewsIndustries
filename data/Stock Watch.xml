@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-11T05:39:09</Generated>
+        <Generated>2026-08-11T06:32:10</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -201,15 +201,15 @@
             <DaysChange>0.14%</DaysChange>
             <warming_cooling>3.1</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$674,500.00</Price>
-            <DaysChange>0.07%</DaysChange>
-            <warming_cooling>3.8</warming_cooling>
-        </Stock>
         <Stock ticker="MA">
             <Price>$563.17</Price>
             <DaysChange>0.04%</DaysChange>
             <warming_cooling>4.3</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$674,500.00</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>3.8</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
             <Price>$710.65</Price>
