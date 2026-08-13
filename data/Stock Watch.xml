@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-13T07:16:08</Generated>
+        <Generated>2026-08-13T08:45:15</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -186,6 +186,11 @@
             <DaysChange>0.19%</DaysChange>
             <warming_cooling>-2.4</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$664,000.00</Price>
+            <DaysChange>0.15%</DaysChange>
+            <warming_cooling>5.1</warming_cooling>
+        </Stock>
         <Stock ticker="KTOS">
             <Price>$63.82</Price>
             <DaysChange>0.14%</DaysChange>
@@ -195,11 +200,6 @@
             <Price>$7.96</Price>
             <DaysChange>0.13%</DaysChange>
             <warming_cooling>-1.1</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$663,000.00</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>5.1</warming_cooling>
         </Stock>
         <Stock ticker="CVX">
             <Price>$196.60</Price>
