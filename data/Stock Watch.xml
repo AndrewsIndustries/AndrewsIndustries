@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-14T09:14:31</Generated>
+        <Generated>2026-08-14T10:17:27</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -236,6 +236,11 @@
             <DaysChange>-0.08%</DaysChange>
             <warming_cooling>0.2</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$659,000.00</Price>
+            <DaysChange>-0.08%</DaysChange>
+            <warming_cooling>3.0</warming_cooling>
+        </Stock>
         <Stock ticker="DD">
             <Price>$144.10</Price>
             <DaysChange>-0.15%</DaysChange>
@@ -281,11 +286,6 @@
             <DaysChange>-0.5%</DaysChange>
             <warming_cooling>6.8</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$659,500.00</Price>
-            <DaysChange>-0.53%</DaysChange>
-            <warming_cooling>3.0</warming_cooling>
-        </Stock>
         <Stock ticker="XOM">
             <Price>$158.61</Price>
             <DaysChange>-0.72%</DaysChange>
@@ -316,11 +316,6 @@
             <DaysChange>-0.99%</DaysChange>
             <warming_cooling>3.8</warming_cooling>
         </Stock>
-        <Stock ticker="RTX">
-            <Price>$220.48</Price>
-            <DaysChange>-1.02%</DaysChange>
-            <warming_cooling>4.8</warming_cooling>
-        </Stock>
         <Stock ticker="WDFC">
             <Price>$230.10</Price>
             <DaysChange>-1.03%</DaysChange>
@@ -345,6 +340,11 @@
             <Price>$272.25</Price>
             <DaysChange>-1.25%</DaysChange>
             <warming_cooling>3.7</warming_cooling>
+        </Stock>
+        <Stock ticker="RTX">
+            <Price>$219.75</Price>
+            <DaysChange>-1.35%</DaysChange>
+            <warming_cooling>4.8</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$598.01</Price>
