@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-15T19:21:10</Generated>
+        <Generated>2026-08-15T19:40:33</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -241,15 +241,15 @@
             <DaysChange>-0.07%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$659,000.00</Price>
-            <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>3.1</warming_cooling>
-        </Stock>
         <Stock ticker="COST">
             <Price>$961.10</Price>
             <DaysChange>-0.08%</DaysChange>
             <warming_cooling>0.1</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$659,000.00</Price>
+            <DaysChange>-0.08%</DaysChange>
+            <warming_cooling>3.1</warming_cooling>
         </Stock>
         <Stock ticker="GOOGL">
             <Price>$345.90</Price>
