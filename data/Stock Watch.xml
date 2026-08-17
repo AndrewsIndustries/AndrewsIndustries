@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-17T04:21:56</Generated>
+        <Generated>2026-08-17T05:02:59</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -38,7 +38,7 @@
         </Stock>
         <Stock ticker="HWKN">
             <Price>$131.05</Price>
-            <DaysChange>2.5%</DaysChange>
+            <DaysChange>2.34%</DaysChange>
             <warming_cooling>-6.9</warming_cooling>
         </Stock>
         <Stock ticker="TXN">
