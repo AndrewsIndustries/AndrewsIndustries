@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-17T23:33:47</Generated>
+        <Generated>2026-08-17T23:51:40</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -66,15 +66,15 @@
             <DaysChange>1.11%</DaysChange>
             <warming_cooling>8.9</warming_cooling>
         </Stock>
-        <Stock ticker="TSM">
-            <Price>$430.97</Price>
-            <DaysChange>1.09%</DaysChange>
-            <warming_cooling>4.9</warming_cooling>
-        </Stock>
         <Stock ticker="CSCO">
             <Price>$112.90</Price>
             <DaysChange>1.09%</DaysChange>
             <warming_cooling>7.0</warming_cooling>
+        </Stock>
+        <Stock ticker="TSM">
+            <Price>$430.97</Price>
+            <DaysChange>1.09%</DaysChange>
+            <warming_cooling>4.9</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
             <Price>$103.49</Price>
