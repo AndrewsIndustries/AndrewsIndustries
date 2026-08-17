@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-17T20:56:21</Generated>
+        <Generated>2026-08-17T21:19:51</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -101,15 +101,15 @@
             <DaysChange>0.4%</DaysChange>
             <warming_cooling>0.4</warming_cooling>
         </Stock>
+        <Stock ticker="ORC">
+            <Price>$6.67</Price>
+            <DaysChange>0.38%</DaysChange>
+            <warming_cooling>0.2</warming_cooling>
+        </Stock>
         <Stock ticker="PFE">
             <Price>$26.87</Price>
             <DaysChange>0.32%</DaysChange>
             <warming_cooling>9.6</warming_cooling>
-        </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.67</Price>
-            <DaysChange>0.3%</DaysChange>
-            <warming_cooling>0.2</warming_cooling>
         </Stock>
         <Stock ticker="NVAX">
             <Price>$8.07</Price>
@@ -226,15 +226,15 @@
             <DaysChange>-0.93%</DaysChange>
             <warming_cooling>2.8</warming_cooling>
         </Stock>
-        <Stock ticker="FUJHY">
-            <Price>$7.98</Price>
-            <DaysChange>-0.99%</DaysChange>
-            <warming_cooling>1.6</warming_cooling>
-        </Stock>
         <Stock ticker="PG">
             <Price>$143.12</Price>
             <DaysChange>-0.99%</DaysChange>
             <warming_cooling>-1.5</warming_cooling>
+        </Stock>
+        <Stock ticker="FUJHY">
+            <Price>$7.98</Price>
+            <DaysChange>-0.99%</DaysChange>
+            <warming_cooling>1.6</warming_cooling>
         </Stock>
         <Stock ticker="TM">
             <Price>$189.18</Price>
@@ -253,7 +253,7 @@
         </Stock>
         <Stock ticker="GME">
             <Price>$18.40</Price>
-            <DaysChange>-1.39%</DaysChange>
+            <DaysChange>-1.34%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
