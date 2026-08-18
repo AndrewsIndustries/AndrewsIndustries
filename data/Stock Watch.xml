@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-18T06:04:10</Generated>
+        <Generated>2026-08-18T06:59:06</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -125,6 +125,11 @@
             <Price>$0.45</Price>
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$649,000.00</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>3.1</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
             <Price>$225.01</Price>
@@ -265,11 +270,6 @@
             <Price>$358.84</Price>
             <DaysChange>-1.42%</DaysChange>
             <warming_cooling>-0.3</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$649,000.00</Price>
-            <DaysChange>-1.52%</DaysChange>
-            <warming_cooling>3.1</warming_cooling>
         </Stock>
         <Stock ticker="AMD">
             <Price>$506.00</Price>
