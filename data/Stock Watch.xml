@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-17T23:51:40</Generated>
+        <Generated>2026-08-18T00:23:22</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -66,15 +66,15 @@
             <DaysChange>1.11%</DaysChange>
             <warming_cooling>8.9</warming_cooling>
         </Stock>
-        <Stock ticker="CSCO">
-            <Price>$112.90</Price>
-            <DaysChange>1.09%</DaysChange>
-            <warming_cooling>7.0</warming_cooling>
-        </Stock>
         <Stock ticker="TSM">
             <Price>$430.97</Price>
             <DaysChange>1.09%</DaysChange>
             <warming_cooling>4.9</warming_cooling>
+        </Stock>
+        <Stock ticker="CSCO">
+            <Price>$112.90</Price>
+            <DaysChange>1.09%</DaysChange>
+            <warming_cooling>7.0</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
             <Price>$103.49</Price>
@@ -101,15 +101,15 @@
             <DaysChange>0.39%</DaysChange>
             <warming_cooling>0.4</warming_cooling>
         </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.67</Price>
-            <DaysChange>0.3%</DaysChange>
-            <warming_cooling>0.2</warming_cooling>
-        </Stock>
         <Stock ticker="PFE">
             <Price>$26.87</Price>
             <DaysChange>0.3%</DaysChange>
             <warming_cooling>9.6</warming_cooling>
+        </Stock>
+        <Stock ticker="ORC">
+            <Price>$6.67</Price>
+            <DaysChange>0.3%</DaysChange>
+            <warming_cooling>0.2</warming_cooling>
         </Stock>
         <Stock ticker="NVAX">
             <Price>$8.07</Price>
@@ -296,15 +296,15 @@
             <DaysChange>-2.2%</DaysChange>
             <warming_cooling>1.1</warming_cooling>
         </Stock>
-        <Stock ticker="F">
-            <Price>$14.05</Price>
-            <DaysChange>-2.23%</DaysChange>
-            <warming_cooling>-4.6</warming_cooling>
-        </Stock>
         <Stock ticker="BLK">
             <Price>$1,147.11</Price>
             <DaysChange>-2.23%</DaysChange>
             <warming_cooling>6.5</warming_cooling>
+        </Stock>
+        <Stock ticker="F">
+            <Price>$14.05</Price>
+            <DaysChange>-2.23%</DaysChange>
+            <warming_cooling>-4.6</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$593.74</Price>
