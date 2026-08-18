@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-18T10:13:52</Generated>
+        <Generated>2026-08-18T10:47:04</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -123,7 +123,7 @@
         </Stock>
         <Stock ticker="WSR">
             <Price>$0.45</Price>
-            <DaysChange>0%</DaysChange>
+            <DaysChange>0.0%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
@@ -182,19 +182,19 @@
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="GOOGL">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$344.00</Price>
+            <DaysChange>-0.55%</DaysChange>
+            <warming_cooling>3.0</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$221.64</Price>
+            <DaysChange>-0.59%</DaysChange>
+            <warming_cooling>2.4</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$645,000.00</Price>
+            <DaysChange>-0.62%</DaysChange>
+            <warming_cooling>2.7</warming_cooling>
         </Stock>
         <Stock ticker="COST">
             <Price>$953.50</Price>
@@ -283,7 +283,7 @@
         </Stock>
         <Stock ticker="KTOS">
             <Price>$63.29</Price>
-            <DaysChange>-2%</DaysChange>
+            <DaysChange>-2.0%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="DJT">
