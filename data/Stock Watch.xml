@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-19T21:54:42</Generated>
+        <Generated>2026-08-19T22:13:52</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -43,7 +43,7 @@
         </Stock>
         <Stock ticker="PFE">
             <Price>$28.24</Price>
-            <DaysChange>3.63%</DaysChange>
+            <DaysChange>3.6%</DaysChange>
             <warming_cooling>4.6</warming_cooling>
         </Stock>
         <Stock ticker="DJT">
@@ -63,7 +63,7 @@
         </Stock>
         <Stock ticker="SNAP">
             <Price>$5.24</Price>
-            <DaysChange>2.54%</DaysChange>
+            <DaysChange>2.64%</DaysChange>
             <warming_cooling>9.9</warming_cooling>
         </Stock>
         <Stock ticker="RIOT">
@@ -103,7 +103,7 @@
         </Stock>
         <Stock ticker="KO">
             <Price>$90.35</Price>
-            <DaysChange>1.72%</DaysChange>
+            <DaysChange>1.71%</DaysChange>
             <warming_cooling>-2.7</warming_cooling>
         </Stock>
         <Stock ticker="VZ">
@@ -148,7 +148,7 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$144.38</Price>
-            <DaysChange>0.65%</DaysChange>
+            <DaysChange>0.64%</DaysChange>
             <warming_cooling>-1.4</warming_cooling>
         </Stock>
         <Stock ticker="DD">
@@ -168,7 +168,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$60.09</Price>
-            <DaysChange>0.48%</DaysChange>
+            <DaysChange>0.47%</DaysChange>
             <warming_cooling>4.5</warming_cooling>
         </Stock>
         <Stock ticker="GME">
@@ -246,15 +246,15 @@
             <DaysChange>-0.32%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="BA">
-            <Price>$222.20</Price>
-            <DaysChange>-0.39%</DaysChange>
-            <warming_cooling>8.0</warming_cooling>
-        </Stock>
         <Stock ticker="FUJHY">
             <Price>$7.97</Price>
             <DaysChange>-0.38%</DaysChange>
             <warming_cooling>-6.1</warming_cooling>
+        </Stock>
+        <Stock ticker="BA">
+            <Price>$222.20</Price>
+            <DaysChange>-0.39%</DaysChange>
+            <warming_cooling>8.0</warming_cooling>
         </Stock>
         <Stock ticker="COST">
             <Price>$956.99</Price>
@@ -313,7 +313,7 @@
         </Stock>
         <Stock ticker="WFC">
             <Price>$85.94</Price>
-            <DaysChange>-1.67%</DaysChange>
+            <DaysChange>-1.69%</DaysChange>
             <warming_cooling>6.0</warming_cooling>
         </Stock>
         <Stock ticker="TXN">
@@ -378,7 +378,7 @@
         </Stock>
         <Stock ticker="RDDT">
             <Price>$151.71</Price>
-            <DaysChange>-4.13%</DaysChange>
+            <DaysChange>-4.03%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
     </MarketData>
