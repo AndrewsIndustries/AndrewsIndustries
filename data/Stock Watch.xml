@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-19T20:43:58</Generated>
+        <Generated>2026-08-19T21:03:41</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -58,12 +58,12 @@
         </Stock>
         <Stock ticker="BDN">
             <Price>$3.07</Price>
-            <DaysChange>2.85%</DaysChange>
+            <DaysChange>3.02%</DaysChange>
             <warming_cooling>7.2</warming_cooling>
         </Stock>
         <Stock ticker="SNAP">
             <Price>$5.24</Price>
-            <DaysChange>2.54%</DaysChange>
+            <DaysChange>2.64%</DaysChange>
             <warming_cooling>9.9</warming_cooling>
         </Stock>
         <Stock ticker="RIOT">
@@ -113,7 +113,7 @@
         </Stock>
         <Stock ticker="GM">
             <Price>$84.96</Price>
-            <DaysChange>1.51%</DaysChange>
+            <DaysChange>1.49%</DaysChange>
             <warming_cooling>-3.0</warming_cooling>
         </Stock>
         <Stock ticker="AGNC">
@@ -168,7 +168,7 @@
         </Stock>
         <Stock ticker="OXY">
             <Price>$60.09</Price>
-            <DaysChange>0.48%</DaysChange>
+            <DaysChange>0.47%</DaysChange>
             <warming_cooling>4.5</warming_cooling>
         </Stock>
         <Stock ticker="GME">
@@ -193,7 +193,7 @@
         </Stock>
         <Stock ticker="TM">
             <Price>$188.78</Price>
-            <DaysChange>0.26%</DaysChange>
+            <DaysChange>0.28%</DaysChange>
             <warming_cooling>-2.4</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
@@ -338,7 +338,7 @@
         </Stock>
         <Stock ticker="RTX">
             <Price>$220.35</Price>
-            <DaysChange>-2.28%</DaysChange>
+            <DaysChange>-2.25%</DaysChange>
             <warming_cooling>3.5</warming_cooling>
         </Stock>
         <Stock ticker="KTOS">
