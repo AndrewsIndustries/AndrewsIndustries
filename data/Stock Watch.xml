@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-19T08:58:04</Generated>
+        <Generated>2026-08-19T09:32:07</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -96,15 +96,15 @@
             <DaysChange>0.82%</DaysChange>
             <warming_cooling>-2.5</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$650,500.00</Price>
-            <DaysChange>0.77%</DaysChange>
-            <warming_cooling>-1.6</warming_cooling>
-        </Stock>
         <Stock ticker="WMT">
-            <Price>$115.20</Price>
-            <DaysChange>0.76%</DaysChange>
-            <warming_cooling>1.6</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GD">
             <Price>$393.48</Price>
@@ -173,7 +173,7 @@
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.67</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>0%</DaysChange>
             <warming_cooling>0.9</warming_cooling>
         </Stock>
         <Stock ticker="HD">
