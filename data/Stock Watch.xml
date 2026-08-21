@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-21T00:34:09</Generated>
+        <Generated>2026-08-21T02:10:19</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -198,7 +198,7 @@
         </Stock>
         <Stock ticker="RDDT">
             <Price>$150.31</Price>
-            <DaysChange>-0.92%</DaysChange>
+            <DaysChange>-0.94%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
         </Stock>
         <Stock ticker="PG">
