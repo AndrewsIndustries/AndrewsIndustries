@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-21T09:50:44</Generated>
+        <Generated>2026-08-21T10:15:12</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -108,7 +108,7 @@
         </Stock>
         <Stock ticker="CVX">
             <Price>$205.77</Price>
-            <DaysChange>0%</DaysChange>
+            <DaysChange>0.0%</DaysChange>
             <warming_cooling>1.6</warming_cooling>
         </Stock>
         <Stock ticker="META">
@@ -252,19 +252,19 @@
             <warming_cooling>7.6</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$638,500.00</Price>
+            <DaysChange>-1.69%</DaysChange>
+            <warming_cooling>-1.2</warming_cooling>
         </Stock>
         <Stock ticker="TSLA">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$345.13</Price>
+            <DaysChange>-1.71%</DaysChange>
+            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="AAPL">
-            <Price>$Loading...</Price>
-            <DaysChange>Loading...%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <Price>$311.30</Price>
+            <DaysChange>-1.75%</DaysChange>
+            <warming_cooling>-1.0</warming_cooling>
         </Stock>
         <Stock ticker="GS">
             <Price>$1,001.95</Price>
@@ -323,7 +323,7 @@
         </Stock>
         <Stock ticker="LMT">
             <Price>$571.48</Price>
-            <DaysChange>-3%</DaysChange>
+            <DaysChange>-3.0%</DaysChange>
             <warming_cooling>4.5</warming_cooling>
         </Stock>
         <Stock ticker="MS">
