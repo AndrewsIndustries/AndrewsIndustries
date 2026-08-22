@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-22T21:06:12</Generated>
+        <Generated>2026-08-22T21:31:57</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -271,25 +271,25 @@
             <DaysChange>-0.24%</DaysChange>
             <warming_cooling>4.9</warming_cooling>
         </Stock>
-        <Stock ticker="AGNC">
-            <Price>$10.89</Price>
-            <DaysChange>-0.27%</DaysChange>
-            <warming_cooling>2.9</warming_cooling>
-        </Stock>
         <Stock ticker="BAC">
             <Price>$61.69</Price>
             <DaysChange>-0.27%</DaysChange>
             <warming_cooling>2.3</warming_cooling>
         </Stock>
-        <Stock ticker="HWKN">
-            <Price>$118.99</Price>
-            <DaysChange>-0.34%</DaysChange>
-            <warming_cooling>-0.4</warming_cooling>
+        <Stock ticker="AGNC">
+            <Price>$10.89</Price>
+            <DaysChange>-0.27%</DaysChange>
+            <warming_cooling>2.9</warming_cooling>
         </Stock>
         <Stock ticker="SHEL">
             <Price>$93.33</Price>
             <DaysChange>-0.34%</DaysChange>
             <warming_cooling>0.6</warming_cooling>
+        </Stock>
+        <Stock ticker="HWKN">
+            <Price>$118.99</Price>
+            <DaysChange>-0.34%</DaysChange>
+            <warming_cooling>-0.4</warming_cooling>
         </Stock>
         <Stock ticker="OXY">
             <Price>$61.30</Price>
