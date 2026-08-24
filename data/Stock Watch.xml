@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-24T11:41:06</Generated>
+        <Generated>2026-08-24T12:00:24</Generated>
         <Count>75</Count>
     </Header>
     <MarketData>
@@ -269,22 +269,22 @@
         <Stock ticker="CVX">
             <Price>$205.27</Price>
             <DaysChange>-0.24%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>4.9</warming_cooling>
         </Stock>
         <Stock ticker="BAC">
             <Price>$61.69</Price>
             <DaysChange>-0.27%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>2.3</warming_cooling>
         </Stock>
         <Stock ticker="AGNC">
             <Price>$10.89</Price>
             <DaysChange>-0.27%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>2.9</warming_cooling>
         </Stock>
         <Stock ticker="BRKA">
             <Price>$636,500.00</Price>
             <DaysChange>-0.31%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
+            <warming_cooling>-3.1</warming_cooling>
         </Stock>
         <Stock ticker="SHEL">
             <Price>$93.33</Price>
