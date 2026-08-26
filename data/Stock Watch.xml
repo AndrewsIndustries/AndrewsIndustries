@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-26T07:15:34</Generated>
+        <Generated>2026-08-26T08:01:28</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -216,55 +216,55 @@
             <DaysChange>0.09%</DaysChange>
             <warming_cooling>-3.6</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$651,000.00</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>-2.5</warming_cooling>
-        </Stock>
         <Stock ticker="TWO">
             <Price>$12.18</Price>
             <DaysChange>-0.04%</DaysChange>
-            <warming_cooling>-0.2</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="MA">
             <Price>$599.37</Price>
             <DaysChange>-0.08%</DaysChange>
-            <warming_cooling>0.6</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="AAPL">
             <Price>$309.90</Price>
             <DaysChange>-0.14%</DaysChange>
-            <warming_cooling>1.9</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="LHX">
             <Price>$262.17</Price>
             <DaysChange>-0.25%</DaysChange>
-            <warming_cooling>-3.1</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GOOGL">
             <Price>$346.96</Price>
             <DaysChange>-0.32%</DaysChange>
-            <warming_cooling>-4.9</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="KO">
             <Price>$91.64</Price>
             <DaysChange>-0.38%</DaysChange>
-            <warming_cooling>4.1</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="AMZN">
             <Price>$261.06</Price>
             <DaysChange>-0.39%</DaysChange>
-            <warming_cooling>-2.5</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="TM">
             <Price>$192.95</Price>
             <DaysChange>-0.44%</DaysChange>
-            <warming_cooling>1.6</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.72</Price>
             <DaysChange>-0.44%</DaysChange>
-            <warming_cooling>5.6</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$648,000.00</Price>
+            <DaysChange>-0.46%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="DD">
             <Price>$136.04</Price>
