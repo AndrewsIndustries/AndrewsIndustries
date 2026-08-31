@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-08-31T00:39:17</Generated>
+        <Generated>2026-08-31T06:07:26</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -191,24 +191,24 @@
             <DaysChange>0.08%</DaysChange>
             <warming_cooling>-5.0</warming_cooling>
         </Stock>
-        <Stock ticker="BRKA">
-            <Price>$649,500.00</Price>
-            <DaysChange>0.08%</DaysChange>
-            <warming_cooling>-5.6</warming_cooling>
-        </Stock>
         <Stock ticker="CF">
-            <Price>$125.79</Price>
-            <DaysChange>0.06%</DaysChange>
-            <warming_cooling>6.4</warming_cooling>
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="TWO">
             <Price>$12.18</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>0%</DaysChange>
             <warming_cooling>1.2</warming_cooling>
         </Stock>
         <Stock ticker="WSR">
             <Price>$0.47</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>0%</DaysChange>
             <warming_cooling>9.8</warming_cooling>
         </Stock>
         <Stock ticker="BA">
@@ -226,20 +226,20 @@
             <DaysChange>-0.12%</DaysChange>
             <warming_cooling>2.5</warming_cooling>
         </Stock>
-        <Stock ticker="PFE">
-            <Price>$27.96</Price>
-            <DaysChange>-0.18%</DaysChange>
-            <warming_cooling>3.4</warming_cooling>
+        <Stock ticker="RTX">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="GD">
             <Price>$379.32</Price>
             <DaysChange>-0.19%</DaysChange>
             <warming_cooling>-3.1</warming_cooling>
         </Stock>
-        <Stock ticker="RTX">
-            <Price>$211.71</Price>
-            <DaysChange>-0.19%</DaysChange>
-            <warming_cooling>-6.6</warming_cooling>
+        <Stock ticker="PFE">
+            <Price>$Loading...</Price>
+            <DaysChange>Loading...%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
             <Price>$707.24</Price>
