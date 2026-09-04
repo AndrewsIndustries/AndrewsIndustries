@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-04T00:26:00</Generated>
+        <Generated>2026-09-04T04:51:16</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -261,6 +261,11 @@
             <DaysChange>0.09%</DaysChange>
             <warming_cooling>3.9</warming_cooling>
         </Stock>
+        <Stock ticker="ORC">
+            <Price>$6.52</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>1.7</warming_cooling>
+        </Stock>
         <Stock ticker="TWO">
             <Price>$12.18</Price>
             <DaysChange>0.0%</DaysChange>
@@ -271,11 +276,6 @@
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>nan</warming_cooling>
         </Stock>
-        <Stock ticker="ORC">
-            <Price>$6.52</Price>
-            <DaysChange>0.0%</DaysChange>
-            <warming_cooling>1.7</warming_cooling>
-        </Stock>
         <Stock ticker="WFC">
             <Price>$89.19</Price>
             <DaysChange>-0.09%</DaysChange>
@@ -283,7 +283,7 @@
         </Stock>
         <Stock ticker="ARR">
             <Price>$16.13</Price>
-            <DaysChange>0.0%</DaysChange>
+            <DaysChange>-0.12%</DaysChange>
             <warming_cooling>-1.9</warming_cooling>
         </Stock>
         <Stock ticker="AMD">
@@ -326,15 +326,15 @@
             <DaysChange>-0.49%</DaysChange>
             <warming_cooling>-0.8</warming_cooling>
         </Stock>
-        <Stock ticker="MCD">
-            <Price>$259.63</Price>
-            <DaysChange>-0.51%</DaysChange>
-            <warming_cooling>-4.5</warming_cooling>
-        </Stock>
         <Stock ticker="SHEL">
             <Price>$92.33</Price>
             <DaysChange>-0.51%</DaysChange>
             <warming_cooling>0.9</warming_cooling>
+        </Stock>
+        <Stock ticker="MCD">
+            <Price>$259.63</Price>
+            <DaysChange>-0.51%</DaysChange>
+            <warming_cooling>-4.5</warming_cooling>
         </Stock>
         <Stock ticker="PFE">
             <Price>$28.81</Price>
