@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-06T05:07:26</Generated>
+        <Generated>2026-09-06T09:22:12</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -101,15 +101,15 @@
             <DaysChange>0.84%</DaysChange>
             <warming_cooling>-1.9</warming_cooling>
         </Stock>
-        <Stock ticker="GM">
-            <Price>$87.76</Price>
-            <DaysChange>0.83%</DaysChange>
-            <warming_cooling>2.3</warming_cooling>
-        </Stock>
         <Stock ticker="BA">
             <Price>$212.25</Price>
             <DaysChange>0.83%</DaysChange>
             <warming_cooling>-8.0</warming_cooling>
+        </Stock>
+        <Stock ticker="GM">
+            <Price>$87.76</Price>
+            <DaysChange>0.83%</DaysChange>
+            <warming_cooling>2.3</warming_cooling>
         </Stock>
         <Stock ticker="KWR">
             <Price>$161.50</Price>
