@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-09T01:17:31</Generated>
+        <Generated>2026-09-09T06:02:40</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -138,8 +138,13 @@
         </Stock>
         <Stock ticker="MCD">
             <Price>$255.81</Price>
-            <DaysChange>0.04%</DaysChange>
+            <DaysChange>0.05%</DaysChange>
             <warming_cooling>-2.2</warming_cooling>
+        </Stock>
+        <Stock ticker="TWO">
+            <Price>$12.18</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="CSCO">
             <Price>$109.17</Price>
@@ -150,11 +155,6 @@
             <Price>$338.36</Price>
             <DaysChange>-0.03%</DaysChange>
             <warming_cooling>-2.7</warming_cooling>
-        </Stock>
-        <Stock ticker="TWO">
-            <Price>$12.18</Price>
-            <DaysChange>-0.04%</DaysChange>
-            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="ORC">
             <Price>$6.54</Price>
@@ -198,7 +198,7 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$62.39</Price>
-            <DaysChange>-0.48%</DaysChange>
+            <DaysChange>-0.46%</DaysChange>
             <warming_cooling>-3.5</warming_cooling>
         </Stock>
         <Stock ticker="META">
@@ -258,7 +258,7 @@
         </Stock>
         <Stock ticker="RTX">
             <Price>$198.81</Price>
-            <DaysChange>-0.96%</DaysChange>
+            <DaysChange>-0.99%</DaysChange>
             <warming_cooling>-9.0</warming_cooling>
         </Stock>
         <Stock ticker="WMT">
