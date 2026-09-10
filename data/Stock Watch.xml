@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-10T01:02:32</Generated>
+        <Generated>2026-09-10T05:53:29</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -33,7 +33,7 @@
         </Stock>
         <Stock ticker="XOM">
             <Price>$164.23</Price>
-            <DaysChange>2.22%</DaysChange>
+            <DaysChange>2.19%</DaysChange>
             <warming_cooling>-0.4</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
@@ -108,7 +108,7 @@
         </Stock>
         <Stock ticker="PFE">
             <Price>$27.78</Price>
-            <DaysChange>-0.04%</DaysChange>
+            <DaysChange>-0.05%</DaysChange>
             <warming_cooling>2.8</warming_cooling>
         </Stock>
         <Stock ticker="TSLA">
@@ -188,12 +188,12 @@
         </Stock>
         <Stock ticker="RTX">
             <Price>$197.55</Price>
-            <DaysChange>-0.64%</DaysChange>
+            <DaysChange>-0.63%</DaysChange>
             <warming_cooling>-8.9</warming_cooling>
         </Stock>
         <Stock ticker="PH">
             <Price>$949.47</Price>
-            <DaysChange>-0.67%</DaysChange>
+            <DaysChange>-0.64%</DaysChange>
             <warming_cooling>-7.2</warming_cooling>
         </Stock>
         <Stock ticker="GS">
@@ -288,7 +288,7 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$142.64</Price>
-            <DaysChange>-2.02%</DaysChange>
+            <DaysChange>-2.03%</DaysChange>
             <warming_cooling>2.3</warming_cooling>
         </Stock>
         <Stock ticker="BA">
@@ -323,7 +323,7 @@
         </Stock>
         <Stock ticker="ZIM">
             <Price>$29.38</Price>
-            <DaysChange>-2.33%</DaysChange>
+            <DaysChange>-2.29%</DaysChange>
             <warming_cooling>2.2</warming_cooling>
         </Stock>
         <Stock ticker="GM">
