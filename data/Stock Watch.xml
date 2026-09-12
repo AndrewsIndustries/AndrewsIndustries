@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-11T23:39:56</Generated>
+        <Generated>2026-09-12T01:32:37</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -58,12 +58,12 @@
         </Stock>
         <Stock ticker="HMC">
             <Price>$32.52</Price>
-            <DaysChange>2.86%</DaysChange>
+            <DaysChange>2.85%</DaysChange>
             <warming_cooling>-2.1</warming_cooling>
         </Stock>
         <Stock ticker="BA">
             <Price>$210.45</Price>
-            <DaysChange>2.72%</DaysChange>
+            <DaysChange>2.76%</DaysChange>
             <warming_cooling>-0.9</warming_cooling>
         </Stock>
         <Stock ticker="INTC">
@@ -151,15 +151,15 @@
             <DaysChange>1.28%</DaysChange>
             <warming_cooling>1.4</warming_cooling>
         </Stock>
+        <Stock ticker="TSM">
+            <Price>$433.24</Price>
+            <DaysChange>1.22%</DaysChange>
+            <warming_cooling>2.4</warming_cooling>
+        </Stock>
         <Stock ticker="HWKN">
             <Price>$124.07</Price>
             <DaysChange>1.17%</DaysChange>
             <warming_cooling>8.5</warming_cooling>
-        </Stock>
-        <Stock ticker="TSM">
-            <Price>$433.24</Price>
-            <DaysChange>1.16%</DaysChange>
-            <warming_cooling>2.4</warming_cooling>
         </Stock>
         <Stock ticker="HD">
             <Price>$308.74</Price>
@@ -213,7 +213,7 @@
         </Stock>
         <Stock ticker="MA">
             <Price>$569.19</Price>
-            <DaysChange>0.69%</DaysChange>
+            <DaysChange>0.68%</DaysChange>
             <warming_cooling>-0.2</warming_cooling>
         </Stock>
         <Stock ticker="MSFT">
@@ -258,7 +258,7 @@
         </Stock>
         <Stock ticker="XOM">
             <Price>$165.99</Price>
-            <DaysChange>0.45%</DaysChange>
+            <DaysChange>0.46%</DaysChange>
             <warming_cooling>-3.4</warming_cooling>
         </Stock>
         <Stock ticker="VDE">
@@ -288,7 +288,7 @@
         </Stock>
         <Stock ticker="NOC">
             <Price>$518.97</Price>
-            <DaysChange>0.05%</DaysChange>
+            <DaysChange>0.0%</DaysChange>
             <warming_cooling>-6.5</warming_cooling>
         </Stock>
         <Stock ticker="TWO">
