@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-12T22:52:42</Generated>
+        <Generated>2026-09-13T00:28:14</Generated>
         <Count>76</Count>
     </Header>
     <MarketData>
@@ -236,15 +236,15 @@
             <DaysChange>0.57%</DaysChange>
             <warming_cooling>9.7</warming_cooling>
         </Stock>
-        <Stock ticker="KO">
-            <Price>$88.29</Price>
-            <DaysChange>0.52%</DaysChange>
-            <warming_cooling>-3.9</warming_cooling>
-        </Stock>
         <Stock ticker="TSLA">
             <Price>$365.44</Price>
             <DaysChange>0.52%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
+        </Stock>
+        <Stock ticker="KO">
+            <Price>$88.29</Price>
+            <DaysChange>0.52%</DaysChange>
+            <warming_cooling>-3.9</warming_cooling>
         </Stock>
         <Stock ticker="OXY">
             <Price>$61.46</Price>
