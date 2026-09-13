@@ -2,8 +2,8 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-13T05:11:21</Generated>
-        <Count>76</Count>
+        <Generated>2026-09-13T10:15:11</Generated>
+        <Count>81</Count>
     </Header>
     <MarketData>
         <Stock ticker="WSR">
@@ -131,6 +131,11 @@
             <DaysChange>1.37%</DaysChange>
             <warming_cooling>-6.9</warming_cooling>
         </Stock>
+        <Stock ticker="FDRR">
+            <Price>$70.06</Price>
+            <DaysChange>1.37%</DaysChange>
+            <warming_cooling>0.5</warming_cooling>
+        </Stock>
         <Stock ticker="BDN">
             <Price>$3.01</Price>
             <DaysChange>1.35%</DaysChange>
@@ -206,6 +211,11 @@
             <DaysChange>0.81%</DaysChange>
             <warming_cooling>1.0</warming_cooling>
         </Stock>
+        <Stock ticker="JEPQ">
+            <Price>$59.78</Price>
+            <DaysChange>0.81%</DaysChange>
+            <warming_cooling>0.7</warming_cooling>
+        </Stock>
         <Stock ticker="KWR">
             <Price>$156.22</Price>
             <DaysChange>0.79%</DaysChange>
@@ -246,6 +256,11 @@
             <DaysChange>0.52%</DaysChange>
             <warming_cooling>-3.9</warming_cooling>
         </Stock>
+        <Stock ticker="GLAD">
+            <Price>$19.48</Price>
+            <DaysChange>0.52%</DaysChange>
+            <warming_cooling>0.4</warming_cooling>
+        </Stock>
         <Stock ticker="OXY">
             <Price>$61.46</Price>
             <DaysChange>0.49%</DaysChange>
@@ -265,6 +280,11 @@
             <Price>$183.61</Price>
             <DaysChange>0.36%</DaysChange>
             <warming_cooling>2.5</warming_cooling>
+        </Stock>
+        <Stock ticker="FNARX">
+            <Price>$72.30</Price>
+            <DaysChange>0.36%</DaysChange>
+            <warming_cooling>-0.3</warming_cooling>
         </Stock>
         <Stock ticker="ZIM">
             <Price>$29.57</Price>
@@ -355,6 +375,11 @@
             <Price>$46.69</Price>
             <DaysChange>-0.62%</DaysChange>
             <warming_cooling>-9.2</warming_cooling>
+        </Stock>
+        <Stock ticker="GAIN">
+            <Price>$15.90</Price>
+            <DaysChange>-0.93%</DaysChange>
+            <warming_cooling>-1.6</warming_cooling>
         </Stock>
         <Stock ticker="LMT">
             <Price>$524.19</Price>
