@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-16T01:40:56</Generated>
+        <Generated>2026-09-16T06:45:27</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -45,6 +45,11 @@
             <Price>$504.20</Price>
             <DaysChange>2.19%</DaysChange>
             <warming_cooling>5.5</warming_cooling>
+        </Stock>
+        <Stock ticker="FNARX">
+            <Price>$72.88</Price>
+            <DaysChange>1.83%</DaysChange>
+            <warming_cooling>0.5</warming_cooling>
         </Stock>
         <Stock ticker="MRVL">
             <Price>$221.70</Price>
@@ -248,7 +253,7 @@
         </Stock>
         <Stock ticker="BLK">
             <Price>$1,058.66</Price>
-            <DaysChange>-0.67%</DaysChange>
+            <DaysChange>-0.65%</DaysChange>
             <warming_cooling>-6.9</warming_cooling>
         </Stock>
         <Stock ticker="TSLA">
@@ -275,11 +280,6 @@
             <Price>$189.83</Price>
             <DaysChange>-1.0%</DaysChange>
             <warming_cooling>-5.8</warming_cooling>
-        </Stock>
-        <Stock ticker="FNARX">
-            <Price>$71.57</Price>
-            <DaysChange>-1.01%</DaysChange>
-            <warming_cooling>0.5</warming_cooling>
         </Stock>
         <Stock ticker="TSM">
             <Price>$413.75</Price>
@@ -318,7 +318,7 @@
         </Stock>
         <Stock ticker="ARR">
             <Price>$15.05</Price>
-            <DaysChange>-1.41%</DaysChange>
+            <DaysChange>-1.38%</DaysChange>
             <warming_cooling>-1.0</warming_cooling>
         </Stock>
         <Stock ticker="MSFT">
