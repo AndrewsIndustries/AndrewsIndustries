@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-17T00:39:53</Generated>
+        <Generated>2026-09-17T05:21:31</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -133,7 +133,7 @@
         </Stock>
         <Stock ticker="PG">
             <Price>$147.02</Price>
-            <DaysChange>0.24%</DaysChange>
+            <DaysChange>0.27%</DaysChange>
             <warming_cooling>-1.6</warming_cooling>
         </Stock>
         <Stock ticker="JNJ">
@@ -171,6 +171,11 @@
             <DaysChange>-0.31%</DaysChange>
             <warming_cooling>-0.4</warming_cooling>
         </Stock>
+        <Stock ticker="DD">
+            <Price>$127.57</Price>
+            <DaysChange>-0.32%</DaysChange>
+            <warming_cooling>-7.3</warming_cooling>
+        </Stock>
         <Stock ticker="PFE">
             <Price>$27.46</Price>
             <DaysChange>-0.33%</DaysChange>
@@ -180,11 +185,6 @@
             <Price>$8.55</Price>
             <DaysChange>-0.35%</DaysChange>
             <warming_cooling>-8.3</warming_cooling>
-        </Stock>
-        <Stock ticker="DD">
-            <Price>$127.57</Price>
-            <DaysChange>-0.37%</DaysChange>
-            <warming_cooling>-7.3</warming_cooling>
         </Stock>
         <Stock ticker="KWR">
             <Price>$153.99</Price>
@@ -223,7 +223,7 @@
         </Stock>
         <Stock ticker="PH">
             <Price>$918.75</Price>
-            <DaysChange>-0.68%</DaysChange>
+            <DaysChange>-0.69%</DaysChange>
             <warming_cooling>-8.7</warming_cooling>
         </Stock>
         <Stock ticker="AFRM">
@@ -291,19 +291,19 @@
             <DaysChange>-1.24%</DaysChange>
             <warming_cooling>0.2</warming_cooling>
         </Stock>
-        <Stock ticker="GM">
-            <Price>$84.29</Price>
-            <DaysChange>-1.24%</DaysChange>
-            <warming_cooling>-3.0</warming_cooling>
-        </Stock>
         <Stock ticker="V">
             <Price>$370.93</Price>
             <DaysChange>-1.25%</DaysChange>
             <warming_cooling>-4.3</warming_cooling>
         </Stock>
+        <Stock ticker="GM">
+            <Price>$84.29</Price>
+            <DaysChange>-1.27%</DaysChange>
+            <warming_cooling>-3.0</warming_cooling>
+        </Stock>
         <Stock ticker="RDDT">
             <Price>$157.60</Price>
-            <DaysChange>-1.28%</DaysChange>
+            <DaysChange>-1.27%</DaysChange>
             <warming_cooling>-5.7</warming_cooling>
         </Stock>
         <Stock ticker="MSFT">
@@ -328,7 +328,7 @@
         </Stock>
         <Stock ticker="MS">
             <Price>$202.42</Price>
-            <DaysChange>-1.8%</DaysChange>
+            <DaysChange>-1.87%</DaysChange>
             <warming_cooling>0.6</warming_cooling>
         </Stock>
         <Stock ticker="SNAP">
