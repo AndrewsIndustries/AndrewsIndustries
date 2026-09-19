@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-19T01:09:17</Generated>
+        <Generated>2026-09-19T05:49:23</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -65,11 +65,6 @@
             <Price>$71.21</Price>
             <DaysChange>1.32%</DaysChange>
             <warming_cooling>-8.1</warming_cooling>
-        </Stock>
-        <Stock ticker="FNARX">
-            <Price>$72.00</Price>
-            <DaysChange>1.28%</DaysChange>
-            <warming_cooling>1.9</warming_cooling>
         </Stock>
         <Stock ticker="NVAX">
             <Price>$10.11</Price>
@@ -205,6 +200,11 @@
             <Price>$47.46</Price>
             <DaysChange>-0.42%</DaysChange>
             <warming_cooling>-10.0</warming_cooling>
+        </Stock>
+        <Stock ticker="FNARX">
+            <Price>$71.68</Price>
+            <DaysChange>-0.44%</DaysChange>
+            <warming_cooling>1.9</warming_cooling>
         </Stock>
         <Stock ticker="V">
             <Price>$368.29</Price>
