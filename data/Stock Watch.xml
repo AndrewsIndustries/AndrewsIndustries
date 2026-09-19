@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-19T09:45:53</Generated>
+        <Generated>2026-09-19T13:28:46</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -156,15 +156,15 @@
             <DaysChange>-0.06%</DaysChange>
             <warming_cooling>4.0</warming_cooling>
         </Stock>
-        <Stock ticker="JNJ">
-            <Price>$269.99</Price>
-            <DaysChange>-0.09%</DaysChange>
-            <warming_cooling>0.2</warming_cooling>
-        </Stock>
         <Stock ticker="MA">
             <Price>$565.24</Price>
             <DaysChange>-0.09%</DaysChange>
             <warming_cooling>-2.5</warming_cooling>
+        </Stock>
+        <Stock ticker="JNJ">
+            <Price>$269.99</Price>
+            <DaysChange>-0.09%</DaysChange>
+            <warming_cooling>0.2</warming_cooling>
         </Stock>
         <Stock ticker="MCD">
             <Price>$248.24</Price>
