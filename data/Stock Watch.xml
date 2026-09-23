@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-23T01:50:17</Generated>
+        <Generated>2026-09-23T06:46:32</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -118,7 +118,7 @@
         </Stock>
         <Stock ticker="TSLA">
             <Price>$378.90</Price>
-            <DaysChange>0.98%</DaysChange>
+            <DaysChange>0.96%</DaysChange>
             <warming_cooling>0.1</warming_cooling>
         </Stock>
         <Stock ticker="MRK">
@@ -171,6 +171,11 @@
             <DaysChange>0.43%</DaysChange>
             <warming_cooling>-0.7</warming_cooling>
         </Stock>
+        <Stock ticker="FNARX">
+            <Price>$70.51</Price>
+            <DaysChange>0.4%</DaysChange>
+            <warming_cooling>1.8</warming_cooling>
+        </Stock>
         <Stock ticker="GLAD">
             <Price>$19.36</Price>
             <DaysChange>0.36%</DaysChange>
@@ -211,6 +216,11 @@
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>-0.6</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$661,000.00</Price>
+            <DaysChange>0.0%</DaysChange>
+            <warming_cooling>2.4</warming_cooling>
+        </Stock>
         <Stock ticker="JNJ">
             <Price>$269.19</Price>
             <DaysChange>-0.1%</DaysChange>
@@ -230,11 +240,6 @@
             <Price>$32.42</Price>
             <DaysChange>-0.34%</DaysChange>
             <warming_cooling>0.6</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$661,000.00</Price>
-            <DaysChange>-0.38%</DaysChange>
-            <warming_cooling>2.4</warming_cooling>
         </Stock>
         <Stock ticker="F">
             <Price>$13.10</Price>
@@ -320,11 +325,6 @@
             <Price>$155.67</Price>
             <DaysChange>-1.93%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="FNARX">
-            <Price>$70.23</Price>
-            <DaysChange>-2.02%</DaysChange>
-            <warming_cooling>1.8</warming_cooling>
         </Stock>
         <Stock ticker="MA">
             <Price>$555.89</Price>
