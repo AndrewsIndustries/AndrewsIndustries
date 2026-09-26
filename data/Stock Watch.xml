@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-26T17:54:08</Generated>
+        <Generated>2026-09-26T20:17:59</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -114,7 +114,7 @@
         <Stock ticker="F">
             <Price>$12.71</Price>
             <DaysChange>0.87%</DaysChange>
-            <warming_cooling>-5.9</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="FDRR">
             <Price>$69.23</Price>
@@ -129,7 +129,7 @@
         <Stock ticker="BA">
             <Price>$198.07</Price>
             <DaysChange>0.65%</DaysChange>
-            <warming_cooling>-4.5</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="VOO">
             <Price>$710.79</Price>
@@ -274,7 +274,7 @@
         <Stock ticker="V">
             <Price>$367.38</Price>
             <DaysChange>-0.16%</DaysChange>
-            <warming_cooling>0.4</warming_cooling>
+            <warming_cooling>nan</warming_cooling>
         </Stock>
         <Stock ticker="SNAP">
             <Price>$5.42</Price>
