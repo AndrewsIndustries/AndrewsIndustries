@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-25T22:32:13</Generated>
+        <Generated>2026-09-26T00:49:03</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -78,7 +78,7 @@
         </Stock>
         <Stock ticker="BAC">
             <Price>$56.70</Price>
-            <DaysChange>1.16%</DaysChange>
+            <DaysChange>1.2%</DaysChange>
             <warming_cooling>-7.9</warming_cooling>
         </Stock>
         <Stock ticker="MRVL">
@@ -216,15 +216,15 @@
             <DaysChange>0.21%</DaysChange>
             <warming_cooling>0.6</warming_cooling>
         </Stock>
+        <Stock ticker="JNJ">
+            <Price>$271.22</Price>
+            <DaysChange>0.2%</DaysChange>
+            <warming_cooling>-1.9</warming_cooling>
+        </Stock>
         <Stock ticker="SHEL">
             <Price>$95.78</Price>
             <DaysChange>0.19%</DaysChange>
             <warming_cooling>1.7</warming_cooling>
-        </Stock>
-        <Stock ticker="JNJ">
-            <Price>$271.22</Price>
-            <DaysChange>0.17%</DaysChange>
-            <warming_cooling>-1.9</warming_cooling>
         </Stock>
         <Stock ticker="GD">
             <Price>$336.72</Price>
@@ -236,11 +236,6 @@
             <DaysChange>0.12%</DaysChange>
             <warming_cooling>-1.9</warming_cooling>
         </Stock>
-        <Stock ticker="MS">
-            <Price>$196.31</Price>
-            <DaysChange>0.04%</DaysChange>
-            <warming_cooling>-7.0</warming_cooling>
-        </Stock>
         <Stock ticker="TWO">
             <Price>$0.38</Price>
             <DaysChange>0.0%</DaysChange>
@@ -250,6 +245,11 @@
             <Price>$9.62</Price>
             <DaysChange>0.0%</DaysChange>
             <warming_cooling>-7.3</warming_cooling>
+        </Stock>
+        <Stock ticker="MS">
+            <Price>$196.31</Price>
+            <DaysChange>-0.01%</DaysChange>
+            <warming_cooling>-7.0</warming_cooling>
         </Stock>
         <Stock ticker="ARR">
             <Price>$14.10</Price>
@@ -283,7 +283,7 @@
         </Stock>
         <Stock ticker="SNAP">
             <Price>$5.42</Price>
-            <DaysChange>-0.09%</DaysChange>
+            <DaysChange>-0.18%</DaysChange>
             <warming_cooling>1.1</warming_cooling>
         </Stock>
         <Stock ticker="MCD">
@@ -303,7 +303,7 @@
         </Stock>
         <Stock ticker="VZ">
             <Price>$47.08</Price>
-            <DaysChange>-0.44%</DaysChange>
+            <DaysChange>-0.51%</DaysChange>
             <warming_cooling>-4.1</warming_cooling>
         </Stock>
         <Stock ticker="CVX">
@@ -323,12 +323,12 @@
         </Stock>
         <Stock ticker="LMT">
             <Price>$519.56</Price>
-            <DaysChange>-0.82%</DaysChange>
+            <DaysChange>-0.79%</DaysChange>
             <warming_cooling>1.5</warming_cooling>
         </Stock>
         <Stock ticker="XOM">
             <Price>$160.59</Price>
-            <DaysChange>-0.91%</DaysChange>
+            <DaysChange>-0.96%</DaysChange>
             <warming_cooling>2.6</warming_cooling>
         </Stock>
         <Stock ticker="VDE">
@@ -373,7 +373,7 @@
         </Stock>
         <Stock ticker="RDDT">
             <Price>$149.84</Price>
-            <DaysChange>-1.9%</DaysChange>
+            <DaysChange>-1.89%</DaysChange>
             <warming_cooling>-2.3</warming_cooling>
         </Stock>
         <Stock ticker="RIOT">
@@ -393,7 +393,7 @@
         </Stock>
         <Stock ticker="CF">
             <Price>$114.67</Price>
-            <DaysChange>-3.16%</DaysChange>
+            <DaysChange>-3.18%</DaysChange>
             <warming_cooling>-4.2</warming_cooling>
         </Stock>
         <Stock ticker="META">
@@ -408,7 +408,7 @@
         </Stock>
         <Stock ticker="GME">
             <Price>$23.39</Price>
-            <DaysChange>-6.46%</DaysChange>
+            <DaysChange>-6.51%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
     </MarketData>
