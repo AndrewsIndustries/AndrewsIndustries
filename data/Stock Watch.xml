@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-09-27T17:04:53</Generated>
+        <Generated>2026-09-27T20:04:14</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -146,15 +146,15 @@
             <DaysChange>0.46%</DaysChange>
             <warming_cooling>4.9</warming_cooling>
         </Stock>
-        <Stock ticker="SPCX">
-            <Price>$148.68</Price>
-            <DaysChange>0.44%</DaysChange>
-            <warming_cooling>-1.1</warming_cooling>
-        </Stock>
         <Stock ticker="DJT">
             <Price>$9.14</Price>
             <DaysChange>0.44%</DaysChange>
             <warming_cooling>-1.2</warming_cooling>
+        </Stock>
+        <Stock ticker="SPCX">
+            <Price>$148.68</Price>
+            <DaysChange>0.44%</DaysChange>
+            <warming_cooling>-1.1</warming_cooling>
         </Stock>
         <Stock ticker="RTX">
             <Price>$189.40</Price>
