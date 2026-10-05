@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-10-05T02:12:31</Generated>
+        <Generated>2026-10-05T09:02:25</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -26,15 +26,15 @@
             <DaysChange>4.22%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
         </Stock>
-        <Stock ticker="CSCO">
-            <Price>$112.20</Price>
-            <DaysChange>3.56%</DaysChange>
-            <warming_cooling>-3.0</warming_cooling>
-        </Stock>
         <Stock ticker="HWKN">
             <Price>$131.41</Price>
             <DaysChange>3.32%</DaysChange>
             <warming_cooling>5.9</warming_cooling>
+        </Stock>
+        <Stock ticker="CSCO">
+            <Price>$112.20</Price>
+            <DaysChange>3.16%</DaysChange>
+            <warming_cooling>-3.0</warming_cooling>
         </Stock>
         <Stock ticker="ORCL">
             <Price>$142.30</Price>
@@ -55,11 +55,6 @@
             <Price>$24.70</Price>
             <DaysChange>2.45%</DaysChange>
             <warming_cooling>10.0</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$672,500.00</Price>
-            <DaysChange>1.74%</DaysChange>
-            <warming_cooling>0.0</warming_cooling>
         </Stock>
         <Stock ticker="MRVL">
             <Price>$272.29</Price>
@@ -225,6 +220,11 @@
             <Price>$125.89</Price>
             <DaysChange>0.23%</DaysChange>
             <warming_cooling>-5.8</warming_cooling>
+        </Stock>
+        <Stock ticker="BRKA">
+            <Price>$674,000.00</Price>
+            <DaysChange>0.22%</DaysChange>
+            <warming_cooling>0.0</warming_cooling>
         </Stock>
         <Stock ticker="VDE">
             <Price>$175.93</Price>
