@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-10-12T04:03:36</Generated>
+        <Generated>2026-10-12T11:51:21</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -16,15 +16,15 @@
             <DaysChange>6.31%</DaysChange>
             <warming_cooling>-1.6</warming_cooling>
         </Stock>
-        <Stock ticker="GME">
-            <Price>$26.56</Price>
-            <DaysChange>5.19%</DaysChange>
-            <warming_cooling>10.0</warming_cooling>
-        </Stock>
         <Stock ticker="PLTR">
             <Price>$209.05</Price>
             <DaysChange>5.17%</DaysChange>
             <warming_cooling>3.4</warming_cooling>
+        </Stock>
+        <Stock ticker="GME">
+            <Price>$26.56</Price>
+            <DaysChange>5.06%</DaysChange>
+            <warming_cooling>10.0</warming_cooling>
         </Stock>
         <Stock ticker="AFRM">
             <Price>$80.70</Price>
@@ -80,11 +80,6 @@
             <Price>$261.44</Price>
             <DaysChange>1.93%</DaysChange>
             <warming_cooling>-6.1</warming_cooling>
-        </Stock>
-        <Stock ticker="BRKA">
-            <Price>$692,000.00</Price>
-            <DaysChange>1.91%</DaysChange>
-            <warming_cooling>1.5</warming_cooling>
         </Stock>
         <Stock ticker="WFC">
             <Price>$83.55</Price>
@@ -156,15 +151,15 @@
             <DaysChange>0.9%</DaysChange>
             <warming_cooling>-5.2</warming_cooling>
         </Stock>
+        <Stock ticker="GD">
+            <Price>$331.27</Price>
+            <DaysChange>0.9%</DaysChange>
+            <warming_cooling>-6.3</warming_cooling>
+        </Stock>
         <Stock ticker="ARR">
             <Price>$13.59</Price>
             <DaysChange>0.89%</DaysChange>
             <warming_cooling>-8.4</warming_cooling>
-        </Stock>
-        <Stock ticker="GD">
-            <Price>$331.27</Price>
-            <DaysChange>0.88%</DaysChange>
-            <warming_cooling>-6.3</warming_cooling>
         </Stock>
         <Stock ticker="WMT">
             <Price>$111.35</Price>
@@ -241,6 +236,11 @@
             <DaysChange>0.2%</DaysChange>
             <warming_cooling>1.4</warming_cooling>
         </Stock>
+        <Stock ticker="BRKA">
+            <Price>$693,000.00</Price>
+            <DaysChange>0.14%</DaysChange>
+            <warming_cooling>1.5</warming_cooling>
+        </Stock>
         <Stock ticker="LHX">
             <Price>$236.97</Price>
             <DaysChange>0.02%</DaysChange>
@@ -288,7 +288,7 @@
         </Stock>
         <Stock ticker="TM">
             <Price>$185.30</Price>
-            <DaysChange>-0.32%</DaysChange>
+            <DaysChange>-0.38%</DaysChange>
             <warming_cooling>-4.4</warming_cooling>
         </Stock>
         <Stock ticker="NVDA">
@@ -296,15 +296,15 @@
             <DaysChange>-0.52%</DaysChange>
             <warming_cooling>5.1</warming_cooling>
         </Stock>
+        <Stock ticker="F">
+            <Price>$12.17</Price>
+            <DaysChange>-0.65%</DaysChange>
+            <warming_cooling>-7.7</warming_cooling>
+        </Stock>
         <Stock ticker="MCD">
             <Price>$235.23</Price>
             <DaysChange>-0.7%</DaysChange>
             <warming_cooling>-6.0</warming_cooling>
-        </Stock>
-        <Stock ticker="F">
-            <Price>$12.17</Price>
-            <DaysChange>-0.73%</DaysChange>
-            <warming_cooling>-7.7</warming_cooling>
         </Stock>
         <Stock ticker="NOC">
             <Price>$480.72</Price>
