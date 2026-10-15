@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-10-15T00:40:06</Generated>
+        <Generated>2026-10-15T05:10:38</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -56,15 +56,15 @@
             <DaysChange>1.98%</DaysChange>
             <warming_cooling>-0.2</warming_cooling>
         </Stock>
-        <Stock ticker="CF">
-            <Price>$119.46</Price>
-            <DaysChange>1.92%</DaysChange>
-            <warming_cooling>-5.1</warming_cooling>
-        </Stock>
         <Stock ticker="RTX">
             <Price>$186.47</Price>
             <DaysChange>1.89%</DaysChange>
             <warming_cooling>-6.2</warming_cooling>
+        </Stock>
+        <Stock ticker="CF">
+            <Price>$119.46</Price>
+            <DaysChange>1.88%</DaysChange>
+            <warming_cooling>-5.1</warming_cooling>
         </Stock>
         <Stock ticker="ADBE">
             <Price>$240.68</Price>
@@ -223,7 +223,7 @@
         </Stock>
         <Stock ticker="FDRR">
             <Price>$69.03</Price>
-            <DaysChange>-0.95%</DaysChange>
+            <DaysChange>-0.9%</DaysChange>
             <warming_cooling>0.5</warming_cooling>
         </Stock>
         <Stock ticker="BA">
