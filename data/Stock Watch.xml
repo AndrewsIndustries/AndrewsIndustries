@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-10-19T00:28:02</Generated>
+        <Generated>2026-10-19T05:04:36</Generated>
         <Count>81</Count>
     </Header>
     <MarketData>
@@ -206,15 +206,15 @@
             <DaysChange>-0.14%</DaysChange>
             <warming_cooling>3.8</warming_cooling>
         </Stock>
+        <Stock ticker="FDRR">
+            <Price>$68.77</Price>
+            <DaysChange>-0.38%</DaysChange>
+            <warming_cooling>1.5</warming_cooling>
+        </Stock>
         <Stock ticker="WDFC">
             <Price>$200.09</Price>
             <DaysChange>-0.49%</DaysChange>
             <warming_cooling>-0.5</warming_cooling>
-        </Stock>
-        <Stock ticker="FDRR">
-            <Price>$68.77</Price>
-            <DaysChange>-0.59%</DaysChange>
-            <warming_cooling>1.5</warming_cooling>
         </Stock>
         <Stock ticker="KWR">
             <Price>$156.96</Price>
