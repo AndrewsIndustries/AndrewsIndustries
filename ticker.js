@@ -1,94 +1,156 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const ticker = document.getElementById('footer-ticker');
     const container = ticker ? ticker.parentElement : null;
 
     if (!ticker || !container) {
-        console.error("Ticker elements not found. Ensure you have an element with id='footer-ticker'.");
+        console.error("[ticker] Ticker elements not found. Ensure an element with id='footer-ticker' exists inside its scrolling container.");
         return;
     }
 
+    // Public, read-only XML hosted on GitHub. Keep this HTTPS for secure static hosting.
     const stockXmlUrl = new URL(
         'data/Stock%20Watch.xml',
         'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/'
     );
-    stockXmlUrl.searchParams.set('t', Date.now());
+    const pollIntervalMs = 10 * 60 * 1000;
+    const maxBackoffMs = 30 * 60 * 1000;
+    const baseBackoffMs = 30 * 1000;
+    const requestTimeoutMs = 10 * 1000;
+    const separator = ' \u00A0\u00A0\u00A0 | \u00A0\u00A0\u00A0 ';
+    let consecutiveFailures = 0;
+    let pollTimer;
+    let position = container.clientWidth;
+    let animationFrame;
+    let lastKnownGoodText = ticker.textContent.trim();
 
-    // Keep the currently displayed ticker when a request returns bad or empty data.
-    const previousTickerText = ticker.textContent.trim();
-
-    try {
-        console.log(`[ticker] Fetching stock XML from ${stockXmlUrl.href}`);
-        const response = await fetch(stockXmlUrl.href, { cache: 'no-store' });
-
-        if (!response.ok) {
-            const errorText = await response.text().catch(() => 'Unable to read error response body.');
-            console.warn(`[ticker] Stock XML request failed: HTTP ${response.status} ${response.statusText}. Response:`, errorText.slice(0, 500));
-            throw new Error(`Stock XML request failed with HTTP ${response.status}`);
+    function getRetryDelay(response) {
+        const retryAfter = response.headers.get('Retry-After');
+        if (retryAfter) {
+            const seconds = Number(retryAfter);
+            if (Number.isFinite(seconds)) return Math.max(1000, seconds * 1000);
+            const retryAt = Date.parse(retryAfter);
+            if (Number.isFinite(retryAt)) return Math.max(1000, retryAt - Date.now());
         }
 
-        const xmlText = await response.text();
-        console.log(`[ticker] Received ${xmlText.length} characters of stock XML (HTTP ${response.status}).`);
-        if (!xmlText.trim()) {
-            console.warn('[ticker] Stock XML response was empty; keeping the previous ticker display.');
-            throw new Error('Stock XML response was empty');
+        const resetAt = Number(response.headers.get('X-RateLimit-Reset'));
+        if (Number.isFinite(resetAt) && resetAt > 0) {
+            return Math.max(1000, resetAt * 1000 - Date.now());
         }
+        return null;
+    }
 
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, 'application/xml');
-        const parseErrors = xmlDoc.getElementsByTagName('parsererror');
-        if (parseErrors.length > 0 || !xmlDoc.documentElement) {
-            console.warn('[ticker] Stock XML could not be parsed. Raw response preview:', xmlText.slice(0, 500));
+    function logRateLimit(response) {
+        const remainingHeader = response.headers.get('X-RateLimit-Remaining') ||
+            response.headers.get('X-Ratelimit-Remaining');
+        if (remainingHeader === null) return;
+
+        const remaining = Number(remainingHeader);
+        if (Number.isFinite(remaining)) {
+            console.info(`[ticker] API rate-limit remaining: ${remaining}.`);
+            if (remaining <= 0) console.warn('[ticker] Rate limit exhausted; retaining the current ticker and backing off.');
+        }
+    }
+
+    function parseTickerEntries(xmlText) {
+        const xmlDoc = new DOMParser().parseFromString(xmlText, 'application/xml');
+        if (xmlDoc.getElementsByTagName('parsererror').length > 0 || !xmlDoc.documentElement) {
             throw new Error('Stock XML response was malformed');
         }
 
         const stocks = Array.from(xmlDoc.getElementsByTagName('Stock'));
-        if (stocks.length === 0) {
-            console.warn('[ticker] Stock XML contained no <Stock> entries; keeping the previous ticker display.');
-            throw new Error('Stock XML contained no stock entries');
-        }
-
-        const tickerEntries = stocks.map(stock => {
+        const entries = stocks.map(stock => {
             const symbol = stock.getAttribute('ticker')?.trim();
             if (!symbol) return null;
 
             const price = stock.getElementsByTagName('Price')[0]?.textContent?.trim() || 'N/A';
             const change = stock.getElementsByTagName('DaysChange')[0]?.textContent?.trim() || '0%';
             const status = stock.getElementsByTagName('warming_cooling')[0]?.textContent?.trim() || '';
-
             let display = `${symbol}: ${price} (${change})`;
-            if (status && status.toLowerCase() !== 'nan') {
-                display += ` [${status}]`;
-            }
+            if (status && status.toLowerCase() !== 'nan') display += ` [${status}]`;
             return display;
         }).filter(Boolean);
 
-        if (tickerEntries.length === 0) {
-            console.warn('[ticker] Stock XML contained no valid ticker entries; keeping the previous ticker display.');
-            throw new Error('Stock XML contained no valid ticker entries');
-        }
+        if (!entries.length) throw new Error('Stock XML contained no valid ticker entries');
+        return entries;
+    }
 
-        ticker.textContent = tickerEntries.join(' \u00A0\u00A0\u00A0 | \u00A0\u00A0\u00A0 ');
-        console.log(`[ticker] Updated ticker display with ${tickerEntries.length} stock entries.`);
-    } catch (error) {
-        console.error('[ticker] Unable to refresh live stock data; preserving the last display when available:', error);
-        if (!previousTickerText) {
-            ticker.textContent = 'Unable to load live stock data.';
+    async function refreshTicker() {
+        const url = new URL(stockXmlUrl.href);
+        url.searchParams.set('t', Date.now());
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), requestTimeoutMs);
+
+        try {
+            console.info(`[ticker] Fetching stock XML from ${url.href}`);
+            const response = await fetch(url.href, { cache: 'no-store', signal: controller.signal });
+            logRateLimit(response);
+
+            if (!response.ok) {
+                const errorText = await response.text().catch(() => 'Unable to read error response body.');
+                const retryDelay = getRetryDelay(response);
+                const error = new Error(`Stock XML request failed: HTTP ${response.status} ${response.statusText}`);
+                error.status = response.status;
+                error.retryDelay = retryDelay;
+                console.warn(`[ticker] ${error.message}. Response:`, errorText.slice(0, 500));
+                throw error;
+            }
+
+            const xmlText = await response.text();
+            if (!xmlText.trim()) throw new Error('Stock XML response was empty');
+            const tickerEntries = parseTickerEntries(xmlText);
+
+            // Commit a new display only after the entire response has been validated.
+            const nextText = tickerEntries.join(separator);
+            ticker.textContent = nextText;
+            lastKnownGoodText = nextText;
+            consecutiveFailures = 0;
+            console.info(`[ticker] Updated ticker display with ${tickerEntries.length} stock entries (HTTP ${response.status}).`);
+            return null;
+        } catch (error) {
+            consecutiveFailures += 1;
+            if (lastKnownGoodText) ticker.textContent = lastKnownGoodText;
+            const retryDelay = error.retryDelay || Math.min(maxBackoffMs, baseBackoffMs * (2 ** Math.min(consecutiveFailures - 1, 10)));
+            console.error('[ticker] Refresh failed; preserving the last known ticker display.', {
+                status: error.status || 'network/parse error',
+                message: error.message,
+                retryInMs: retryDelay,
+                error
+            });
+            if (!lastKnownGoodText) ticker.textContent = 'Unable to load live stock data.';
+            return retryDelay;
+        } finally {
+            clearTimeout(timeoutId);
         }
     }
 
-    const speed = 2; // Speed of the ticker (pixels per frame)
-    let position = container.clientWidth;
+    async function poll() {
+        let retryDelay;
+        try {
+            retryDelay = await refreshTicker();
+        } catch (error) {
+            // Defensive guard so an unexpected poll error never stops future refreshes.
+            console.error('[ticker] Unexpected polling error; preserving the current display.', error);
+            retryDelay = baseBackoffMs;
+        }
+        pollTimer = setTimeout(poll, retryDelay || pollIntervalMs);
+    }
 
     function animate() {
-        position -= speed;
-
-        if (position < -ticker.offsetWidth) {
-            position = container.clientWidth;
+        try {
+            position -= 2;
+            if (position < -ticker.offsetWidth) position = container.clientWidth;
+            ticker.style.transform = `translateX(${position}px)`;
+            animationFrame = requestAnimationFrame(animate);
+        } catch (error) {
+            console.error('[ticker] Animation failed; ticker data will continue to refresh.', error);
         }
-
-        ticker.style.transform = `translateX(${position}px)`;
-        requestAnimationFrame(animate);
     }
 
+    window.addEventListener('pagehide', () => {
+        clearTimeout(pollTimer);
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+    }, { once: true });
+
+    poll();
     animate();
 });
