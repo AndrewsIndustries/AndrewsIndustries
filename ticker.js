@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Public, read-only XML hosted on GitHub. Keep this HTTPS for secure static hosting.
-    const stockXmlUrl = new URL(
-        'data/Stock%20Watch.xml',
-        'https://raw.githubusercontent.com/AndrewsIndustries/AndrewsIndustries/main/'
-    );
+    // The XML is published with this static site. Fetch it from the site's own
+    // origin so GitHub Pages and custom-domain deployments do not depend on
+    // cross-origin headers from raw.githubusercontent.com.
+    const stockXmlUrl = new URL('data/Stock%20Watch.xml', document.baseURI);
     const pollIntervalMs = 10 * 60 * 1000;
     const maxBackoffMs = 30 * 60 * 1000;
     const baseBackoffMs = 30 * 1000;
@@ -110,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             consecutiveFailures += 1;
             if (lastKnownGoodText) ticker.textContent = lastKnownGoodText;
             const retryDelay = error.retryDelay || Math.min(maxBackoffMs, baseBackoffMs * (2 ** Math.min(consecutiveFailures - 1, 10)));
+
+            if (error instanceof TypeError) {
+                console.warn('[ticker] The browser could not access the stock feed. If the feed URL is changed to another origin, that server must allow this site with Access-Control-Allow-Origin. GitHub Pages is static and cannot host a server-side CORS proxy; use same-origin published XML or deploy a separately hosted proxy. The existing ticker display is being retained.');
+            }
             console.error('[ticker] Refresh failed; preserving the last known ticker display.', {
                 status: error.status || 'network/parse error',
                 message: error.message,
