@@ -2,7 +2,7 @@
 <StockWatchReport>
     <Header>
         <Organization>Andrews Industries</Organization>
-        <Generated>2026-11-21T16:15:00</Generated>
+        <Generated>2026-11-21T21:40:21</Generated>
         <Count>83</Count>
     </Header>
     <MarketData>
@@ -26,15 +26,15 @@
             <DaysChange>1.11%</DaysChange>
             <warming_cooling>4.3</warming_cooling>
         </Stock>
-        <Stock ticker="KO">
-            <Price>$96.99</Price>
-            <DaysChange>0.91%</DaysChange>
-            <warming_cooling>3.8</warming_cooling>
-        </Stock>
         <Stock ticker="CVX">
             <Price>$208.37</Price>
             <DaysChange>0.91%</DaysChange>
             <warming_cooling>-4.7</warming_cooling>
+        </Stock>
+        <Stock ticker="KO">
+            <Price>$96.99</Price>
+            <DaysChange>0.91%</DaysChange>
+            <warming_cooling>3.8</warming_cooling>
         </Stock>
         <Stock ticker="PG">
             <Price>$169.37</Price>
