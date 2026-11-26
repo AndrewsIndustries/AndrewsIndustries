@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,4 +39,32 @@ jobs:
           git config --global user.name "Andrews-Sync-Bot"
           git config --global user.email "actions@github.com"
           git add data/*.xml data/*.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated Sync: $(date)" && git push)
+
+          if ! git diff --staged --quiet; then
+            git commit -m "Automated Sync: $(date)"
+
+            for attempt in 1 2 3; do
+              if ! git fetch origin main; then
+                echo "Failed to fetch origin/main."
+                exit 1
+              fi
+
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "Rebase conflict while updating from origin/main; rebase aborted."
+                exit 1
+              fi
+
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+
+              if [ "$attempt" -lt 3 ]; then
+                echo "Push attempt $attempt failed; retrying in 5 seconds."
+                sleep 5
+              fi
+            done
+
+            echo "Push failed after 3 attempts."
+            exit 1
+          fi
