@@ -23,13 +23,13 @@ X_HANDLES = [
 'osintwarfare',
 'Osinttechnical',
 'sentdefender',
-'PolymarketIntel'
+'PolymarketIntel',
 'GlobalOSINTHQ',
 'OSN_Reports',
 'AI313_',
 'Worldnews0014',
 'WarMonitorClips',
-'@FoxNews'
+'FoxNews'
 ]
 
 def get_nitter_urls(handle):
@@ -96,7 +96,7 @@ def sync_x_news():
         for url in get_nitter_urls(handle):
             if success: break
             try:
-                response = requests.get(url, headers=headers, timeout=15)
+                response = requests.get(url, headers=headers, timeout=5)
                 if response.status_code != 200: continue
                 
                 entries = []
@@ -115,7 +115,7 @@ def sync_x_news():
 
                 if not entries: continue
 
-                for entry in entries:
+                for entry in entries[:2]:
                     headline = clean_text(entry.get('title', ''))
                     if not headline or headline in seen_titles: continue
                     seen_titles.add(headline)
@@ -138,6 +138,7 @@ def sync_x_news():
                 
                 success = True
                 print(f"[+] Synced @{handle}")
+                break
             except Exception:
                 continue
         
