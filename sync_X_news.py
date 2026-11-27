@@ -16,11 +16,20 @@ import requests
 # --- CONFIGURATION ---
 # Add or remove X (Twitter) handles here
 X_HANDLES = [
-    'conflict_radar',
-    'osintwarfare',
-    'Osinttechnical',
-    'sentdefender',
-    'PolymarketIntel'
+'WarWatchIntel',
+'criticalthreats',
+'CENTCOM',
+'conflict_radar',
+'osintwarfare',
+'Osinttechnical',
+'sentdefender',
+'PolymarketIntel'
+'GlobalOSINTHQ',
+'OSN_Reports',
+'AI313_',
+'Worldnews0014',
+'WarMonitorClips',
+'@FoxNews'
 ]
 
 def get_nitter_urls(handle):
